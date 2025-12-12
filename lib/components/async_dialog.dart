@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
-import 'package:hop/components/custom_dialog.dart';
-import 'package:hop/globals/images.dart';
-import 'package:hop/utils/custom_extensions.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
+import 'package:padelrush/components/custom_dialog.dart';
+import 'package:padelrush/globals/images.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
 
 class AsyncDialog<T> extends ConsumerWidget {
   const AsyncDialog(

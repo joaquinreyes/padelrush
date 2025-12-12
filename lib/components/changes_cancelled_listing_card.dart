@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
-import 'package:hop/globals/images.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
+import 'package:padelrush/globals/images.dart';
 
 class ChangesCancelledListingCard extends StatelessWidget {
   const ChangesCancelledListingCard({super.key,

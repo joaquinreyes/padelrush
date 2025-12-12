@@ -1,4 +1,4 @@
-import 'package:hop/globals/constants.dart';
+import 'package:padelrush/globals/constants.dart';
 
 class RegisterModel {
   String? firstName;

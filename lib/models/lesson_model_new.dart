@@ -1,5 +1,5 @@
-import 'package:hop/globals/constants.dart';
-import 'package:hop/utils/custom_extensions.dart';
+import 'package:padelrush/globals/constants.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
 import 'package:intl/intl.dart';
 import '../globals/utils.dart';
 import '../utils/dubai_date_time.dart';

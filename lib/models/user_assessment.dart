@@ -1,6 +1,6 @@
-import 'package:hop/models/app_user.dart';
-import 'package:hop/models/service_detail_model.dart';
-import 'package:hop/models/user_bookings.dart';
+import 'package:padelrush/models/app_user.dart';
+import 'package:padelrush/models/service_detail_model.dart';
+import 'package:padelrush/models/user_bookings.dart';
 import '../utils/dubai_date_time.dart';
 import 'base_classes/booking_base.dart';
 

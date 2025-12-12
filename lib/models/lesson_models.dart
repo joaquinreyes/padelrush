@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hop/models/base_classes/booking_base.dart';
-import 'package:hop/models/court_booking.dart';
-import 'package:hop/models/service_detail_model.dart';
+import 'package:padelrush/models/base_classes/booking_base.dart';
+import 'package:padelrush/models/court_booking.dart';
+import 'package:padelrush/models/service_detail_model.dart';
 
 import '../screens/app_provider.dart';
 

@@ -1,5 +1,5 @@
-import 'package:hop/models/base_classes/booking_base.dart';
-import 'package:hop/models/service_detail_model.dart';
+import 'package:padelrush/models/base_classes/booking_base.dart';
+import 'package:padelrush/models/service_detail_model.dart';
 
 import 'court_booking.dart';
 

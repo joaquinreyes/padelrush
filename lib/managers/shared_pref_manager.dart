@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:hop/models/app_user.dart';
+import 'package:padelrush/models/app_user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'shared_pref_manager.g.dart';

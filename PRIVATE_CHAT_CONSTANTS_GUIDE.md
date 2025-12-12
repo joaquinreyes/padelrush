@@ -239,13 +239,13 @@ if (!state.isConnected) {
 To use the constants in your code:
 
 ```dart
-import 'package:hop/managers/private_chat_socket_manager/private_chat_socket_constants.dart';
+import 'package:padelrush/managers/private_chat_socket_manager/private_chat_socket_constants.dart';
 ```
 
 Or with a shorter alias:
 
 ```dart
-import 'package:hop/managers/private_chat_socket_manager/private_chat_socket_constants.dart' as ChatConst;
+import 'package:padelrush/managers/private_chat_socket_manager/private_chat_socket_constants.dart' as ChatConst;
 
 // Usage:
 _socket.emit(ChatConst.PrivateChatSocketConstants.emitPrivateMessage, {...});
@@ -296,7 +296,7 @@ When writing tests, you can:
 
 Example test:
 ```dart
-import 'package:hop/managers/private_chat_socket_manager/private_chat_socket_constants.dart';
+import 'package:padelrush/managers/private_chat_socket_manager/private_chat_socket_constants.dart';
 
 test('should emit correct event name for sending message', () {
   // Arrange

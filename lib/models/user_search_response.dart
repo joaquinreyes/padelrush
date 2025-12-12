@@ -1,4 +1,4 @@
-import 'package:hop/models/app_user.dart';
+import 'package:padelrush/models/app_user.dart';
 
 class UserSearchResponse {
   bool? success;

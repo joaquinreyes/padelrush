@@ -1,5 +1,5 @@
 import 'package:geolocator/geolocator.dart';
-import 'package:hop/globals/constants.dart';
+import 'package:padelrush/globals/constants.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'location_repo.g.dart';
 

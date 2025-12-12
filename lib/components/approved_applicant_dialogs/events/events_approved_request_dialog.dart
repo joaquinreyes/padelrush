@@ -1,22 +1,22 @@
-import 'package:hop/components/custom_dialog.dart';
+import 'package:padelrush/components/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
 
-import 'package:hop/components/approved_applicant_dialogs/open_match/open_match_applicants_dialog.dart';
-import 'package:hop/components/main_button.dart';
-import 'package:hop/components/open_match_participant_row.dart';
-import 'package:hop/components/secondary_button.dart';
-import 'package:hop/globals/images.dart';
-import 'package:hop/globals/utils.dart';
-import 'package:hop/models/approve_request_socket_response.dart';
-import 'package:hop/models/service_detail_model.dart';
-import 'package:hop/repository/booking_repo.dart';
-import 'package:hop/repository/payment_repo.dart';
-import 'package:hop/screens/payment_information/payment_information.dart';
-import 'package:hop/utils/custom_extensions.dart';
+import 'package:padelrush/components/approved_applicant_dialogs/open_match/open_match_applicants_dialog.dart';
+import 'package:padelrush/components/main_button.dart';
+import 'package:padelrush/components/open_match_participant_row.dart';
+import 'package:padelrush/components/secondary_button.dart';
+import 'package:padelrush/globals/images.dart';
+import 'package:padelrush/globals/utils.dart';
+import 'package:padelrush/models/approve_request_socket_response.dart';
+import 'package:padelrush/models/service_detail_model.dart';
+import 'package:padelrush/repository/booking_repo.dart';
+import 'package:padelrush/repository/payment_repo.dart';
+import 'package:padelrush/screens/payment_information/payment_information.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
 
 class EventApprovedRequestDialog extends ConsumerStatefulWidget {
   const EventApprovedRequestDialog({

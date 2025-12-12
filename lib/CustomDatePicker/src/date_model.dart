@@ -1,9 +1,9 @@
 // ignore_for_file: unnecessary_this
 
 import 'dart:math';
-import 'package:hop/CustomDatePicker/src/date_format.dart';
-import 'package:hop/CustomDatePicker/src/i18n_model.dart';
-import 'package:hop/utils/dubai_date_time.dart';
+import 'package:padelrush/CustomDatePicker/src/date_format.dart';
+import 'package:padelrush/CustomDatePicker/src/i18n_model.dart';
+import 'package:padelrush/utils/dubai_date_time.dart';
 import 'datetime_util.dart';
 
 //interface for picker data model

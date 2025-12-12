@@ -1,6 +1,6 @@
-import 'package:hop/globals/utils.dart';
-import 'package:hop/utils/custom_extensions.dart';
-import 'package:hop/utils/dubai_date_time.dart';
+import 'package:padelrush/globals/utils.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
+import 'package:padelrush/utils/dubai_date_time.dart';
 
 class CourtBookingData {
   List<Bookings>? bookings;

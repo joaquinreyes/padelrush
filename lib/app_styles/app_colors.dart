@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hop/globals/utils.dart';
+import 'package:padelrush/globals/utils.dart';
 
 // https://www.figma.com/community/plugin/1267503782684933309/export-colors-as-dart
 class AppColors {

@@ -1,9 +1,9 @@
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
-import 'package:hop/utils/custom_extensions.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/box_shadow/flutter_inset_box_shadow.dart' as inset;
+import 'package:padelrush/box_shadow/flutter_inset_box_shadow.dart' as inset;
 import '../globals/constants.dart';
 
 class RankedOrFriendly extends StatelessWidget {

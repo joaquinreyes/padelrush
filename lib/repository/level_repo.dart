@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hop/globals/api_endpoints.dart';
-import 'package:hop/globals/constants.dart';
-import 'package:hop/managers/api_manager.dart';
-import 'package:hop/models/calculated_level_data.dart';
-import 'package:hop/models/level_questions.dart';
+import 'package:padelrush/globals/api_endpoints.dart';
+import 'package:padelrush/globals/constants.dart';
+import 'package:padelrush/managers/api_manager.dart';
+import 'package:padelrush/models/calculated_level_data.dart';
+import 'package:padelrush/models/level_questions.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../managers/user_manager.dart';

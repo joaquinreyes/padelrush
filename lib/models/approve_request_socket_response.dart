@@ -1,4 +1,4 @@
-import 'package:hop/models/service_detail_model.dart';
+import 'package:padelrush/models/service_detail_model.dart';
 
 class ApprovedRequest_SocketResponse {
   // ServiceBooking? serviceBooking;

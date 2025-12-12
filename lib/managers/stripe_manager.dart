@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:hop/managers/user_manager.dart';
+import 'package:padelrush/managers/user_manager.dart';
 
 part 'stripe_manager.g.dart';
 

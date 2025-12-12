@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
-import 'package:hop/globals/constants.dart';
-import 'package:hop/globals/utils.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
+import 'package:padelrush/globals/constants.dart';
+import 'package:padelrush/globals/utils.dart';
 
 class SecondaryImageButton extends StatelessWidget {
   SecondaryImageButton(

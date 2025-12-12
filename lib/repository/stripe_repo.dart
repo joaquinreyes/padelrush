@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:hop/globals/api_endpoints.dart';
-import 'package:hop/managers/api_manager.dart';
-import 'package:hop/managers/stripe_manager.dart';
-import 'package:hop/managers/user_manager.dart';
-import 'package:hop/models/stripe_payment_method.dart';
+import 'package:padelrush/globals/api_endpoints.dart';
+import 'package:padelrush/managers/api_manager.dart';
+import 'package:padelrush/managers/stripe_manager.dart';
+import 'package:padelrush/managers/user_manager.dart';
+import 'package:padelrush/models/stripe_payment_method.dart';
 
 import '../globals/constants.dart';
 part 'stripe_repo.g.dart';

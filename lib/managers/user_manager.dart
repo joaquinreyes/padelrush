@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hop/globals/constants.dart';
-import 'package:hop/managers/private_chat_socket_manager/private_chat_socket_manager.dart';
-import 'package:hop/managers/shared_pref_manager.dart';
-import 'package:hop/models/app_user.dart';
+import 'package:padelrush/globals/constants.dart';
+import 'package:padelrush/managers/private_chat_socket_manager/private_chat_socket_manager.dart';
+import 'package:padelrush/managers/shared_pref_manager.dart';
+import 'package:padelrush/models/app_user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_manager.g.dart';

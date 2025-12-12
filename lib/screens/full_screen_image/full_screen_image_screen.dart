@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hop/routes/app_pages.dart';
+import 'package:padelrush/routes/app_pages.dart';
 
 import '../../components/network_circle_image.dart';
 

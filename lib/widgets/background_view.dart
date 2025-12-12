@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hop/globals/images.dart';
+import 'package:padelrush/globals/images.dart';
 
 class BackgroundView extends StatelessWidget {
   final Widget child;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:hop/models/base_classes/booking_base.dart';
-import 'package:hop/utils/dubai_date_time.dart';
+import 'package:padelrush/models/base_classes/booking_base.dart';
+import 'package:padelrush/utils/dubai_date_time.dart';
 import 'package:intl/intl.dart';
 
 extension CustomTranslations on String {

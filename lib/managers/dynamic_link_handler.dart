@@ -1,7 +1,7 @@
 import 'package:app_links/app_links.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hop/routes/app_pages.dart';
-import 'package:hop/routes/app_routes.dart';
+import 'package:padelrush/routes/app_pages.dart';
+import 'package:padelrush/routes/app_routes.dart';
 import '../globals/constants.dart';
 
 /// Provides methods to manage dynamic links.

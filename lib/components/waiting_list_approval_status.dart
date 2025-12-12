@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
-import 'package:hop/components/custom_dialog.dart';
-import 'package:hop/components/main_button.dart';
-import 'package:hop/components/network_circle_image.dart';
-import 'package:hop/components/secondary_button.dart';
-import 'package:hop/globals/constants.dart';
-import 'package:hop/globals/utils.dart';
-import 'package:hop/models/service_waiting_players.dart';
-import 'package:hop/repository/play_repo.dart';
-import 'package:hop/utils/custom_extensions.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
+import 'package:padelrush/components/custom_dialog.dart';
+import 'package:padelrush/components/main_button.dart';
+import 'package:padelrush/components/network_circle_image.dart';
+import 'package:padelrush/components/secondary_button.dart';
+import 'package:padelrush/globals/constants.dart';
+import 'package:padelrush/globals/utils.dart';
+import 'package:padelrush/models/service_waiting_players.dart';
+import 'package:padelrush/repository/play_repo.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
 
 class WaitingListApprovalStatus extends ConsumerStatefulWidget {
   const WaitingListApprovalStatus({

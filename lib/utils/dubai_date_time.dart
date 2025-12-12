@@ -1,4 +1,4 @@
-import 'package:hop/utils/custom_extensions.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
 import 'package:intl/intl.dart';
 
 class DubaiDateTime {

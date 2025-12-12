@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hop/components/approved_applicant_dialogs/events/events_applicant_dialog.dart';
-import 'package:hop/components/approved_applicant_dialogs/events/events_approved_request_dialog.dart';
-import 'package:hop/components/approved_applicant_dialogs/open_match/open_match_applicants_dialog.dart';
-import 'package:hop/components/approved_applicant_dialogs/open_match/open_match_approved_request_dialog.dart';
-import 'package:hop/globals/constants.dart';
-import 'package:hop/managers/socket_manager/socket_state.dart';
-import 'package:hop/models/applicat_socket_response.dart';
-import 'package:hop/models/approve_request_socket_response.dart';
-import 'package:hop/repository/play_repo.dart';
-import 'package:hop/routes/app_pages.dart';
-import 'package:hop/screens/event_detail/event_detail.dart';
-import 'package:hop/screens/open_match_detail/open_match_detail.dart';
+import 'package:padelrush/components/approved_applicant_dialogs/events/events_applicant_dialog.dart';
+import 'package:padelrush/components/approved_applicant_dialogs/events/events_approved_request_dialog.dart';
+import 'package:padelrush/components/approved_applicant_dialogs/open_match/open_match_applicants_dialog.dart';
+import 'package:padelrush/components/approved_applicant_dialogs/open_match/open_match_approved_request_dialog.dart';
+import 'package:padelrush/globals/constants.dart';
+import 'package:padelrush/managers/socket_manager/socket_state.dart';
+import 'package:padelrush/models/applicat_socket_response.dart';
+import 'package:padelrush/models/approve_request_socket_response.dart';
+import 'package:padelrush/repository/play_repo.dart';
+import 'package:padelrush/routes/app_pages.dart';
+import 'package:padelrush/screens/event_detail/event_detail.dart';
+import 'package:padelrush/screens/open_match_detail/open_match_detail.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 final socketProvider = StateNotifierProvider<SocketNotifier, SocketState>(

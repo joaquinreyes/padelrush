@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
-import 'package:hop/components/network_circle_image.dart';
-import 'package:hop/managers/user_manager.dart';
-import 'package:hop/routes/app_pages.dart';
-import 'package:hop/screens/app_provider.dart';
-import 'package:hop/utils/custom_extensions.dart';
-import 'package:hop/box_shadow/flutter_inset_box_shadow.dart' as inset;
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
+import 'package:padelrush/components/network_circle_image.dart';
+import 'package:padelrush/managers/user_manager.dart';
+import 'package:padelrush/routes/app_pages.dart';
+import 'package:padelrush/screens/app_provider.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
+import 'package:padelrush/box_shadow/flutter_inset_box_shadow.dart' as inset;
 
 class SideNavBar extends ConsumerWidget {
   static int nestedRouteCount = 0;

@@ -1,6 +1,6 @@
-import 'package:hop/globals/constants.dart';
-import 'package:hop/globals/utils.dart';
-import 'package:hop/models/service_detail_model.dart';
+import 'package:padelrush/globals/constants.dart';
+import 'package:padelrush/globals/utils.dart';
+import 'package:padelrush/models/service_detail_model.dart';
 
 class ClubLocationData {
   int? id;

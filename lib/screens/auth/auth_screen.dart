@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
-import 'package:hop/components/main_button.dart';
-import 'package:hop/globals/constants.dart';
-import 'package:hop/globals/current_platform.dart';
-import 'package:hop/globals/images.dart';
-import 'package:hop/routes/app_pages.dart';
-import 'package:hop/routes/app_routes.dart';
-import 'package:hop/screens/auth/auth_responseive.dart';
-import 'package:hop/utils/custom_extensions.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
+import 'package:padelrush/components/main_button.dart';
+import 'package:padelrush/globals/constants.dart';
+import 'package:padelrush/globals/current_platform.dart';
+import 'package:padelrush/globals/images.dart';
+import 'package:padelrush/routes/app_pages.dart';
+import 'package:padelrush/routes/app_routes.dart';
+import 'package:padelrush/screens/auth/auth_responseive.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
 
 import '../../managers/shared_pref_manager.dart';
 import '../../repository/club_repo.dart';

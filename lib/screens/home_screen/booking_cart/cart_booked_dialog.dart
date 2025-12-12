@@ -1,15 +1,15 @@
-import 'package:hop/components/custom_dialog.dart';
+import 'package:padelrush/components/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
-import 'package:hop/components/multi_style_text.dart';
-import 'package:hop/components/secondary_button.dart';
-import 'package:hop/globals/constants.dart';
-import 'package:hop/globals/images.dart';
-import 'package:hop/screens/app_provider.dart';
-import 'package:hop/utils/custom_extensions.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
+import 'package:padelrush/components/multi_style_text.dart';
+import 'package:padelrush/components/secondary_button.dart';
+import 'package:padelrush/globals/constants.dart';
+import 'package:padelrush/globals/images.dart';
+import 'package:padelrush/screens/app_provider.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
 import '../../../components/multi_booking_info_card.dart';
 import '../../../models/multi_booking_model.dart';
 

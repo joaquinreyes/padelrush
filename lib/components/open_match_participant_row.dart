@@ -3,12 +3,12 @@ import 'dart:math' as math;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
-import 'package:hop/components/avaialble_slot_widget.dart';
-import 'package:hop/components/participant_slot.dart';
-import 'package:hop/globals/constants.dart';
-import 'package:hop/models/base_classes/booking_player_base.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
+import 'package:padelrush/components/avaialble_slot_widget.dart';
+import 'package:padelrush/components/participant_slot.dart';
+import 'package:padelrush/globals/constants.dart';
+import 'package:padelrush/models/base_classes/booking_player_base.dart';
 
 class OpenMatchParticipantRowWithBG extends StatelessWidget {
   OpenMatchParticipantRowWithBG(

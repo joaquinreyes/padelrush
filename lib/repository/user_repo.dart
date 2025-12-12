@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hop/globals/api_endpoints.dart';
-import 'package:hop/globals/utils.dart';
-import 'package:hop/managers/api_manager.dart';
-import 'package:hop/managers/user_manager.dart';
-import 'package:hop/models/app_user.dart';
-import 'package:hop/models/custom_fields.dart';
-import 'package:hop/models/register_model.dart';
+import 'package:padelrush/globals/api_endpoints.dart';
+import 'package:padelrush/globals/utils.dart';
+import 'package:padelrush/managers/api_manager.dart';
+import 'package:padelrush/managers/user_manager.dart';
+import 'package:padelrush/models/app_user.dart';
+import 'package:padelrush/models/custom_fields.dart';
+import 'package:padelrush/models/register_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 

@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names, unnecessary_new
 
-import 'package:hop/utils/dubai_date_time.dart';
+import 'package:padelrush/utils/dubai_date_time.dart';
 import 'i18n_model.dart';
 
 /// Outputs year as four digits

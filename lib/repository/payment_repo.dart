@@ -1,15 +1,15 @@
 import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:hop/globals/api_endpoints.dart';
-import 'package:hop/managers/api_manager.dart';
-import 'package:hop/managers/user_manager.dart';
-import 'package:hop/models/coupon_model.dart';
-import 'package:hop/models/payment_methods.dart';
-import 'package:hop/models/stripe_payment_method.dart';
-import 'package:hop/utils/custom_extensions.dart';
+import 'package:padelrush/globals/api_endpoints.dart';
+import 'package:padelrush/managers/api_manager.dart';
+import 'package:padelrush/managers/user_manager.dart';
+import 'package:padelrush/models/coupon_model.dart';
+import 'package:padelrush/models/payment_methods.dart';
+import 'package:padelrush/models/stripe_payment_method.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:hop/repository/stripe_repo.dart';
+import 'package:padelrush/repository/stripe_repo.dart';
 
 import '../globals/constants.dart';
 import '../models/multi_booking_model.dart';

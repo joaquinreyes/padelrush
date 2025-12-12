@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/utils/custom_extensions.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
 
 import '../app_styles/app_colors.dart';
 import '../app_styles/app_text_styles.dart';

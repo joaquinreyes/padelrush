@@ -1,5 +1,5 @@
-import 'package:hop/models/service_detail_model.dart';
-import 'package:hop/models/service_waiting_players.dart';
+import 'package:padelrush/models/service_detail_model.dart';
+import 'package:padelrush/models/service_waiting_players.dart';
 
 class ApplicantSocketResponse {
   ServiceDetail? serviceBooking;

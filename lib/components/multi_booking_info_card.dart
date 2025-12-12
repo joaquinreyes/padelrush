@@ -1,11 +1,11 @@
-import 'package:hop/components/secondary_button.dart';
-import 'package:hop/models/multi_booking_model.dart';
+import 'package:padelrush/components/secondary_button.dart';
+import 'package:padelrush/models/multi_booking_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
-import 'package:hop/utils/custom_extensions.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
 import 'package:intl/intl.dart';
 
 import '../models/court_booking.dart';

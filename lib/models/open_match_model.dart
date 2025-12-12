@@ -1,5 +1,5 @@
-import 'package:hop/models/base_classes/booking_base.dart';
-import 'package:hop/models/base_classes/booking_player_base.dart';
+import 'package:padelrush/models/base_classes/booking_base.dart';
+import 'package:padelrush/models/base_classes/booking_player_base.dart';
 
 class OpenMatchModel extends BookingBase {
   OpenMatchService? service;

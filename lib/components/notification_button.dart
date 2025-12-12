@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/globals/current_platform.dart';
-import 'package:hop/globals/images.dart';
-import 'package:hop/repository/notification_repo.dart';
-import 'package:hop/routes/app_pages.dart';
-import 'package:hop/routes/app_routes.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/globals/current_platform.dart';
+import 'package:padelrush/globals/images.dart';
+import 'package:padelrush/repository/notification_repo.dart';
+import 'package:padelrush/routes/app_pages.dart';
+import 'package:padelrush/routes/app_routes.dart';
 
 class NotificationButton extends ConsumerStatefulWidget {
   const NotificationButton({

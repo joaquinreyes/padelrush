@@ -1,24 +1,24 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-import 'package:hop/components/custom_dialog.dart';
+import 'package:padelrush/components/custom_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
-import 'package:hop/components/main_button.dart';
-import 'package:hop/components/secondary_text.dart';
-import 'package:hop/components/secondary_textfield.dart';
-import 'package:hop/globals/images.dart';
-import 'package:hop/globals/utils.dart';
-import 'package:hop/models/coupon_model.dart';
-import 'package:hop/models/payment_methods.dart';
-import 'package:hop/repository/payment_repo.dart';
-import 'package:hop/repository/stripe_repo.dart';
-import 'package:hop/utils/custom_extensions.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
+import 'package:padelrush/components/main_button.dart';
+import 'package:padelrush/components/secondary_text.dart';
+import 'package:padelrush/components/secondary_textfield.dart';
+import 'package:padelrush/globals/images.dart';
+import 'package:padelrush/globals/utils.dart';
+import 'package:padelrush/models/coupon_model.dart';
+import 'package:padelrush/models/payment_methods.dart';
+import 'package:padelrush/repository/payment_repo.dart';
+import 'package:padelrush/repository/stripe_repo.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
 import '../../globals/constants.dart';

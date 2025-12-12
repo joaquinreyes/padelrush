@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/globals/current_platform.dart';
-import 'package:hop/screens/notification_screen/notification_screen.dart';
-import 'package:hop/screens/responsive_widgets/web_header.dart';
-import 'package:hop/screens/responsive_widgets/web_side_bar.dart';
+import 'package:padelrush/globals/current_platform.dart';
+import 'package:padelrush/screens/notification_screen/notification_screen.dart';
+import 'package:padelrush/screens/responsive_widgets/web_header.dart';
+import 'package:padelrush/screens/responsive_widgets/web_side_bar.dart';
 
 class HomeResponsiveWidget extends StatefulWidget {
   const HomeResponsiveWidget({super.key, required this.child});

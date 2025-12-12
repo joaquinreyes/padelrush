@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/box_shadow/flutter_inset_box_shadow.dart' as inset;
+import 'package:padelrush/box_shadow/flutter_inset_box_shadow.dart' as inset;
 import '../app_styles/app_colors.dart';
 import '../screens/app_provider.dart';
 

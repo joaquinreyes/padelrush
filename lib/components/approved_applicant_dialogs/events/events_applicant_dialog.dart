@@ -1,21 +1,21 @@
-import 'package:hop/components/custom_dialog.dart';
+import 'package:padelrush/components/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
 
-import 'package:hop/components/c_divider.dart';
-import 'package:hop/components/open_match_participant_row.dart';
-import 'package:hop/components/open_match_waiting_for_approval_players.dart';
-import 'package:hop/globals/constants.dart';
-import 'package:hop/globals/utils.dart';
-import 'package:hop/models/applicat_socket_response.dart';
-import 'package:hop/models/base_classes/booking_player_base.dart';
-import 'package:hop/models/service_detail_model.dart';
-import 'package:hop/repository/play_repo.dart';
-import 'package:hop/screens/open_match_detail/open_match_detail.dart';
-import 'package:hop/utils/custom_extensions.dart';
+import 'package:padelrush/components/c_divider.dart';
+import 'package:padelrush/components/open_match_participant_row.dart';
+import 'package:padelrush/components/open_match_waiting_for_approval_players.dart';
+import 'package:padelrush/globals/constants.dart';
+import 'package:padelrush/globals/utils.dart';
+import 'package:padelrush/models/applicat_socket_response.dart';
+import 'package:padelrush/models/base_classes/booking_player_base.dart';
+import 'package:padelrush/models/service_detail_model.dart';
+import 'package:padelrush/repository/play_repo.dart';
+import 'package:padelrush/screens/open_match_detail/open_match_detail.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
 part 'components.dart';
 
 class EventApplicantDialog extends ConsumerStatefulWidget {

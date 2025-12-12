@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hop/globals/constants.dart';
-import 'package:hop/managers/shared_pref_manager.dart';
+import 'package:padelrush/globals/constants.dart';
+import 'package:padelrush/managers/shared_pref_manager.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:hop/models/club_locations.dart';
+import 'package:padelrush/models/club_locations.dart';
 part 'app_provider.g.dart';
 
 @Riverpod(keepAlive: true)

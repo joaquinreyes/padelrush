@@ -6,12 +6,12 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/CustomDatePicker/src/date_model.dart';
-import 'package:hop/CustomDatePicker/src/datetime_picker_theme.dart'
+import 'package:padelrush/CustomDatePicker/src/date_model.dart';
+import 'package:padelrush/CustomDatePicker/src/datetime_picker_theme.dart'
     as datePickerTheme;
-import 'package:hop/CustomDatePicker/src/i18n_model.dart';
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
+import 'package:padelrush/CustomDatePicker/src/i18n_model.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
 
 typedef DateChangedCallback(DateTime time);
 typedef DateCancelledCallback();

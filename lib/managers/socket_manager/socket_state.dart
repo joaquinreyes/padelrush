@@ -1,5 +1,5 @@
-import 'package:hop/models/applicat_socket_response.dart';
-import 'package:hop/models/approve_request_socket_response.dart';
+import 'package:padelrush/models/applicat_socket_response.dart';
+import 'package:padelrush/models/approve_request_socket_response.dart';
 
 class SocketState {
   final List<ApplicantSocketResponse> applicantsData;

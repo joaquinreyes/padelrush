@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
 
 class MultiStyleTextFirstLight extends StatelessWidget {
   const MultiStyleTextFirstLight(

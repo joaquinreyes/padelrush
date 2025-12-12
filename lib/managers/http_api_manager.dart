@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:hop/globals/api_endpoints.dart';
-import 'package:hop/managers/api_manager.dart';
-import 'package:hop/managers/user_manager.dart';
-import 'package:hop/screens/app_provider.dart';
+import 'package:padelrush/globals/api_endpoints.dart';
+import 'package:padelrush/managers/api_manager.dart';
+import 'package:padelrush/managers/user_manager.dart';
+import 'package:padelrush/screens/app_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;

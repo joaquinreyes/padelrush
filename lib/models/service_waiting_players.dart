@@ -1,4 +1,4 @@
-import 'package:hop/models/base_classes/booking_player_base.dart';
+import 'package:padelrush/models/base_classes/booking_player_base.dart';
 
 class ServiceWaitingPlayers extends BookingPlayerBase {
   ServiceWaitingPlayers({

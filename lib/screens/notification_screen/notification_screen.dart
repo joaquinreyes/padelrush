@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hop/app_styles/app_colors.dart';
-import 'package:hop/app_styles/app_text_styles.dart';
-import 'package:hop/components/secondary_button.dart';
-import 'package:hop/globals/current_platform.dart';
-import 'package:hop/globals/images.dart';
-import 'package:hop/models/in_app_notification.dart';
-import 'package:hop/repository/notification_repo.dart';
-import 'package:hop/routes/app_pages.dart';
-import 'package:hop/routes/app_routes.dart';
-import 'package:hop/utils/custom_extensions.dart';
-import 'package:hop/widgets/background_view.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
+import 'package:padelrush/app_styles/app_text_styles.dart';
+import 'package:padelrush/components/secondary_button.dart';
+import 'package:padelrush/globals/current_platform.dart';
+import 'package:padelrush/globals/images.dart';
+import 'package:padelrush/models/in_app_notification.dart';
+import 'package:padelrush/repository/notification_repo.dart';
+import 'package:padelrush/routes/app_pages.dart';
+import 'package:padelrush/routes/app_routes.dart';
+import 'package:padelrush/utils/custom_extensions.dart';
+import 'package:padelrush/widgets/background_view.dart';
 
 part 'notification_components.dart';
 

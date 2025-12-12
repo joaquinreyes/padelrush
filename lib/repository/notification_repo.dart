@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:hop/globals/api_endpoints.dart';
-import 'package:hop/managers/api_manager.dart';
-import 'package:hop/managers/user_manager.dart';
-import 'package:hop/models/in_app_notification.dart';
+import 'package:padelrush/globals/api_endpoints.dart';
+import 'package:padelrush/managers/api_manager.dart';
+import 'package:padelrush/managers/user_manager.dart';
+import 'package:padelrush/models/in_app_notification.dart';
 
 part 'notification_repo.g.dart';
 
