@@ -168,16 +168,16 @@ class __PaymentInformationState extends ConsumerState<PaymentInformation> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                      Expanded(
+                      Flexible(
                         child: Text(
                           "DO_YOU_HAVE_A_DISCOUNT_COUPON".tr(context),
-                          style: AppTextStyles.qanelasLight(fontSize: 16.sp),
+                          style: AppTextStyles.poppinsMedium(fontSize: 14.sp),
                         ),
                       ),
                       Text(
                         " ${"OPTIONAL".tr(context).toLowerCase()}",
-                        style: AppTextStyles.qanelasRegular(
-                          fontSize: 15.sp,
+                        style: AppTextStyles.poppinsRegular(
+                          fontSize: 13.sp,
                         ),
                       )
                     ]),
@@ -185,8 +185,8 @@ class __PaymentInformationState extends ConsumerState<PaymentInformation> {
                   SizedBox(height: 5.h),
                   Container(
                     decoration: BoxDecoration(
-                      color: AppColors.black25,
-                      borderRadius: BorderRadius.circular(12.r),
+                      color: AppColors.gray,
+                      borderRadius: BorderRadius.circular(100.r),
                     ),
                     child: SecondaryTextField(
                       hintText: "ENTER_COUPON_HERE".tr(context),
@@ -198,9 +198,9 @@ class __PaymentInformationState extends ConsumerState<PaymentInformation> {
                         ref.read(_invalidCoupon.notifier).state = false;
                         ref.read(totalMultiBookingAmount.notifier).state = calculateAmountPayable(ref, widget.price);
                       },
-                      hintTextStyle: AppTextStyles.qanelasLight(
+                      hintTextStyle: AppTextStyles.poppinsLight(
                           color: AppColors.black2, fontSize: 13.sp),
-                      style: AppTextStyles.qanelasRegular()
+                      style: AppTextStyles.poppinsRegular()
                           .copyWith(color: AppColors.black2, fontSize: 13.sp),
                       suffixIcon: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -234,7 +234,7 @@ class __PaymentInformationState extends ConsumerState<PaymentInformation> {
               alignment: Alignment.centerLeft,
               child: Text(
                 "${"Add_PAYMENT_METHOD".tr(context)}",
-                style: AppTextStyles.qanelasLight(fontSize: 16.sp),
+                style: AppTextStyles.poppinsMedium(fontSize: 14.sp),
                 textAlign: TextAlign.start,
               ),
             ),
@@ -245,7 +245,7 @@ class __PaymentInformationState extends ConsumerState<PaymentInformation> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "${"SELECT_PAYMENT_METHOD".tr(context)}",
-                  style: AppTextStyles.qanelasLight(fontSize: 16.sp),
+                  style: AppTextStyles.poppinsLight(fontSize: 16.sp),
                   textAlign: TextAlign.start,
                 )),
             SizedBox(height: 15.h),
@@ -333,7 +333,7 @@ class __PaymentInformationState extends ConsumerState<PaymentInformation> {
         width: double.infinity,
         padding: EdgeInsets.only(top: 15.h, bottom: 10.h),
         decoration: BoxDecoration(
-          color: AppColors.black25,
+          color: AppColors.whiteNew,
           borderRadius: BorderRadius.circular(10.r),
         ),
         child: Column(
@@ -348,7 +348,7 @@ class __PaymentInformationState extends ConsumerState<PaymentInformation> {
             SizedBox(height: 15.h),
             Text(
               "ADD_CREDIT_DEBIT_CARD".tr(context),
-              style: AppTextStyles.qanelasRegular(fontSize: 15.sp),
+              style: AppTextStyles.poppinsRegular(fontSize: 15.sp),
             ),
           ],
         ),

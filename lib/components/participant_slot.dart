@@ -100,7 +100,7 @@ class ParticipantSlot extends ConsumerWidget {
                   spacing: 2.w,
                   fontSize: 10.sp,
                   label: "RELEASE".trU(context),
-                  labelStyle: AppTextStyles.qanelasRegular(fontSize: 10.sp),
+                  labelStyle: AppTextStyles.poppinsRegular(fontSize: 10.sp),
                   onTap: () {
                     onRelease?.call(player.id ?? -1);
                   },
@@ -140,7 +140,7 @@ class ParticipantSlot extends ConsumerWidget {
               spacing: 2.w,
               fontSize: 10.sp,
               label: "RELEASE".trU(context),
-              labelStyle: AppTextStyles.qanelasRegular(fontSize: 10.sp),
+              labelStyle: AppTextStyles.poppinsRegular(fontSize: 10.sp),
               onTap: () {
                 onRelease?.call(player.id ?? -1);
               },
@@ -164,7 +164,7 @@ class ParticipantSlot extends ConsumerWidget {
       minFontSize: 6.sp,
       maxLines: 2,
       stepGranularity: 1.sp,
-      style: AppTextStyles.qanelasRegular(color: textColor, fontSize: 12.sp),
+      style: AppTextStyles.poppinsRegular(color: textColor, fontSize: 12.sp),
     );
   }
 
@@ -178,7 +178,7 @@ class ParticipantSlot extends ConsumerWidget {
       minFontSize: 9.sp,
       maxLines: 1,
       stepGranularity: 1.sp,
-      style: AppTextStyles.qanelasMedium(
+      style: AppTextStyles.poppinsMedium(
         fontSize: 11.sp,
           color: textColor,),
     );

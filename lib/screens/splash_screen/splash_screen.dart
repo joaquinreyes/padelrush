@@ -121,10 +121,10 @@ class _SplashBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.darkYellow,
+      backgroundColor: AppColors.white,
       body: Container(
         decoration: BoxDecoration(
-          color: AppColors.black2,
+          // color: AppColors.black2,
           // image: DecorationImage(
           //   image: AssetImage(AppImages.authBackground.path),
           //   fit: BoxFit.cover,
@@ -133,7 +133,7 @@ class _SplashBody extends StatelessWidget {
         child: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 55.w),
-            child: Image.asset(AppImages.splashLogo.path, height: 298.h),
+            child: Image.asset(AppImages.splashLogoNew.path, height: 298.h),
           ),
         ),
       ),

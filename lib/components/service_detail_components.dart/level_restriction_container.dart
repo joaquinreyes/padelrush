@@ -27,7 +27,7 @@ class LevelRestrictionContainer extends StatelessWidget {
       ),
       child: Text(
         "${"LEVEL".tr(context)} $levelRestriction",
-        style: AppTextStyles.qanelasSemiBold(fontSize: 14.sp),
+        style: AppTextStyles.poppinsSemiBold(fontSize: 14.sp),
       ),
     );
   }

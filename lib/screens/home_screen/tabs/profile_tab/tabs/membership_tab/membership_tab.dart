@@ -39,7 +39,7 @@ class MembershipTab extends ConsumerWidget {
       children: [
         Text(
           'MEMBERSHIP_INFORMATION'.trU(context),
-          style: AppTextStyles.qanelasMedium(
+          style: AppTextStyles.poppinsMedium(
               fontSize: 17.sp,),
         ),
         SizedBox(height: 10.h),

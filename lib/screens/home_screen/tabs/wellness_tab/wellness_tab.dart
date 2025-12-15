@@ -139,7 +139,7 @@ class _WellnessTabState extends ConsumerState<WellnessTab> {
               padding: const EdgeInsets.symmetric(),
               child: Text(
                 '${'PILATES'.trU(context)}',
-                style: AppTextStyles.qanelasMedium(fontSize: 22.sp, letterSpacing: 1),
+                style: AppTextStyles.poppinsMedium(fontSize: 22.sp, letterSpacing: 1),
               ),
             ),
           ),
@@ -339,7 +339,7 @@ class _WellnessTabState extends ConsumerState<WellnessTab> {
     widgets.add(
       Padding(
         padding: EdgeInsets.only(right: 15.w,left: 15.w,bottom: 15.sp),
-        child: Text("CLASSES".trU(context),style: AppTextStyles.qanelasMedium(fontSize: 17.sp),),
+        child: Text("CLASSES".trU(context),style: AppTextStyles.poppinsMedium(fontSize: 17.sp),),
       ),
     );
     for (var date in dateList) {
@@ -399,7 +399,7 @@ class _WellnessTabState extends ConsumerState<WellnessTab> {
                         children: [
                           Text(
                             membershipName,
-                            style: AppTextStyles.qanelasBold(
+                            style: AppTextStyles.poppinsBold(
                                 letterSpacing: 14.sp * 0.10),
                           ),
                         ],
@@ -413,12 +413,12 @@ class _WellnessTabState extends ConsumerState<WellnessTab> {
                               Text(
                                 duration,
                                 style:
-                                    AppTextStyles.qanelasLight(fontSize: 13.sp),
+                                    AppTextStyles.poppinsLight(fontSize: 13.sp),
                               ),
                               Text(
                                 "${"PRICE".tr(context)} ${Utils.formatPrice(membershipPrice)}",
                                 style:
-                                    AppTextStyles.qanelasLight(fontSize: 13.sp),
+                                    AppTextStyles.poppinsLight(fontSize: 13.sp),
                               ),
                             ],
                           ),
@@ -432,7 +432,7 @@ class _WellnessTabState extends ConsumerState<WellnessTab> {
                             padding: EdgeInsets.only(left: 8.w, top: 2.h),
                             label: "BUY".trU(context),
                             labelStyle:
-                                AppTextStyles.qanelasLight(fontSize: 15.sp),
+                                AppTextStyles.poppinsLight(fontSize: 15.sp),
                             onTap: () async {
                               final selectedDate = await showDialog(
                                 context: context,
@@ -505,12 +505,12 @@ class _WellnessTabState extends ConsumerState<WellnessTab> {
       children: [
         Text(
           text1,
-          style: AppTextStyles.qanelasLight(fontSize: 13.sp),
+          style: AppTextStyles.poppinsLight(fontSize: 13.sp),
         ),
         Spacer(),
         Text(
           text2,
-          style: AppTextStyles.qanelasLight(fontSize: 13.sp),
+          style: AppTextStyles.poppinsLight(fontSize: 13.sp),
         ),
       ],
     );
@@ -565,13 +565,13 @@ class ClassesCard extends ConsumerWidget {
                 child: Text(
                   (event.service?.event?.eventName ?? "").capitalizeFirst,
                   style:
-                  AppTextStyles.qanelasBold(fontSize: 16.sp),
+                  AppTextStyles.poppinsBold(fontSize: 16.sp),
                 ),
               ),
               Text(
                 "${event.timeDifferent} MIN",
                 textAlign: TextAlign.center,
-                style: AppTextStyles.qanelasMedium(fontSize: 14.sp),
+                style: AppTextStyles.poppinsMedium(fontSize: 14.sp),
               ),
             ],
           ),
@@ -608,12 +608,12 @@ class ClassesCard extends ConsumerWidget {
       children: [
         Text(
           text1,
-          style: AppTextStyles.qanelasRegular(fontSize: 13.sp),
+          style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
         ),
         SizedBox(height: 2.h),
         Text(
           text2,
-          style: AppTextStyles.qanelasRegular(fontSize: 13.sp),
+          style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
         ),
       ],
     );
@@ -667,11 +667,11 @@ class _ToggleTabsState extends State<ToggleTabs> {
                   child: Text(
                     tab.toUpperCase(),
                     style: isSelected
-                        ? AppTextStyles.qanelasSemiBold(
+                        ? AppTextStyles.poppinsSemiBold(
                             color: AppColors.white,
                             fontSize: 13.sp,
                           )
-                        : AppTextStyles.qanelasLight(
+                        : AppTextStyles.poppinsLight(
                             fontSize: 13.sp,
                             color: AppColors.black70,
                           ),
@@ -720,7 +720,7 @@ class _MembershipComponent extends ConsumerWidget {
                 padding: EdgeInsets.only(bottom: 15.h,left: 15.w),
                 child: Text(
                   'MEMBERSHIP'.trU(context),
-                  style: AppTextStyles.qanelasMedium(
+                  style: AppTextStyles.poppinsMedium(
                     fontSize: 17.sp,),
                 ),
               ),

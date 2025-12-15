@@ -54,11 +54,11 @@ class MainButton extends StatelessWidget {
   final BoxDecoration? decoration;
 
   Color get _defaultBackgroundColor =>
-      isForPopup ? AppColors.darkYellow : AppColors.black2;
+      isForPopup ? AppColors.darkYellow80 : AppColors.darkYellow80;
 
   Color get _backgroundColor => color ?? _defaultBackgroundColor;
 
-  Color get _defaultDisabledColor => color ?? (isForPopup ? AppColors.black25 : AppColors.buttonBackgroundColor);
+  Color get _defaultDisabledColor => color ?? (isForPopup ? AppColors.gray : AppColors.gray);
 
   double get effectiveBorderRadius => borderRadius ?? 12.r;
 
@@ -156,15 +156,15 @@ class MainButton extends StatelessWidget {
   TextStyle get _labelTextStyle {
     if (enabled) {
       return labelStyle ??
-          AppTextStyles.qanelasMedium(
-            color: AppColors.white,
-            fontSize: 18.sp,
+          AppTextStyles.poppinsMedium(
+            color: AppColors.black,
+            fontSize: 16.sp,
           );
     } else {
       return labelStyle ??
-          AppTextStyles.qanelasMedium(
-            color: AppColors.white,
-            fontSize: 18.sp,
+          AppTextStyles.poppinsMedium(
+            color: AppColors.black,
+            fontSize: 16.sp,
           );
     }
   }
@@ -172,12 +172,12 @@ class MainButton extends StatelessWidget {
   TextStyle get _labelTextStyleForPopup {
     if (enabled) {
       return labelStyle ??
-          AppTextStyles.qanelasMedium(
-              color: AppColors.black2,
-              fontSize: 18.sp,);
+          AppTextStyles.poppinsMedium(
+              color: AppColors.black,
+              fontSize: 16.sp,);
     } else {
       return labelStyle ??
-          AppTextStyles.qanelasMedium(color: AppColors.white, fontSize: 18.sp);
+          AppTextStyles.poppinsMedium(color: AppColors.black, fontSize: 16.sp);
     }
   }
 
@@ -188,7 +188,7 @@ class MainButton extends StatelessWidget {
       width: arrowSize ?? 18.h,
       color: labelStyle?.color ??
           labelColor ??
-          (enabled ? AppColors.white : AppColors.white),
+          (enabled ? AppColors.black : AppColors.black),
     );
   }
 

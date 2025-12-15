@@ -86,9 +86,9 @@ class _EventListState extends ConsumerState<EventsList> {
             bottom: 15.h,
           ),
           child: Text(
-            Utils.formatBookingDate(date, context).toUpperCase(),
-            style: AppTextStyles.qanelasMedium(
-              fontSize: 18.sp,
+            Utils.formatBookingDate(date, context),
+            style: AppTextStyles.poppinsBold(
+              fontSize: 16.sp,
             ),
           ),
         ),
@@ -134,9 +134,9 @@ class EventsCard extends ConsumerWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(25.r),
         border: border,
-        color: AppColors.tileBgColor,
+        color: AppColors.gray,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -150,7 +150,7 @@ class EventsCard extends ConsumerWidget {
                   children: [
                     Text(
                       (event.service?.event?.eventName ?? "").capitalizeFirst,
-                      style: AppTextStyles.qanelasBold(fontSize: 16.sp),
+                      style: AppTextStyles.poppinsBold(fontSize: 16.sp),
                     ),
                     SizedBox(height: 2.h),
                     LevelRestrictionContainer(
@@ -196,8 +196,8 @@ class EventsCard extends ConsumerWidget {
                         maxCapacity: event.getMaximumCapacity,
                         minCapacity: event.getMinimumCapacity,
                       ).trU(context),
-                      style: AppTextStyles.qanelasMedium(
-                        fontSize: 12.sp,
+                      style: AppTextStyles.poppinsBold(
+                        fontSize: 14.sp,
                       ),
                     ),
                     // SizedBox(height: 4.h),
@@ -211,9 +211,9 @@ class EventsCard extends ConsumerWidget {
                       child: Text(
                         "${event.players?.length.toString() ?? "0"}/${event.getMaximumCapacity.toString()}",
                         textAlign: TextAlign.center,
-                        style: AppTextStyles.qanelasSemiBold(
+                        style: AppTextStyles.poppinsBold(
                           color: AppColors.black2,
-                          fontSize: 14.sp,
+                          fontSize: 12.sp,
                         ),
                       ),
                     ),
@@ -241,12 +241,12 @@ class EventsCard extends ConsumerWidget {
       children: [
         Text(
           text1,
-          style: AppTextStyles.qanelasRegular(fontSize: 13.sp),
+          style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
         ),
         SizedBox(height: 2.h),
         Text(
           text2,
-          style: AppTextStyles.qanelasRegular(fontSize: 13.sp),
+          style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
         ),
       ],
     );

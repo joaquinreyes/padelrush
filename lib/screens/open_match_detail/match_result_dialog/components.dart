@@ -38,14 +38,14 @@ class _MatchResultFormsState extends ConsumerState<_MatchResultForms> {
             children: [
               Text(
                 widget.service.formattedDateStartTime,
-                style: AppTextStyles.qanelasBold(
+                style: AppTextStyles.poppinsBold(
 
                   fontSize: 16.sp,
                 ),
               ),
               Text(
                 widget.service.openMatchLevelRange ?? '',
-                style: AppTextStyles.qanelasRegular(
+                style: AppTextStyles.poppinsRegular(
                     fontSize: 15.sp ),
               ),
             ],
@@ -91,10 +91,10 @@ class _MatchResultFormsState extends ConsumerState<_MatchResultForms> {
         child: Text(
           "DRAW".tr(context),
           style: isDraw
-              ? AppTextStyles.qanelasSemiBold(
+              ? AppTextStyles.poppinsSemiBold(
                   fontSize: 14.sp,
                 )
-              : AppTextStyles.qanelasRegular(
+              : AppTextStyles.poppinsRegular(
                   fontSize: 13.sp,
                 ),
         ),
@@ -172,7 +172,7 @@ class _SingleResultForm extends ConsumerWidget {
       child: Center(
         child: Text(
           "DRAW".trU(context),
-          style: AppTextStyles.qanelasMedium(
+          style: AppTextStyles.poppinsMedium(
             color: AppColors.white,
             fontSize: 16.sp,
           ),
@@ -198,7 +198,7 @@ class _RankOtherPlayers extends ConsumerWidget {
         SizedBox(height: 20.h),
         Text(
           "RANK_THE_OTHER_PLAYERS".tr(context),
-          style: AppTextStyles.qanelasLight(
+          style: AppTextStyles.poppinsLight(
               fontSize: 16.sp),
         ),
         SizedBox(height: 10.h),
@@ -274,7 +274,7 @@ class _RankingLevelSelectorState extends State<_RankingLevelSelector> {
       children: [
         Text(
           "SELECT_PLAYER_LEVEL".tr(context),
-          style: AppTextStyles.qanelasLight(
+          style: AppTextStyles.poppinsLight(
               fontSize: 15.sp ),
         ),
         SizedBox(height: 5.h),
@@ -322,10 +322,10 @@ class _RankingLevelSelectorState extends State<_RankingLevelSelector> {
                       child: Text(
                         e.toStringAsFixed(2),
                         style: isSelected
-                            ? AppTextStyles.qanelasSemiBold(
+                            ? AppTextStyles.poppinsSemiBold(
                                 fontSize: 14.sp,
                               )
-                            : AppTextStyles.qanelasRegular(
+                            : AppTextStyles.poppinsRegular(
                                 fontSize: 13.sp,
                                 color: AppColors.white,
                               ),
@@ -375,7 +375,7 @@ class _ScoreInput extends StatelessWidget {
           if (isWinner || isDraw)
             Text(
               (isDraw ? "DRAW" : "WINNERS").tr(context),
-              style: AppTextStyles.qanelasMedium(
+              style: AppTextStyles.poppinsMedium(
                 fontSize: 14.sp,
               ),
             ),
@@ -424,7 +424,7 @@ class _SwapRow extends StatelessWidget {
         const Spacer(flex: 7),
         Text(
           "V/S",
-          style: AppTextStyles.qanelasMedium(
+          style: AppTextStyles.poppinsMedium(
               fontSize: 12.sp, ),
         ),
         const Spacer(flex: 3),

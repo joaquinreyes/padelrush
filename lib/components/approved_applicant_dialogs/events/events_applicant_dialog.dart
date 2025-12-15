@@ -56,7 +56,7 @@ class _ApplicantDialogState extends ConsumerState<EventApplicantDialog> {
             alignment: AlignmentDirectional.centerStart,
             child: Text(
               "CURRENT_TEAM".tr(context),
-              style: AppTextStyles.qanelasRegular()
+              style: AppTextStyles.poppinsRegular()
             ),
           ),
           SizedBox(height: 5.h),

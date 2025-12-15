@@ -22,11 +22,11 @@ class ApplicantOpenMatchInfoCard extends StatelessWidget {
             children: [
               Text(
                 "LOCATION".trU(context),
-                style: AppTextStyles.qanelasMedium(fontSize: 16.sp,),
+                style: AppTextStyles.poppinsMedium(fontSize: 16.sp,),
               ),
               const Spacer(),
               Text("DATE_AND_TIME".trU(context),
-                  style: AppTextStyles.qanelasMedium(fontSize: 16.sp,)),
+                  style: AppTextStyles.poppinsMedium(fontSize: 16.sp,)),
             ],
           ),
           SizedBox(height: 1.h),
@@ -41,19 +41,19 @@ class ApplicantOpenMatchInfoCard extends StatelessWidget {
                 children: [
                   Text(
                     service.courtName.toLowerCase().capitalizeFirst,
-                    style: AppTextStyles.qanelasRegular(fontSize: 15.sp,),
+                    style: AppTextStyles.poppinsRegular(fontSize: 15.sp,),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     // locationName.capitalizeFirst,
                     (service.service?.location?.locationName ?? "")
                         .capitalizeFirst,
-                    style: AppTextStyles.qanelasRegular(fontSize: 15.sp,),
+                    style: AppTextStyles.poppinsRegular(fontSize: 15.sp,),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     "${"PRICE".tr(context)} ${Utils.formatPrice(service.service?.price?.toDouble())}",
-                    style: AppTextStyles.qanelasRegular(fontSize: 15.sp,),
+                    style: AppTextStyles.poppinsRegular(fontSize: 15.sp,),
                   ),
                 ],
               ),
@@ -63,17 +63,17 @@ class ApplicantOpenMatchInfoCard extends StatelessWidget {
                 children: [
                   Text(
                     service.formatStartEndTime12,
-                    style: AppTextStyles.qanelasRegular(fontSize: 15.sp,),
+                    style: AppTextStyles.poppinsRegular(fontSize: 15.sp,),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     service.formatBookingDate,
-                    style: AppTextStyles.qanelasRegular(fontSize: 15.sp,),
+                    style: AppTextStyles.poppinsRegular(fontSize: 15.sp,),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     service.durationInMinutes(),
-                    style: AppTextStyles.qanelasRegular(fontSize: 15.sp,),
+                    style: AppTextStyles.poppinsRegular(fontSize: 15.sp,),
                   ),
                 ],
               ),

@@ -16,6 +16,7 @@ class _HeaderInfo extends ConsumerWidget {
       PlatformC().isCurrentDesignPlatformDesktop
           ? SizedBox(height: 10.h)
           : SignOutButtonComponent(),
+      10.verticalSpace,
       Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -59,38 +60,37 @@ class _HeaderInfo extends ConsumerWidget {
                       path: user?.profileUrl,
                       width: 90.h,
                       height: 90.h,
-                      borderRadius: BorderRadius.circular(12.r),
+                      borderRadius: BorderRadius.circular(100.r),
                       bgColor: AppColors.black2,
                       logoColor: AppColors.white,
                       showBG: true,
                     ),
                     Positioned(
-                      right: 6.w,
                       bottom: 6.h,
-                      child: Image.asset(
-                        AppImages.iconCameraNew.path,
-                        width: 13.w,
-                        height: 13.w,
-                        color: AppColors.white,
+                      child: Container(
+                        padding: EdgeInsets.all(4.h),
+                        decoration:
+                        BoxDecoration(
+                          color: AppColors.black,
+                          borderRadius: BorderRadius.circular(100.r),
+
+                        ),
+                        child: Image.asset(
+                          AppImages.iconCameraNew.path,
+                          width: 13.w,
+                          height: 13.w,
+                          color: AppColors.darkYellow,
+                        ),
                       ),
                     )
                   ],
                 ),
               ),
-              SizedBox(height: 10.h),
-              const FollowingFollowerComponent()
-            ],
-          ),
-          SizedBox(width: 5.w),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
               SizedBox(height: 5.h),
               Text(
                 user?.firstName?.toUpperCase() ?? "",
-                style: AppTextStyles.qanelasMedium(
-                  fontSize: 22.sp,
+                style: AppTextStyles.pragmaticaObliqueExtendedBold(
+                  fontSize: 24.sp,
                 ),
               ),
               SizedBox(height: 1.h),
@@ -113,18 +113,17 @@ class _HeaderInfo extends ConsumerWidget {
                   // SizedBox(width: 5.w),
                   Text(
                     "${(userLevel ?? 0).toStringAsFixed(2)} ${getRankLabel(userLevel ?? 0)}• ${user?.playingSide ?? ""}",
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       fontSize: 15.sp,
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 13.h),
               Row(
                 children: [
                   Text(
                     "WALLET".tr(context),
-                    style: AppTextStyles.qanelasBold(
+                    style: AppTextStyles.poppinsBold(
                       fontSize: 15.sp,
                     ),
                   ),
@@ -134,7 +133,7 @@ class _HeaderInfo extends ConsumerWidget {
                         if (data.isNotEmpty) {
                           return Text(
                             "${NumberFormat('#,##0', 'id_ID').format(data.first.balance)} $currency",
-                            style: AppTextStyles.qanelasRegular(
+                            style: AppTextStyles.poppinsRegular(
                               fontSize: 15.sp,
                             ),
                           );
@@ -142,35 +141,117 @@ class _HeaderInfo extends ConsumerWidget {
 
                         return Text(
                           Utils.formatPrice2(0, currency),
-                          style: AppTextStyles.qanelasRegular(
+                          style: AppTextStyles.poppinsRegular(
                             fontSize: 15.sp,
                           ),
                         );
                       },
                       error: (error, stackTrace) => Text(
-                            Utils.formatPrice2(0, currency),
-                            style: AppTextStyles.qanelasRegular(
-                              fontSize: 15.sp,
-                            ),
-                          ),
+                        Utils.formatPrice2(0, currency),
+                        style: AppTextStyles.poppinsRegular(
+                          fontSize: 15.sp,
+                        ),
+                      ),
                       loading: () => const Center(
-                            child: CupertinoActivityIndicator(
-                              radius: 10,
-                            ),
-                          ))
+                        child: CupertinoActivityIndicator(
+                          radius: 10,
+                        ),
+                      ))
                 ],
-              )
+              ),
+              // SizedBox(height: 10.h),
+              // const FollowingFollowerComponent()
             ],
           ),
-          SizedBox(width: 15.w),
-          membership.when(
-              data: (data) {
-                return Padding(
-                    padding: EdgeInsets.only(top: 25),
-                    child: _membershipButton(ref, context, data));
-              },
-              error: (e, _) => SizedBox(),
-              loading: () => const Center(child: CupertinoActivityIndicator()))
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   mainAxisAlignment: MainAxisAlignment.start,
+          //   children: [
+          //     SizedBox(height: 5.h),
+          //     Text(
+          //       user?.firstName?.toUpperCase() ?? "",
+          //       style: AppTextStyles.poppinsMedium(
+          //         fontSize: 22.sp,
+          //       ),
+          //     ),
+          //     SizedBox(height: 1.h),
+          //     Row(
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: [
+          //         // if (userLevelTag.isNotEmpty)
+          //         //   Container(
+          //         //       padding:
+          //         //           EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+          //         //       decoration: BoxDecoration(
+          //         //           color: AppColors.brightGold,
+          //         //           borderRadius: BorderRadius.circular(10)),
+          //         //       child: Text(
+          //         //         userLevelTag.tr(context),
+          //         //         style: AppTextStyles.gothamNarrowLight()
+          //         //             .copyWith(fontSize: 15.sp, color: Colors.black),
+          //         //       )),
+          //         // SizedBox(width: 5.w),
+          //         Text(
+          //           "${(userLevel ?? 0).toStringAsFixed(2)} ${getRankLabel(userLevel ?? 0)}• ${user?.playingSide ?? ""}",
+          //           style: AppTextStyles.poppinsRegular(
+          //             fontSize: 15.sp,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //     SizedBox(height: 13.h),
+          //     Row(
+          //       children: [
+          //         Text(
+          //           "WALLET".tr(context),
+          //           style: AppTextStyles.poppinsBold(
+          //             fontSize: 15.sp,
+          //           ),
+          //         ),
+          //         SizedBox(width: 4.w),
+          //         paymentDetails.when(
+          //             data: (data) {
+          //               if (data.isNotEmpty) {
+          //                 return Text(
+          //                   "${NumberFormat('#,##0', 'id_ID').format(data.first.balance)} $currency",
+          //                   style: AppTextStyles.poppinsRegular(
+          //                     fontSize: 15.sp,
+          //                   ),
+          //                 );
+          //               }
+          //
+          //               return Text(
+          //                 Utils.formatPrice2(0, currency),
+          //                 style: AppTextStyles.poppinsRegular(
+          //                   fontSize: 15.sp,
+          //                 ),
+          //               );
+          //             },
+          //             error: (error, stackTrace) => Text(
+          //                   Utils.formatPrice2(0, currency),
+          //                   style: AppTextStyles.poppinsRegular(
+          //                     fontSize: 15.sp,
+          //                   ),
+          //                 ),
+          //             loading: () => const Center(
+          //                   child: CupertinoActivityIndicator(
+          //                     radius: 10,
+          //                   ),
+          //                 ))
+          //       ],
+          //     )
+          //   ],
+          // ),
+          // SizedBox(width: 15.w),
+          // membership.when(
+          //     data: (data) {
+          //       return Padding(
+          //           padding: EdgeInsets.only(top: 25),
+          //           child: _membershipButton(ref, context, data));
+          //     },
+          //     error: (e, _) => SizedBox(),
+          //     loading: () => const Center(child: CupertinoActivityIndicator()))
         ],
       )
     ]);
@@ -220,7 +301,7 @@ class _HeaderInfo extends ConsumerWidget {
             Expanded(
               child: Text(
                 (!haveMembership ? "BECOME_MEMBER" : "MEMBER_CARD").tr(context),
-                style: AppTextStyles.qanelasRegular(fontSize: 11.sp),
+                style: AppTextStyles.poppinsRegular(fontSize: 11.sp),
                 textAlign: TextAlign.center,
               ),
             )
@@ -277,28 +358,31 @@ class SignOutButtonComponent extends ConsumerWidget {
       alignment: Alignment.centerRight,
       margin: EdgeInsets.only(right: 18.5.w, bottom: 10.h, top: 10.h),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: InkWell(
-              onTap: () {
-                ref.read(goRouterProvider).push(
-                      "${RouteNames.rankingProfile}/${user?.id ?? -1}",
-                    );
-              },
-              child: Container(
-                decoration: decoration,
-                padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 20.w),
-                child: Text(
-                  "SEE_RANKING_PROFILE".tr(context),
-                  style: AppTextStyles.qanelasRegular(
-                    fontSize: 13.sp,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 15),
+          //   child: InkWell(
+          //     onTap: () {
+          //       ref.read(goRouterProvider).push(
+          //             "${RouteNames.rankingProfile}/${user?.id ?? -1}",
+          //           );
+          //     },
+          //     child: Container(
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(100.r),
+          //         color: AppColors.gray,
+          //       ),
+          //       padding: EdgeInsets.symmetric(vertical: 9.5.h, horizontal: 20.w),
+          //       child: Text(
+          //         "SEE_RANKING_PROFILE".tr(context),
+          //         style: AppTextStyles.poppinsRegular(
+          //           fontSize: 13.sp,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           InkWell(
             onTap: () async {
               bool? logout = await showDialog(
@@ -310,11 +394,14 @@ class SignOutButtonComponent extends ConsumerWidget {
               }
             },
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 20.w),
-              decoration: decoration,
+              padding: EdgeInsets.symmetric(vertical: 9.5.h, horizontal: 20.w),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100.r),
+                color: AppColors.gray,
+              ),
               child: Text(
                 "SIGN_OUT".tr(context),
-                style: AppTextStyles.qanelasRegular(
+                style: AppTextStyles.poppinsRegular(
                   fontSize: 13.sp,
                 ),
               ),
@@ -389,7 +476,7 @@ class _MembershipDialog extends ConsumerWidget {
               isActive
                   ? "HOUSE_OF_PADEL_MEMBERSHIP".trU(context)
                   : "BECOME_A_MEMBER".trU(context),
-              style: AppTextStyles.qanelasMedium(
+              style: AppTextStyles.poppinsMedium(
                   fontSize: 19.sp,
                   color: isActive ? AppColors.black : AppColors.white),
               textAlign: TextAlign.center,
@@ -405,7 +492,7 @@ class _MembershipDialog extends ConsumerWidget {
                 alignment: Alignment.centerRight,
                 child: Text(
                   "Price: ${price.toStringAsFixed(0)} $currency/month",
-                  style: AppTextStyles.qanelasLight(
+                  style: AppTextStyles.poppinsLight(
                       fontSize: 15.sp, color: AppColors.white),
                 ),
               ),
@@ -437,7 +524,7 @@ class _MembershipDialog extends ConsumerWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             "Membership Benefits:",
-            style: AppTextStyles.qanelasLight(
+            style: AppTextStyles.poppinsLight(
                 fontSize: 15.sp, color: color ?? AppColors.white),
           ),
         ),
@@ -455,7 +542,7 @@ class _MembershipDialog extends ConsumerWidget {
                 Expanded(
                   child: Text(
                     e,
-                    style: AppTextStyles.qanelasLight(
+                    style: AppTextStyles.poppinsLight(
                         fontSize: 15.sp, color: color ?? AppColors.white),
                   ),
                 ),
@@ -498,13 +585,13 @@ class _MembershipDialog extends ConsumerWidget {
                 children: [
                   Text(
                     "MEMBER".tr(context),
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                         fontSize: 13.sp, color: AppColors.white),
                   ),
                   SizedBox(height: 2),
                   Text(
                     fullName,
-                    style: AppTextStyles.qanelasMedium(
+                    style: AppTextStyles.poppinsMedium(
                         fontSize: 13.sp, color: AppColors.white),
                   ),
                 ],
@@ -569,7 +656,7 @@ class _MembershipDialog extends ConsumerWidget {
                 children: [
                   Text(
                     haveMembership?.finishDateString(context) ?? "",
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                         fontSize: 13.sp, color: AppColors.white),
                   )
                 ],

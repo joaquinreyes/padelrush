@@ -17,11 +17,10 @@ class RankedOrFriendly extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // decoration: inset.BoxDecoration(
-      //   boxShadow: kInsetShadow,
-      //   color: AppColors.tileBgColor,
-      //   borderRadius: BorderRadius.circular(12.r),
-      // ),
+      decoration: BoxDecoration(
+        color: AppColors.gray,
+        borderRadius: BorderRadius.circular(100.r),
+      ),
       padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 4.h),
       child: Row(
         children: [
@@ -35,14 +34,15 @@ class RankedOrFriendly extends StatelessWidget {
 
   _buildWidget(String text, bool isSelected) {
     return Container(
-      decoration: decoration.copyWith(color: isSelected ? AppColors.darkYellow : AppColors.white),
-      padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 10.w),
+      decoration: BoxDecoration(color: isSelected ? AppColors.black70 : AppColors.transparentColor,
+        borderRadius: BorderRadius.circular(100.r),),
+      padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 10.w),
       child: Text(
         text,
         style: isSelected
-            ? AppTextStyles.qanelasSemiBold(
-          fontSize: 14.sp,)
-            : AppTextStyles.qanelasRegular(
+            ? AppTextStyles.poppinsSemiBold(
+            fontSize: 14.sp, color: AppColors.white)
+            : AppTextStyles.poppinsRegular(
           color: AppColors.black70,
           fontSize: 13.sp,
         ),

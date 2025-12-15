@@ -22,26 +22,24 @@ class _AmountPayable extends ConsumerWidget {
     }
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.black90,
+        color: AppColors.gray,
         borderRadius: BorderRadius.circular(12.r),
       ),
-      padding: EdgeInsets.only(left: 12.w, right: 12.w, top: 8.h, bottom: 6.h),
+      padding: EdgeInsets.only(left: 12.w, right: 12.w, top: 8.h, bottom: 8.h),
       child: Row(
         children: [
           Text(
             "AMOUNT_PAYABLE".tr(context),
-            style: AppTextStyles.qanelasSemiBold(
-              fontSize: 14.sp,
-              color: Colors.white,
+            style: AppTextStyles.poppinsMedium(
+              fontSize: 11.sp,
             ),
           ),
           const Spacer(),
           if (originalAmount > payableAmount) ...[
             Text(
               Utils.formatPrice(originalAmount),
-              style: AppTextStyles.qanelasRegular(
-                fontSize: 12.sp,
-                color: AppColors.white
+              style: AppTextStyles.poppinsMedium(
+                fontSize: 11.sp,
               ).copyWith(
                 decoration: TextDecoration.lineThrough,
               ),
@@ -50,9 +48,8 @@ class _AmountPayable extends ConsumerWidget {
           ],
           Text(
             Utils.formatPrice(payableAmount),
-            style: AppTextStyles.qanelasSemiBold(
-              color: AppColors.white,
-              fontSize: 14.sp,
+            style: AppTextStyles.poppinsMedium(
+              fontSize: 11.sp,
             ),
           ),
         ],
@@ -117,13 +114,14 @@ class _PaymentButtonState extends ConsumerState<_PaymentButton> {
       child: Text(
         widget.title?.capitalWord(context, isButtonEnabled) ?? "PROCEED_WITH_PAYMENT".tr(context).capitalWord(context, isButtonEnabled),
         style: isButtonEnabled
-            ? AppTextStyles.qanelasMedium(
-                fontSize: 18.sp,
-                color: AppColors.black2,
+            ? AppTextStyles.poppinsMedium(
+                fontSize: 16.sp,
+                color: AppColors.black,
               )
-            : AppTextStyles.qanelasMedium(fontSize: 18.sp, color: AppColors.white),
+            : AppTextStyles.poppinsMedium(fontSize: 16.sp, color: AppColors.black70),
       ),
       isForPopup: true,
+      borderRadius: 100.r,
       // color: AppColors.rosewood,
       // labelColor: isButtonEnabled ? AppColors.white: AppColors.baseGreen,
       onTap: () {
@@ -133,7 +131,7 @@ class _PaymentButtonState extends ConsumerState<_PaymentButton> {
           _onPayTap();
         }
       },
-      labelStyle: AppTextStyles.qanelasLight().copyWith(fontSize: 18.sp, color: isButtonEnabled ? AppColors.darkYellow : AppColors.white),
+      labelStyle: AppTextStyles.poppinsLight().copyWith(fontSize: 18.sp, color: isButtonEnabled ? AppColors.darkYellow : AppColors.white),
     );
   }
 
@@ -536,8 +534,8 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
               child: Text(
                 'PAY'.tr(context),
                 style: isSelected
-                    ? AppTextStyles.qanelasLight().copyWith(fontSize: 16.sp)
-                    : AppTextStyles.qanelasRegular().copyWith(color: AppColors.white, fontSize: 17.sp),
+                    ? AppTextStyles.poppinsLight().copyWith(fontSize: 16.sp)
+                    : AppTextStyles.poppinsRegular().copyWith(color: AppColors.white, fontSize: 17.sp),
               ),
             ),
           ],
@@ -641,8 +639,8 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.darkYellow50 : AppColors.black25,
-          borderRadius: BorderRadius.circular(12.r),
+          color: isSelected ? AppColors.darkYellow35 : AppColors.gray,
+          borderRadius: BorderRadius.circular(100.r),
         ),
         margin: EdgeInsets.only(bottom: 10.h),
         padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
@@ -660,11 +658,11 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
               child: Text(
                 title.capitalizeFirst,
                 style: isSelected
-                    ? AppTextStyles.qanelasBold(
-                        fontSize: 16.sp,
+                    ? AppTextStyles.poppinsMedium(
+                        fontSize: 15.sp,
                         color: AppColors.black,
                       )
-                    : AppTextStyles.qanelasRegular(color: AppColors.black2, fontSize: 16.sp),
+                    : AppTextStyles.poppinsRegular(color: AppColors.black2, fontSize: 13.sp),
               ),
             ),
             const Spacer(),

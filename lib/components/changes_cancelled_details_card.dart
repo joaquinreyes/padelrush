@@ -21,8 +21,8 @@ class ChangesCancelledDetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.darkYellow,
-        borderRadius: BorderRadius.circular(12.r),
+        color: AppColors.darkYellow60,
+        borderRadius: BorderRadius.circular(25.r),
       ),
       padding: EdgeInsets.only(
         left: 15.w,
@@ -44,8 +44,8 @@ class ChangesCancelledDetailsCard extends StatelessWidget {
               ),
               SizedBox(width: 10.w),
               Text(
-                heading.toUpperCase(),
-                style: AppTextStyles.qanelasMedium(
+                heading,
+                style: AppTextStyles.poppinsBold(
                   fontSize: 13.sp
                 ),
               ),
@@ -54,8 +54,9 @@ class ChangesCancelledDetailsCard extends StatelessWidget {
           SizedBox(height: 5.h),
           Text(
             description,
-            style: AppTextStyles.qanelasRegular(
-              fontSize: 15.sp,
+            style: AppTextStyles.poppinsRegular(
+              height: 1,
+              fontSize: 13.sp,
             ),
           ),
           // SizedBox(height: 2.h),
@@ -71,8 +72,8 @@ class ChangesCancelledDetailsCard extends StatelessWidget {
               iconColor: AppColors.black2,
               imageHeight: 14.w,
               imageWidth: 14.w,
-              color: AppColors.black25,
-              labelStyle: AppTextStyles.qanelasRegular(
+              color: AppColors.gray,
+              labelStyle: AppTextStyles.poppinsRegular(
                 fontSize: 13.sp,
               ),
               applyShadow: false,

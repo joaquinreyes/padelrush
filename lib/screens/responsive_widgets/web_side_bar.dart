@@ -133,10 +133,10 @@ class SideNavBar extends ConsumerWidget {
                   if (index == 3) ...[const _Profile(), SizedBox(width: 15.w)],
                   Text(text.toUpperCase(),
                       style: isSelected
-                          ? AppTextStyles.qanelasBold(
+                          ? AppTextStyles.poppinsBold(
                                   fontSize: 14, color: AppColors.black)
                               .copyWith(letterSpacing: 3.sp)
-                          : AppTextStyles.qanelasLight(
+                          : AppTextStyles.poppinsLight(
                               fontSize: 13, color: AppColors.white)),
                 ],
               ),

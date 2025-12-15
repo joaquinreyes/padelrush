@@ -38,10 +38,10 @@ class ServiceInformationText extends StatelessWidget {
             ),
             SizedBox(width: 10.w),
             Text(
-              "INFORMATION".trU(context),
+              "INFORMATION".tr(context),
               style: titleStyle ??
-                  AppTextStyles.qanelasMedium(
-                      fontSize: 17.sp,),
+                  AppTextStyles.poppinsBold(
+                      fontSize: 16.sp,),
             ),
           ],
         ),
@@ -50,7 +50,7 @@ class ServiceInformationText extends StatelessWidget {
           child: Text(
             service.info,
             style: desStyle ??
-                AppTextStyles.qanelasRegular(
+                AppTextStyles.poppinsRegular(
                     color: AppColors.black, fontSize: 13.sp),
             textAlign: TextAlign.start,
           ),

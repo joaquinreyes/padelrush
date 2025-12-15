@@ -61,7 +61,7 @@ class _WaitingListApprovalStatusState
                     ? "ARE_YOU_SURE_YOU_WANT_TO_ACCEPT_THE_OPEN_MATCH".trU(context)
                     : "ARE_YOU_SURE_YOU_WANT_TO_REJECT_THE_OPEN_MATCH".trU(context),
                 textAlign: TextAlign.center,
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                   fontSize: 19.sp,
                   color: AppColors.black2,
                 ),
@@ -70,7 +70,7 @@ class _WaitingListApprovalStatusState
               Text(
                 "THIS_ACTION_CANNOT_BE_UNDONE".tr(context),
                 textAlign: TextAlign.center,
-                style: AppTextStyles.qanelasRegular(
+                style: AppTextStyles.poppinsRegular(
                   fontSize: 15.sp,
                   color: AppColors.black2,
                 ),
@@ -79,7 +79,7 @@ class _WaitingListApprovalStatusState
               MainButton(
                 label: isAccept ? "ACCEPT".trU(context) : "REJECT".trU(context),
                 color: isAccept ? AppColors.darkYellow : AppColors.darkRosewood,
-                labelStyle: AppTextStyles.qanelasMedium(
+                labelStyle: AppTextStyles.poppinsMedium(
                   fontSize: 18.sp,
                   color: isAccept ? AppColors.black2 : AppColors.white,
                 ),
@@ -145,7 +145,7 @@ class _WaitingListApprovalStatusState
           player.isApproved
               ? acceptedHeader
               : "YOU_ARE_WAITING_FOR_APPROVAL".trU(context),
-          style: AppTextStyles.qanelasMedium(
+          style: AppTextStyles.poppinsMedium(
             fontSize: 17.sp,
           ),
         ),
@@ -175,14 +175,14 @@ class _WaitingListApprovalStatusState
                 children: [
                   Text(
                     player.getCustomerName.toUpperCase(),
-                    style: AppTextStyles.qanelasMedium(fontSize: 12.sp),
+                    style: AppTextStyles.poppinsMedium(fontSize: 12.sp),
                   ),
                   if (player.customer?.level(getSportsName(ref))?.isNotEmpty ??
                       false)
                     Text(
                       "${player.customer?.level(getSportsName(ref))}",
                       //, •  Right",
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         fontSize: 12.sp,
                       ),
                     ),
@@ -198,7 +198,7 @@ class _WaitingListApprovalStatusState
                   onTap: () => _showConfirmationDialog("reject"),
                   child: Text(
                     "REJECT".tr(context),
-                    style: AppTextStyles.qanelasMedium(
+                    style: AppTextStyles.poppinsMedium(
                       fontSize: 13.sp,
                       color: AppColors.white,
                     ),
@@ -208,7 +208,7 @@ class _WaitingListApprovalStatusState
                 MainButton(
                   label: "ACCEPT".tr(context),
                   color: AppColors.darkYellow,
-                  labelStyle: AppTextStyles.qanelasMedium(
+                  labelStyle: AppTextStyles.poppinsMedium(
                     fontSize: 13.sp,
                     color: AppColors.black2
                   ),
@@ -224,7 +224,7 @@ class _WaitingListApprovalStatusState
                       ? "PAY_MY_SHARE".tr(context)
                       : "WITHDRAW_FROM_THE_MATCH".tr(context),
                   color: AppColors.darkYellow,
-                  labelStyle: AppTextStyles.qanelasMedium(
+                  labelStyle: AppTextStyles.poppinsMedium(
                     fontSize: 13.sp,
                   ),
                   applySize: false,

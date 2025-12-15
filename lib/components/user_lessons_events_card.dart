@@ -73,8 +73,8 @@ class UserLessonsEventsCard extends ConsumerWidget {
           ? "LESSON_CANCELLED".tr(context)
           : "EVENT_CANCELLED".tr(context);
     }
-    final color = isCancelled || isPlayerPendingPayment ? AppColors.black2 : AppColors.tileBgColor;
-    final textColor = isCancelled || isPlayerPendingPayment ? AppColors.white : AppColors.black;
+    final color = isCancelled || isPlayerPendingPayment ? AppColors.darkYellow60 : AppColors.gray;
+    final textColor = isCancelled || isPlayerPendingPayment ? AppColors.black : AppColors.black;
     final pax = booking.minimumCapacity == null
         ? " - ${booking.maximumCapacity ?? 0} pax"
         : "";
@@ -116,7 +116,7 @@ class UserLessonsEventsCard extends ConsumerWidget {
                     iconColor: AppColors.black2,
                     textColor: AppColors.black2,
                     padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 15.w),
-                    style: AppTextStyles.qanelasSemiBold(fontSize: 13.sp, color: AppColors.black2),
+                    style: AppTextStyles.poppinsSemiBold(fontSize: 13.sp, color: AppColors.black2),
                     text: "BOOKING_UNPAID".tr(context),
                   ),
                   MainButton(
@@ -184,7 +184,7 @@ class UserLessonsEventsCard extends ConsumerWidget {
                     width: 85.w,
                     isForPopup: true,
                     height: 30.h,
-                    labelStyle: AppTextStyles.qanelasBold(
+                    labelStyle: AppTextStyles.poppinsBold(
                         fontSize: 14.sp),
                     padding: EdgeInsets.zero,
                   )
@@ -199,10 +199,10 @@ class UserLessonsEventsCard extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      booking.service?.eventLessonName.toUpperCase() ?? "",
-                      style: AppTextStyles.qanelasBold(
+                      booking.service?.eventLessonName ?? "",
+                      style: AppTextStyles.poppinsBold(
                         color: textColor,
-                        fontSize: 16.sp,
+                        fontSize: 15.sp,
                       ),
                     ),
                     SizedBox(height: 2.h),
@@ -225,10 +225,10 @@ class UserLessonsEventsCard extends ConsumerWidget {
                         playersCount: booking.players?.length ?? 0,
                         maxCapacity: booking.getMaximumCapacity,
                         minCapacity: booking.getMinimumCapacity,
-                      ).toUpperCase(),
-                      style: AppTextStyles.qanelasMedium(
+                      ),
+                      style: AppTextStyles.poppinsBold(
                         color: textColor,
-                        fontSize: 14.sp,
+                        fontSize: 13.sp,
                       ),
                     ),
                     SizedBox(height: 2.h),
@@ -256,7 +256,7 @@ class UserLessonsEventsCard extends ConsumerWidget {
                   Text(
                     ("${booking.service?.location?.locationName ?? ""}" )
                         .capitalizeFirst,
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       color: textColor,
                       fontSize: 13.sp,
                     ),
@@ -264,7 +264,7 @@ class UserLessonsEventsCard extends ConsumerWidget {
                   SizedBox(height: 2.h),
                   Text(
                     "${"PRICE".tr(context)} ${Utils.formatPriceNew(booking.service?.price?.toDouble())}",
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       color: textColor,
                       fontSize: 13.sp,
                     ),
@@ -277,7 +277,7 @@ class UserLessonsEventsCard extends ConsumerWidget {
                 children: [
                   Text(
                     booking.formatBookingDate,
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       color: textColor,
                       fontSize: 13.sp,
                     ),
@@ -285,7 +285,7 @@ class UserLessonsEventsCard extends ConsumerWidget {
                   SizedBox(height: 2.h),
                   Text(
                     "${booking.formatStartEndTimeAM.toLowerCase()}$pax",
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       color: textColor,
                       fontSize: 13.sp,
                     ),
@@ -307,7 +307,7 @@ class UserLessonsEventsCard extends ConsumerWidget {
               padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 13.w),
               child: Text(
                 "${(booking.getMyPositionEvent(currentUserID ?? 0) ?? 0).getUserPosition} Place",
-                style: AppTextStyles.qanelasSemiBold(
+                style: AppTextStyles.poppinsSemiBold(
                   fontSize: 14.sp,
                 ),
               ),

@@ -102,27 +102,32 @@ flutter:
     - assets/images/.
     - assets/locales/.
   fonts:
-    - family: Qanelas
+    - family: Pragmatica
       fonts:
-        - asset: assets/fonts/qanelas/Qanelas-Thin.otf
-          weight: 100
-        - asset: assets/fonts/qanelas/Qanelas-Light.otf
-          weight: 300
-        - asset: assets/fonts/qanelas/Qanelas-Regular.otf
-          weight: 400
-        - asset: assets/fonts/qanelas/Qanelas-RegularItalic.otf
-          weight: 400
-          style: italic
-        - asset: assets/fonts/qanelas/Qanelas-Medium.otf
-          weight: 500
-        - asset: assets/fonts/qanelas/Qanelas-SemiBold.otf
-          weight: 600
-        - asset: assets/fonts/qanelas/Qanelas-Bold.otf
+        - asset: assets/fonts/pragmatica/Pragmatica_Extended-Bold.otf
           weight: 700
-        - asset: assets/fonts/qanelas/Qanelas-ExtraBold.otf
-          weight: 800
-        - asset: assets/fonts/qanelas/Qanelas-Black.otf
-          weight: 900
+    - family: PragmaticaOblique
+      fonts:
+        - asset: assets/fonts/pragmatica/Pragmatica_Extra-Bold-Oblique.otf
+          weight: 700
+
+    - family: Mohave
+      fonts:
+        - asset: assets/fonts/Mohave/Mohave-Bold.ttf
+          weight: 700
+
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/poppins/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/poppins/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/poppins/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/poppins/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/poppins/Poppins-Light.ttf
+          weight: 300
 
 flutter_native_splash:
   color: "#FFFFFF"

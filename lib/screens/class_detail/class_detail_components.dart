@@ -28,7 +28,7 @@ class _InfoCard extends StatelessWidget {
                 flex: 3,
                 child: Text(
                   (event.service?.event?.eventName ?? "").capitalizeFirst,
-                  style: AppTextStyles.qanelasBold(
+                  style: AppTextStyles.poppinsBold(
                       color: AppColors.white,fontSize: 16.sp,),
                 ),
               ),
@@ -38,7 +38,7 @@ class _InfoCard extends StatelessWidget {
                   // (event.courtName).toUpperCase(),
                   ('${event.duration2} MIN' ?? ""),
                   textAlign: TextAlign.end,
-                  style: AppTextStyles.qanelasMedium(
+                  style: AppTextStyles.poppinsMedium(
                       color: AppColors.white,
                       fontSize: 15.sp,),
                 ),
@@ -66,21 +66,21 @@ class _InfoCard extends StatelessWidget {
                   children: [
                     Text(
                       'SLOTS'.trU(context),
-                      style: AppTextStyles.qanelasMedium(
+                      style: AppTextStyles.poppinsMedium(
                           color: AppColors.white,
                           fontSize: 12.sp,
                       ),
                     ),
                     Text(
                       "${event.players?.length ?? 0} / ${event.getMaximumCapacity}",
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         color: AppColors.white,
                         fontSize: 12.sp,
                       ),
                     ),
                     Text(
                       "${'PARTICIPANTS'.tr(context).toLowerCase()}",
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         color: AppColors.white,
                         fontSize: 12.sp,
                       ),
@@ -113,14 +113,14 @@ class _InfoCard extends StatelessWidget {
         Text(
           text1,
           style: textStyle1 ??
-              AppTextStyles.qanelasRegular(
+              AppTextStyles.poppinsRegular(
                   color: AppColors.white, fontSize: 13.sp),
         ),
         SizedBox(height: 2.h),
         Text(
           text2,
           style: textStyle2 ??
-              AppTextStyles.qanelasRegular(
+              AppTextStyles.poppinsRegular(
                   color: AppColors.white, fontSize: 13.sp),
         ),
       ],
@@ -303,7 +303,7 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
             ),
             SizedBox(width: 10.w),
             Text("WAITING_LIST".trU(context),
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                     fontSize: 17.sp,
                 ),
             )
@@ -344,7 +344,7 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
             : Padding(
                 padding: EdgeInsets.only(top: 0,left: 12.w),
                 child: Text("THERE_IS_NO_WAITING_LIST".tr(context),
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       color: AppColors.black2,
                       fontSize: 13.sp,
                     )),
@@ -355,7 +355,7 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
             alignment: Alignment.centerRight,
             child:
                 Text("${"WAITING_LIST".tr(context)} ${widget.players.length}",
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       color: AppColors.black2,
                     )),
           ),

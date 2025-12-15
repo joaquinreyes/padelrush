@@ -15,7 +15,7 @@ class AvailableSlotWidget extends StatelessWidget {
     this.otherTeamMemberID,
     this.textColor = AppColors.blue,
     Color? backgroundColor,
-    this.iconColor = AppColors.white,
+    this.iconColor = AppColors.black,
     this.borderColor,
     this.padding,
   }) : backGroundColor = backgroundColor ?? AppColors.darkYellow;
@@ -81,7 +81,7 @@ class AvailableSlotWidget extends StatelessWidget {
       minFontSize: 9.sp,
       maxLines: 1,
       stepGranularity: 1.sp,
-      style: AppTextStyles.qanelasMedium(
+      style: AppTextStyles.poppinsMedium(
         color: textColor,
         fontSize: 11.sp,
       ),
@@ -94,14 +94,14 @@ class AvailableSlotWidget extends StatelessWidget {
       width: 48.w,
       decoration: BoxDecoration(
         color: backGroundColor != null ? backGroundColor : AppColors.darkYellow,
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(100.r),
       ),
       padding: EdgeInsets.all(1.5.w),
       child: DottedBorder(
-        borderType: BorderType.RRect,
+        borderType: BorderType.Circle,
         dashPattern: const [4, 4],
         radius: Radius.circular(12.r),
-        color: borderColor != null ? borderColor! : Colors.white,
+        color: borderColor != null ? borderColor! : AppColors.black,
         borderPadding: EdgeInsets.all(1.w),
         strokeWidth: 1.5.h,
         child: Container(
@@ -111,7 +111,7 @@ class AvailableSlotWidget extends StatelessWidget {
           child: Icon(
             Icons.add,
             color: iconColor,
-            size: 14.h,
+            size: 16.h,
           ),
         ),
       ),

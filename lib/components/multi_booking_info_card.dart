@@ -110,7 +110,7 @@ class _MultiBookingCourtInfoCardState extends ConsumerState<MultiBookingCourtInf
                           ),
                           child: Text(
                             '${'BOOKING'.tr(context)} ',
-                            style: AppTextStyles.qanelasMedium(
+                            style: AppTextStyles.poppinsMedium(
                               fontSize: 16.sp,
                               color: AppColors.white,
                             ),
@@ -129,7 +129,7 @@ class _MultiBookingCourtInfoCardState extends ConsumerState<MultiBookingCourtInf
                           ),
                           child: Text(
                             formattedDate,
-                            style: AppTextStyles.qanelasMedium(
+                            style: AppTextStyles.poppinsMedium(
                               fontSize: 14.sp,
                               color: AppColors.white,
                             ),
@@ -198,7 +198,7 @@ class _MultiBookingCourtInfoCardState extends ConsumerState<MultiBookingCourtInf
                         SizedBox(width: 7.w),
                         Text(
                           "DELETE_BOOKING".tr(context),
-                          style: AppTextStyles.qanelasRegular(fontSize: 13.sp, color: AppColors.white),
+                          style: AppTextStyles.poppinsRegular(fontSize: 13.sp, color: AppColors.white),
                         ),
                       ],
                     ),

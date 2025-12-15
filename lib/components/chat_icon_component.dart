@@ -35,7 +35,7 @@ class ChatIconComponent extends StatelessWidget {
               width: 25.h,
               child: Image.asset(
                 AppImages.chatIconUnRead.path,
-                color: AppColors.darkYellow,
+                color: AppColors.black,
               ),
             ),
           ),
@@ -60,9 +60,8 @@ class ChatIconComponent extends StatelessWidget {
                 child: Center(
                   child: Text(
                     '$unreadCount',
-                    style: AppTextStyles.qanelasMedium(
+                    style: AppTextStyles.poppinsMedium(
                       fontSize: 9.sp,
-                      color: AppColors.white,
                     ),
                   ),
                 ),

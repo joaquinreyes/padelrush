@@ -119,7 +119,7 @@ class _DateSelectorWidgetState extends ConsumerState<_DateSelectorWidget> {
         children: [
           Text(
             date.format(DateFormat.ABBR_WEEKDAY),
-            style: AppTextStyles.qanelasLight(
+            style: AppTextStyles.poppinsLight(
               height: 0.8,
               // color: AppColors.white,
               color: isSelected ? AppColors.white : AppColors.black70,
@@ -127,7 +127,7 @@ class _DateSelectorWidgetState extends ConsumerState<_DateSelectorWidget> {
           ),
           Text(
             '${date.day}',
-            style: AppTextStyles.qanelasRegular(
+            style: AppTextStyles.poppinsRegular(
               color: isSelected ? AppColors.white : AppColors.black70,
               fontSize: 18.sp,
               letterSpacing: 18.sp * 0.12,
@@ -135,7 +135,7 @@ class _DateSelectorWidgetState extends ConsumerState<_DateSelectorWidget> {
           ),
           Text(
             date.format(DateFormat.ABBR_MONTH),
-            style: AppTextStyles.qanelasLight(
+            style: AppTextStyles.poppinsLight(
               color: isSelected ? AppColors.white : AppColors.darkGray,
               height: 0.8,
             ),
@@ -512,7 +512,7 @@ class _Selector extends ConsumerWidget {
           alignment: Alignment.center,
           child: Text(title,
               textAlign: TextAlign.center,
-              style: AppTextStyles.qanelasRegular(
+              style: AppTextStyles.poppinsRegular(
                   fontSize: 16.sp,
                   color:
                       isServiceSelected ? AppColors.white : AppColors.black70,
@@ -571,7 +571,7 @@ class _MembershipInformationState extends ConsumerState<MembershipInformation> {
           padding: EdgeInsets.symmetric(horizontal: 3.w),
           child: Text(
             "STARTING_DATE".tr(context),
-            style: AppTextStyles.qanelasLight(
+            style: AppTextStyles.poppinsLight(
               color: AppColors.white,
               fontSize: 17.sp,
             ),
@@ -611,7 +611,7 @@ class _MembershipInformationState extends ConsumerState<MembershipInformation> {
                       selectedDate == null
                           ? "dd-MM-yyyy"
                           : DateFormat("dd-MM-yyyy").format(selectedDate!),
-                      style: AppTextStyles.qanelasLight(
+                      style: AppTextStyles.poppinsLight(
                         color: AppColors.white95,
                         fontSize: 13.sp,
                       ),
@@ -632,7 +632,7 @@ class _MembershipInformationState extends ConsumerState<MembershipInformation> {
           alignment: Alignment.centerLeft,
           child: Text(
             "BOOKING_PAYMENT".trU(context),
-            style: AppTextStyles.qanelasLight(
+            style: AppTextStyles.poppinsLight(
                 color: AppColors.white, fontSize: 20.sp),
           ),
         ),

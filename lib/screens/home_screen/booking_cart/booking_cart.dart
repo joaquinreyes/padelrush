@@ -51,7 +51,7 @@ class BookingCartState extends ConsumerState<BookingCart> {
           children: [
             Text(
               "BOOKING_CART".trU(context),
-              style: AppTextStyles.qanelasMedium(
+              style: AppTextStyles.poppinsMedium(
                 fontSize: 15.sp,
               ),
             ),
@@ -65,7 +65,7 @@ class BookingCartState extends ConsumerState<BookingCart> {
               padding: EdgeInsets.all(2.w),
               child: Text(bookingCartList.length.toString(),
                   style:
-                      AppTextStyles.qanelasMedium(color: AppColors.darkYellow,fontSize: 13.sp,),),
+                      AppTextStyles.poppinsMedium(color: AppColors.darkYellow,fontSize: 13.sp,),),
             ),
             SizedBox(width: 35.w),
             const Icon(Icons.keyboard_arrow_up, color: AppColors.black2,),

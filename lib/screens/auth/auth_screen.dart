@@ -28,15 +28,15 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
   Widget build(BuildContext context) {
     return AuthResponsive(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.white,
         body: Center(
           child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(AppImages.authBackground.path),
-                fit: BoxFit.cover,
-              ),
-            ),
+            // decoration: BoxDecoration(
+            //   image: DecorationImage(
+            //     image: AssetImage(AppImages.authBackground.path),
+            //     fit: BoxFit.cover,
+            //   ),
+            // ),
             child: Padding(
               padding: EdgeInsets.symmetric(
                 vertical: PlatformC().isCurrentDesignPlatformDesktop ? 30 : 0,
@@ -68,7 +68,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                             alignment: Alignment.center,
                             child: Text(
                               "SKIP".tr(context),
-                              style: AppTextStyles.qanelasMedium(
+                              style: AppTextStyles.poppinsMedium(
                                 fontSize: 13.sp,
                                 color: AppColors.black2,
                               ),
@@ -80,14 +80,11 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
 
                     ),
                     const Spacer(),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 50.w),
-                      child: Image.asset(
-                        AppImages.splashLogo.path,
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        // height: 92.h,
-                      ),
+                    Image.asset(
+                      AppImages.splashLogoNew.path,
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      // height: 92.h,
                     ),
                     const Spacer(),
                     MainButton(
@@ -96,7 +93,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                       showArrow: true,
                       // arrowImages: AppImages.rightArrowGreen.path,
                       // height: 40.h,
-                      labelStyle: AppTextStyles.qanelasMedium(
+                      labelStyle: AppTextStyles.poppinsBold(
                           color: AppColors.black,
                           fontSize: 18.sp,),
                       color: AppColors.darkYellow,
@@ -106,11 +103,11 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                     ),
                     SizedBox(height: 20.h),
                     MainButton(
-                      color: AppColors.darkYellow30,
+                      color: AppColors.gray,
                       borderRadius: 0.r,
-                      label: "REGISTER".tr(context),
-                      labelStyle: AppTextStyles.qanelasRegular(
-                        color: AppColors.darkYellow,
+                      label: "REGISTER".trU(context),
+                      labelStyle: AppTextStyles.poppinsRegular(
+                        color: AppColors.black,
                         fontSize: 18.sp,
                       ),
                       showArrow: true,

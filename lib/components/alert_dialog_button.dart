@@ -156,13 +156,13 @@ class AlertDialogButton extends StatelessWidget {
   TextStyle get _labelTextStyle {
     if (enabled) {
       return labelStyle ??
-          AppTextStyles.qanelasLight(
+          AppTextStyles.poppinsLight(
             color: AppColors.white,
             fontSize: 18.sp,
           );
     } else {
       return labelStyle ??
-          AppTextStyles.qanelasLight(
+          AppTextStyles.poppinsLight(
             color: AppColors.white,
             fontSize: 18.sp,
           );
@@ -172,11 +172,11 @@ class AlertDialogButton extends StatelessWidget {
   TextStyle get _labelTextStyleForPopup {
     if (enabled) {
       return labelStyle ??
-          AppTextStyles.qanelasBold(
+          AppTextStyles.poppinsBold(
               color: AppColors.darkYellow, fontSize: 18.sp);
     } else {
       return labelStyle ??
-          AppTextStyles.qanelasLight(color: AppColors.white, fontSize: 18.sp);
+          AppTextStyles.poppinsLight(color: AppColors.white, fontSize: 18.sp);
     }
   }
 

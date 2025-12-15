@@ -103,15 +103,15 @@ class CustomTextField extends StatelessWidget {
   InputDecoration _buildInputDecoration() {
     return InputDecoration(
       filled: isForPopup ? true : fillColor != null,
-      fillColor: isForPopup ? AppColors.black25 : fillColor,
+      fillColor: isForPopup ? AppColors.gray : fillColor,
       contentPadding: contentPadding ??
           EdgeInsets.symmetric(
               vertical: 8.h, horizontal: isForPopup ? 12.w : 0.w),
       alignLabelWithHint: true,
       labelText: labelText,
       labelStyle: isForPopup
-          ? AppTextStyles.qanelasBold()
-          : AppTextStyles.qanelasBold(),
+          ? AppTextStyles.poppinsBold()
+          : AppTextStyles.poppinsBold(),
       helperText: helperText,
       hintText: hintText,
       hintStyle: hintTextStyle ?? _defaultHintTextStyle(),
@@ -132,11 +132,11 @@ class CustomTextField extends StatelessWidget {
 
   TextStyle _defaultTextStyle() {
     return isForPopup
-        ? AppTextStyles.qanelasRegular(
+        ? AppTextStyles.poppinsRegular(
             color: AppColors.black2,
             fontSize: 13.sp,
           )
-        : AppTextStyles.qanelasRegular(
+        : AppTextStyles.poppinsRegular(
             color: AppColors.black2,
             fontSize: 18.sp,
           );
@@ -144,11 +144,11 @@ class CustomTextField extends StatelessWidget {
 
   TextStyle _defaultHintTextStyle() {
     return isForPopup
-        ? AppTextStyles.qanelasRegular(
+        ? AppTextStyles.poppinsRegular(
            fontSize: 13.sp,
            color: AppColors.black70,
           )
-        : AppTextStyles.qanelasRegular(
+        : AppTextStyles.poppinsRegular(
             color: AppColors.black..withOpacity(0.5),
             fontSize: 19.sp,
           );

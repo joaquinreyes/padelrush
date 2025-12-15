@@ -163,13 +163,13 @@ class __OpenMatchState extends ConsumerState<_OpenMatch> {
               Expanded(
                 child: Text(
                   "ARE_YOU_GOING_WITH_SOMEONE_ELSE".tr(context),
-                  style: AppTextStyles.qanelasMedium(
+                  style: AppTextStyles.poppinsMedium(
                       color: AppColors.black2, fontSize: 15.sp),
                 ),
               ),
               Text(
                 " ${"OPTIONAL".tr(context).toLowerCase()}",
-                style: AppTextStyles.qanelasRegular(
+                style: AppTextStyles.poppinsRegular(
                     color: AppColors.black2, fontSize: 13.sp),
               ),
             ],
@@ -183,9 +183,7 @@ class __OpenMatchState extends ConsumerState<_OpenMatch> {
                   allowTap: false,
                   textForAvailableSlot: "ADD".trU(context),
                   players: _buildPlayersList(),
-                  slotIconColor: AppColors.white,
-                  backgroundColor: AppColors.tileBgColor,
-                  slotBackgroundColor: AppColors.black2,
+                  backgroundColor: AppColors.gray,
                   imageBgColor: AppColors.black2,
                   onTap: (slotIndex, otherPlayerID) async {
                     await _showPlayerSelectionDialog(context, slotIndex);
@@ -502,7 +500,7 @@ class _AddPlayersDialogState extends ConsumerState<_AddPlayersDialog> {
         children: [
           Text(
             "ADD_PLAYERS".trU(context),
-            style: AppTextStyles.qanelasMedium(
+            style: AppTextStyles.poppinsMedium(
               fontSize: 19.sp,
               color: AppColors.black2,
             ),
@@ -514,12 +512,10 @@ class _AddPlayersDialogState extends ConsumerState<_AddPlayersDialog> {
             child: OpenMatchParticipantRowWithBG(
               textForAvailableSlot: "AVAILABLE".trU(context),
               players: displayPlayersList,
-              backgroundColor: AppColors.transparentColor,
+              backgroundColor: AppColors.gray,
               textColor: AppColors.black2,
-              slotBackgroundColor: AppColors.black2,
               imageBgColor: AppColors.white,
               imageLogoColor: AppColors.black2,
-              slotIconColor: AppColors.white,
               allowTap: false,
               showReserveReleaseButton: true,
               alreadyReserved: true,
@@ -542,11 +538,11 @@ class _AddPlayersDialogState extends ConsumerState<_AddPlayersDialog> {
               prefixIcon: Icon(Icons.search, color: AppColors.black50),
               controller: searchController,
               hintText: "SEARCH".tr(context),
-              style: AppTextStyles.qanelasRegular(
+              style: AppTextStyles.poppinsRegular(
                 color: AppColors.black2,
                 fontSize: 13.sp,
               ),
-              hintTextStyle: AppTextStyles.qanelasRegular(
+              hintTextStyle: AppTextStyles.poppinsRegular(
                 color: AppColors.black2,
                 fontSize: 13.sp,
               ),
@@ -575,7 +571,7 @@ class _AddPlayersDialogState extends ConsumerState<_AddPlayersDialog> {
               child: Center(
                 child: Text(
                   searchError ?? "",
-                  style: AppTextStyles.qanelasRegular(
+                  style: AppTextStyles.poppinsRegular(
                     fontSize: 14.sp,
                     color: AppColors.black2,
                   ),
@@ -589,7 +585,7 @@ class _AddPlayersDialogState extends ConsumerState<_AddPlayersDialog> {
               children: [
                 Text(
                   searchQuery.isEmpty ? "ALL_USERS".tr(context) : "SEARCH_RESULTS".tr(context),
-                  style: AppTextStyles.qanelasMedium(
+                  style: AppTextStyles.poppinsMedium(
                     fontSize: 16.sp,
                     color: AppColors.black2,
                   ),
@@ -610,7 +606,7 @@ class _AddPlayersDialogState extends ConsumerState<_AddPlayersDialog> {
         child: Center(
           child: Text(
             "NO_USERS_FOUND".tr(context),
-            style: AppTextStyles.qanelasRegular(
+            style: AppTextStyles.poppinsRegular(
               fontSize: 14.sp,
               color: AppColors.black2,
             ),
@@ -755,7 +751,7 @@ class _PositionSelectionDialog extends StatelessWidget {
           children: [
             Text(
               "CHOOSE_YOUR_SPOT".trU(context),
-              style: AppTextStyles.qanelasMedium(
+              style: AppTextStyles.poppinsMedium(
                 fontSize: 19.sp,
                 color: AppColors.black2,
               ),
@@ -819,7 +815,7 @@ class _SearchPlayerItem extends StatelessWidget {
               children: [
                 Text(
                   user.fullName.toUpperCase(),
-                  style: AppTextStyles.qanelasMedium(
+                  style: AppTextStyles.poppinsMedium(
                     fontSize: 12.sp,
                     color: AppColors.black2,
                   ),
@@ -828,7 +824,7 @@ class _SearchPlayerItem extends StatelessWidget {
                   SizedBox(height: 2.h),
                   Text(
                     "FOLLOWING".tr(context),
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       fontSize: 10.sp,
                       color: AppColors.black50,
                     ),
@@ -848,7 +844,7 @@ class _SearchPlayerItem extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               isAdded ? "ADDED".trU(context) : "ADD".trU(context),
-              style: AppTextStyles.qanelasRegular(
+              style: AppTextStyles.poppinsRegular(
                 fontSize: 13.sp,
                 color: AppColors.black2,
               ),
@@ -892,7 +888,7 @@ class _PayMyShareInfoDialog extends StatelessWidget {
               SizedBox(width: 15.w),
               Text(
                 "Pay My Share",
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                   fontSize: 19.sp,
                   color: AppColors.black2,
                 ),
@@ -914,7 +910,7 @@ class _PayMyShareInfoDialog extends StatelessWidget {
                 Text(
                   "We will put on hold the remaining amount of the booking until all players pay their share.",
                   textAlign: TextAlign.center,
-                  style: AppTextStyles.qanelasRegular(
+                  style: AppTextStyles.poppinsRegular(
                     fontSize: 15.sp,
                     color: AppColors.black2,
                   ),
@@ -923,7 +919,7 @@ class _PayMyShareInfoDialog extends StatelessWidget {
                 RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       fontSize: 15.sp,
                       color: AppColors.black2,
                     ),
@@ -933,7 +929,7 @@ class _PayMyShareInfoDialog extends StatelessWidget {
                       TextSpan(
                         text:
                             "${DateFormat('dd MMMM HH:mm').format(bookingTime.add(Duration(hours: 2)))}",
-                        style: AppTextStyles.qanelasBold(
+                        style: AppTextStyles.poppinsBold(
                           fontSize: 15.sp,
                           color: AppColors.black2,
                         ),
@@ -987,7 +983,7 @@ class _AddOtherPlayersInfoDialog extends StatelessWidget {
               SizedBox(width: 15.w),
               Text(
                 "ADD_OTHER_PLAYERS".trU(context),
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                   fontSize: 19.sp,
                   color: AppColors.black2,
                 ),
@@ -1008,7 +1004,7 @@ class _AddOtherPlayersInfoDialog extends StatelessWidget {
                 Text(
                   "You can add other players to the match and each player will pay their own slot.",
                   textAlign: TextAlign.center,
-                  style: AppTextStyles.qanelasRegular(
+                  style: AppTextStyles.poppinsRegular(
                     fontSize: 15.sp,
                     color: AppColors.black2,
                   ),
@@ -1017,7 +1013,7 @@ class _AddOtherPlayersInfoDialog extends StatelessWidget {
                 Text(
                   "If any spot remains unpaid within two hours after the game, the pending amount will be charged to you.",
                   textAlign: TextAlign.center,
-                  style: AppTextStyles.qanelasRegular(
+                  style: AppTextStyles.poppinsRegular(
                     fontSize: 15.sp,
                     color: AppColors.black2,
                   ),

@@ -21,8 +21,8 @@ class _InfoCard extends StatelessWidget {
         vertical: 15.h,
       ),
       decoration: BoxDecoration(
-        color: AppColors.black2,
-        borderRadius: BorderRadius.circular(12.r),
+        color: AppColors.darkYellow35,
+        borderRadius: BorderRadius.circular(25.r),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -33,8 +33,7 @@ class _InfoCard extends StatelessWidget {
                 flex: 3,
                 child: Text(
                   (lesson.service?.lesson?.lessonName ?? "").capitalizeFirst,
-                  style: AppTextStyles.qanelasBold(
-                    color: AppColors.white,
+                  style: AppTextStyles.poppinsBold(
                     fontSize: 16.sp,
                   ),
                 ),
@@ -44,8 +43,7 @@ class _InfoCard extends StatelessWidget {
                 child: Text(
                   (lesson.service?.location?.locationName.trU(context) ?? ""),
                   textAlign: TextAlign.end,
-                  style: AppTextStyles.qanelasMedium(
-                    color: AppColors.white,
+                  style: AppTextStyles.poppinsMedium(
                     fontSize: 14.sp,
                   ),
                 ),
@@ -69,20 +67,19 @@ class _InfoCard extends StatelessWidget {
                   children: [
                     Text(
                       'SLOTS'.trU(context),
-                      style: AppTextStyles.qanelasMedium(
-                        color: AppColors.white,
-                        fontSize: 12.sp,
+                      style: AppTextStyles.poppinsBold(
+                        fontSize: 14.sp,
                       ),
                     ),
                     Text(
                       "${'MAX'.tr(context)} ${lesson.getMaximumCapacity.toString() ?? ""} ${'PLAYERS'.tr(context)}",
-                      style: AppTextStyles.qanelasRegular(
-                          color: AppColors.white, fontSize: 12.sp),
+                      style: AppTextStyles.poppinsRegular(
+                        fontSize: 12.sp),
                     ),
                     Text(
                       "${'MIN'.tr(context)} ${lesson.getMinimumCapacity.toString() ?? ""} ${'PLAYERS'.tr(context)}",
-                      style: AppTextStyles.qanelasRegular(
-                          color: AppColors.white, fontSize: 12.sp),
+                      style: AppTextStyles.poppinsRegular(
+                    fontSize: 12.sp),
                     ),
                   ],
                 ),
@@ -112,15 +109,15 @@ class _InfoCard extends StatelessWidget {
         Text(
           text1,
           style: textStyle1 ??
-              AppTextStyles.qanelasRegular(
-                  color: AppColors.white, fontSize: 13.sp),
+              AppTextStyles.poppinsRegular(
+                 fontSize: 13.sp),
         ),
         SizedBox(height: 2.h),
         Text(
           text2,
           style: textStyle2 ??
-              AppTextStyles.qanelasRegular(
-                  color: AppColors.white, fontSize: 13.sp),
+              AppTextStyles.poppinsRegular(
+           fontSize: 13.sp),
         ),
       ],
     );
@@ -169,7 +166,7 @@ class _LessonVariantInfoCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   coachName,
-                  style: AppTextStyles.qanelasBold(
+                  style: AppTextStyles.poppinsBold(
                     color: AppColors.white,
                     fontSize: 16.sp,
                   ),
@@ -179,7 +176,7 @@ class _LessonVariantInfoCard extends StatelessWidget {
                 child: Text(
                   location,
                   textAlign: TextAlign.end,
-                  style: AppTextStyles.qanelasMedium(
+                  style: AppTextStyles.poppinsMedium(
                     color: AppColors.white,
                     fontSize: 14.sp,
                   ),
@@ -199,19 +196,19 @@ class _LessonVariantInfoCard extends StatelessWidget {
                   children: [
                     Text(
                       lessonType,
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                           color: AppColors.white, fontSize: 13.sp),
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       court,
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                           color: AppColors.white, fontSize: 13.sp),
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       "Paid $paid",
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                           color: AppColors.white, fontSize: 13.sp),
                     ),
                   ],
@@ -224,19 +221,19 @@ class _LessonVariantInfoCard extends StatelessWidget {
                   children: [
                     Text(
                       "$duration - $pax",
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                           color: AppColors.white, fontSize: 13.sp),
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       time,
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                           color: AppColors.white, fontSize: 13.sp),
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       date,
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                           color: AppColors.white, fontSize: 13.sp),
                     ),
                   ],
@@ -369,10 +366,10 @@ class _LessonPlayersSlots extends StatelessWidget {
                   logoColor: AppColors.white,
                 )
               : AvailableSlotWidget(
-                  text: "AVAILABLE".trU(context),
+                  text: "AVAILABLE".tr(context),
                   index: colIndex,
                   onTap: (index, __) => onSlotTap(index, null),
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: AppColors.darkYellow80,
                   textColor: AppColors.black,
                   iconColor: AppColors.black,
                   borderColor: AppColors.black,

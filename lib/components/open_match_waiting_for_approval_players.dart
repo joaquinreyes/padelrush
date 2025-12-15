@@ -42,7 +42,7 @@ class _OpenMatchWaitingForApprovalPlayersState
               "PLAYERS_WAITING_FOR_YOUR_APPROVAL"
                   .tr(context)
                   .capitalWord(context, !widget.isForSocketPopup),
-              style: AppTextStyles.qanelasMedium(
+              style: AppTextStyles.poppinsMedium(
                   fontSize: 17.sp, color: textColor),
             ),
             SizedBox(height: 10.h),
@@ -77,12 +77,12 @@ class _OpenMatchWaitingForApprovalPlayersState
                             children: [
                               Text(
                                 player.getCustomerName.toUpperCase(),
-                                style: AppTextStyles.qanelasMedium(
+                                style: AppTextStyles.poppinsMedium(
                                     color: textColor, fontSize: 12.sp),
                               ),
                               Text(
                                   "${player.customer?.level(getSportsName(ref))}",
-                                  style: AppTextStyles.qanelasRegular(
+                                  style: AppTextStyles.poppinsRegular(
                                     color: textColor,
                                     fontSize: 12.sp,
                                   )
@@ -95,7 +95,7 @@ class _OpenMatchWaitingForApprovalPlayersState
                                       borderRadius:
                                           BorderRadius.circular(12.r)),
                                   child: Text("UNPAID".trU(context),
-                                      style: AppTextStyles.qanelasMedium(
+                                      style: AppTextStyles.poppinsMedium(
                                         color: textColor,
                                         fontSize: 10.sp,
                                       )),
@@ -108,7 +108,7 @@ class _OpenMatchWaitingForApprovalPlayersState
                                   width: 100.w,
                                   child: Text(
                                     "WAITING_FOR_PLAYER_TO_JOIN".tr(context),
-                                    style: AppTextStyles.qanelasLight(
+                                    style: AppTextStyles.poppinsLight(
                                         fontSize: 14.sp, color: textColor),
                                     textAlign: TextAlign.center,
                                   ),
@@ -118,7 +118,7 @@ class _OpenMatchWaitingForApprovalPlayersState
                                       width: 100.w,
                                       child: Text(
                                         "WAITING_FOR_PLAYER_TO_PAY".tr(context),
-                                        style: AppTextStyles.qanelasLight(
+                                        style: AppTextStyles.poppinsLight(
                                             fontSize: 14.sp, color: textColor),
                                         textAlign: TextAlign.center,
                                       ),
@@ -134,7 +134,7 @@ class _OpenMatchWaitingForApprovalPlayersState
                                           right: 15.w,
                                           top: 6.h,
                                           bottom: 6.h),
-                                      labelStyle: AppTextStyles.qanelasMedium(
+                                      labelStyle: AppTextStyles.poppinsMedium(
                                         fontSize: 13.sp,
                                       ),
                                       borderRadius: 100.r,

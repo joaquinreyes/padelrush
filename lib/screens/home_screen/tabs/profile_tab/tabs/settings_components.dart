@@ -23,11 +23,14 @@ class _DeletePasswordBtns extends ConsumerWidget {
             }
           },
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 28.w),
-            decoration: decoration,
+            padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 28.w),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100.r),
+              color: AppColors.gray,
+            ),
             child: Text(
               "DELETE_ACCOUNT".tr(context),
-              style: AppTextStyles.qanelasRegular(fontSize: 13.sp),
+              style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
             ),
           ),
         ),
@@ -40,11 +43,14 @@ class _DeletePasswordBtns extends ConsumerWidget {
             );
           },
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 21.w),
-            decoration: decoration,
+            padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 21.w),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100.r),
+              color: AppColors.gray,
+            ),
             child: Text(
               "CHANGE_PASSWORD".tr(context),
-              style: AppTextStyles.qanelasRegular(fontSize: 13.sp),
+              style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
             ),
           ),
         )
@@ -122,14 +128,14 @@ Row _buildInfoField(String heading, String value) {
     children: [
       Text(
         heading,
-        style: AppTextStyles.qanelasSemiBold(
-          fontSize: 16.sp,
+        style: AppTextStyles.poppinsSemiBold(
+          fontSize: 13.sp,
         ),
       ),
       Text(
         value,
-        style: AppTextStyles.qanelasRegular(
-          fontSize: 15.sp,
+        style: AppTextStyles.poppinsRegular(
+          fontSize: 13.sp,
         ),
       ),
     ],
@@ -179,8 +185,8 @@ class __ChangePasswordDialogState extends ConsumerState<_ChangePasswordDialog> {
                 children: [
                   Text(
                     "CURRENT_PASSWORD".tr(context),
-                    style: AppTextStyles.qanelasLight(
-                        fontSize: 16.sp, color: AppColors.white),
+                    style: AppTextStyles.poppinsMedium(
+                        fontSize: 15.sp,),
                   ),
                   const Spacer(),
                   InkWell(
@@ -195,8 +201,8 @@ class __ChangePasswordDialogState extends ConsumerState<_ChangePasswordDialog> {
                       },
                       child: Text(
                         "RECOVER".tr(context),
-                        style: AppTextStyles.qanelasRegular(
-                            fontSize: 15.sp, color: AppColors.white),
+                        style: AppTextStyles.poppinsRegular(
+                            fontSize: 13.sp,),
                       ))
                 ],
               ),
@@ -224,8 +230,8 @@ class __ChangePasswordDialogState extends ConsumerState<_ChangePasswordDialog> {
                 alignment: AlignmentDirectional.centerStart,
                 child: Text(
                   "NEW_PASSWORD".tr(context),
-                  style: AppTextStyles.qanelasLight(
-                      fontSize: 16.sp, color: AppColors.white),
+                  style: AppTextStyles.poppinsMedium(
+                    fontSize: 15.sp,),
                 ),
               ),
               SizedBox(height: 5.h),
@@ -333,8 +339,8 @@ class __DeleteAccountConfirmationState
               alignment: AlignmentDirectional.centerStart,
               child: Text(
                 "PASSWORD".tr(context),
-                style: AppTextStyles.qanelasLight(
-                    fontSize: 16.sp, color: AppColors.white),
+                style: AppTextStyles.poppinsMedium(
+                  fontSize: 15.sp,),
               ),
             ),
             SizedBox(height: 5.h),
@@ -358,7 +364,6 @@ class __DeleteAccountConfirmationState
             ),
             SizedBox(height: 20.h),
             MainButton(
-              decoration: decoration,
               label: "DELETE_ACCOUNT".tr(context).capitalWord(context, enabled),
               enabled: enabled,
               isForPopup: true,
@@ -395,9 +400,9 @@ class TransactionList extends ConsumerWidget {
           Row(
             children: [
               Text(
-                "TRANSACTION_HISTORY".trU(context),
-                style: AppTextStyles.qanelasMedium(
-                  fontSize: 17.sp,
+                "TRANSACTION_HISTORY".tr(context),
+                style: AppTextStyles.poppinsBold(
+                  fontSize: 16.sp,
                 ),
               ),
               SizedBox(width: 5.w),
@@ -432,8 +437,8 @@ class TransactionList extends ConsumerWidget {
               5.horizontalSpace,
               Text(
                 "(${"LATEST".tr(context)})",
-                style: AppTextStyles.qanelasRegular(
-                  fontSize: 15.sp,
+                style: AppTextStyles.poppinsRegular(
+                  fontSize: 13.sp,
                 ),
               ),
             ],
@@ -472,15 +477,15 @@ class TransactionList extends ConsumerWidget {
                           Expanded(
                               child: Text(
                             showDate,
-                            style: AppTextStyles.qanelasRegular(
-                              fontSize: isForPopUp ? 13.sp : 15.sp,
+                            style: AppTextStyles.poppinsRegular(
+                              fontSize: isForPopUp ? 13.sp : 13.sp,
                             ),
                           )),
                           Expanded(
                               child: Text(
                             status,
-                            style: AppTextStyles.qanelasRegular(
-                              fontSize: 14.sp,
+                            style: AppTextStyles.poppinsRegular(
+                              fontSize: 13.sp,
                             ),
                             textAlign: TextAlign.center,
                           )),
@@ -488,14 +493,14 @@ class TransactionList extends ConsumerWidget {
                               child: Text(
                             paymentMethod.capitalizeFirst,
                             style:
-                                AppTextStyles.qanelasSemiBold(fontSize: 16.sp),
+                                AppTextStyles.poppinsBold(fontSize: 12.sp),
                             textAlign: TextAlign.center,
                           )),
                           Expanded(
                               child: Text(
                             amount,
-                            style: AppTextStyles.qanelasRegular(
-                              fontSize: 14.sp,
+                            style: AppTextStyles.poppinsRegular(
+                              fontSize: 13.sp,
                             ),
                             textAlign: TextAlign.start,
                           )),

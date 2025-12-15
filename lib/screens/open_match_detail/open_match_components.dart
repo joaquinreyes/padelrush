@@ -10,11 +10,10 @@ class _RankedOrFriendly extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // decoration: inset.BoxDecoration(
-      //   boxShadow: kInsetShadow,
-      //   color: AppColors.tileBgColor,
-      //   borderRadius: BorderRadius.circular(12.r),
-      // ),
+      decoration: BoxDecoration(
+        color: AppColors.gray,
+        borderRadius: BorderRadius.circular(100.r),
+      ),
       padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 4.h),
       child: Row(
         children: [
@@ -28,14 +27,15 @@ class _RankedOrFriendly extends StatelessWidget {
 
   _buildWidget(String text, bool isSelected) {
     return Container(
-      decoration: decoration.copyWith(color: isSelected ? AppColors.darkYellow : AppColors.white),
-      padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 10.w),
+      decoration: BoxDecoration(color: isSelected ? AppColors.black70 : AppColors.transparentColor,
+      borderRadius: BorderRadius.circular(100.r),),
+      padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 10.w),
       child: Text(
         text,
         style: isSelected
-            ? AppTextStyles.qanelasSemiBold(
-            fontSize: 14.sp,)
-            : AppTextStyles.qanelasRegular(
+            ? AppTextStyles.poppinsSemiBold(
+            fontSize: 14.sp, color: AppColors.white)
+            : AppTextStyles.poppinsRegular(
                 color: AppColors.black70,
                 fontSize: 13.sp,
               ),
@@ -62,7 +62,7 @@ class _OrganizerNote extends StatelessWidget {
         SizedBox(height: 20.h),
         Text(
           "NOTE_FROM_ORGANIZER".trU(context),
-          style: AppTextStyles.qanelasMedium(
+          style: AppTextStyles.poppinsMedium(
               fontSize: 17.sp,),
         ),
         SizedBox(height: 10.h),
@@ -70,13 +70,13 @@ class _OrganizerNote extends StatelessWidget {
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
             border: border,
-            color: AppColors.tileBgColor,
+            color: AppColors.gray,
             borderRadius: BorderRadius.circular(12.r)
           ),
           padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 12.w),
           child: Text(
             note,
-            style: AppTextStyles.qanelasRegular(
+            style: AppTextStyles.poppinsRegular(
                 fontSize: 13.sp,),
           ),
         ),
@@ -102,7 +102,7 @@ class _InfoCard extends ConsumerWidget {
         vertical: 15.h,
       ),
       decoration: BoxDecoration(
-        color: AppColors.black2,
+        color: AppColors.gray,
         border: border,
         borderRadius: BorderRadius.circular(12.r),
       ),
@@ -113,14 +113,13 @@ class _InfoCard extends ConsumerWidget {
             children: [
               Text(
                 'ORGANIZER'.tr(context),
-                style: AppTextStyles.qanelasMedium(
-                    color: AppColors.white, fontSize: 16.sp),
+                style: AppTextStyles.poppinsMedium(fontSize: 16.sp),
               ),
               const Spacer(),
               Text(
                 'BOOKING'.tr(context),
-                style: AppTextStyles.qanelasMedium(
-                    color: AppColors.white, fontSize: 16.sp),
+                style: AppTextStyles.poppinsMedium(
+                    fontSize: 16.sp),
               ),
               if (service.isPrivate)
                 Container(
@@ -151,8 +150,7 @@ class _InfoCard extends ConsumerWidget {
                   Text(
                     // "${DateFormat("EEE dd MMM").format(booking.startingTime ?? (DubaiDateTime.now().dateTime))} • ${DateFormat(DateFormat.HOUR_MINUTE).format(booking.startingTime ?? (DubaiDateTime.now().dateTime))} - ${DateFormat(DateFormat.HOUR_MINUTE).format((booking.endingTime ?? (DubaiDateTime.now().dateTime)))}",
                     service.formattedDateStartEndTimeAM12,
-                    style: AppTextStyles.qanelasRegular(
-                      color: AppColors.white,
+                    style: AppTextStyles.poppinsRegular(
                       fontSize: 15.sp,
                     ),
                   ),
@@ -160,16 +158,14 @@ class _InfoCard extends ConsumerWidget {
                   Text(
                     "${service.courts?.first.courtName ?? ""} | ${service.service?.location?.locationName ?? ""}"
                         .capitalizeFirst,
-                    style: AppTextStyles.qanelasRegular(
-                      color: AppColors.white,
+                    style: AppTextStyles.poppinsRegular(
                       fontSize: 15.sp,
                     ),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     "$level Price ${Utils.formatPrice(service.pricePaid(ref))}",
-                    style: AppTextStyles.qanelasRegular(
-                      color: AppColors.white,
+                    style: AppTextStyles.poppinsRegular(
                       fontSize: 15.sp,
                     ),
                   ),
@@ -190,8 +186,7 @@ class _InfoCard extends ConsumerWidget {
         child: Text(
           "NO_ORGANIZER".tr(context),
           textAlign: TextAlign.center,
-          style: AppTextStyles.qanelasRegular(
-              color: AppColors.white, fontSize: 15.sp),
+          style: AppTextStyles.poppinsRegular(fontSize: 15.sp),
         ),
       );
     }
@@ -217,16 +212,14 @@ class _InfoCard extends ConsumerWidget {
         Text(
           organizer.getCustomerName.capitalizeFirst,
           textAlign: TextAlign.center,
-          style: AppTextStyles.qanelasMedium(
-            color: AppColors.white,
+          style: AppTextStyles.poppinsMedium(
             fontSize: 11.sp,
           ),
         ),
         Text(
           "$level ${getRankLabel(double.tryParse(level) ?? 0)}", // • SIDE",
           textAlign: TextAlign.center,
-          style: AppTextStyles.qanelasRegular(
-            color: AppColors.white,
+          style: AppTextStyles.poppinsRegular(
             fontSize: 12.sp,
           ),
         ),

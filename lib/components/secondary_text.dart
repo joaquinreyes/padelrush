@@ -16,7 +16,7 @@ class SecondaryText extends StatelessWidget {
     return Center(
       child: Text(
         text,
-        style: AppTextStyles.qanelasRegular(
+        style: AppTextStyles.poppinsRegular(
           fontSize: 13.sp,
           color: color ?? AppColors.black,
         ),

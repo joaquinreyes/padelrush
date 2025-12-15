@@ -29,6 +29,7 @@ import 'package:padelrush/routes/app_pages.dart';
 import 'package:padelrush/routes/app_routes.dart';
 import 'package:padelrush/screens/home_screen/tabs/play_match_tab/tabs/tab_parent.dart';
 import 'package:padelrush/screens/home_screen/tabs/profile_tab/tabs/booking_profile_tab/booking_profile_tab.dart';
+import 'package:padelrush/screens/home_screen/tabs/profile_tab/tabs/booking_profile_tab/user_bookings_list.dart';
 import 'package:padelrush/screens/home_screen/tabs/profile_tab/tabs/membership_tab/membership_tab.dart';
 import 'package:padelrush/screens/home_screen/tabs/profile_tab/tabs/settings.dart';
 import 'package:padelrush/utils/custom_extensions.dart';
@@ -51,6 +52,7 @@ class ProfileTab extends ConsumerStatefulWidget {
 
 class _ProfileTabState extends ConsumerState<ProfileTab> {
   late List<Widget> _pages = [];
+  bool allowRankingProfile = false;
 
   @override
   void initState() {
@@ -64,8 +66,40 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
       ref.invalidate(fetchUserProvider);
       ref.invalidate(fetchAllCustomFieldsProvider);
     });
-    _pages = [const BookingProfileTab(), const Settings(), MembershipTab()];
+    _pages = [const UserBookingsList(), const UserBookingsList(isPast: true), const Settings()];
+    Future(() {
+      _pages = [
+        // const BookingProfileTab(),
+        const UserBookingsList(),
+        const UserBookingsList(isPast: true),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
+          child: RankingProfile(customerID: ref.read(userProvider)?.user?.id ?? -1, isPage: false),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
+          child: const Settings(),
+        ),
+        MembershipTab()
+      ];
+    }).then((e) {
+      if (context.mounted) {
+        setTabs();
+      }
+    });
   }
+  void setTabs() {
+    allowRankingProfile = true;
+    setState(() {});
+  }
+  // void setPages(BuildContext context) {
+  //   Future(() {
+  //     ref.read(_selectedTabIndex.notifier).state = 0;
+  //     ref.invalidate(fetchUserProvider);
+  //     ref.invalidate(fetchAllCustomFieldsProvider);
+  //   });
+  //   _pages = [const BookingProfileTab(), const Settings(), MembershipTab()];
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -94,25 +128,29 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
           const _HeaderInfo(),
           Container(
             width: double.infinity,
-            margin: EdgeInsets.symmetric(vertical: 15.h),
-            padding: EdgeInsets.symmetric(horizontal: 25.w),
-            // decoration: inset.BoxDecoration(
-            //   color: AppColors.tileBgColor,
-            //   boxShadow: kInsetShadow,
-            //   borderRadius: BorderRadius.circular(12.r),
-            // ),
+            margin: EdgeInsets.symmetric(vertical: 15.h,horizontal: 15.w),
+            padding: EdgeInsets.symmetric(horizontal: 15.w,),
+            decoration: inset.BoxDecoration(
+              color: AppColors.gray,
+              boxShadow: kInsetShadow,
+              borderRadius: BorderRadius.circular(100.r),
+            ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _pageSelectorItem(text: 'BOOKINGS'.tr(context), index: 0),
-                _pageSelectorItem(text: 'SETTINGS'.tr(context), index: 1),
-                _pageSelectorItem(text: 'PACKAGES'.tr(context), index: 2),
+                _pageSelectorItem(text: 'UPCOMING_BOOKINGS'.tr(context), index: 0),
+                _pageSelectorItem(text: 'PAST_BOOKINGS'.tr(context), index: 1),
+                if (allowRankingProfile) _pageSelectorItem(text: 'RANKING_PROFILE'.tr(context), index: 2),
+                _pageSelectorItem(text: 'SETTINGS'.tr(context), index: 3),
+                // _pageSelectorItem(text: 'BOOKINGS'.tr(context), index: 0),
+                // _pageSelectorItem(text: 'SETTINGS'.tr(context), index: 1),
+                // _pageSelectorItem(text: 'PACKAGES'.tr(context), index: 2),
               ],
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
+            padding: EdgeInsets.symmetric(horizontal: 0.w),
             child: ExpandablePageView(
               physics: const NeverScrollableScrollPhysics(),
               controller: pageController,
@@ -146,10 +184,11 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
             ),
             margin: EdgeInsets.symmetric(
               vertical: 4.h,
-              horizontal: 4.w
+              horizontal: 0.w
             ),
-            decoration: decoration.copyWith(
-                color: isSelected ? AppColors.black2 : AppColors.white),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100.r),
+                color: isSelected ? AppColors.black2 : AppColors.transparentColor),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

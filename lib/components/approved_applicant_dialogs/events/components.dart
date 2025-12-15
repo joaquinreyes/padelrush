@@ -18,12 +18,12 @@ class ApplicantEventInfoCard extends StatelessWidget {
             children: [
               Text(
                 service.service?.event?.eventName ?? "",
-                style: AppTextStyles.qanelasRegular(),
+                style: AppTextStyles.poppinsRegular(),
               ),
               const Spacer(),
               Text(
                 "DATE_AND_TIME".tr(context),
-                style: AppTextStyles.qanelasRegular(),
+                style: AppTextStyles.poppinsRegular(),
               )
             ],
           ),
@@ -38,12 +38,12 @@ class ApplicantEventInfoCard extends StatelessWidget {
                   Text(
                     (service.service?.location?.locationName ?? "")
                         .capitalizeFirst,
-                    style: AppTextStyles.qanelasRegular(),
+                    style: AppTextStyles.poppinsRegular(),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     "${"PRICE".tr(context)} ${Utils.formatPrice(service.service?.price?.toDouble())}",
-                    style: AppTextStyles.qanelasRegular(),
+                    style: AppTextStyles.poppinsRegular(),
                   ),
                 ],
               ),
@@ -53,12 +53,12 @@ class ApplicantEventInfoCard extends StatelessWidget {
                 children: [
                   Text(
                     service.formatBookingDate,
-                    style: AppTextStyles.qanelasRegular(),
+                    style: AppTextStyles.poppinsRegular(),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     service.formatStartEndTime,
-                    style: AppTextStyles.qanelasRegular(),
+                    style: AppTextStyles.poppinsRegular(),
                   ),
                 ],
               ),

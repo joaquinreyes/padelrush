@@ -17,7 +17,7 @@ class RankedComponent extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 13.w),
       child: Text(
         "RANKED".tr(context),
-        style: AppTextStyles.qanelasSemiBold(
+        style: AppTextStyles.poppinsSemiBold(
           fontSize: 14.sp,
         ),
       ),

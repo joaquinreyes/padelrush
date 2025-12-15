@@ -64,16 +64,14 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
           child: RichText(
             text: TextSpan(
               text: '${'ALREADY_HAVE_AN_ACCOUNT'.tr(context)} ',
-              style: AppTextStyles.qanelasRegular(
-                color: AppColors.black2,
+              style: AppTextStyles.poppinsMedium(
                 fontSize: 18.sp,
               ),
               children: [
                 TextSpan(
                   text: 'SIGN_IN'.tr(context),
-                  style: AppTextStyles.qanelasLight(
+                  style: AppTextStyles.pragmaticaExtendedBold(
                     fontSize: 18.sp,
-                    color: AppColors.black2,
                   ),
                 ),
               ],
@@ -100,7 +98,7 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                         children: [
                           Text(
                             'FIRST_NAME'.tr(context),
-                            style: AppTextStyles.qanelasMedium(
+                            style: AppTextStyles.poppinsMedium(
                                 color: AppColors.black2, fontSize: 19.sp),
                           ),
                           CustomTextField(
@@ -123,7 +121,7 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                           SizedBox(height: 50.h),
                           Text(
                             'LAST_NAME'.tr(context),
-                            style: AppTextStyles.qanelasMedium(
+                            style: AppTextStyles.poppinsMedium(
                                 color: AppColors.black2, fontSize: 19.sp),
                           ),
                           CustomTextField(
@@ -146,7 +144,7 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                           SizedBox(height: 50.h),
                           Text(
                             'EMAIL'.tr(context),
-                            style: AppTextStyles.qanelasMedium(
+                            style: AppTextStyles.poppinsMedium(
                                 color: AppColors.black2, fontSize: 19.sp),
                           ),
                           CustomTextField(
@@ -172,13 +170,13 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                               }
                               return null;
                             },
-                            style: AppTextStyles.qanelasLight(
+                            style: AppTextStyles.poppinsLight(
                                 fontSize: 17.sp, color: AppColors.black),
                           ),
                           SizedBox(height: 50.h),
                           Text(
                             'PHONE_NUMBER'.tr(context),
-                            style: AppTextStyles.qanelasMedium(
+                            style: AppTextStyles.poppinsMedium(
                                 color: AppColors.black2, fontSize: 19.sp),
                           ),
                           Row(
@@ -194,11 +192,11 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                                 showOnlyCountryWhenClosed: false,
                                 alignLeft: false,
                                 padding: EdgeInsets.zero,
-                                textStyle: AppTextStyles.qanelasRegular(
+                                textStyle: AppTextStyles.poppinsRegular(
                                     fontSize: 18.sp, color: AppColors.black2),
-                                searchStyle: AppTextStyles.qanelasRegular(
+                                searchStyle: AppTextStyles.poppinsRegular(
                                     fontSize: 18.sp, color: AppColors.black2),
-                                dialogTextStyle: AppTextStyles.qanelasRegular()
+                                dialogTextStyle: AppTextStyles.poppinsRegular()
                                     .copyWith(
                                         fontSize: 18.sp,
                                         color: AppColors.black2),
@@ -230,7 +228,7 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                           SizedBox(height: 40.h),
                           Text(
                             'PASSWORD'.tr(context),
-                            style: AppTextStyles.qanelasMedium(
+                            style: AppTextStyles.poppinsMedium(
                                 color: AppColors.black2, fontSize: 19.sp),
                           ),
                           CustomTextField(
@@ -285,14 +283,14 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                                   textAlign: TextAlign.end,
                                   text: TextSpan(
                                     text: 'I_ACCEPT_THE'.tr(context),
-                                    style: AppTextStyles.qanelasRegular(
+                                    style: AppTextStyles.poppinsRegular(
                                       fontSize: 15.sp,
                                     ),
                                     children: [
                                       TextSpan(
                                         text:
                                             '${'TERMS_AND_CONDITIONS'.tr(context)}.',
-                                        style: AppTextStyles.qanelasRegularItalic(
+                                        style: AppTextStyles.poppinsRegularItalic(
                                             fontSize: 16.sp,
                                             textDecoration:
                                                 TextDecoration.underline),
@@ -345,7 +343,7 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                           ),
                           MainButton(
                             enabled: _canProceed,
-                            label: 'REGISTER'.tr(context).capitalWord(context, _canProceed),
+                            label: 'REGISTER'.tr(context),
                             // labelStyle: AppTextStyles.qanelasLight(
                             //     fontSize: 18.sp, color: AppColors.white),
                             // color: _canProceed

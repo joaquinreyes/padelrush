@@ -37,18 +37,17 @@ class ImageSourceSheet extends StatelessWidget {
           // MultiStyleTextFirstBold(text: 'CHANGE_PROFILE_PICTURE'.trU(context), fontSize: 19.sp, color: AppColors.black),
           Text(
             'CHANGE_PROFILE_PICTURE'.trU(context),
-            style: AppTextStyles.popupHeaderTextStyle.copyWith(color: AppColors.black2),
+            style: AppTextStyles.popupHeaderTextStyle,
           ),
           SizedBox(height: 20.h),
           MainButton(
             label: 'CAMERA'.tr(context),
             enabled: true,
             showArrow: true,
-            color: AppColors.black2,
-            borderColor: AppColors.black2,
-            labelStyle: AppTextStyles.qanelasSemiBold(
-              fontSize: 18.sp,
-              color: AppColors.white,
+            color: AppColors.darkYellow80,
+            borderColor: AppColors.darkYellow80,
+            labelStyle: AppTextStyles.poppinsMedium(
+              fontSize: 16.sp,
             ),
             onTap: () {
               Navigator.pop(context, ImageSource.camera);
@@ -59,11 +58,10 @@ class ImageSourceSheet extends StatelessWidget {
             label: 'GALLERY'.tr(context),
             enabled: true,
             showArrow: true,
-            color: AppColors.black2,
-            borderColor: AppColors.black2,
-            labelStyle: AppTextStyles.qanelasSemiBold(
-              fontSize: 18.sp,
-              color: AppColors.white,
+            color: AppColors.darkYellow80,
+            borderColor: AppColors.darkYellow80,
+            labelStyle: AppTextStyles.poppinsMedium(
+              fontSize: 16.sp,
             ),
             onTap: () {
               Navigator.pop(context, ImageSource.gallery);

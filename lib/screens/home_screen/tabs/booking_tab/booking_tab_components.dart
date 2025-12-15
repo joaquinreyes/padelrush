@@ -36,12 +36,17 @@ class _DateSelectorWidgetState extends ConsumerState<_DateSelectorWidget> {
         ? ref.watch(selectedDateProvider)
         : ref.watch(selectedDateLessonProvider);
     return Container(
-      height: (width / height) > 0.6 ? 120.h : 65.h,
-      margin: EdgeInsets.only(
-        top: 10.h,
-        bottom: 7.h,
-      ),
-      color: AppColors.white,
+      height: (width / height) > 0.6 ? 120.h : 81.h,
+      // margin: EdgeInsets.only(
+      //   top: 10.h,
+      //   bottom: 7.h,
+      // ),
+      // margin: EdgeInsets.only(left: 15.w),
+      padding: EdgeInsets.all(8.h),
+      // decoration: BoxDecoration(
+      //     color: AppColors.gray,
+      //     // borderRadius: BorderRadius.only(topLeft: Radius.circular(100.r),bottomLeft: Radius.circular(100.r)),
+      // ),
       // padding: EdgeInsets.only(left: 6.w, right: 0),
       child: _buildDateListView(context, selectedDate.dateTime, membership),
     );
@@ -74,7 +79,7 @@ class _DateSelectorWidgetState extends ConsumerState<_DateSelectorWidget> {
       UserActiveMembership? membership) {
     bool isSelected = date.isAtSameMomentAs(selectedDate);
 
-    Color color = isSelected ? AppColors.black2 : AppColors.white;
+    Color color = isSelected ? AppColors.darkYellow : AppColors.transparentColor;
 
     final selectedIndex = ref.watch(_selectedTabIndex);
     final isCourtActive = selectedIndex == 0;
@@ -96,7 +101,8 @@ class _DateSelectorWidgetState extends ConsumerState<_DateSelectorWidget> {
         onTap: () => _onDateTap(date),
         child: Container(
           clipBehavior: Clip.none,
-          decoration: decoration.copyWith(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100.r),
             color: color
           ),
           child: _buildDateContent(date, isSelected),
@@ -135,24 +141,24 @@ class _DateSelectorWidgetState extends ConsumerState<_DateSelectorWidget> {
         children: [
           Text(
             date.format(DateFormat.ABBR_WEEKDAY),
-            style: AppTextStyles.qanelasRegular(
-              height: 0.8,
-              fontSize: 15.sp,
-              color: isSelected ? AppColors.white : AppColors.black70,
+            style: AppTextStyles.poppinsRegular(
+              height: 1,
+              fontSize: 13.sp,
+              color: isSelected ? AppColors.black : AppColors.black,
             ),
           ),
           Text(
             '${date.day}',
-            style: AppTextStyles.qanelasBold(
-              color: isSelected ? AppColors.white : AppColors.black70,
+            style: AppTextStyles.poppinsBold(
+              color: isSelected ? AppColors.black : AppColors.black,
               fontSize: 15.sp,
             ),
           ),
           Text(
             date.format(DateFormat.ABBR_MONTH),
-            style: AppTextStyles.qanelasRegular(
-              fontSize: 15.sp,
-              color: isSelected ? AppColors.white : AppColors.black70,
+            style: AppTextStyles.poppinsRegular(
+              fontSize: 13.sp,
+              color: isSelected ? AppColors.black : AppColors.black,
               height: 0.8,
             ),
           ),
@@ -209,20 +215,20 @@ class _Duration extends ConsumerWidget {
         },
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 8.w),
-          padding: EdgeInsets.all(2.h),
-          decoration: decoration.copyWith(
-              color:
-                  isServiceSelected ? AppColors.black2 : AppColors.white),
+          padding: EdgeInsets.all(4.h),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100.r),
+              color: isServiceSelected ? AppColors.black2 : AppColors.transparentColor),
           alignment: Alignment.center,
           child: Text(
             "$duration min",
             textAlign: TextAlign.center,
             style: isServiceSelected
-                ? AppTextStyles.qanelasSemiBold(
-                color: AppColors.white, fontSize: 14.sp)
-                : AppTextStyles.qanelasRegular(
-              fontSize: 13.sp,
-              color: AppColors.black2.withOpacity(.7),
+                ? AppTextStyles.poppinsMedium(
+                color: AppColors.white, fontSize: 11.sp)
+                : AppTextStyles.poppinsRegular(
+              fontSize: 11.sp,
+              color: AppColors.black70,
             ),
           ),
         ),
@@ -263,10 +269,10 @@ class _Court extends ConsumerWidget {
           courtName.capitalizeFirst,
           textAlign: TextAlign.center,
           style: isCourtSelected
-              ? AppTextStyles.qanelasSemiBold(
-                  color: AppColors.white, fontSize: 14.sp)
-              : AppTextStyles.qanelasRegular(
-                  fontSize: 13.sp, color: AppColors.black70),
+              ? AppTextStyles.poppinsMedium(
+                  color: AppColors.white, fontSize: 11.sp)
+              : AppTextStyles.poppinsRegular(
+                  fontSize: 11.sp, color: AppColors.black70),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -291,18 +297,19 @@ class _DurationAndSportContainer extends StatelessWidget {
         margin: EdgeInsets.all(
           4.h,
         ),
-        padding: EdgeInsets.fromLTRB(20.w, 4.h, 20.w, 4.h),
-        decoration: decoration.copyWith(
-            color: isSelected ? AppColors.black2 : Colors.white),
+        padding: EdgeInsets.fromLTRB(20.w, 7.h, 20.w, 7.h),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100.r),
+            color: isSelected ? AppColors.black2 : AppColors.transparentColor),
         alignment: Alignment.center,
         child: Text(
           text,
           textAlign: TextAlign.center,
           style: isSelected
-              ? AppTextStyles.qanelasSemiBold(
-                  color: AppColors.white, fontSize: 14.sp)
-              : AppTextStyles.qanelasRegular(
-                  fontSize: 13.sp, color: AppColors.black70),
+              ? AppTextStyles.poppinsMedium(
+                  color: AppColors.white, fontSize: 11.sp)
+              : AppTextStyles.poppinsRegular(
+                  fontSize: 11.sp, color: AppColors.black70),
         ),
       ),
     );
@@ -420,11 +427,11 @@ class __TimeslotsState extends ConsumerState<_Timeslots> {
           child: Text(
             timeSlotChunked[rowIndex][colIndex].format("h:mm a").toLowerCase(),
             style: selected
-                ? AppTextStyles.qanelasBold(
+                ? AppTextStyles.poppinsBold(
                     fontSize: 15.sp,
                     color: AppColors.black2,
                   )
-                : AppTextStyles.qanelasRegular(
+                : AppTextStyles.poppinsRegular(
                     fontSize: 15.sp,
                     color: AppColors.black,
                   ),
@@ -503,8 +510,8 @@ class __AvailableTimeslotState extends ConsumerState<_AvailableTimeslot> {
                       children: [
                         Text(
                           courts.values.toList()[index],
-                          style: AppTextStyles.qanelasSemiBold(
-                            fontSize: 15.sp,
+                          style: AppTextStyles.poppinsMedium(
+                            fontSize: 14.sp,
                           ),
                         ),
                         SizedBox(height: 2.h),
@@ -516,7 +523,7 @@ class __AvailableTimeslotState extends ConsumerState<_AvailableTimeslot> {
                             Text(
                               formattedTime,
                               style:
-                                  AppTextStyles.qanelasRegular(fontSize: 15.sp),
+                                  AppTextStyles.poppinsRegular(fontSize: 13.sp),
                             ),
                           ],
                         )
@@ -531,9 +538,10 @@ class __AvailableTimeslotState extends ConsumerState<_AvailableTimeslot> {
                       height: 30.h,
                       width: 90.w,
                       arrowSize: 15.h,
+                      borderRadius: 100.r,
                       padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      label: "BOOK".trU(context),
-                      labelStyle: AppTextStyles.qanelasMedium(fontSize: 14.sp),
+                      label: "BOOK".tr(context),
+                      labelStyle: AppTextStyles.poppinsMedium(fontSize: 15.sp),
                       onTap: () async {
                         if (!Utils.checkUserLogin(ref)) {
                           ref.read(goRouterProvider).push(RouteNames.auth);
@@ -676,19 +684,23 @@ class _Selector extends ConsumerWidget {
               );
         },
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 4.w),
+          margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 0.w),
           clipBehavior: Clip.none,
-          padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 4.w),
-          decoration: decoration.copyWith(
-              color:
-                  isServiceSelected ? AppColors.black2 : AppColors.white),
+          padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 0.w),
+          // decoration: decoration.copyWith(
+          //     color:
+          //         isServiceSelected ? AppColors.black2 : AppColors.white),
           alignment: Alignment.center,
-          child: Text(title,
-              textAlign: TextAlign.center,
-              style: AppTextStyles.qanelasMedium(
-                fontSize: isServiceSelected ? 17.sp : 15.sp,
-                color: isServiceSelected ? AppColors.white : AppColors.black70,
-              )),
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: isServiceSelected
+                ? AppTextStyles.pragmaticaObliqueExtendedBold(fontSize: 20.sp)
+                : AppTextStyles.pragmaticaExtendedBold(
+                    fontSize: 14.sp,
+                    color: AppColors.black70,
+                  ),
+          ),
         ),
       ),
     );
@@ -731,11 +743,11 @@ class _LessonBookingType extends ConsumerWidget {
             lessonType.lessons ?? "",
             textAlign: TextAlign.center,
             style: isServiceSelected
-                ? AppTextStyles.qanelasSemiBold(
+                ? AppTextStyles.poppinsSemiBold(
                     color: AppColors.white,
                     fontSize: 13.sp,
                     letterSpacing: 13.sp * 0.05)
-                : AppTextStyles.qanelasLight(
+                : AppTextStyles.poppinsLight(
                     color: AppColors.black70,
                     fontSize: 13.sp,
                   ),
@@ -860,8 +872,8 @@ class __TimeslotsLessonState extends ConsumerState<_TimeslotsLesson> {
           child: Text(
             timeSlotChunked[rowIndex][colIndex].format("h:mm a").toLowerCase(),
             style: selected
-                ? AppTextStyles.qanelasBold(fontSize: 15.sp)
-                : AppTextStyles.qanelasRegular(
+                ? AppTextStyles.poppinsBold(fontSize: 15.sp)
+                : AppTextStyles.poppinsRegular(
                     color: AppColors.black, fontSize: 15.sp),
           ),
         ),
@@ -1008,7 +1020,7 @@ class __AvailableTimeslotLessonState
                         children: [
                           Text(
                             lessons.values.toList()[index],
-                            style: AppTextStyles.qanelasSemiBold(
+                            style: AppTextStyles.poppinsSemiBold(
                               fontSize: 15.sp,
                             ),
                           ),
@@ -1017,7 +1029,7 @@ class __AvailableTimeslotLessonState
                             padding: EdgeInsets.only(left: 10.w),
                             child: Text(
                               formattedTime,
-                              style: AppTextStyles.qanelasRegular(
+                              style: AppTextStyles.poppinsRegular(
                                 fontSize: 15.sp,
                               ),
                             ),
@@ -1035,7 +1047,7 @@ class __AvailableTimeslotLessonState
                       arrowSize: 15.h,
                       padding: EdgeInsets.symmetric(horizontal: 10.w),
                       label: "BOOK".trU(context),
-                      labelStyle: AppTextStyles.qanelasMedium(fontSize: 14.sp),
+                      labelStyle: AppTextStyles.poppinsMedium(fontSize: 14.sp),
                       onTap: () async {
                         if (!Utils.checkUserLogin(ref)) {
                           ref.read(goRouterProvider).push(RouteNames.auth);
@@ -1220,7 +1232,7 @@ class __QuizQuestionsState extends ConsumerState<QuizQuestions> {
             error: (e, _) => Center(
               child: Text(
                 e.toString(),
-                style: AppTextStyles.qanelasLight(
+                style: AppTextStyles.poppinsLight(
                   fontSize: 16.sp,
                   color: AppColors.errorColor,
                 ),
@@ -1275,7 +1287,7 @@ class _MembershipComponent extends ConsumerWidget {
                 padding: EdgeInsets.only(bottom: 15.h, left: 15.w),
                 child: Text(
                   'PACKAGES'.trU(context),
-                  style: AppTextStyles.qanelasMedium(
+                  style: AppTextStyles.poppinsMedium(
                     fontSize: 17.sp,
                   ),
                 ),
@@ -1309,10 +1321,15 @@ class _CoachSelection extends ConsumerWidget {
           return SecondaryText(text: "NO_COACH_FOUND".tr(context));
         }
         return Container(
-          height: (width / height) > 0.6 ? 110.h : 71.h,
-          margin:
-              EdgeInsets.only(left: 6.w, top: 15.h, bottom: 7.h, right: 6.w),
-          padding: EdgeInsets.only(left: 5.w, right: 0),
+          height: (width / height) > 0.6 ? 110.h : 78.h,
+          // margin:
+          //     EdgeInsets.only(left: 6.w, top: 15.h, bottom: 7.h, right: 6.w),
+          // padding: EdgeInsets.only(left: 5.w, right: 0),
+          padding: EdgeInsets.all(8.h),
+          // decoration: BoxDecoration(
+          //   color: AppColors.gray,
+          //   // borderRadius: BorderRadius.only(topLeft: Radius.circular(100.r),bottomLeft: Radius.circular(100.r)),
+          // ),
           child:
               _buildCoachesListView(ref, context, selectedLessonCoachId, data),
         );
@@ -1355,9 +1372,9 @@ class _CoachSelection extends ConsumerWidget {
           height: 60.w,
           width: 80.w,
           clipBehavior: Clip.none,
-          decoration: decoration.copyWith(
-            color: isSelected ? AppColors.black2 : AppColors.white,
-            borderRadius: BorderRadius.circular(5.r),
+          decoration: BoxDecoration(
+            color: isSelected ? AppColors.darkYellow : AppColors.transparentColor,
+            borderRadius: BorderRadius.circular(100.r),
           ),
           child: _buildCoachContent(slots, isSelected),
         ),
@@ -1387,8 +1404,7 @@ class _CoachSelection extends ConsumerWidget {
         Flexible(
           child: Text(
             coachName,
-            style: AppTextStyles.qanelasBold(fontSize: 12.sp).copyWith(
-                color: isSelected ? AppColors.white : AppColors.black),
+            style: isSelected ? AppTextStyles.poppinsBold(fontSize: 12.sp) : AppTextStyles.poppinsMedium(fontSize: 12.sp),
             textAlign: TextAlign.center,
           ),
         ),
@@ -1560,7 +1576,7 @@ class _FilterRow extends ConsumerWidget {
           SizedBox(height: 5.h),
           Text(
             'LOCATION'.trU(context),
-            style: AppTextStyles.qanelasMedium(
+            style: AppTextStyles.poppinsBold(
               fontSize: 19.sp,
             ),
           ),
@@ -1631,7 +1647,7 @@ class _FilterRow extends ConsumerWidget {
           SizedBox(height: 5.h),
           Text(
             'DATE'.trU(context),
-            style: AppTextStyles.qanelasMedium(
+            style: AppTextStyles.poppinsBold(
               fontSize: 19.sp,
             ),
           ),
@@ -1639,16 +1655,17 @@ class _FilterRow extends ConsumerWidget {
           SfDateRangePickerTheme(
             data: SfDateRangePickerThemeData().copyWith(
               headerBackgroundColor: Colors.transparent,
-              headerTextStyle: AppTextStyles.qanelasMedium(
+              headerTextStyle: AppTextStyles.poppinsMedium(
                 fontSize: 18.sp,
               ),
-              viewHeaderTextStyle: AppTextStyles.qanelasSemiBold(
+              viewHeaderTextStyle: AppTextStyles.poppinsSemiBold(
                 fontSize: 18.sp,
               ),
-              disabledDatesTextStyle: AppTextStyles.qanelasMedium(
-                fontSize: 20.sp,
+              disabledDatesTextStyle: AppTextStyles.mohaveBold(
+                fontSize: 26.sp,
+                color: AppColors.black70,
               ),
-              todayTextStyle: AppTextStyles.qanelasMedium(
+              todayTextStyle: AppTextStyles.poppinsMedium(
                 fontSize: 20.sp,
               ),
               todayHighlightColor: AppColors.black2,
@@ -1659,18 +1676,20 @@ class _FilterRow extends ConsumerWidget {
               selectionShape: DateRangePickerSelectionShape.circle,
               initialSelectedRange: range,
               enablePastDates: false,
-              endRangeSelectionColor: AppColors.black2,
-              startRangeSelectionColor: AppColors.black2,
-              rangeSelectionColor: AppColors.black25,
+              endRangeSelectionColor: AppColors.darkYellow80,
+              startRangeSelectionColor: AppColors.darkYellow80,
+              rangeSelectionColor: AppColors.darkYellow35,
               monthCellStyle: DateRangePickerMonthCellStyle(
-                textStyle: AppTextStyles.qanelasMedium(
-                  fontSize: 20.sp,
+                textStyle: AppTextStyles.mohaveBold(
+                  fontSize: 26.sp,
                 ),
               ),
-              selectionTextStyle: AppTextStyles.qanelasMedium(
-                  fontSize: 20.sp, color: AppColors.white),
-              rangeTextStyle: AppTextStyles.qanelasMedium(
-                  fontSize: 20.sp, color: AppColors.white),
+              selectionTextStyle: AppTextStyles.mohaveBold(
+                  fontSize: 26.sp, color: AppColors.black),
+              rangeTextStyle: AppTextStyles.mohaveBold(
+                  fontSize: 26.sp,
+                color: AppColors.black70,
+              ),
               monthViewSettings: DateRangePickerMonthViewSettings(
                 dayFormat: "E",
                 viewHeaderHeight: 52.h,
@@ -1678,17 +1697,17 @@ class _FilterRow extends ConsumerWidget {
               ),
               headerHeight: 52.h,
               yearCellStyle: DateRangePickerYearCellStyle(
-                todayTextStyle: AppTextStyles.qanelasMedium(
-                  fontSize: 20.sp,
+                todayTextStyle: AppTextStyles.mohaveBold(
+                  fontSize: 26.sp,
                 ),
-                disabledDatesTextStyle: AppTextStyles.qanelasMedium(
-                  fontSize: 20.sp,
+                disabledDatesTextStyle: AppTextStyles.mohaveBold(
+                  fontSize: 26.sp,
                 ),
-                textStyle: AppTextStyles.qanelasMedium(
-                  fontSize: 20.sp,
+                textStyle: AppTextStyles.mohaveBold(
+                  fontSize: 26.sp,
                 ),
-                leadingDatesTextStyle: AppTextStyles.qanelasMedium(
-                  fontSize: 20.sp,
+                leadingDatesTextStyle: AppTextStyles.mohaveBold(
+                  fontSize: 26.sp,
                 ),
               ),
               onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
@@ -1751,7 +1770,7 @@ class _FilterRow extends ConsumerWidget {
           SizedBox(height: 5.h),
           Text(
             'COACHES'.trU(context),
-            style: AppTextStyles.qanelasMedium(
+            style: AppTextStyles.poppinsBold(
               fontSize: 19.sp,
             ),
           ),
@@ -1820,19 +1839,18 @@ class _FilterRow extends ConsumerWidget {
       child: Container(
         decoration: inset.BoxDecoration(
           boxShadow: kInsetShadow,
-          color: AppColors.tileBgColor,
-          borderRadius: BorderRadius.circular(12.r),
+          color: AppColors.gray,
+          borderRadius: BorderRadius.circular(25.r),
         ),
-        padding: EdgeInsets.only(left: 10.w, right: 5.w, top: 8.h, bottom: 8.h),
+        padding: EdgeInsets.only(left: 10.w, right: 5.w, top: 11.5.h, bottom: 11.5.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
               child: Text(
                 label,
-                style: AppTextStyles.qanelasSemiBold(
-                  fontSize: 14.sp,
-                  color: AppColors.black2,
+                style: AppTextStyles.poppinsMedium(
+                  fontSize: 11.sp,
                 ),
               ),
             ),
@@ -1876,20 +1894,21 @@ class _CoachDurationList extends ConsumerWidget {
         },
         child: Container(
             margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 8.w),
-            padding: EdgeInsets.all(2.h),
-            decoration: kShadow.copyWith(
+            padding: EdgeInsets.symmetric(vertical: 7.h,horizontal: 4.w),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100.r),
                 color: isServiceSelected
                     ? AppColors.black2
-                    : AppColors.tileBgColor),
+                    : AppColors.transparentColor),
             alignment: Alignment.center,
             child: Text(
               "${lessonVariants.duration ?? 0} ${"MINS".tr(context)}",
               textAlign: TextAlign.center,
               style: isServiceSelected
-                  ? AppTextStyles.qanelasSemiBold(
-                      color: AppColors.white, fontSize: 14.sp)
-                  : AppTextStyles.qanelasRegular(
-                      fontSize: 13.sp, color: AppColors.black70),
+                  ? AppTextStyles.poppinsMedium(
+                      color: AppColors.white, fontSize: 11.sp)
+                  : AppTextStyles.poppinsRegular(
+                      fontSize: 11.sp, color: AppColors.black70),
             )),
       ),
     );
@@ -1909,7 +1928,7 @@ class _NonMembershipUser extends ConsumerWidget {
           SizedBox(height: 20.h),
           Text(
             "CAN_NOT_BOOK_DESCRIPTION".tr(context),
-            style: AppTextStyles.qanelasMedium(
+            style: AppTextStyles.poppinsMedium(
                 fontSize: 19.sp, color: AppColors.white),
             textAlign: TextAlign.center,
           ),
@@ -1999,7 +2018,7 @@ class _MembershipDialog extends ConsumerWidget {
               isActive
                   ? "HOUSE_OF_PADEL_MEMBERSHIP".trU(context)
                   : "BECOME_A_MEMBER".trU(context),
-              style: AppTextStyles.qanelasMedium(
+              style: AppTextStyles.poppinsMedium(
                   fontSize: 19.sp,
                   color: isActive ? AppColors.black : AppColors.white),
               textAlign: TextAlign.center,
@@ -2015,7 +2034,7 @@ class _MembershipDialog extends ConsumerWidget {
                 alignment: Alignment.centerRight,
                 child: Text(
                   "Price: ${price.toStringAsFixed(0)} $currency/month",
-                  style: AppTextStyles.qanelasLight(
+                  style: AppTextStyles.poppinsLight(
                       fontSize: 15.sp, color: AppColors.white),
                 ),
               ),
@@ -2047,7 +2066,7 @@ class _MembershipDialog extends ConsumerWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             "Membership Benefits:",
-            style: AppTextStyles.qanelasLight(
+            style: AppTextStyles.poppinsLight(
                 fontSize: 15.sp, color: color ?? AppColors.white),
           ),
         ),
@@ -2065,7 +2084,7 @@ class _MembershipDialog extends ConsumerWidget {
                 Expanded(
                   child: Text(
                     e,
-                    style: AppTextStyles.qanelasLight(
+                    style: AppTextStyles.poppinsLight(
                         fontSize: 15.sp, color: color ?? AppColors.white),
                   ),
                 ),
@@ -2108,13 +2127,13 @@ class _MembershipDialog extends ConsumerWidget {
                 children: [
                   Text(
                     "MEMBER".tr(context),
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                         fontSize: 13.sp, color: AppColors.white),
                   ),
                   SizedBox(height: 2),
                   Text(
                     fullName,
-                    style: AppTextStyles.qanelasMedium(
+                    style: AppTextStyles.poppinsMedium(
                         fontSize: 13.sp, color: AppColors.white),
                   ),
                 ],
@@ -2141,7 +2160,7 @@ class _MembershipDialog extends ConsumerWidget {
                 children: [
                   Text(
                     "${"OFF_PEAK_COACHING".tr(context)}:",
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                         fontSize: 13.sp, color: AppColors.white),
                   ),
                   Row(
@@ -2156,7 +2175,7 @@ class _MembershipDialog extends ConsumerWidget {
                         ),
                         child: Text(
                           "$userLeft",
-                          style: AppTextStyles.qanelasMedium(
+                          style: AppTextStyles.poppinsMedium(
                               fontSize: 11.sp, color: AppColors.black),
                         ),
                       ),
@@ -2165,7 +2184,7 @@ class _MembershipDialog extends ConsumerWidget {
                       ),
                       Text(
                         "${"REMAINING".tr(context)}",
-                        style: AppTextStyles.qanelasRegular(
+                        style: AppTextStyles.poppinsRegular(
                             fontSize: 13.sp, color: AppColors.white),
                       )
                     ],
@@ -2179,7 +2198,7 @@ class _MembershipDialog extends ConsumerWidget {
                 children: [
                   Text(
                     haveMembership?.finishDateString(context) ?? "",
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                         fontSize: 13.sp, color: AppColors.white),
                   )
                 ],

@@ -31,7 +31,7 @@ class TermsAndCondition extends ConsumerWidget {
               isTerms
                   ? "TERMS_AND_CONDITIONS".trU(context)
                   : "COMMUNICATIONS".trU(context),
-              style: AppTextStyles.popupHeaderTextStyle.copyWith(color: AppColors.black2),
+              style: AppTextStyles.popupHeaderTextStyle.copyWith(color: AppColors.black),
             )),
             SizedBox(
               height: 20.h,
@@ -52,8 +52,8 @@ class TermsAndCondition extends ConsumerWidget {
                       isTerms
                           ? "TERMS_AND_CONDITIONS_TEXT".tr(context)
                           : "COMMUNICATIONS_TEXT".tr(context),
-                      style: AppTextStyles.qanelasRegular(
-                          fontSize: 15.sp, color: AppColors.black2),
+                      style: AppTextStyles.poppinsRegular(
+                          fontSize: 14.sp,),
                       textAlign: TextAlign.start,
                     ),
                   ),

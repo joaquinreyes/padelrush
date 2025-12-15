@@ -59,7 +59,7 @@ class _ApplicantDialogState extends ConsumerState<OpenMatchApplicantDialog> {
             alignment: Alignment.centerLeft,
             child: Text(
               "CURRENT_PLAYERS".tr(context),
-              style: AppTextStyles.qanelasLight(fontSize: 16.sp),
+              style: AppTextStyles.poppinsLight(fontSize: 16.sp),
             ),
           ),
           SizedBox(height: 5.h),

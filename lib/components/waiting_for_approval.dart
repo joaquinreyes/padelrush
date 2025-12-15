@@ -21,7 +21,7 @@ class WaitingForApproval extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColors.black,
-          borderRadius: BorderRadius.circular(10.r),
+          borderRadius: BorderRadius.circular(100.r),
         ),
         padding: EdgeInsets.symmetric(
           horizontal: 15.w,
@@ -30,7 +30,7 @@ class WaitingForApproval extends StatelessWidget {
         child: Text(
           title ?? "WAITING_FOR_APPROVAL".trU(context),
           style: titleStyle ??
-              AppTextStyles.qanelasRegular(
+              AppTextStyles.poppinsRegular(
                 color: AppColors.white,
               ),
         ),

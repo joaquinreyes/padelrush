@@ -95,7 +95,7 @@ class _PrivateChatListScreenState extends ConsumerState<PrivateChatListScreen> {
               Expanded(
                 child: Text(
                   "MESSAGES".trU(context),
-                  style: AppTextStyles.qanelasMedium(
+                  style: AppTextStyles.poppinsMedium(
                     fontSize: 22.sp,
                   ),
                   textAlign: TextAlign.center,
@@ -121,11 +121,11 @@ class _PrivateChatListScreenState extends ConsumerState<PrivateChatListScreen> {
             prefixIcon: Icon(Icons.search, color: AppColors.black50),
             controller: _searchController,
             hintText: "SEARCH".tr(context),
-            style: AppTextStyles.qanelasRegular(
+            style: AppTextStyles.poppinsRegular(
               color: AppColors.black50,
               fontSize: 13.sp,
             ),
-            hintTextStyle: AppTextStyles.qanelasRegular(
+            hintTextStyle: AppTextStyles.poppinsRegular(
               color: AppColors.black50,
               fontSize: 13.sp,
             ),
@@ -160,7 +160,7 @@ class _PrivateChatListScreenState extends ConsumerState<PrivateChatListScreen> {
                   Expanded(
                     child: Text(
                       chatState.error!,
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         fontSize: 14.sp,
                         color: Colors.red,
                       ),
@@ -190,7 +190,7 @@ class _PrivateChatListScreenState extends ConsumerState<PrivateChatListScreen> {
                           SizedBox(height: 20.h),
                           Text(
                             "${"NO_CONVERSATIONS_YET".tr(context)}",
-                            style: AppTextStyles.qanelasMedium(
+                            style: AppTextStyles.poppinsMedium(
                               fontSize: 18.sp,
                               color: AppColors.black70,
                             ),
@@ -198,7 +198,7 @@ class _PrivateChatListScreenState extends ConsumerState<PrivateChatListScreen> {
                           SizedBox(height: 10.h),
                           Text(
                             "Start chatting with other players!",
-                            style: AppTextStyles.qanelasRegular(
+                            style: AppTextStyles.poppinsRegular(
                               fontSize: 14.sp,
                               color: AppColors.black50,
                             ),
@@ -229,7 +229,7 @@ class _PrivateChatListScreenState extends ConsumerState<PrivateChatListScreen> {
                             return Center(
                               child: Text(
                                 'No conversations found',
-                                style: AppTextStyles.qanelasRegular(
+                                style: AppTextStyles.poppinsRegular(
                                   fontSize: 14.sp,
                                   color: AppColors.black50,
                                 ),
@@ -285,7 +285,7 @@ class _PrivateChatListScreenState extends ConsumerState<PrivateChatListScreen> {
                                       Expanded(
                                         child: Text(
                                           userName,
-                                          style: AppTextStyles.qanelasMedium(
+                                          style: AppTextStyles.poppinsMedium(
                                             fontSize: 15.sp,
                                             color: AppColors.black,
                                           ),

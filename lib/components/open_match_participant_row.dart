@@ -25,9 +25,10 @@ class OpenMatchParticipantRowWithBG extends StatelessWidget {
       this.maxPlayers = 4,
       this.textColor = AppColors.blue,
       Color? slotBackgroundColor,
-      this.slotIconColor = AppColors.white,
+      this.slotIconColor = AppColors.black,
       this.imageBgColor = AppColors.black2,
       this.imageLogoColor = AppColors.white,
+      this.borderColor = AppColors.black,
       this.borderRadius})
       : slotBackgroundColor = slotBackgroundColor ?? AppColors.darkYellow;
   final Color slotBackgroundColor;
@@ -45,6 +46,7 @@ class OpenMatchParticipantRowWithBG extends StatelessWidget {
   final Color slotIconColor;
   final Color imageBgColor;
   final Color imageLogoColor;
+  final Color borderColor;
   final BorderRadius? borderRadius;
 
   @override
@@ -74,6 +76,7 @@ class OpenMatchParticipantRowWithBG extends StatelessWidget {
         slotIconColor: slotIconColor,
         imageBgColor: imageBgColor,
         imageLogoColor: imageLogoColor,
+        borderColor: borderColor,
       ),
     );
   }
@@ -176,9 +179,9 @@ class _OpenMatchParticipantRowState extends State<OpenMatchParticipantRow> {
             maxLines: 1,
             stepGranularity: 1.sp,
             textAlign: TextAlign.center,
-            style: AppTextStyles.qanelasMedium(
+            style: AppTextStyles.poppinsBold(
               color: widget.textColor,
-              fontSize: 15.sp,
+              fontSize: 12.sp,
             ),
           ),
           const Spacer(),

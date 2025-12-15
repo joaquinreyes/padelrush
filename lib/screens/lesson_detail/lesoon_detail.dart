@@ -150,12 +150,15 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                   ),
                 ),
               ),
-              Text(
-                "${"LESSON".trU(context)}\n ${"INFORMATION".trU(context)}",
-                style: AppTextStyles.qanelasMedium(
-                  fontSize: 22.sp,
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "${"LESSON".trU(context)}\n ${"INFORMATION".trU(context)}",
+                  style: AppTextStyles.pragmaticaObliqueExtendedBold(
+                      fontSize: 24.sp,
+                      height: 1),
+                  textAlign: TextAlign.start,
                 ),
-                textAlign: TextAlign.center,
               ),
               // Text(
               //   "${"LESSON".trU(context)}\n ${"INFORMATION".trU(context)}",
@@ -173,28 +176,22 @@ class _DataBodyState extends ConsumerState<_DataBody> {
               if(!isLessonVariant)...[
                 ServiceInformationText(
                   service: service,
-                  titleStyle: AppTextStyles.qanelasBold().copyWith(
-                      fontSize: 19.sp,
-                      color: AppColors.black,
-                      letterSpacing: 19.sp * 0.10),
-                  desStyle: AppTextStyles.qanelasRegular()
-                      .copyWith(color: AppColors.black, fontSize: 13.sp),
                 ),
                 ServiceCoaches(coaches: service.getCoaches),
                 SizedBox(height: 20.h),
                 Row(
                   children: [
                     Text(
-                      "${"PLAYERS".trU(context)} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
-                      style: AppTextStyles.qanelasMedium(
-                        fontSize: 17.sp,
+                      "${"PLAYERS".tr (context)} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
+                      style: AppTextStyles.poppinsBold(
+                        fontSize: 16.sp,
                       ),
                     ),
                     const Spacer(),
                     Text(
-                      "${"STATUS".trU(context)}: ${eventLessonStatusText.trU(context)}",
-                      style: AppTextStyles.qanelasMedium(
-                        fontSize: 15.sp,
+                      "${"STATUS".tr(context)}: ${eventLessonStatusText.tr(context)}",
+                      style: AppTextStyles.poppinsBold(
+                        fontSize: 16.sp,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -215,7 +212,10 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                       left: 15.w, right: 15.w, top: 15.h, bottom: 0.h),
                   width: double.infinity,
                   constraints: kComponentWidthConstraint,
-                  decoration: decoration,
+                  decoration: BoxDecoration(
+                    color: AppColors.gray,
+                    borderRadius: BorderRadius.circular(25.r),
+                  ),
                   child: _LessonPlayersSlots(
                     players: service.players ?? [],
                     maxPlayers: service.getMaximumCapacity,
@@ -231,6 +231,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                 children: [
                   Column(
                     mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (isJoined) ...[
                         _leaveLesson(context),
@@ -252,20 +253,17 @@ class _DataBodyState extends ConsumerState<_DataBody> {
 
   Widget _shareMatchButton(BuildContext context) {
     return SecondaryImageButton(
-      decoration: decoration,
       label: "SHARE_MATCH".tr(context),
       // labelStyle: AppTextStyles.qanelasLight(
       //   fontSize: 13.sp,
       //   color: AppColors.black,
       // ),
-      padding:
-          EdgeInsets.only(right: 14.w, top: 4.h, bottom: 4.h, left: 14.w),
+      // padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 5.h),
       image: AppImages.whatsaapIcon.path,
-      imageHeight: 14.h,
-      imageWidth: 14.h,
+      imageHeight: 12.h,
+      imageWidth: 12.h,
       textColor: AppColors.black,
       // borderRadius: 8.r,
-      color: AppColors.tileBgColor,
       onTap: _shareWhatsAap,
     );
   }
@@ -277,19 +275,17 @@ class _DataBodyState extends ConsumerState<_DataBody> {
 
   SecondaryImageButton _addToCalendarButton(BuildContext context) {
     return SecondaryImageButton(
-      decoration: decoration,
       label: "ADD_TO_CALENDAR".tr(context),
       // labelStyle: AppTextStyles.qanelasLight(
       //   fontSize: 13.sp,
       //   color: AppColors.black,
       // ),
-      padding: EdgeInsets.only(left: 5.w, right: 22.w, top: 4.h, bottom: 4.h),
+      // padding: EdgeInsets.only(left: 5.w, right: 15.w, top: 4.h, bottom: 4.h),
       image: AppImages.calendar.path,
       imageHeight: 15.h,
       imageWidth: 15.h,
       textColor: AppColors.black,
       // borderRadius: 8.r,
-      color: AppColors.tileBgColor,
       onTap: () {
         String title =
             "Lesson @ ${widget.service.service?.location?.locationName ?? ""}";
@@ -304,19 +300,17 @@ class _DataBodyState extends ConsumerState<_DataBody> {
 
   SecondaryImageButton _leaveLesson(BuildContext context) {
     return SecondaryImageButton(
-      decoration: decoration,
       label: "LEAVE_LESSON".tr(context),
       // labelStyle: AppTextStyles.qanelasLight(
       //   fontSize: 13.sp,
       //   color: AppColors.black,
       // ),
-      padding: EdgeInsets.only(right: 39.w, top: 4.h, bottom: 4.h, left: 10.w),
+      // padding: EdgeInsets.only(right: 39.w, top: 4.h, bottom: 4.h, left: 10.w),
       image: AppImages.crossIcon.path,
       imageHeight: 8.h,
       imageWidth: 8.h,
       textColor: AppColors.black,
       // borderRadius: 8.r,
-      color: AppColors.tileBgColor,
       onTap: () {
         _onLeave();
       },

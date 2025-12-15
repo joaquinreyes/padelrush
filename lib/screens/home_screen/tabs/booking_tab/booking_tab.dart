@@ -215,7 +215,7 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
 
   Container _viewSelectRow() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
       // decoration: inset.BoxDecoration(
       //   color: AppColors.tileBgColor,
       //   boxShadow: kInsetShadow,
@@ -252,18 +252,25 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
 
           return Column(
             children: [
-              Row(
-                children: [
-                  if (lessonSelected) _coachDateSelector(),
-                  Expanded(
-                    child: !isDateLessonSelected && lessonSelected
-                        ? const _CoachSelection()
-                        : _DateSelectorWidget(
-                            futureDayLength: Utils.getFutureDateLength(
-                                locationsData, getSportsName(ref)),
-                          ),
-                  )
-                ],
+              Container(
+                margin: EdgeInsets.only(left: 15.w),
+                decoration: BoxDecoration(
+                  color: AppColors.gray,
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(100.r),bottomLeft: Radius.circular(100.r)),
+                ),
+                child: Row(
+                  children: [
+                    if (lessonSelected) _coachDateSelector(),
+                    Expanded(
+                      child: !isDateLessonSelected && lessonSelected
+                          ? const _CoachSelection()
+                          : _DateSelectorWidget(
+                              futureDayLength: Utils.getFutureDateLength(
+                                  locationsData, getSportsName(ref)),
+                            ),
+                    )
+                  ],
+                ),
               ),
               SizedBox(height: 12.h),
               Expanded(
@@ -321,13 +328,19 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
     final double height = MediaQuery.of(context).size.height;
 
     return Container(
-      height: (width / height) > 0.6 ? 110.h : 71.h,
-      margin: EdgeInsets.only(left: 6.w, top: 15.h, bottom: 7.h),
-      padding: EdgeInsets.only(left: 5.w, right: 0),
-      decoration: inset.BoxDecoration(
-        boxShadow: kInsetShadow,
-        borderRadius: BorderRadius.circular(5.r),
-      ),
+      height: (width / height) > 0.6 ? 110.h : 78.h,
+      // margin: EdgeInsets.only(left: 6.w, top: 15.h, bottom: 7.h),
+      // padding: EdgeInsets.only(left: 5.w, right: 0),
+      // margin: EdgeInsets.only(left: 15.w),
+      padding: EdgeInsets.all(8.h),
+      // decoration: BoxDecoration(
+      //   color: AppColors.gray,
+      //   borderRadius: BorderRadius.only(topLeft: Radius.circular(100.r),bottomLeft: Radius.circular(100.r)),
+      // ),
+      // decoration: inset.BoxDecoration(
+      //   boxShadow: kInsetShadow,
+      //   borderRadius: BorderRadius.circular(5.r),
+      // ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -365,20 +378,19 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
         ref.read(_dateBookableLesson.notifier).state = value;
       },
       child: Container(
-        margin: EdgeInsets.all(4.h),
+        margin: EdgeInsets.symmetric(horizontal: 4.w),
         padding: EdgeInsets.all(5.h),
         decoration: BoxDecoration(
-          color: isDateLessonSelected ? AppColors.black : Colors.transparent,
-          borderRadius: BorderRadius.circular(5.r),
+          color: isDateLessonSelected ? AppColors.darkYellow : Colors.transparent,
+          borderRadius: BorderRadius.circular(100.r),
         ),
         alignment: Alignment.center,
         child: Text(
           text,
           textAlign: TextAlign.center,
           style: isDateLessonSelected
-              ? AppTextStyles.qanelasSemiBold(fontSize: 14.sp)
-                  .copyWith(color: AppColors.white)
-              : AppTextStyles.qanelasSemiBold(fontSize: 13.sp),
+              ? AppTextStyles.poppinsSemiBold(fontSize: 14.sp)
+              : AppTextStyles.poppinsSemiBold(fontSize: 13.sp),
         ),
       ),
     );
@@ -429,11 +441,11 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
         padding: EdgeInsets.symmetric(horizontal: 9.w),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 8.w),
-          // decoration: inset.BoxDecoration(
-          //   color: AppColors.tileBgColor,
-          //   boxShadow: kInsetShadow,
-          //   // borderRadius: BorderRadius.circular(12.r)
-          // ),
+          decoration: inset.BoxDecoration(
+            color: AppColors.gray,
+            borderRadius: BorderRadius.circular(100.r),
+            // boxShadow: kInsetShadow,
+          ),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -453,11 +465,11 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: Container(
-          // decoration: inset.BoxDecoration(
-          //   color: AppColors.tileBgColor,
-          //   // borderRadius: BorderRadius.circular(12.r),
-          //   boxShadow: kInsetShadow,
-          // ),
+          decoration: inset.BoxDecoration(
+            color: AppColors.gray,
+            borderRadius: BorderRadius.circular(100.r),
+            // boxShadow: kInsetShadow,
+          ),
           padding: EdgeInsets.symmetric(horizontal: 8.w),
           child: Row(
             mainAxisSize: MainAxisSize.max,
@@ -592,15 +604,15 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
                   children: [
                     Text(
                       locationName.toUpperCase(),
-                      style: AppTextStyles.qanelasMedium(
-                        fontSize: 15.sp,
+                      style: AppTextStyles.poppinsBold(
+                        fontSize: 14.sp,
                       ),
                     ),
                     const Spacer(),
                     Text(
                       "${distance} km",
-                      style: AppTextStyles.qanelasRegular(
-                          color: AppColors.black70, fontSize: 15.sp),
+                      style: AppTextStyles.poppinsRegular(
+                          color: AppColors.black70, fontSize: 13.sp),
                     ),
                   ],
                 ),
@@ -634,11 +646,11 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
       child: Container(
         height: 38.h,
         constraints: kComponentWidthConstraint,
-        // decoration: inset.BoxDecoration(
-        //   boxShadow: kInsetShadow,
-        //   borderRadius: BorderRadius.circular(12.r),
-        //   color: AppColors.black5,
-        // ),
+        decoration: inset.BoxDecoration(
+          color: AppColors.gray,
+          borderRadius: BorderRadius.circular(100.r),
+          // boxShadow: kInsetShadow,
+        ),
         child: Row(
           children: [
             for (int i = 0; i < data.durationsToShow.length; i++)
@@ -676,10 +688,10 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
       child: Container(
         height: 38.h,
         constraints: kComponentWidthConstraint,
-        decoration: inset.BoxDecoration(
-          boxShadow: kInsetShadow,
-          borderRadius: BorderRadius.circular(12.r),
-          color: AppColors.black5,
+        decoration: BoxDecoration(
+          // boxShadow: kInsetShadow,
+          borderRadius: BorderRadius.circular(100.r),
+          color: AppColors.gray,
         ),
         child: Row(
             children: uniqueCourts.entries
@@ -715,7 +727,7 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
       margin: EdgeInsets.symmetric(horizontal: 15.w),
       constraints: kComponentWidthConstraint,
       decoration: BoxDecoration(
-        color: AppColors.tileBgColor,
+        color: AppColors.gray,
         border: border,
         borderRadius: BorderRadius.circular(12.r),
       ),
@@ -1047,10 +1059,10 @@ class _LessonState extends ConsumerState<LessonsList> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
       constraints: kComponentWidthConstraint,
-      // decoration: inset.BoxDecoration(
-      //   boxShadow: kInsetShadow,
-      //   borderRadius: BorderRadius.circular(5.r),
-      // ),
+      decoration: BoxDecoration(
+        color: AppColors.gray,
+        borderRadius: BorderRadius.circular(100.r),
+      ),
       child: Row(
         children: [
           for (int i = 0; i < listLessonTypes.length; i++)
@@ -1066,7 +1078,7 @@ class _LessonState extends ConsumerState<LessonsList> {
       margin: EdgeInsets.symmetric(horizontal: 15.w),
       constraints: kComponentWidthConstraint,
       decoration: BoxDecoration(
-        color: AppColors.tileBgColor,
+        color: AppColors.gray,
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: child,
@@ -1106,7 +1118,7 @@ class _LessonState extends ConsumerState<LessonsList> {
                     selectedDate != null
                         ? DateFormat('EEE d MMM').format(selectedDate)
                         : cardData.getDateCourt(selectedDuration),
-                    style: AppTextStyles.qanelasMedium(
+                    style: AppTextStyles.poppinsMedium(
                       fontSize: 15.sp,
                     ).copyWith(fontWeight: FontWeight.bold),
                   ),
@@ -1134,7 +1146,7 @@ class _LessonState extends ConsumerState<LessonsList> {
                       ],
                       Text(
                         cardData.fullName?.capitalizeFirst ?? "",
-                        style: AppTextStyles.qanelasSemiBold(fontSize: 14.sp),
+                        style: AppTextStyles.poppinsSemiBold(fontSize: 14.sp),
                       ),
                     ],
                   ),
@@ -1150,7 +1162,7 @@ class _LessonState extends ConsumerState<LessonsList> {
                       );
                     },
                     child: Text("INFO".tr(context),
-                        style: AppTextStyles.qanelasRegular(fontSize: 13.sp)),
+                        style: AppTextStyles.poppinsRegular(fontSize: 13.sp)),
                   )
               ],
             ),
@@ -1186,7 +1198,7 @@ class _LessonState extends ConsumerState<LessonsList> {
                         children: [
                           Text(
                             (e.locationName ?? "").capitalizeFirst,
-                            style: AppTextStyles.qanelasRegular(fontSize: 14.sp)
+                            style: AppTextStyles.poppinsRegular(fontSize: 14.sp)
                                 .copyWith(fontWeight: FontWeight.bold),
                             textAlign: TextAlign.start,
                           ),
@@ -1256,7 +1268,7 @@ class CoachDetailsDialog extends StatelessWidget {
             Text(
               description,
               textAlign: TextAlign.center,
-              style: AppTextStyles.qanelasRegular(
+              style: AppTextStyles.poppinsRegular(
                 fontSize: 15.sp,
                 color: AppColors.black2,
               ),

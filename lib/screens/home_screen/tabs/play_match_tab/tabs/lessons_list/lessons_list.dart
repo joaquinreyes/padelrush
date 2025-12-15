@@ -116,7 +116,7 @@ class _LessonsState extends ConsumerState<_Lessons> {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 15.h),
       decoration: BoxDecoration(
-        color: AppColors.tileBgColor,
+        color: AppColors.gray,
         border: border,
         borderRadius: BorderRadius.circular(12.r),
       ),
@@ -135,8 +135,8 @@ class _LessonsState extends ConsumerState<_Lessons> {
                     children: [
                       Text(
                         (widget.lesson.lessonName ?? "").capitalizeFirst,
-                        style: AppTextStyles.qanelasBold(
-                            fontSize: 16.sp,),
+                        style: AppTextStyles.poppinsBold(
+                            fontSize: 15.sp,),
                       ),
                       SizedBox(height: 2.h),
                       LevelRestrictionContainer(
@@ -163,7 +163,7 @@ class _LessonsState extends ConsumerState<_Lessons> {
                   flex: 3,
                   child: Text(
                     widget.lesson.description,
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       fontSize: 13.sp,
                     ),
                   ),
@@ -174,7 +174,7 @@ class _LessonsState extends ConsumerState<_Lessons> {
                   children: [
                     Text(
                       widget.lesson.location?.locationName ?? '',
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         fontSize: 13.sp,
                       ),
                     ),
@@ -182,7 +182,7 @@ class _LessonsState extends ConsumerState<_Lessons> {
                     Text(
                       Utils.formatPrice(widget.lesson.price),
                       overflow: TextOverflow.ellipsis,
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         fontSize: 13.sp,
                       ),
                     ),

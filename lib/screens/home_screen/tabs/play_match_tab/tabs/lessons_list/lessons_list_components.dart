@@ -19,10 +19,10 @@ class _HideShowDatesButton extends StatelessWidget {
         // ),
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 10.w),
+          padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 7.5.w),
           decoration: BoxDecoration(
-            color: AppColors.darkYellow,
-            borderRadius: BorderRadius.circular(12.r),
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(100.r),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -31,8 +31,8 @@ class _HideShowDatesButton extends StatelessWidget {
                 isDatesVisible
                     ? "HIDE_DATES".tr(context)
                     : "SEE_DATES".tr(context),
-                style: AppTextStyles.qanelasRegular(
-                    fontSize: 13.sp,),
+                style: AppTextStyles.poppinsRegular(
+                    fontSize: 11.sp,),
               ),
               SizedBox(width: 4.w),
               Icon(
@@ -129,7 +129,7 @@ class _LessonDateItem extends StatelessWidget {
             Text(
               serviceBooking?.bookingDate.format("EEE dd MMM") ??
                   "",
-              style: AppTextStyles.qanelasSemiBold(
+              style: AppTextStyles.poppinsSemiBold(
                   fontSize: 15.sp,),
             ),
             SizedBox(height: 2.h),
@@ -137,7 +137,7 @@ class _LessonDateItem extends StatelessWidget {
               padding: EdgeInsets.only(left: 10.w),
               child: Text(
                 "${serviceBooking?.bookingStartTime.format("h:mm")} - ${serviceBooking?.bookingEndTime.format("h:mm a").toLowerCase()}",
-                style: AppTextStyles.qanelasRegular(fontSize: 15.sp),
+                style: AppTextStyles.poppinsRegular(fontSize: 15.sp),
               ),
             ),
           ],
@@ -152,18 +152,18 @@ class _LessonDateItem extends StatelessWidget {
                 maxCapacity: maximumCapacity,
                 minCapacity: minimumCapacity,
               ).toUpperCase(),
-              style: AppTextStyles.qanelasMedium(fontSize: 12.sp,),
+              style: AppTextStyles.poppinsBold(fontSize: 14.sp,),
             ),
             // SizedBox(height: 4.h),
             Container(
               padding: EdgeInsets.only(top: 2.h, left: 10.w, right: 10.w,bottom: 2.h),
               decoration: BoxDecoration(
                 color: AppColors.darkYellow,
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(100.r),
               ),
               child: Text(
                 "${serviceBooking?.players?.length.toString() ?? "0"}/$maximumCapacity",
-                style: AppTextStyles.qanelasSemiBold(fontSize: 14.sp,),
+                style: AppTextStyles.poppinsBold(fontSize: 12.sp,),
               ),
             ),
           ],
@@ -175,10 +175,11 @@ class _LessonDateItem extends StatelessWidget {
           enabled: isEnabled,
           height: 35.h,
           arrowSize: 12.h,
+          borderRadius: 100.r,
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           applySize: false,
           label: "BOOK".trU(context),
-          labelStyle: AppTextStyles.qanelasMedium(fontSize: 14.sp),
+          labelStyle: AppTextStyles.poppinsMedium(fontSize: 15.sp),
           onTap: onTap,
         ),
       ],
@@ -322,7 +323,7 @@ class _LessonCoachesListView extends StatelessWidget {
                                         .tr(context)
                                         .toLowerCase()
                                         .capitalizeFirst,
-                                    style: AppTextStyles.qanelasLight(
+                                    style: AppTextStyles.poppinsLight(
                                         color: isSelected
                                             ? AppColors.white
                                             : AppColors.black70),
@@ -334,7 +335,7 @@ class _LessonCoachesListView extends StatelessWidget {
                                     fullName.toUpperCase(),
                                     softWrap: true,
                                     overflow: TextOverflow.ellipsis,
-                                    style: AppTextStyles.qanelasRegular(
+                                    style: AppTextStyles.poppinsRegular(
                                         fontSize: 13.sp,
                                         color: isSelected
                                             ? AppColors.white

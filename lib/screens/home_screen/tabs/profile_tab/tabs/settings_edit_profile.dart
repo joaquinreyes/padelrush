@@ -84,7 +84,7 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
               _editCustomFields(),
               SizedBox(height: 20.h),
               MainButton(
-                label: "SAVE".trU(context),
+                label: "SAVE".tr(context),
                 enabled: true,
                 isForPopup: true,
                 onTap: () async {
@@ -233,7 +233,7 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
                 },
           child: Container(
             decoration: BoxDecoration(
-              color: AppColors.black25,
+              color: AppColors.gray,
               borderRadius: BorderRadius.circular(12.r),
             ),
             padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 12.w),
@@ -244,7 +244,7 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
                     selectedDate != null
                         ? selectedDate.format("MMMM yyyy")
                         : "mm/yyyy",
-                    style: AppTextStyles.qanelasLight(
+                    style: AppTextStyles.poppinsLight(
                       fontSize: 13.sp,
                     ),
                   ),
@@ -328,11 +328,11 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
                         child: Text(
                           str,
                           style: isSelected
-                              ? AppTextStyles.qanelasRegular().copyWith(
+                              ? AppTextStyles.poppinsRegular().copyWith(
                                   color: AppColors.black,
                                   fontSize: 15.sp,
                                 )
-                              : AppTextStyles.qanelasRegular().copyWith(
+                              : AppTextStyles.poppinsRegular().copyWith(
                                   color: AppColors.black,
                                   fontSize: 15.sp,
                                 ),
@@ -404,11 +404,11 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
                     child: Text(
                       str,
                       style: isSelected
-                          ? AppTextStyles.qanelasRegular().copyWith(
+                          ? AppTextStyles.poppinsRegular().copyWith(
                               color: AppColors.black,
                               fontSize: 13.sp,
                             )
-                          : AppTextStyles.qanelasRegular().copyWith(
+                          : AppTextStyles.poppinsRegular().copyWith(
                               color: AppColors.black,
                               fontSize: 13.sp,
                             ),
@@ -461,7 +461,7 @@ class __EDITProfileState extends ConsumerState<_EditProfile> {
           flex: 2,
           child: Text(
             header.tr(context),
-            style: AppTextStyles.qanelasLight(fontSize: 16.sp),
+            style: AppTextStyles.poppinsMedium(fontSize: 15.sp),
           ),
         ),
         Expanded(

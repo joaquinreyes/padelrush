@@ -21,23 +21,24 @@ class _ViewSelector extends ConsumerWidget {
       child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomTab(
                 title:
-                    '${'OPEN'.trU(context)}${kIsWeb ? " " : "\n"}${'MATCHES'.trU(context)}',
+                    '${'OPEN'.trU(context)}${kIsWeb ? " " : "\n "}${'MATCHES'.trU(context)}',
                 index: 0,
                 selectedIndex: selectedIndex,
                 onTap: () => ref.read(_selectedTabIndex.notifier).state = 0,
               ),
-              SizedBox(width: 15.w),
+              // SizedBox(width: 15.w),
               CustomTab(
                 title: "ACTIVITIES".trU(context),
                 index: 1,
                 selectedIndex: selectedIndex,
                 onTap: () => ref.read(_selectedTabIndex.notifier).state = 1,
               ),
-              SizedBox(width: 15.w),
+              // SizedBox(width: 15.w),
               CustomTab(
                 title: "COACHING".trU(context),
                 index: 2,
@@ -159,17 +160,19 @@ class CustomTab extends StatelessWidget {
         child: Container(
           height: 44.h,
           alignment: Alignment.center,
-          decoration: decoration.copyWith(
-              color: isSelected ? AppColors.black2 : AppColors.white),
+          // decoration: BoxDecoration(
+          //     color: isSelected ? AppColors.black2 : AppColors.white),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
+            padding: EdgeInsets.symmetric(horizontal: 0.w),
             child: Text(
               title,
-              textAlign: TextAlign.center,
-              style: AppTextStyles.qanelasMedium(
-                fontSize: isSelected ? 17.sp : 15.sp,
-                color: isSelected ? AppColors.white : AppColors.black70,
-              ).copyWith(height: selectedIndex == 0 ? 0.95 : null),
+              textAlign: TextAlign.start,
+              style: isSelected ? AppTextStyles.pragmaticaObliqueExtendedBold(
+                fontSize: 20.sp,
+              ).copyWith(height: 1) : AppTextStyles.pragmaticaExtendedBold(
+                fontSize: 14.sp,
+                color: AppColors.black70,
+              ).copyWith(height: 1),
             ),
           ),
         ),
@@ -410,17 +413,20 @@ class FilterRow extends ConsumerWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        decoration: decoration,
-        padding: EdgeInsets.only(left: 10.w, right: 5.w, top: 8.h, bottom: 8.h),
+        decoration: inset.BoxDecoration(
+          boxShadow: kInsetShadow,
+          color: AppColors.gray,
+          borderRadius: BorderRadius.circular(25.r),
+        ),
+        padding: EdgeInsets.only(left: 10.w, right: 5.w, top: 11.5.h, bottom: 11.5.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
               child: Text(
                 label,
-                style: AppTextStyles.qanelasSemiBold(
-                  fontSize: 14.sp,
-                  color: AppColors.black2,
+                style: AppTextStyles.poppinsMedium(
+                  fontSize: 11.sp,
                 ),
               ),
             ),
@@ -480,7 +486,7 @@ class FilterRow extends ConsumerWidget {
           SizedBox(height: 5.h),
           Text(
             'DATE'.trU(context),
-            style: AppTextStyles.qanelasMedium(
+            style: AppTextStyles.poppinsBold(
               fontSize: 19.sp,
             ),
           ),
@@ -488,16 +494,17 @@ class FilterRow extends ConsumerWidget {
           SfDateRangePickerTheme(
             data: SfDateRangePickerThemeData().copyWith(
               headerBackgroundColor: Colors.transparent,
-              headerTextStyle: AppTextStyles.qanelasMedium(
+              headerTextStyle: AppTextStyles.poppinsMedium(
                 fontSize: 18.sp,
               ),
-              viewHeaderTextStyle: AppTextStyles.qanelasSemiBold(
+              viewHeaderTextStyle: AppTextStyles.poppinsSemiBold(
                 fontSize: 18.sp,
               ),
-              disabledDatesTextStyle: AppTextStyles.qanelasMedium(
-                fontSize: 20.sp,
+              disabledDatesTextStyle: AppTextStyles.mohaveBold(
+                fontSize: 26.sp,
+                color: AppColors.black70,
               ),
-              todayTextStyle: AppTextStyles.qanelasMedium(
+              todayTextStyle: AppTextStyles.poppinsMedium(
                 fontSize: 20.sp,
               ),
               todayHighlightColor: AppColors.black2,
@@ -508,18 +515,20 @@ class FilterRow extends ConsumerWidget {
               selectionShape: DateRangePickerSelectionShape.circle,
               initialSelectedRange: range,
               enablePastDates: false,
-              endRangeSelectionColor: AppColors.black2,
-              startRangeSelectionColor: AppColors.black2,
-              rangeSelectionColor: AppColors.black25,
+              endRangeSelectionColor: AppColors.darkYellow80,
+              startRangeSelectionColor: AppColors.darkYellow80,
+              rangeSelectionColor: AppColors.darkYellow35,
               monthCellStyle: DateRangePickerMonthCellStyle(
-                textStyle: AppTextStyles.qanelasMedium(
-                  fontSize: 20.sp,
+                textStyle: AppTextStyles.mohaveBold(
+                  fontSize: 26.sp,
                 ),
               ),
-              selectionTextStyle: AppTextStyles.qanelasMedium(
-                  fontSize: 20.sp, color: AppColors.white),
-              rangeTextStyle: AppTextStyles.qanelasMedium(
-                  fontSize: 20.sp, color: AppColors.white),
+              selectionTextStyle: AppTextStyles.mohaveBold(
+                  fontSize: 26.sp, color: AppColors.black),
+              rangeTextStyle: AppTextStyles.mohaveBold(
+                fontSize: 26.sp,
+                color: AppColors.black70,
+              ),
               monthViewSettings: DateRangePickerMonthViewSettings(
                 dayFormat: "E",
                 viewHeaderHeight: 52.h,
@@ -527,17 +536,17 @@ class FilterRow extends ConsumerWidget {
               ),
               headerHeight: 52.h,
               yearCellStyle: DateRangePickerYearCellStyle(
-                todayTextStyle: AppTextStyles.qanelasMedium(
-                  fontSize: 20.sp,
+                todayTextStyle: AppTextStyles.mohaveBold(
+                  fontSize: 26.sp,
                 ),
-                disabledDatesTextStyle: AppTextStyles.qanelasMedium(
-                  fontSize: 20.sp,
+                disabledDatesTextStyle: AppTextStyles.mohaveBold(
+                  fontSize: 26.sp,
                 ),
-                textStyle: AppTextStyles.qanelasMedium(
-                  fontSize: 20.sp,
+                textStyle: AppTextStyles.mohaveBold(
+                  fontSize: 26.sp,
                 ),
-                leadingDatesTextStyle: AppTextStyles.qanelasMedium(
-                  fontSize: 20.sp,
+                leadingDatesTextStyle: AppTextStyles.mohaveBold(
+                  fontSize: 26.sp,
                 ),
               ),
               onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
@@ -575,7 +584,7 @@ class FilterRow extends ConsumerWidget {
             SizedBox(height: 5.h),
             Text(
               'LEVEL'.trU(context),
-              style: AppTextStyles.qanelasMedium(fontSize: 19.sp),
+              style: AppTextStyles.poppinsMedium(fontSize: 19.sp),
             ),
             SizedBox(height: 20.h),
             const _LevelListForSelection()
@@ -607,7 +616,7 @@ class FilterRow extends ConsumerWidget {
           SizedBox(height: 5.h),
           Text(
             'LOCATION'.trU(context),
-            style: AppTextStyles.qanelasMedium(
+            style: AppTextStyles.poppinsMedium(
               fontSize: 19.sp,
             ),
           ),
@@ -775,8 +784,8 @@ class OptionTile extends StatelessWidget {
         onTap: enabled ? onTap : null,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
-            color: selected ? AppColors.black2 : AppColors.tileBgColor,
+            borderRadius: BorderRadius.circular(100.r),
+            color: selected ? AppColors.darkYellow35 : AppColors.tileBgColor,
             // border: Border.all(
             //   color: selected ? Colors.transparent : AppColors.orange,
             //   width: 1.w,
@@ -790,8 +799,8 @@ class OptionTile extends StatelessWidget {
                 shape: BoxShape.circle,
                 selectedColor: AppColors.darkYellow,
                 unSelectedColor: AppColors.white,
-                unSelectedBorderColor: AppColors.black2,
-                selectedBorderColor: AppColors.white,
+                unSelectedBorderColor: AppColors.black70,
+                selectedBorderColor: AppColors.black70,
               ),
               SizedBox(width: 20.w),
               Expanded(
@@ -799,12 +808,12 @@ class OptionTile extends StatelessWidget {
                 child: Text(
                   (option),
                   style: selected
-                      ? AppTextStyles.qanelasSemiBold(
+                      ? AppTextStyles.poppinsMedium(
                           fontSize: 16.sp,
-                          color: AppColors.white,
                         )
-                      : AppTextStyles.qanelasRegular(
+                      : AppTextStyles.poppinsMedium(
                           fontSize: 16.sp,
+                    color: AppColors.black70,
                         ),
                 ),
               ),
@@ -837,15 +846,15 @@ class _PlayerRankingButton extends StatelessWidget {
           );
         },
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 8.w),
+          padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 8.w),
           margin: EdgeInsets.only(right: 15.w),
           decoration: BoxDecoration(
-              color: AppColors.black2,
-              borderRadius: BorderRadius.circular(12.r)),
+              color: AppColors.darkYellow,
+              borderRadius: BorderRadius.circular(100.r)),
           child: Text(
             "PLAYERS_RANKING".tr(context),
-            style: AppTextStyles.qanelasMedium(
-                fontSize: 14.sp, color: AppColors.white),
+            style: AppTextStyles.poppinsMedium(
+                fontSize: 14.sp,),
           ),
         ),
       ),
@@ -900,7 +909,7 @@ class _PlayersRankingState extends ConsumerState<_PlayersRanking> {
               maxHeight: 400.h,
             ),
             decoration: BoxDecoration(
-              color: AppColors.white25,
+              color: AppColors.gray,
             ),
             width: double.infinity,
             child: PageView(
@@ -935,7 +944,7 @@ class _PlayerRankingSelector extends ConsumerWidget {
     final selectedIndex = ref.watch(selectedTabIndex);
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.black25,
+        color: AppColors.gray,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
@@ -1100,8 +1109,8 @@ class CustomTabButton extends StatelessWidget {
         child: Container(
           height: 40.h,
           decoration: BoxDecoration(
-            color: isSelected ? AppColors.white : Colors.transparent,
-            borderRadius: BorderRadius.circular(12.r),
+            color: isSelected ? AppColors.darkYellow : Colors.transparent,
+            borderRadius: BorderRadius.circular(100.r),
           ),
           alignment: Alignment.center,
           child: Padding(
@@ -1109,7 +1118,7 @@ class CustomTabButton extends StatelessWidget {
             child: Text(
               title.trU(context),
               textAlign: TextAlign.center,
-              style: AppTextStyles.qanelasSemiBold(
+              style: AppTextStyles.poppinsSemiBold(
                 fontSize: 16.sp,
                 color: AppColors.black2,
               ),
@@ -1331,7 +1340,7 @@ class _RankingPlayerView extends ConsumerWidget {
                   fit: BoxFit.scaleDown,
                   child: Text(
                     ranking.toString(),
-                    style: AppTextStyles.qanelasMedium(
+                    style: AppTextStyles.poppinsMedium(
                       fontSize: 13.sp,
                       color: Colors.white,
                     ),
@@ -1354,7 +1363,7 @@ class _RankingPlayerView extends ConsumerWidget {
             Expanded(
               child: Text(
                 userName,
-                style: AppTextStyles.qanelasRegular(
+                style: AppTextStyles.poppinsRegular(
                   color: isCurrentUser ? AppColors.black : AppColors.black,
                   fontSize: 15.sp,
                 ),
@@ -1363,7 +1372,7 @@ class _RankingPlayerView extends ConsumerWidget {
             SizedBox(width: 15.w),
             Text(
               userLevel.toString(),
-              style: AppTextStyles.qanelasRegular(
+              style: AppTextStyles.poppinsRegular(
                 color: isCurrentUser ? AppColors.black : AppColors.black,
                 fontSize: 11.sp,
               ),
@@ -1438,9 +1447,9 @@ class _DurationAndSportContainer extends StatelessWidget {
           text,
           textAlign: TextAlign.center,
           style: isSelected
-              ? AppTextStyles.qanelasSemiBold(
+              ? AppTextStyles.poppinsSemiBold(
                   fontSize: 13.sp, color: AppColors.white)
-              : AppTextStyles.qanelasLight(
+              : AppTextStyles.poppinsLight(
                   fontSize: 13.sp, color: AppColors.black70),
         ),
       ),

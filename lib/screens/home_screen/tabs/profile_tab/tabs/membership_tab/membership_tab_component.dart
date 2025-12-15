@@ -61,7 +61,7 @@ class _MembershipDialog extends StatelessWidget {
               children: [
                 Text(
                   "${categoryName.trim().isNotEmpty ? "${categoryName.capitalizeFirst} : " : ""}$membershipName",
-                  style: AppTextStyles.qanelasMedium(
+                  style: AppTextStyles.poppinsMedium(
                       color: AppColors.black2, fontSize: 16.sp),
                   textAlign: TextAlign.start,
                 ),
@@ -76,7 +76,7 @@ class _MembershipDialog extends StatelessWidget {
                       children: [
                         Text(
                           "${"PRICE".tr(context)} ${Utils.formatPrice(membershipPrice)}",
-                          style: AppTextStyles.qanelasRegular(
+                          style: AppTextStyles.poppinsRegular(
                             fontSize: 15.sp,
                           ),
                         ),
@@ -126,7 +126,7 @@ class _MembershipDialog extends StatelessWidget {
                   SizedBox(height: 15.h),
                   Text(
                     "${"DESCRIPTION".tr(context)} :",
-                    style: AppTextStyles.qanelasMedium(
+                    style: AppTextStyles.poppinsMedium(
                         color: AppColors.white, fontSize: 17.sp),
                   ),
                   SizedBox(height: 5.h),
@@ -265,7 +265,7 @@ class MembershipListComponent extends ConsumerWidget {
                     padding: EdgeInsets.only(bottom: 10.h),
                     child: Text(
                       membershipCategoryName.toUpperCase(),
-                      style: AppTextStyles.qanelasMedium(
+                      style: AppTextStyles.poppinsMedium(
                         fontSize: 17.sp,
                       ),
                       textAlign: TextAlign.start,
@@ -275,7 +275,7 @@ class MembershipListComponent extends ConsumerWidget {
                     ? Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15.w),
                         child: Text("NO_PURCHASE_MEMBERSHIP_FOUND".tr(context),
-                            style: AppTextStyles.qanelasRegular(
+                            style: AppTextStyles.poppinsRegular(
                               fontSize: 13.sp,
                             )),
                       )
@@ -332,7 +332,7 @@ class MembershipListComponent extends ConsumerWidget {
                           fit: BoxFit.scaleDown,
                           child: Text(
                             membershipName.toUpperCase(),
-                            style: AppTextStyles.qanelasMedium(
+                            style: AppTextStyles.poppinsMedium(
                               fontSize: 14.sp,
                             ),
                           ),
@@ -343,7 +343,7 @@ class MembershipListComponent extends ConsumerWidget {
                             Expanded(
                               child: Text(
                                 '${"PRICE".tr(context)} ${Utils.formatPrice(e.price)}',
-                                style: AppTextStyles.qanelasSemiBold(
+                                style: AppTextStyles.poppinsSemiBold(
                                   fontSize: 14.sp,
                                   color: AppColors.black2,
                                 ),
@@ -409,7 +409,7 @@ class MembershipListComponent extends ConsumerWidget {
                                 ),
                                 child: Text(
                                   'Buy',
-                                  style: AppTextStyles.qanelasMedium(
+                                  style: AppTextStyles.poppinsMedium(
                                     fontSize: 14.sp,
                                     color: AppColors.black2,
                                   ),
@@ -427,7 +427,7 @@ class MembershipListComponent extends ConsumerWidget {
                         flex: 4,
                         child: Text(
                           membershipName,
-                          style: AppTextStyles.qanelasSemiBold(
+                          style: AppTextStyles.poppinsSemiBold(
                               fontSize: 15.sp, letterSpacing: 15.sp * 0.05),
                         ),
                       ),
@@ -494,7 +494,7 @@ class MembershipListComponent extends ConsumerWidget {
                                 alignment: Alignment.center,
                                 child: Text(
                                   "GET_MEMBERSHIP".tr(context),
-                                  style: AppTextStyles.qanelasRegular(
+                                  style: AppTextStyles.poppinsRegular(
                                       fontSize: 12.sp),
                                 ),
                               )

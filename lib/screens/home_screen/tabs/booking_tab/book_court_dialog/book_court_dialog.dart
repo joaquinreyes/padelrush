@@ -280,7 +280,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "BOOKING_PAYMENT".tr(context),
-                      style: AppTextStyles.qanelasMedium(fontSize: 15.sp),
+                      style: AppTextStyles.poppinsMedium(fontSize: 15.sp),
                     ),
                   ),
                   SizedBox(height: 10.h),
@@ -322,11 +322,11 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                                   child: Text(
                                     "PAY_FULL_COURT".tr(context),
                                     style: ref.watch(_isPrivateMatchProvider)
-                                        ? AppTextStyles.qanelasBold(
+                                        ? AppTextStyles.poppinsBold(
                                             fontSize: 14.sp,
                                             color: AppColors.black,
                                           )
-                                        : AppTextStyles.qanelasMedium(
+                                        : AppTextStyles.poppinsMedium(
                                             fontSize: 14.sp,
                                             color: AppColors.black70,
                                           ),
@@ -385,11 +385,11 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                                         ? "Loading..."
                                         : "PAY_MY_SHARE".tr(context),
                                     style: !ref.watch(_isPrivateMatchProvider)
-                                        ? AppTextStyles.qanelasBold(
+                                        ? AppTextStyles.poppinsBold(
                                             fontSize: 14.sp,
                                             color: AppColors.black,
                                           )
-                                        : AppTextStyles.qanelasMedium(
+                                        : AppTextStyles.poppinsMedium(
                                             fontSize: 14.sp,
                                             color: AppColors.black70,
                                           ),
@@ -414,7 +414,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                         child: RichText(
                           textAlign: TextAlign.center,
                           text: TextSpan(
-                            style: AppTextStyles.qanelasRegular(
+                            style: AppTextStyles.poppinsRegular(
                               fontSize: 13.sp,
                               color: AppColors.black2,
                             ),
@@ -424,7 +424,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                               TextSpan(
                                 text:
                                     "${DateFormat('dd MMMM HH:mm').format(widget.bookingTime.add(Duration(hours: 2)))}",
-                                style: AppTextStyles.qanelasBold(
+                                style: AppTextStyles.poppinsBold(
                                   fontSize: 13.sp,
                                   color: AppColors.black2,
                                 ),
@@ -449,7 +449,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                         child: Text(
                           "You will be charged the full amount. You will be refunded to your club wallet when someone else joins and pays their share.",
                           textAlign: TextAlign.center,
-                          style: AppTextStyles.qanelasRegular(
+                          style: AppTextStyles.poppinsRegular(
                             fontSize: 13.sp,
                             color: AppColors.black2,
                           ),
@@ -487,7 +487,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                   // color: AppColors.selectedGreen,
                   enabled: price != null,
                   label: "ADD_TO_CART".trU(context),
-                  labelStyle: AppTextStyles.qanelasMedium(
+                  labelStyle: AppTextStyles.poppinsMedium(
                       fontSize: 18.sp, color: AppColors.white),
                   color: AppColors.white25,
                   isForPopup: true,
@@ -525,7 +525,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                       color: AppColors.darkYellow,
                       enabled: price != null && !_isProcessing,
                       isForPopup: false,
-                      labelStyle: AppTextStyles.qanelasMedium(
+                      labelStyle: AppTextStyles.poppinsMedium(
                           fontSize: 18.sp, color: AppColors.black),
                       label: "Continue Payment",
                       onTap: () async {
@@ -542,7 +542,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                       color: AppColors.darkYellow,
                       enabled: price != null && !_isProcessing,
                       isForPopup: false,
-                      labelStyle: AppTextStyles.qanelasMedium(
+                      labelStyle: AppTextStyles.poppinsMedium(
                           fontSize: 18.sp, color: AppColors.black),
                       label: widget.isOnlyOpenMatch
                           ? "GET_REFUND_AND_OPEN_MATCH".tr(context)
@@ -559,7 +559,221 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
             ),
           ),
         ],
-      ),
+      )?? CustomDialog(child: Flexible(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6.5.w),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "BOOKING_INFORMATION".trU(context),
+                  style: AppTextStyles.popupHeaderTextStyle,
+                ),
+                SizedBox(height: 5.h),
+
+                provider.when(
+                  data: (data) {
+                    int? cancellationHour;
+
+                    String? textPrice;
+                    double pricePaid = 0;
+                    if (data is String) {
+                      if (data.contains("pay your remaining")) {
+                        isPaid = true;
+                        textPrice = "PRICE".trU(context);
+                      } else {
+                        isPaid = false;
+                        textPrice = "REFUND".trU(context);
+                      }
+                      data.split(" ").map((e) {
+                        if (double.tryParse(e.toString()) != null) {
+                          if (isPaid) {
+                            price = double.tryParse(e.toString()) ?? 0;
+                          } else {
+                            price = widget.bookings.price ?? 0;
+                            refundAmount = double.tryParse(e.toString()) ?? 0;
+                          }
+                          textPrice =
+                          "$textPrice : ${Utils.formatPrice(isPaid ? price : refundAmount)}";
+                        }
+                      }).toList();
+                    } else {
+                      CourtPriceModel value = data;
+                      final double discountedPrice =
+                          value.discountedPrice ?? 0;
+                      final double openMatchDiscountedPrice =
+                          value.openMatchDiscountedPrice ?? 0;
+                      pricePaid = price = ref.read(_isOpenMatchProvider)
+                          ? (openMatchDiscountedPrice *
+                          (widget.isOnlyOpenMatch
+                              ? 1
+                              : (reserveSpotsForMatch + 1)))
+                          : discountedPrice;
+
+                      cancellationHour = isOpenMatch
+                          ? value.cancellationPolicy
+                          ?.openMatchCancellationTimeInHours
+                          : value.cancellationPolicy?.cancellationTimeInHours;
+                    }
+
+                    return Column(
+                      children: [
+                        if (cancellationHour != null && !widget.getPendingPayment)
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20.h),
+                            child: Text(
+                              cancellationHour == 0
+                                  ? "YOU_WILL_NOT_GET_REFUND_ON_THIS_BOOKING"
+                                  .tr(context)
+                                  : "CANCELLATION_POLICY_HOURS".tr(context,
+                                  params: {
+                                    "HOUR": cancellationHour.toString()
+                                  }),
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.popupBodyTextStyle,
+                            ),
+                          ),
+                        BookCourtInfoCard(
+                          textPrice: textPrice,
+                          price: pricePaid,
+                          bookings: widget.bookings,
+                          bookingTime: widget.bookingTime,
+                          courtName: widget.court.values.first,
+                        ),
+                      ],
+                    );
+                  },
+                  loading: () => const CupertinoActivityIndicator(radius: 10,
+                    color: AppColors.darkYellow,
+                  ),
+                  error: (error, stackTrace) {
+                    myPrint("stackTrace: $stackTrace");
+                    return SecondaryText(text: error.toString(),color: AppColors.black,);
+                  },
+                ),
+                if (!widget.getPendingPayment) SizedBox(height: 20.h),
+                if (!widget.isOnlyOpenMatch &&
+                    widget.bookings.isOpenMatch == true &&
+                    !widget.getPendingPayment)
+                  Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "DO_YOU_WANT_TO_OPEN_THIS_MATCH".tr(context),
+                              style: AppTextStyles.poppinsMedium(
+                                fontSize: 14.sp,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            " ${"OPTIONAL".tr(context).toLowerCase()}",
+                            style: AppTextStyles.poppinsRegular(
+                              fontSize: 13.sp,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5.h),
+                      InkWell(
+                        onTap: () {
+                          ref.read(_isOpenMatchProvider.notifier).state =
+                          !isOpenMatch;
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: isOpenMatch
+                                ? AppColors.darkYellow35
+                                : AppColors.gray,
+                            borderRadius: BorderRadius.circular(100.r),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
+                            child: Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "OPEN_MATCH_TO_FIND_PLAYERS".tr(context),
+                                  style: AppTextStyles.poppinsRegular(
+                                    fontSize: 13.sp,
+                                  ),
+                                ),
+                                SelectedTag(
+                                  isSelected: isOpenMatch,
+                                  unSelectedBorderColor: AppColors.white,
+                                  unSelectedColor: Colors.transparent,
+                                  shape: BoxShape.circle,
+                                  selectedBorderColor: AppColors.darkYellow,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                if (isOpenMatch && !widget.getPendingPayment)
+                  const _OpenMatch(allowAddPlayer: false,),
+                // ],
+                SizedBox(height: 20.h),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "BOOKING_PAYMENT".tr(context),
+                    style: AppTextStyles.poppinsBold(
+                      fontSize: 18.sp,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10.h),
+                MainButton(
+                  // child: MultiStyleTextFirstLora(
+                  //   text: isOpenMatch
+                  //       ? "PAY_MY_SHARE".trU(context)
+                  //       : "PAY_BOOKING".trU(context),
+                  //   fontSize: 16.sp,
+                  //   color: AppColors.black,
+                  // ),
+                  enabled: price != null,
+                  label: isOpenMatch
+                      ? "PAY_MY_SHARE".tr(context)
+                      : "PAY_FULL_COURT".trU(context),
+                  // : "PAY_BOOKING".trU(context),
+                  isForPopup: true,
+                  onTap: () async {
+                    await _payCourt(
+                        false,
+                        isPaid ? price! : (price! - refundAmount),
+                        refundAmount,false);
+                  },
+                  // borderRadius: 12,
+                  // labelStyle: AppTextStyles.halyard(
+                  //     fontSize: 24.sp, color: AppColors.white),
+                ),
+                SizedBox(height: 5.h),
+                // Add to Cart button is hidden
+                // if (!widget.isOnlyOpenMatch)
+                //   if (!isOpenMatch) ...[
+                //     MainButton(
+                //       enabled: price != null,
+                //       label: "ADD_TO_CART".tr(context),
+                //       isForPopup: true,
+                //       onTap: () async {
+                //         await _payCourt(true, price!, 0);
+                //       },
+                //       // borderRadius: 12,
+                //     ),
+                //   ]
+              ],
+            ),
+          ),
+        ),
+      )),
     );
   }
 
@@ -964,7 +1178,7 @@ class _BookCourtDialogLessonState extends ConsumerState<BookCourtDialogLesson> {
                           ),
                         BookCourtInfoCardLesson(
                           lessonVariant: selectedLessonVariant,
-                          bgColor: AppColors.white95,
+                          bgColor: AppColors.gray,
                           bookingTime: widget.bookingTime,
                           title: widget.title,
                           price: pricePaid,
@@ -986,8 +1200,8 @@ class _BookCourtDialogLessonState extends ConsumerState<BookCourtDialogLesson> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "NUMBER_OF_PAX".tr(context),
-                    style: AppTextStyles.qanelasLight(
-                        color: AppColors.white, fontSize: 16.sp),
+                    style: AppTextStyles.poppinsLight(
+                        color: AppColors.black, fontSize: 16.sp),
                   ),
                 ),
                 SizedBox(height: 10.h),
@@ -1007,7 +1221,7 @@ class _BookCourtDialogLessonState extends ConsumerState<BookCourtDialogLesson> {
                         height: 40.h,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
+                          borderRadius: BorderRadius.circular(100.r),
                           color: isSelected
                               ? AppColors.darkYellow
                               : AppColors.white,
@@ -1015,8 +1229,7 @@ class _BookCourtDialogLessonState extends ConsumerState<BookCourtDialogLesson> {
                         child: Text(
                           (e.maximumCapacity ?? 0).toString(),
                           textAlign: TextAlign.center,
-                          style: AppTextStyles.qanelasMedium()
-                              .copyWith(color: AppColors.black),
+                          style: AppTextStyles.poppinsMedium(),
                         ),
                       ),
                     );
@@ -1027,8 +1240,8 @@ class _BookCourtDialogLessonState extends ConsumerState<BookCourtDialogLesson> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "BOOKING_PAYMENT".tr(context),
-                    style: AppTextStyles.qanelasLight(
-                        color: AppColors.white, fontSize: 16.sp),
+                    style: AppTextStyles.poppinsLight(
+                        color: AppColors.black, fontSize: 16.sp),
                   ),
                 ),
                 SizedBox(height: 10.h),

@@ -36,7 +36,7 @@ class _NotificationButtonState extends ConsumerState<NotificationButton> {
         alignment: Alignment.topRight,
         children: [
           Icon(Icons.notifications_rounded,
-              color: AppColors.darkYellow, size: 32),
+              color: AppColors.black, size: 32),
           unreadCountAsync.maybeWhen(
             data: (count) {
               if (count > 0) {
@@ -57,7 +57,6 @@ class _NotificationButtonState extends ConsumerState<NotificationButton> {
                       child: Text(
                         count > 99 ? '99+' : '$count',
                         style: TextStyle(
-                          color: AppColors.white,
                           fontSize: 8.sp,
                           fontWeight: FontWeight.bold,
                         ),

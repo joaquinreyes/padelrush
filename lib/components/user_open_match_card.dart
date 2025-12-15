@@ -28,8 +28,8 @@ class UserOpenMatchCard extends ConsumerWidget {
     final isPlayerPendingPayment = booking.isPlayerPendingPayment(ref);
 
     bool isCancelled = booking.isCancelled ?? false;
-    final color = isCancelled || isPlayerPendingPayment ? AppColors.black2 : AppColors.tileBgColor;
-    final textColor = isCancelled || isPlayerPendingPayment ? AppColors.white : AppColors.black;
+    final color = isCancelled || isPlayerPendingPayment ? AppColors.darkYellow60 : AppColors.gray;
+    final textColor = isCancelled || isPlayerPendingPayment ? AppColors.black : AppColors.black;
     bool isWaiting = booking.requestWaitingList?.isNotEmpty ?? false;
     final price = booking.service?.price != null
         ? Utils.formatPriceNew(booking.service?.price?.toDouble())
@@ -48,10 +48,10 @@ class UserOpenMatchCard extends ConsumerWidget {
           if (isWaiting && !isCancelled) ...[
             WaitingForApproval(
               title: "IN_WAITING_LIST".tr(context).capitalizeFirst,
-              backgroundColor: AppColors.black2,
-              titleStyle: AppTextStyles.qanelasSemiBold(
-                fontSize: 13.sp,
-                color: AppColors.white,
+              backgroundColor: AppColors.darkYellow80,
+              titleStyle: AppTextStyles.poppinsRegular(
+                fontSize: 11.sp,
+                color: AppColors.black,
               ),
             )
           ],
@@ -76,7 +76,7 @@ class UserOpenMatchCard extends ConsumerWidget {
                     iconColor: AppColors.black2,
                     textColor: AppColors.black2,
                     padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 15.w),
-                    style: AppTextStyles.qanelasSemiBold(fontSize: 13.sp, color: AppColors.black2),
+                    style: AppTextStyles.poppinsSemiBold(fontSize: 13.sp, color: AppColors.black2),
                     text: "BOOKING_UNPAID".tr(context),
                   ),
                   MainButton(
@@ -139,7 +139,7 @@ class UserOpenMatchCard extends ConsumerWidget {
                     width: 85.w,
                     height: 30.h,
                     isForPopup: true,
-                    labelStyle: AppTextStyles.qanelasBold(
+                    labelStyle: AppTextStyles.poppinsBold(
                         fontSize: 14.sp),
                     padding: EdgeInsets.zero,
                   )
@@ -149,22 +149,22 @@ class UserOpenMatchCard extends ConsumerWidget {
           Row(
             children: [
               Text(
-                "OPEN_MATCH".trU(context),
-                style: AppTextStyles.qanelasBold(
-                    color: textColor, fontSize: 16.sp,),
+                "OPEN_MATCH".tr(context),
+                style: AppTextStyles.poppinsBold(
+                    color: textColor, fontSize: 15.sp,),
               ),
               const Spacer(),
               Text(
-                (booking.service?.location?.locationName ?? "").toUpperCase(),
-                style: AppTextStyles.qanelasMedium(
+                (booking.service?.location?.locationName ?? ""),
+                style: AppTextStyles.poppinsBold(
                     color: textColor,
-                    fontSize: 14.sp,),
+                    fontSize: 13.sp,),
               ),
             ],
           ),
           SizedBox(height: 1.h),
           CDivider(
-            color: isCancelled ? AppColors.white25 : AppColors.black5,
+            color: isCancelled ? AppColors.gray : AppColors.black5,
           ),
           if (!isCancelled)
             PrivateRankedComponent(
@@ -176,14 +176,16 @@ class UserOpenMatchCard extends ConsumerWidget {
             players: booking.players ?? [],
             textColor: textColor,
             imageBgColor: AppColors.black2,
-            backGroundColor: AppColors.black2,
+            borderColor: AppColors.black,
+            slotIconColor: AppColors.black,
+            backGroundColor: AppColors.darkYellow80,
           ),
           if (!isCancelled) SizedBox(height: 15.h),
           Row(
             children: [
               Text(
                 "${booking.courtName.capitalizeFirst}",
-                style: AppTextStyles.qanelasRegular(
+                style: AppTextStyles.poppinsRegular(
                   color: textColor,
                   fontSize: 13.sp,
                 ),
@@ -191,7 +193,7 @@ class UserOpenMatchCard extends ConsumerWidget {
               const Spacer(),
               Text(
                 booking.formattedDateStartEndTimeAMH,
-                style: AppTextStyles.qanelasRegular(
+                style: AppTextStyles.poppinsRegular(
                   color: textColor,
                   fontSize: 13.sp,
                 ),
@@ -203,7 +205,7 @@ class UserOpenMatchCard extends ConsumerWidget {
             children: [
               Text(
                 "${"PRICE".tr(context)} $price",
-                style: AppTextStyles.qanelasRegular(
+                style: AppTextStyles.poppinsRegular(
                   color: textColor,
                   fontSize: 13.sp,
                 ),
@@ -211,7 +213,7 @@ class UserOpenMatchCard extends ConsumerWidget {
               const Spacer(),
               Text(
                 "${"LEVEL".tr(context)} ${booking.bookingLevel}",
-                style: AppTextStyles.qanelasRegular(
+                style: AppTextStyles.poppinsRegular(
                   color: textColor,
                   fontSize: 13.sp,
                 ),

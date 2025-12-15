@@ -98,10 +98,10 @@ class _BookingProfileTabState extends ConsumerState<BookingProfileTab> {
                 Text(text,
                     textAlign: TextAlign.center,
                     style: isSelected
-                        ? AppTextStyles.qanelasSemiBold(
+                        ? AppTextStyles.poppinsSemiBold(
                             fontSize: 14.sp,
                           )
-                        : AppTextStyles.qanelasRegular(
+                        : AppTextStyles.poppinsRegular(
                             color: AppColors.black70,
                             fontSize: 13.sp,
                           ))

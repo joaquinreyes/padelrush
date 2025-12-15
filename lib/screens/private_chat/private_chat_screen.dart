@@ -178,7 +178,7 @@ class _PrivateChatScreenState extends ConsumerState<PrivateChatScreen> {
                     SizedBox(width: 5.w),
                     Text(
                       widget.otherUserName.toUpperCase(),
-                      style: AppTextStyles.qanelasMedium(
+                      style: AppTextStyles.poppinsMedium(
                         fontSize: 17.sp,
                         color: AppColors.black2
                       ),
@@ -268,7 +268,7 @@ class _PrivateChatScreenState extends ConsumerState<PrivateChatScreen> {
                                             const EdgeInsets.only(bottom: 5),
                                         child: Text(
                                           widget.otherUserName.toUpperCase(),
-                                          style: AppTextStyles.qanelasMedium(
+                                          style: AppTextStyles.poppinsMedium(
                                             fontSize: 14.sp,
                                             color: AppColors.black2,
                                           ),
@@ -276,7 +276,7 @@ class _PrivateChatScreenState extends ConsumerState<PrivateChatScreen> {
                                       ),
                                     Text(
                                       value,
-                                      style: AppTextStyles.qanelasRegular(
+                                      style: AppTextStyles.poppinsRegular(
                                         fontSize: 16.sp,
                                         color: AppColors.black2,
                                       ),
@@ -290,7 +290,7 @@ class _PrivateChatScreenState extends ConsumerState<PrivateChatScreen> {
                                 children: [
                                   Text(
                                     time,
-                                    style: AppTextStyles.qanelasRegular(
+                                    style: AppTextStyles.poppinsRegular(
                                       fontSize: 12.sp,
                                       color: isSend
                                           ? AppColors.black90
@@ -331,7 +331,7 @@ class _PrivateChatScreenState extends ConsumerState<PrivateChatScreen> {
           child: CustomTextField(
             hintText: "TYPE_HERE".tr(context),
             controller: _controller,
-            hintTextStyle: AppTextStyles.qanelasRegular(
+            hintTextStyle: AppTextStyles.poppinsRegular(
               fontSize: 13.sp,
               color: AppColors.black25,
             ),

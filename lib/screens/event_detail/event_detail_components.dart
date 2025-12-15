@@ -17,7 +17,8 @@ class _InfoCard extends StatelessWidget {
       ),
       decoration: BoxDecoration(
           border: border,
-          color: AppColors.black2, borderRadius: BorderRadius.circular(12.r)),
+          color: AppColors.darkYellow35,
+          borderRadius: BorderRadius.circular(12.r)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -27,9 +28,8 @@ class _InfoCard extends StatelessWidget {
                 flex: 3,
                 child: Text(
                   (event.service?.event?.eventName ?? "").capitalizeFirst,
-                  style: AppTextStyles.qanelasBold(
-                    color: AppColors.white,
-                    fontSize: 16.sp,
+                  style: AppTextStyles.poppinsBold(
+                    fontSize: 15.sp,
                   ),
                 ),
               ),
@@ -37,17 +37,16 @@ class _InfoCard extends StatelessWidget {
                 flex: 4,
                 child: Text(
                   // (event.courtName).toUpperCase(),
-                  (event.service?.location?.locationName ?? "").toUpperCase(),
+                  (event.service?.location?.locationName ?? ""),
                   textAlign: TextAlign.end,
-                  style: AppTextStyles.qanelasMedium(
-                    color: AppColors.white,
-                    fontSize: 15.sp,
+                  style: AppTextStyles.poppinsBold(
+                    fontSize: 13.sp,
                   ),
                 ),
               ),
             ],
           ),
-          CDivider(color: AppColors.white25),
+          CDivider(color: AppColors.gray),
           // SizedBox(
           //   height: 5.h,
           // ),
@@ -68,20 +67,19 @@ class _InfoCard extends StatelessWidget {
                   children: [
                     Text(
                       'SLOTS'.trU(context),
-                      style: AppTextStyles.qanelasMedium(
-                        color: AppColors.white,
-                        fontSize: 12.sp,
+                      style: AppTextStyles.poppinsBold(
+                        fontSize: 14.sp,
                       ),
                     ),
                     Text(
                       "${'MAX'.tr(context)} ${event.getMaximumCapacity.toString()} ${(event.isWellnessSport ? 'PARTICIPANTS' : 'PLAYERS').tr(context)}",
-                      style: AppTextStyles.qanelasRegular(
-                          color: AppColors.white, fontSize: 12.sp),
+                      style: AppTextStyles.poppinsRegular(
+                          fontSize: 12.sp),
                     ),
                     Text(
                         "${'MIN'.tr(context)} ${event.getMinimumCapacity.toString()} ${(event.isWellnessSport ? 'PARTICIPANTS' : 'PLAYERS').tr(context)}",
-                        style: AppTextStyles.qanelasRegular(
-                            color: AppColors.white, fontSize: 12.sp)),
+                        style: AppTextStyles.poppinsRegular(
+                            fontSize: 12.sp)),
                   ],
                 ),
               ),
@@ -110,15 +108,15 @@ class _InfoCard extends StatelessWidget {
         Text(
           text1,
           style: textStyle1 ??
-              AppTextStyles.qanelasRegular(
-                  color: AppColors.white, fontSize: 13.sp),
+              AppTextStyles.poppinsRegular(
+                  fontSize: 13.sp),
         ),
         SizedBox(height: 2.h),
         Text(
           text2,
           style: textStyle2 ??
-              AppTextStyles.qanelasRegular(
-                  color: AppColors.white, fontSize: 13.sp),
+              AppTextStyles.poppinsRegular(
+                  fontSize: 13.sp),
         ),
       ],
     );
@@ -300,9 +298,9 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
             ),
             SizedBox(width: 10.w),
             Text(
-              "WAITING_LIST".trU(context),
-              style: AppTextStyles.qanelasMedium(
-                fontSize: 17.sp,
+              "WAITING_LIST".tr(context),
+              style: AppTextStyles.poppinsBold(
+                fontSize: 16.sp,
               ),
             )
           ],
@@ -313,7 +311,7 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12.r),
                     border: border,
-                    color: AppColors.tileBgColor),
+                    color: AppColors.gray),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 child: Column(
@@ -344,7 +342,7 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
             : Padding(
                 padding: EdgeInsets.only(top: 0, left: 12.w),
                 child: Text("THERE_IS_NO_WAITING_LIST".tr(context),
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       color: AppColors.black2,
                       fontSize: 13.sp,
                     )),
@@ -355,7 +353,7 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
             alignment: Alignment.centerRight,
             child:
                 Text("${"WAITING_LIST".tr(context)} ${widget.players.length}",
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       color: AppColors.black2,
                     )),
           ),

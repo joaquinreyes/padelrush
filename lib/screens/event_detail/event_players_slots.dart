@@ -188,8 +188,9 @@ class _DoubleEventPlayersState extends ConsumerState<_DoubleEventPlayers> {
             otherTeamMemberID: player.otherPlayer,
             applicantsCount: getApplicants(waitingList).length,
             currentInWaitingList: isCurrentPlayer,
-            backGroundColor:
-                !isCurrentPlayer ? AppColors.darkRosewood : Colors.transparent,
+            backGroundColor: AppColors.darkYellow80,
+            // backGroundColor:
+            //     !isCurrentPlayer ? AppColors.darkRosewood : Colors.transparent,
             borderColor: !isCurrentPlayer ? AppColors.white : Colors.black,
             iconColor: !isCurrentPlayer ? AppColors.white : Colors.black,
             seeApplicants: () {
@@ -315,7 +316,7 @@ class _DoubleEventPlayersState extends ConsumerState<_DoubleEventPlayers> {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.all(Radius.circular(100.r)),
+        // borderRadius: BorderRadius.all(Radius.circular(100.r)),
         boxShadow: [
           kBoxShadow,
         ],
@@ -325,7 +326,7 @@ class _DoubleEventPlayersState extends ConsumerState<_DoubleEventPlayers> {
       child: Center(
         child: Text(
           "${i + 1}",
-          style: AppTextStyles.qanelasSemiBold(
+          style: AppTextStyles.poppinsSemiBold(
             fontSize: 14.sp,
           ),
         ),
@@ -362,7 +363,7 @@ class _DoubleEventPlayersState extends ConsumerState<_DoubleEventPlayers> {
         isHorizontal: true,
         otherTeamMemberID: otherTeamMemberID,
         borderColor: AppColors.black,
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.white,
         iconColor: AppColors.black,
       ),
     );
@@ -435,7 +436,7 @@ class _SingleEventPlayers extends StatelessWidget {
               text: "AVAILABLE".trU(context),
               index: colIndex,
               onTap: (index, _) => onSlotTap(index, null),
-              backgroundColor: Colors.transparent,
+              backgroundColor: AppColors.darkYellow80,
               iconColor: AppColors.black,
               borderColor: AppColors.black,
             ),
@@ -528,7 +529,7 @@ class _ApplicantSlotWidget extends StatelessWidget {
                     minFontSize: 2.sp,
                     maxLines: 1,
                     stepGranularity: 1.sp,
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       fontSize: 11.sp,
                     ),
                   ),
@@ -540,7 +541,7 @@ class _ApplicantSlotWidget extends StatelessWidget {
                   borderRadius: 0,
                   child: Text(
                     "YOU_APPLIED".tr(context),
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       fontSize: 10.sp,
                     ),
                   ),
@@ -561,7 +562,7 @@ class _ApplicantSlotWidget extends StatelessWidget {
       minFontSize: 9.sp,
       maxLines: 1,
       stepGranularity: 1.sp,
-      style: AppTextStyles.qanelasSemiBold(letterSpacing: 14.sp * 0.05),
+      style: AppTextStyles.poppinsSemiBold(letterSpacing: 14.sp * 0.05),
     );
   }
 

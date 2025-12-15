@@ -132,8 +132,8 @@ class _RecoverPassword1State extends ConsumerState<RecoverPassword1> {
                 alignment: AlignmentDirectional.centerStart,
                 child: Text(
                   'ENTER_EMAIL_ADDRESS'.tr(context),
-                  style: AppTextStyles.qanelasLight(
-                   fontSize: 15.sp),
+                  style: AppTextStyles.poppinsMedium(
+                    fontSize: 15.sp,),
                 ),
               ),
             ),
@@ -284,7 +284,7 @@ class _RecoverPassword2State extends ConsumerState<_RecoverPassword2> {
                   alignment: AlignmentDirectional.centerStart,
                   child: Text(
                     'ENTER_TOKEN'.tr(context),
-                    style: AppTextStyles.qanelasLight(
+                    style: AppTextStyles.poppinsLight(
                          fontSize: 16.sp),
                   ),
                 ),
@@ -328,7 +328,7 @@ class _RecoverPassword2State extends ConsumerState<_RecoverPassword2> {
                   alignment: AlignmentDirectional.centerStart,
                   child: Text(
                     'ENTER_NEW_PASSWORD'.tr(context),
-                    style: AppTextStyles.qanelasLight(  fontSize: 16.sp),
+                    style: AppTextStyles.poppinsLight(  fontSize: 16.sp),
                   ),
                 ),
               ),

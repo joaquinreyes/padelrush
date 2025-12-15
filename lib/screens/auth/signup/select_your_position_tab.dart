@@ -35,7 +35,7 @@ class _SelectYourPositionState extends State<_SelectYourPosition> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'SELECT_YOUR_POSITION'.tr(context),
-                  style: AppTextStyles.qanelasMedium(
+                  style: AppTextStyles.poppinsMedium(
                       fontSize: 20.sp,),
                 )
                 // MultiStyleTextFirstBold(
@@ -102,12 +102,12 @@ class _SelectYourPositionState extends State<_SelectYourPosition> {
           vertical: 5.h,
         ),
         decoration: BoxDecoration(
-          color: selected ? AppColors.black2 : AppColors.tileBgColor,
+          color: selected ? AppColors.darkYellow35 : AppColors.tileBgColor,
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: Row(
           children: [
-            SelectedTag(isSelected: selected, shape: BoxShape.circle,unSelectedBorderColor: AppColors.black2,),
+            SelectedTag(isSelected: selected, shape: BoxShape.circle,unSelectedBorderColor: AppColors.black70,selectedBorderColor: AppColors.black70,),
             SizedBox(width: 20.w),
             Expanded(
               child: Column(
@@ -117,21 +117,21 @@ class _SelectYourPositionState extends State<_SelectYourPosition> {
                   Text(
                     side.userFacingString,
                     style: selected
-                        ? AppTextStyles.qanelasBold(
+                        ? AppTextStyles.poppinsMedium(
                             fontSize: 16.sp,
-                            color: AppColors.white,
+                            color: AppColors.black,
                           )
-                        : AppTextStyles.qanelasRegular(
+                        : AppTextStyles.poppinsMedium(
                             fontSize: 16.sp,
-                            color: AppColors.black2,
+                            color: AppColors.black70,
                           ),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     explanation,
-                    style: AppTextStyles.qanelasRegular(
-                      fontSize: 15.sp,
-                      color: selected ? AppColors.white : AppColors.black2,
+                    style: AppTextStyles.poppinsRegular(
+                      fontSize: 14.sp,
+                      color: selected ? AppColors.black : AppColors.black70,
                     ),
                   )
                 ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
 import 'package:padelrush/globals/images.dart';
 
 class BackgroundView extends StatelessWidget {
@@ -11,13 +12,15 @@ class BackgroundView extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(AppImages.backgroundImage.path),
-          fit: BoxFit.cover,
-          alignment: Alignment.topCenter,
-        ),
-      ),
+      color: AppColors.white,
+
+      // decoration: BoxDecoration(
+      //   image: DecorationImage(
+      //     image: AssetImage(AppImages.backgroundImage.path),
+      //     fit: BoxFit.cover,
+      //     alignment: Alignment.topCenter,
+      //   ),
+      // ),
       child: child,
     );
   }

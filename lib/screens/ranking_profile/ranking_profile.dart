@@ -152,7 +152,7 @@ class _RankingProfileState extends ConsumerState<RankingProfile> {
                   },
                   child: Text(
                     "MESSAGE".tr(context),
-                    style: AppTextStyles.qanelasMedium(
+                    style: AppTextStyles.poppinsMedium(
                         fontSize: 13.sp, color: AppColors.black2),
                   ),
                 ),
@@ -163,7 +163,7 @@ class _RankingProfileState extends ConsumerState<RankingProfile> {
           if (widget.isPage) SizedBox(height: 15.h),
 
           if (widget.isPage)
-            Row(
+            Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -177,8 +177,8 @@ class _RankingProfileState extends ConsumerState<RankingProfile> {
                     child: NetworkCircleImage(
                       path: userFromAssessment.profileUrl,
                       // isUserProfile: true,
-                      width: 90.h,
-                      height: 90.h,
+                      width: 100.h,
+                      height: 100.h,
                       showBG: true,
                       bgColor: AppColors.black2,
                       logoColor: AppColors.white,
@@ -187,26 +187,26 @@ class _RankingProfileState extends ConsumerState<RankingProfile> {
                     ),
                   ),
                 ),
-                SizedBox(width: 20.w),
                 Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${(userFromAssessment.firstName ?? "").toUpperCase()} ${(userFromAssessment.lastName ?? "").toUpperCase()}",
+                        // "${(userFromAssessment.firstName ?? "").toUpperCase()} ${(userFromAssessment.lastName ?? "").toUpperCase()}",
+                        "${(userFromAssessment.firstName ?? "").toUpperCase()}",
                         textAlign: TextAlign.start,
-                        style: AppTextStyles.qanelasMedium(
-                          fontSize: 20.sp,
+                        style: AppTextStyles.pragmaticaObliqueExtendedBold(
+                          fontSize: 24.sp,
                         ),
                       ),
                       if (userFromAssessment.playingSide.isNotEmpty)
                         Text(
                           "${userFromAssessment.level(kSportName)} ${userFromAssessment.playingSide.isNotEmpty ? "\u2022" : ''} ${userFromAssessment.playingSide}",
-                          style: AppTextStyles.qanelasRegular(
+                          style: AppTextStyles.poppinsRegular(
                             fontSize: 15.sp,
                           ),
                         ),
-                      14.verticalSpace,
+                      5.verticalSpace,
                       if (isMe)
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -215,7 +215,7 @@ class _RankingProfileState extends ConsumerState<RankingProfile> {
                           children: [
                             Text(
                               "WALLET".tr(context),
-                              style: AppTextStyles.qanelasBold(fontSize: 15.sp),
+                              style: AppTextStyles.poppinsBold(fontSize: 15.sp),
                             ),
                             SizedBox(width: 4.w),
                             paymentDetails.when(
@@ -225,7 +225,7 @@ class _RankingProfileState extends ConsumerState<RankingProfile> {
                                       Utils.formatPrice2(
                                               data.first.balance, currency)
                                           .toUpperCase(),
-                                      style: AppTextStyles.qanelasRegular(
+                                      style: AppTextStyles.poppinsRegular(
                                         fontSize: 15.sp,
                                       ),
                                     );
@@ -234,14 +234,14 @@ class _RankingProfileState extends ConsumerState<RankingProfile> {
                                   return Text(
                                     Utils.formatPrice2(0, currency)
                                         .toUpperCase(),
-                                    style: AppTextStyles.qanelasRegular(
+                                    style: AppTextStyles.poppinsRegular(
                                       fontSize: 15.sp,
                                     ),
                                   );
                                 },
                                 error: (error, stackTrace) => Text(
                                       Utils.formatPrice2(0, currency),
-                                      style: AppTextStyles.qanelasRegular(
+                                      style: AppTextStyles.poppinsRegular(
                                         fontSize: 15.sp,
                                       ),
                                     ),
@@ -258,7 +258,7 @@ class _RankingProfileState extends ConsumerState<RankingProfile> {
               ],
             ),
           if (widget.isPage && !isMe) SizedBox(height: 20.h),
-          if (widget.isPage) SizedBox(height: 25.h),
+          // if (widget.isPage) SizedBox(height: 25.h),
           _PlayerRanking(
             level: userFromAssessment.levelD(kSportName),
             reliability: userFromAssessment.reliability(sportsName),
@@ -289,10 +289,10 @@ class _RankingProfileState extends ConsumerState<RankingProfile> {
             customer: assessment.customer!,
           ),
           SizedBox(height: 20.h),
-          _RankingProgression(
-            userId: widget.customerID,
-            sportName: kSportName,
-          ),
+          // _RankingProgression(
+          //   userId: widget.customerID,
+          //   sportName: kSportName,
+          // ),
           _PastMatches(
             assessments: assessment.assessments ?? [],
           ),

@@ -23,9 +23,9 @@ class ServiceCoaches extends StatelessWidget {
       children: [
         SizedBox(height: 14.h),
         Text(
-          "${"COACH".trU(context)} ${coaches.length}",
-          style: AppTextStyles.qanelasMedium(
-              fontSize: 17.sp,),
+          "${"COACH".tr(context)} ${coaches.length}",
+          style: AppTextStyles.poppinsBold(
+              fontSize: 16.sp,),
         ),
         SizedBox(height: 10.h),
         ListView.separated(
@@ -42,50 +42,41 @@ class ServiceCoaches extends StatelessWidget {
   _coachCard(ServiceDetailCoach coach) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(12.r),
+        color: AppColors.gray,
+        borderRadius: BorderRadius.circular(25.r),
         border: border
       ),
       padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
       child: Row(
         children: [
-          Expanded(
-            child: Container(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 9.5.w),
-                    child: NetworkCircleImage(
-                      path: coach.profileUrl,
-                      width: 37.w,
-                      height: 37.w,
-                      borderRadius: BorderRadius.circular(4.r),
-                      boxBorder: Border.all(color: AppColors.white25),
-                      bgColor: AppColors.black2,
-                      logoColor: AppColors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 9.5.w),
-                    child: Text(
-                      "${coach.fullName?.toUpperCase()}",
-                      maxLines: 1,
-                      softWrap: true,
-                      style: AppTextStyles.qanelasMedium(fontSize: 11.sp,),
-                    ),
-                  ),
-                ],
-              ),
+          Container(
+            child: Row(
+              children: [
+                NetworkCircleImage(
+                  path: coach.profileUrl,
+                  width: 40.w,
+                  height: 40.w,
+                  borderRadius: BorderRadius.circular(100.r),
+                  boxBorder: Border.all(color: AppColors.white25),
+                  bgColor: AppColors.black2,
+                  logoColor: AppColors.white,
+                ),
+                8.horizontalSpace,
+                Text(
+                  "${coach.fullName}",
+                  maxLines: 1,
+                  softWrap: true,
+                  style: AppTextStyles.poppinsMedium(fontSize: 11.sp,),
+                ),
+              ],
             ),
           ),
-          Expanded(
-            flex: 5,
+          15.horizontalSpace,
+          Flexible(
+            flex: 4,
             child: Text(
               coach.description ?? "",
-              style: AppTextStyles.qanelasRegular(fontSize: 13.sp,),
+              style: AppTextStyles.poppinsRegular(fontSize: 13.sp,),
             ),
           ),
         ],

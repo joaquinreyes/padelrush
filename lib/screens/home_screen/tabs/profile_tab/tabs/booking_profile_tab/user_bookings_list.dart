@@ -31,13 +31,16 @@ class _UpComingBookingsState extends ConsumerState<UserBookingsList> {
   @override
   Widget build(BuildContext context) {
     final bookings = ref.watch(fetchUserAllBookingsProvider);
-    return bookings.when(
-      data: (data) => buildBookingList(context, data),
-      loading: () => const CupertinoActivityIndicator(radius: 10),
-      error: (error, stackTrace) {
-        myPrint("stackTrace: $stackTrace");
-        return SecondaryText(text: error.toString());
-      },
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      child: bookings.when(
+        data: (data) => buildBookingList(context, data),
+        loading: () => const CupertinoActivityIndicator(radius: 10),
+        error: (error, stackTrace) {
+          myPrint("stackTrace: $stackTrace");
+          return SecondaryText(text: error.toString());
+        },
+      ),
     );
   }
 
@@ -91,9 +94,9 @@ class _UpComingBookingsState extends ConsumerState<UserBookingsList> {
         Padding(
           padding: EdgeInsets.only(bottom: 10.h,),
           child: Text(
-            Utils.formatBookingDate(date, context).toUpperCase(),
-            style: AppTextStyles.qanelasMedium(
-              fontSize: 18.sp,
+            Utils.formatBookingDate(date, context),
+            style: AppTextStyles.poppinsBold(
+              fontSize: 16.sp,
             ),
           ),
         ),

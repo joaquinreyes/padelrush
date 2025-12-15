@@ -11,24 +11,27 @@ class _ClearAllBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerRight,
-      child: SecondaryButton(
+      child: SecondaryImageButton(image: AppImages.crossIcon.path,
+        imageHeight: 10.h,
+        imageWidth: 10.h,
         onTap: onTap,
-        color: AppColors.white,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              AppImages.crossIcon.path,
-              color: AppColors.black2,
-              width: 10.w,
-            ),
-            SizedBox(width: 7.w),
-            Text(
-              "CLEAR_ALL".tr(context),
-              style: AppTextStyles.qanelasRegular(fontSize: 11.sp),
-            ),
-          ],
-        ),
+        label:
+        "CLEAR_ALL".tr(context),
+        // child: Row(
+        //   mainAxisSize: MainAxisSize.min,
+        //   children: [
+        //     Image.asset(
+        //       AppImages.crossIcon.path,
+        //       color: AppColors.black2,
+        //       width: 10.w,
+        //     ),
+        //     SizedBox(width: 7.w),
+        //     Text(
+        //       "CLEAR_ALL".tr(context),
+        //       style: AppTextStyles.poppinsRegular(fontSize: 11.sp),
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }
@@ -98,12 +101,12 @@ class NotificationTile extends StatelessWidget {
             EdgeInsets.only(left: 15.w, right: 10.w, top: 10.h, bottom: 15.h),
         decoration: BoxDecoration(
           color: isUnread
-              ? AppColors.tileBgColor.withOpacity(0.5)
-              : AppColors.tileBgColor,
+              ? AppColors.gray.withOpacity(0.5)
+              : AppColors.gray,
           borderRadius: BorderRadius.circular(12.r),
-          border: isUnread
-              ? Border.all(color: AppColors.black2.withOpacity(0.3))
-              : null,
+          // border: isUnread
+          //     ? Border.all(color: AppColors.black2.withOpacity(0.3))
+          //     : null,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,7 +129,7 @@ class NotificationTile extends StatelessWidget {
                       ),
                     Text(
                       _formatTime(notification.createdAt),
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                           fontSize: 11.sp, color: AppColors.black70),
                     ),
                   ],
@@ -135,22 +138,22 @@ class NotificationTile extends StatelessWidget {
                   onTap: onDelete,
                   child: Image.asset(
                     AppImages.crossIcon.path,
-                    height: 13.h,
+                    height: 11.h,
                     color: AppColors.black2,
-                    width: 13.h,
+                    width: 11.h,
                   ),
                 ),
               ],
             ),
             SizedBox(height: 2.h),
             Text(
-              (notification.title ?? '').toUpperCase(),
-              style: AppTextStyles.qanelasSemiBold(fontSize: 13.sp),
+              (notification.title ?? ''),
+              style: AppTextStyles.poppinsBold(fontSize: 13.sp),
             ),
             SizedBox(height: 2.h),
             Text(
               notification.body ?? '',
-              style: AppTextStyles.qanelasRegular(fontSize: 13.sp),
+              style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
             ),
           ],
         ),

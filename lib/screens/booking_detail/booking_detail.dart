@@ -63,11 +63,11 @@ class _BookingDetailState extends ConsumerState<BookingDetail> {
                 ),
               ),
               Text(
-                "${"BOOKING".trU(context)} \n${"INFORMATION".trU(context)}",
-                style: AppTextStyles.qanelasMedium(
-                  fontSize: 22.sp,
-                ),
-                textAlign: TextAlign.center,
+                "${"BOOKING".trU(context)} \n  ${"INFORMATION".trU(context)}",
+                style: AppTextStyles.pragmaticaObliqueExtendedBold(
+                    fontSize: 24.sp,
+                    height: 1),
+                textAlign: TextAlign.start,
               ),
               _body()
             ],
@@ -155,13 +155,11 @@ class _DataBody extends ConsumerWidget {
             Row(
               children: [
                 SecondaryImageButton(
-                  decoration: decoration,
                   label: "CANCEL_OR_RESCHEDULE".tr(context),
                   image: AppImages.crossIcon.path,
                   imageHeight: 10.w,
                   imageWidth: 10.w,
                   fontSize: 13.sp,
-                  color: AppColors.tileBgColor,
                   // labelStyle: AppTextStyles.qanelasLight(fontSize: 13.sp),
                   onTap: () {
                     _cancel(ref, context, userBooking);
@@ -169,14 +167,12 @@ class _DataBody extends ConsumerWidget {
                 ),
                 const Spacer(),
                 SecondaryImageButton(
-                  decoration: decoration,
                   label: "SHARE_MATCH".tr(context),
                   image: AppImages.whatsaapIcon.path,
                   imageHeight: 14.w,
                   imageWidth: 14.w,
                   // labelStyle: AppTextStyles.qanelasLight(fontSize: 13.sp),
                   fontSize: 13.sp,
-                  color: AppColors.tileBgColor,
                   onTap: () {
                     _shareWhatsAap(context, ref);
                   },
@@ -189,13 +185,11 @@ class _DataBody extends ConsumerWidget {
             children: [
               if (!userBooking.isPast)
                 SecondaryImageButton(
-                  decoration: decoration,
                   label: "ADD_TO_CALENDAR".tr(context),
                   image: AppImages.calendar.path,
                   imageHeight: 15.w,
                   imageWidth: 15.w,
                   fontSize: 13.sp,
-                  color: AppColors.tileBgColor,
                   // labelStyle: AppTextStyles.qanelasLight(fontSize: 13.sp),
                   // borderRadius: 8.r,
                   onTap: () {
@@ -210,14 +204,12 @@ class _DataBody extends ConsumerWidget {
               const Spacer(),
               if (allowOpenMatch)
                 SecondaryImageButton(
-                  decoration: decoration,
                   label: "OPEN_MATCH_TO_FIND_PLAYERS".tr(context),
                   image: AppImages.tennisBall.path,
                   imageHeight: 13.w,
                   imageWidth: 13.w,
                   fontSize: 13.sp,
                   // labelStyle: AppTextStyles.qanelasLight(fontSize: 13.sp),
-                  color: AppColors.tileBgColor,
                   // borderRadius: 8.r,
                   onTap: () {
                     _changeToOpen(ref, context);
@@ -247,8 +239,8 @@ class _DataBody extends ConsumerWidget {
       return Container(
         padding: EdgeInsets.all(15.w),
         decoration: BoxDecoration(
-          color: AppColors.black2,
-          borderRadius: BorderRadius.circular(12.r),
+          color: AppColors.gray,
+          borderRadius: BorderRadius.circular(25.r),
         ),
         child: Column(
           children: [
@@ -256,16 +248,14 @@ class _DataBody extends ConsumerWidget {
               children: [
                 Text(
                   firstName,
-                  style: AppTextStyles.qanelasMedium(
-                    color: AppColors.white,
+                  style: AppTextStyles.poppinsMedium(
                     fontSize: 16.sp,
                   ),
                 ),
                 const Spacer(),
                 Text(
                   '${userBooking.service?.location?.locationName}',
-                  style: AppTextStyles.qanelasMedium(
-                    color: AppColors.white,
+                  style: AppTextStyles.poppinsMedium(
                     fontSize: 16.sp,
                   ),
                 ),
@@ -283,16 +273,14 @@ class _DataBody extends ConsumerWidget {
                   children: [
                     Text(
                       '${userBooking.courtName}',
-                      style: AppTextStyles.qanelasRegular(
-                        color: AppColors.white,
+                      style: AppTextStyles.poppinsRegular(
                         fontSize: 15.sp,
                       ),
                     ),
                     SizedBox(height: 2.h),
                     Text(
                       "${'PRICE'.tr(context)} ${Utils.formatPriceNew(userBooking.pricePaid(ref))}",
-                      style: AppTextStyles.qanelasRegular(
-                        color: AppColors.white,
+                      style: AppTextStyles.poppinsRegular(
                         fontSize: 15.sp,
                       ),
                     ),
@@ -305,16 +293,14 @@ class _DataBody extends ConsumerWidget {
                   children: [
                     Text(
                       "${userBooking.bookingStartTime.format("h:mm")} - ${userBooking.bookingEndTime.format("h:mm a").toLowerCase()}",
-                      style: AppTextStyles.qanelasRegular(
-                        color: AppColors.white,
+                      style: AppTextStyles.poppinsRegular(
                         fontSize: 15.sp,
                       ),
                     ),
                     SizedBox(height: 2.h),
                     Text(
                       "${userBooking.bookingDate.format("EEE dd MMM")}",
-                      style: AppTextStyles.qanelasRegular(
-                        color: AppColors.white,
+                      style: AppTextStyles.poppinsRegular(
                         fontSize: 15.sp,
                       ),
                     ),
@@ -329,8 +315,8 @@ class _DataBody extends ConsumerWidget {
     return Container(
       padding: EdgeInsets.all(15.w),
       decoration: BoxDecoration(
-        color: AppColors.black2,
-        borderRadius: BorderRadius.circular(12.r),
+        color: AppColors.gray,
+        borderRadius: BorderRadius.circular(25.r),
       ),
       child: Column(
         children: [
@@ -338,16 +324,14 @@ class _DataBody extends ConsumerWidget {
             children: [
               Text(
                 "ORGANIZER".tr(context),
-                style: AppTextStyles.qanelasMedium(
-                  color: AppColors.white,
+                style: AppTextStyles.poppinsMedium(
                   fontSize: 16.sp,
                 ),
               ),
               const Spacer(),
               Text(
                 "BOOKING".tr(context),
-                style: AppTextStyles.qanelasMedium(
-                  color: AppColors.white,
+                style: AppTextStyles.poppinsMedium(
                   fontSize: 16.sp,
                 ),
               ),
@@ -367,7 +351,7 @@ class _DataBody extends ConsumerWidget {
                       path: profileUrl,
                       width: 37.h,
                       height: 37.h,
-                      borderRadius: BorderRadius.circular(4.r),
+                      borderRadius: BorderRadius.circular(100.r),
                       boxBorder: Border.all(
                         color: AppColors.white25,
                         width: 1,
@@ -378,16 +362,14 @@ class _DataBody extends ConsumerWidget {
                     2.verticalSpace,
                     Text(
                       firstName.toUpperCase(),
-                      style: AppTextStyles.qanelasMedium(
-                        color: AppColors.white,
+                      style: AppTextStyles.poppinsMedium(
                         fontSize: 11.sp,
                       ),
                     ),
                     Text(
                       "${level} ${getRankLabel(double.tryParse(level) ?? 0)}", //•  Right",
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         fontSize: 12.sp,
-                        color: AppColors.white,
                       ),
                     ),
                   ],
@@ -399,16 +381,14 @@ class _DataBody extends ConsumerWidget {
                 children: [
                   Text(
                     "${userBooking.bookingDate.format("EEE dd MMM")} | ${userBooking.bookingStartTime.format("h:mm")} - ${userBooking.bookingEndTime.format("h:mm a").toLowerCase()}",
-                    style: AppTextStyles.qanelasRegular(
-                      color: AppColors.white,
+                    style: AppTextStyles.poppinsRegular(
                       fontSize: 15.sp,
                     ),
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     "${userBooking.courtName} | ${userBooking.service?.location?.locationName}",
-                    style: AppTextStyles.qanelasRegular(
-                      color: AppColors.white,
+                    style: AppTextStyles.poppinsRegular(
                       fontSize: 15.sp,
                     ),
                   ),

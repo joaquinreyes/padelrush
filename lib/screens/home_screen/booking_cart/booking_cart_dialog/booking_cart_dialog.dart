@@ -59,7 +59,7 @@ class _BookCourtDialogState extends ConsumerState<BookingCartDialog> {
               alignment: Alignment.centerLeft,
               child: Text(
                 "${"YOUR_BOOKING_CART_DETAILS".tr(context)}:",
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                   fontSize: 16.sp,
                   color: Colors.white,
                 ),
@@ -84,7 +84,7 @@ class _BookCourtDialogState extends ConsumerState<BookingCartDialog> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "BOOKING_PAYMENT".tr(context),
-                        style: AppTextStyles.qanelasMedium(fontSize: 20.sp).copyWith(color: AppColors.white),
+                        style: AppTextStyles.poppinsMedium(fontSize: 20.sp).copyWith(color: AppColors.white),
                       ),
                     ),
                     SizedBox(height: 10.h),

@@ -26,7 +26,7 @@ class SecondaryImageButton extends StatelessWidget {
       this.labelStyle})
       : imageHeight = imageHeight ?? 15.h,
         imageWidth = imageWidth ?? 15.h,
-        fontSize = fontSize ?? 14.sp,
+        fontSize = fontSize ?? 11.sp,
         spacing = spacing ?? 7.w;
   final VoidCallback? onTap;
   final String label;
@@ -49,11 +49,11 @@ class SecondaryImageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SecondaryButton(
       decoration: decoration,
-      borderRadius: borderRadius != null ? borderRadius! : 12.r,
+      borderRadius: borderRadius != null ? borderRadius! : 100.r,
       color: color ??
           (isForPopup
-              ? AppColors.black10
-              : Utils.calculateColorOverBackground(
+              ? AppColors.gray
+              : AppColors.gray??Utils.calculateColorOverBackground(
                   AppColors.blue,
                   "0C",
                   AppColors.white,
@@ -79,7 +79,7 @@ class SecondaryImageButton extends StatelessWidget {
             label,
             style: labelStyle != null
                 ? labelStyle
-                : AppTextStyles.qanelasRegular().copyWith(
+                : AppTextStyles.poppinsRegular().copyWith(
                     fontSize: fontSize,
                     color: isForPopup
                         ? textColor ?? AppColors.black2

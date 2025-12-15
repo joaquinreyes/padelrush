@@ -482,7 +482,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
               },
               child: Text(
                 'Confirm'.toUpperCase(),
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                     color: AppColors.black2, fontSize: 18.sp),
               ),
             ),

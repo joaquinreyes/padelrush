@@ -49,7 +49,7 @@ class __LevelScoreTab extends ConsumerState<LevelScoreTab> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'LEVEL_ASSESSMENT'.tr(context),
-                        style: AppTextStyles.qanelasMedium(fontSize: 20.sp, color: textColor),
+                        style: AppTextStyles.poppinsMedium(fontSize: 20.sp, color: textColor),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -58,18 +58,18 @@ class __LevelScoreTab extends ConsumerState<LevelScoreTab> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "GREAT_YOUR_STARTING_LEVEL_IS1".tr(context),
-                        style: AppTextStyles.qanelasRegular(fontSize: 16.sp, color: textColor),
+                        style: AppTextStyles.poppinsRegular(fontSize: 16.sp, color: textColor),
                       ),
                     ),
                     SizedBox(height: 6.h),
-                    Image.asset(AppImages.levelAssessment.path, color: textColor),
+                    Image.asset(AppImages.levelAssessment.path),
                     SizedBox(height: 38.h),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'YOUR_STARTING_LEVEL_IS'.tr(context),
                         textAlign: TextAlign.center,
-                        style: AppTextStyles.qanelasMedium(fontSize: 19.sp, color: textColor),
+                        style: AppTextStyles.poppinsMedium(fontSize: 19.sp, color: textColor),
                       ),
                     ),
                     SizedBox(height: 14.h),
@@ -78,7 +78,7 @@ class __LevelScoreTab extends ConsumerState<LevelScoreTab> {
                       alignment: Alignment.center,
                       padding: EdgeInsets.symmetric(vertical: 13.h, horizontal: 15.w),
                       decoration: BoxDecoration(
-                        color: AppColors.darkYellow,
+                        color: AppColors.black80,
                         borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: _isEditEnable
@@ -88,13 +88,13 @@ class __LevelScoreTab extends ConsumerState<LevelScoreTab> {
                               textAlign: TextAlign.center,
                               hintText: 'TYPE_HERE'.tr(context),
                               border: InputBorder.none,
-                              hintTextStyle: AppTextStyles.qanelasMedium(
+                              hintTextStyle: AppTextStyles.poppinsMedium(
                                 fontSize: 22.sp,
                                 color: AppColors.black2,
                               ),
                               contentPadding: EdgeInsets.symmetric(horizontal: 12.w),
                               hasBorders: false,
-                              style: AppTextStyles.qanelasMedium(
+                              style: AppTextStyles.poppinsMedium(
                                 fontSize: 22.sp,
                                 color: AppColors.black2,
                               ),
@@ -113,9 +113,9 @@ class __LevelScoreTab extends ConsumerState<LevelScoreTab> {
                           : Center(
                               child: Text(
                                 "${data.level?.formatString() ?? " "} ${getRankLabel(data.level ?? 0)}",
-                                style: AppTextStyles.qanelasMedium(
-                                  fontSize: 22.sp,
-                                  color: AppColors.black2,
+                                style: AppTextStyles.mohaveBold(
+                                  fontSize: 26.sp,
+                                  color: AppColors.white,
                                 ),
                               ),
                             ),

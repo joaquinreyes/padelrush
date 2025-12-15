@@ -57,7 +57,8 @@ extension StringTranslationExtension on String {
   String capitalWord(BuildContext context, bool canProceed,
       {Map<String, String>? params}) {
     return canProceed
-        ? trU(context, params: params)
+        // ? trU(context, params: params)
+        ? tr(context, params: params)
         : tr(context, params: params);
   }
 }

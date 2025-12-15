@@ -59,7 +59,7 @@ class _ApprovedRequestDialogState
             alignment: AlignmentDirectional.centerStart,
             child: Text(
               "CURRENT_TEAM".tr(context),
-              style: AppTextStyles.qanelasLight(fontSize: 16.sp,color: AppColors.white,),
+              style: AppTextStyles.poppinsLight(fontSize: 16.sp,color: AppColors.white,),
             ),
           ),
           SizedBox(height: 5.h),

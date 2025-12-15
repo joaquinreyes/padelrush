@@ -146,8 +146,7 @@ class __SignupFlowState extends ConsumerState<_SignupFlow> {
                 10.verticalSpace,
                 Text(
                   'REGISTER'.trU(context),
-                  style: AppTextStyles.qanelasMedium(
-                    color: AppColors.black,
+                  style: AppTextStyles.pragmaticaExtendedBold(
                     fontSize: 30.sp,
                   ),
                 ),

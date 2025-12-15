@@ -19,8 +19,8 @@ class _PlayerRanking extends StatelessWidget {
       width: double.maxFinite,
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
       decoration: BoxDecoration(
-        color: AppColors.black2,
-        borderRadius: BorderRadius.circular(12.r),
+        color: AppColors.gray,
+        borderRadius: BorderRadius.circular(25.r),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -29,10 +29,9 @@ class _PlayerRanking extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'PLAYER_RANKING'.trU(context),
-                style: AppTextStyles.qanelasMedium(
-                  color: AppColors.white,
-                  fontSize: 14.sp,
+                'PLAYER_RANKING'.tr(context),
+                style: AppTextStyles.poppinsBold(
+                  fontSize: 15.sp,
                 ),
               ),
               InkWell(
@@ -45,15 +44,14 @@ class _PlayerRanking extends StatelessWidget {
                     children: [
                       Text(
                         'Info'.tr(context),
-                        style: AppTextStyles.qanelasRegular(
-                            color: AppColors.white, fontSize: 13.sp),
+                        style: AppTextStyles.poppinsRegular(
+                            fontSize: 13.sp),
                       ),
                       Padding(
                         padding:
                             EdgeInsets.only(left: 5.h, bottom: 2.h, top: 2.h),
                         child: Image.asset(
                           AppImages.infoIcon.path,
-                          color: AppColors.white,
                           height: 11.h,
                           width: 11.h,
                         ),
@@ -75,15 +73,14 @@ class _PlayerRanking extends StatelessWidget {
                         SizedBox(height: 15.h),
                         Text(
                           '${rounded - 1}.5',
-                          style: AppTextStyles.qanelasSemiBold(
-                            fontSize: 14.sp,
-                            color: AppColors.white,
+                          style: AppTextStyles.poppinsMedium(
+                            fontSize: 11.sp,
                           ),
                         ),
                         Container(
                           width: 2,
                           height: 7,
-                          color: AppColors.white,
+                          color: AppColors.black,
                         )
                       ],
                     ),
@@ -95,21 +92,21 @@ class _PlayerRanking extends StatelessWidget {
                         Container(
                           alignment: Alignment.center,
                           padding: EdgeInsets.only(
-                            top: 4.h,
-                            bottom: 4.h,
+                            top: 6.h,
+                            bottom: 6.h,
                             right: 14.5.w,
                             left: 14.5.w,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.darkYellow,
+                            color: AppColors.black,
                             borderRadius: BorderRadius.circular(100.r),
                           ),
                           child: Center(
                             child: Text(
                               level.toStringAsFixed(2),
-                              style: AppTextStyles.qanelasBold(
+                              style: AppTextStyles.poppinsBold(
                                 color: AppColors.white,
-                                fontSize: 16.sp,
+                                fontSize: 12.sp,
                               ),
                             ),
                           ),
@@ -123,15 +120,14 @@ class _PlayerRanking extends StatelessWidget {
                         SizedBox(height: 15.h),
                         Text(
                           '${rounded + 1}.5',
-                          style: AppTextStyles.qanelasSemiBold(
-                            color: AppColors.white,
-                            fontSize: 14.sp,
+                          style: AppTextStyles.poppinsMedium(
+                            fontSize: 11.sp,
                           ),
                         ),
                         Container(
                           width: 2,
                           height: 7,
-                          color: Colors.white,
+                          color: AppColors.black,
                         )
                       ],
                     ),
@@ -151,9 +147,9 @@ class _PlayerRanking extends StatelessWidget {
                     builder: (context, value, _) => LinearProgressIndicator(
                       minHeight: 10,
                       value: value,
-                      color: AppColors.darkYellow,
+                      color: AppColors.black,
                       borderRadius: BorderRadius.circular(10.r),
-                      backgroundColor: Colors.white,
+                      backgroundColor: AppColors.darkYellow50,
                     ),
                   ),
                 ),
@@ -164,14 +160,14 @@ class _PlayerRanking extends StatelessWidget {
                   Container(
                     width: 2,
                     height: 10,
-                    color: AppColors.black2,
+                    color: AppColors.gray,
                     margin: const EdgeInsets.only(top: 40),
                   ),
                   const Expanded(child: SizedBox()),
                   Container(
                     width: 2,
                     height: 10,
-                    color: AppColors.black2,
+                    color: AppColors.gray,
                     margin: const EdgeInsets.only(top: 40),
                   ),
                   const Expanded(child: SizedBox())
@@ -190,20 +186,20 @@ class _PlayerRanking extends StatelessWidget {
                   children: [
                     Text(
                       'LEVEL_RELIABILITY'.tr(context),
-                      style: AppTextStyles.qanelasRegular(
-                          color: AppColors.white, fontSize: 12.sp),
+                      style: AppTextStyles.poppinsRegular(
+                          fontSize: 12.sp),
                     ),
                     Text(
                       ': ',
-                      style: AppTextStyles.qanelasRegular(
-                          color: AppColors.white, fontSize: 12.sp),
+                      style: AppTextStyles.poppinsRegular(
+                          fontSize: 12.sp),
                     ),
                     Text(
                       reliability != null
                           ? '${reliability?.toStringAsFixed(0)}%'
                           : '0%',
-                      style: AppTextStyles.qanelasSemiBold(
-                          color: AppColors.white, fontSize: 12.sp),
+                      style: AppTextStyles.poppinsSemiBold(
+                          fontSize: 12.sp),
                     ),
                   ],
                 ),
@@ -215,13 +211,13 @@ class _PlayerRanking extends StatelessWidget {
                   children: [
                     Text(
                       'MATCHES_PLAYED'.tr(context),
-                      style: AppTextStyles.qanelasRegular(
-                          color: AppColors.white, fontSize: 12.sp),
+                      style: AppTextStyles.poppinsRegular(
+                          fontSize: 12.sp),
                     ),
                     Text(
                       ':  ',
-                      style: AppTextStyles.qanelasRegular(
-                          color: AppColors.white, fontSize: 12.sp),
+                      style: AppTextStyles.poppinsRegular(
+                          fontSize: 12.sp),
                     ),
                     Container(
                       width: 35.w,
@@ -233,7 +229,7 @@ class _PlayerRanking extends StatelessWidget {
                       ),
                       child:   Text(
                         '${matchPlayed ?? 0}',
-                        style: AppTextStyles.qanelasSemiBold(
+                        style: AppTextStyles.poppinsSemiBold(
                             color: AppColors.black2, fontSize: 12.sp),
                       )
                     )
@@ -322,12 +318,12 @@ class _LevelConversionDialog extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text("RANKING_LABEL".trU(context),
-                          style: AppTextStyles.qanelasSemiBold(
+                          style: AppTextStyles.poppinsSemiBold(
                             color: AppColors.white,
                             fontSize: 16.sp,
                           )),
                       Text("NUMERIC_LEVEL".trU(context),
-                          style: AppTextStyles.qanelasSemiBold(
+                          style: AppTextStyles.poppinsSemiBold(
                             color: AppColors.white,
                             fontSize: 16.sp,
                           )),
@@ -354,7 +350,7 @@ class _LevelConversionDialog extends StatelessWidget {
                                 entry.value
                                     .replaceFirst('(', '')
                                     .replaceFirst(RegExp(r'\)[^)]*$'), ''),
-                                style: AppTextStyles.qanelasRegular(
+                                style: AppTextStyles.poppinsRegular(
                                     color: AppColors.white),
                                 textAlign: TextAlign.center,
                               ),
@@ -362,7 +358,7 @@ class _LevelConversionDialog extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 entry.key.toString(),
-                                style: AppTextStyles.qanelasRegular(
+                                style: AppTextStyles.poppinsRegular(
                                     color: AppColors.white),
                                 textAlign: TextAlign.center,
                               ),
@@ -412,9 +408,9 @@ class _PlayerStats extends ConsumerWidget {
       children: [
         // player stats
         Text(
-          'PLAYER_STATS'.trU(context),
-          style: AppTextStyles.qanelasMedium(
-            fontSize: 17.sp,
+          'PLAYER_STATS'.tr(context),
+          style: AppTextStyles.poppinsBold(
+            fontSize: 16.sp,
           ),
         ),
         SizedBox(height: 10.h),
@@ -441,15 +437,15 @@ class _PlayerStats extends ConsumerWidget {
         Text(
           txt1,
           textAlign: TextAlign.center,
-          style: AppTextStyles.qanelasSemiBold(
-            fontSize: 16.sp,
+          style: AppTextStyles.poppinsSemiBold(
+            fontSize: 13.sp,
           ),
         ),
         Text(
           txt2,
           textAlign: TextAlign.center,
-          style: AppTextStyles.qanelasRegular(
-            fontSize: 14.sp,
+          style: AppTextStyles.poppinsRegular(
+            fontSize: 13.sp,
           ),
         ),
       ],
@@ -471,14 +467,14 @@ class _PastMatches extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'PAST_MATCHES'.trU(context),
-              style: AppTextStyles.qanelasMedium(
-                fontSize: 17.sp,
+              'PAST_MATCHES'.tr(context),
+              style: AppTextStyles.poppinsBold(
+                fontSize: 16.sp,
               ),
             ),
             Text(
               'WINNING_RATE'.tr(context),
-              style: AppTextStyles.qanelasBold(fontSize: 15.sp),
+              style: AppTextStyles.poppinsSemiBold(fontSize: 13.sp),
             ),
           ],
         ),
@@ -544,7 +540,7 @@ class _PastMatchCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.tileBgColor,
+          color: AppColors.gray,
           borderRadius: BorderRadius.circular(12.r),
         ),
         padding: EdgeInsets.all(15.h),
@@ -555,11 +551,11 @@ class _PastMatchCard extends StatelessWidget {
               children: [
                 Text(
                   date,
-                  style: AppTextStyles.qanelasBold(fontSize: 16.sp),
+                  style: AppTextStyles.poppinsBold(fontSize: 16.sp),
                 ),
                 Text(
                   "${"LEVEL".tr(context)} ${assessment.openMatchLevelRange}",
-                  style: AppTextStyles.qanelasRegular(
+                  style: AppTextStyles.poppinsRegular(
                     fontSize: 13.sp,
                   ),
                 )
@@ -645,10 +641,10 @@ class _TeamScores extends StatelessWidget {
     return Text(
       isReserved ? "RESERVED".tr(context) : (player.getCustomerName),
       style: isWinner
-          ? AppTextStyles.qanelasSemiBold(
+          ? AppTextStyles.poppinsSemiBold(
               fontSize: 15.sp,
             )
-          : AppTextStyles.qanelasRegular(
+          : AppTextStyles.poppinsRegular(
               fontSize: 15.sp,
             ),
     );
@@ -660,10 +656,10 @@ class _TeamScores extends StatelessWidget {
       return Text(
         score.toString(),
         style: isWinner
-            ? AppTextStyles.qanelasMedium(
+            ? AppTextStyles.poppinsMedium(
                 fontSize: 17.sp,
               )
-            : AppTextStyles.qanelasLight(
+            : AppTextStyles.poppinsLight(
                 fontSize: 16.sp,
               ),
       );
@@ -682,7 +678,7 @@ class _TeamScores extends StatelessWidget {
       child: Center(
         child: Text(
           'Winners',
-          style: AppTextStyles.qanelasSemiBold(
+          style: AppTextStyles.poppinsSemiBold(
             fontSize: 16.sp,
           ),
         ),
@@ -701,7 +697,7 @@ class _TeamScores extends StatelessWidget {
       child: Center(
         child: Text(
           'DRAW',
-          style: AppTextStyles.qanelasSemiBold(
+          style: AppTextStyles.poppinsSemiBold(
             fontSize: 16.sp,
           ),
         ),
@@ -739,7 +735,7 @@ class _RankingProgressionState extends ConsumerState<_RankingProgression> {
       children: [
         Text(
           'RANKING_PROGRESSION'.trU(context),
-          style: AppTextStyles.qanelasMedium(
+          style: AppTextStyles.poppinsMedium(
             fontSize: 17.sp,
             color: AppColors.black2
           ),
@@ -813,7 +809,7 @@ class _MatchCountButton extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: AppTextStyles.qanelasSemiBold(
+          style: AppTextStyles.poppinsSemiBold(
             fontSize: 14.sp,
             color: isSelected ? AppColors.black2 : AppColors.black70,
           ),

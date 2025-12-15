@@ -22,9 +22,9 @@ class OpenMatchChooseSpotDialog extends StatelessWidget {
               OpenMatchParticipantRowWithBG(
                 textForAvailableSlot: "RESERVE".trU(context),
                 players: players,
-                backgroundColor: AppColors.black25,
+                backgroundColor: AppColors.gray,
                 textColor: AppColors.black2,
-                slotBackgroundColor: AppColors.black2,
+                slotBackgroundColor: AppColors.darkYellow80,
                 imageBgColor: AppColors.white,
                 imageLogoColor: AppColors.black2,
                 onTap: (index, playerID) {
@@ -93,12 +93,12 @@ class _WaitingForApprovalDialogState
                                 height: 40.w),
                             Text(
                               data[i].getCustomerName,
-                              style: AppTextStyles.qanelasBold(),
+                              style: AppTextStyles.poppinsBold(),
                             ),
                             Text(
                               "${data[i].customer?.level(getSportsName(ref))}",
                               // •  Right",
-                              style: AppTextStyles.qanelasBold(
+                              style: AppTextStyles.poppinsBold(
                                 height: 0.9,
                               ),
                             ),
@@ -415,7 +415,7 @@ class _AddPlayerToWaitingListDialogState
           children: [
             Text(
               "ARE_YOU_SURE".trU(context),
-              style: AppTextStyles.qanelasMedium(
+              style: AppTextStyles.poppinsMedium(
                 fontSize: 19.sp,
                 color: AppColors.black2,
               ),
@@ -426,7 +426,7 @@ class _AddPlayerToWaitingListDialogState
                 "PLAYER_NAME": user.fullName
               }),
               textAlign: TextAlign.center,
-              style: AppTextStyles.qanelasRegular(
+              style: AppTextStyles.poppinsRegular(
                 fontSize: 15.sp,
                 color: AppColors.black2,
               ),
@@ -462,7 +462,7 @@ class _AddPlayerToWaitingListDialogState
               children: [
                 Text(
                   "CHOOSE_YOUR_SPOT".trU(context),
-                  style: AppTextStyles.qanelasMedium(
+                  style: AppTextStyles.poppinsMedium(
                     fontSize: 19.sp,
                     color: AppColors.black2,
                   ),
@@ -544,7 +544,7 @@ class _AddPlayerToWaitingListDialogState
         children: [
           Text(
             "ADD_PLAYERS".trU(context),
-            style: AppTextStyles.qanelasMedium(
+            style: AppTextStyles.poppinsMedium(
               fontSize: 19.sp,
               color: AppColors.black2,
             ),
@@ -562,11 +562,11 @@ class _AddPlayerToWaitingListDialogState
               prefixIcon: Icon(Icons.search, color: AppColors.black50),
               controller: searchController,
               hintText: "SEARCH".tr(context),
-              style: AppTextStyles.qanelasRegular(
+              style: AppTextStyles.poppinsRegular(
                 color: AppColors.black2,
                 fontSize: 13.sp,
               ),
-              hintTextStyle: AppTextStyles.qanelasRegular(
+              hintTextStyle: AppTextStyles.poppinsRegular(
                 color: AppColors.black2,
                 fontSize: 13.sp,
               ),
@@ -585,7 +585,7 @@ class _AddPlayerToWaitingListDialogState
             alignment: Alignment.centerLeft,
             child: Text(
               searchQuery.isEmpty ? "ALL_USERS".tr(context) : "SEARCH_RESULTS".tr(context),
-              style: AppTextStyles.qanelasMedium(
+              style: AppTextStyles.poppinsMedium(
                 fontSize: 16.sp,
                 color: AppColors.black2,
               ),
@@ -617,7 +617,7 @@ class _AddPlayerToWaitingListDialogState
         padding: EdgeInsets.symmetric(vertical: 20.h),
         child: Text(
           "NO_RESULTS_FOUND".tr(context),
-          style: AppTextStyles.qanelasRegular(
+          style: AppTextStyles.poppinsRegular(
             fontSize: 14.sp,
             color: AppColors.black2,
           ),
@@ -724,7 +724,7 @@ class _UserItemForWaitingList extends ConsumerWidget {
               children: [
                 Text(
                   user.fullName.toUpperCase(),
-                  style: AppTextStyles.qanelasMedium(
+                  style: AppTextStyles.poppinsMedium(
                     fontSize: 12.sp,
                     color: AppColors.black2,
                   ),
@@ -733,7 +733,7 @@ class _UserItemForWaitingList extends ConsumerWidget {
                   SizedBox(height: 2.h),
                   Text(
                     "FOLLOWING".tr(context),
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       fontSize: 10.sp,
                       color: AppColors.black50,
                     ),
@@ -757,7 +757,7 @@ class _UserItemForWaitingList extends ConsumerWidget {
               isPlayerInWaitingList
                   ? "ADDED".trU(context)
                   : "ADD".trU(context),
-              style: AppTextStyles.qanelasRegular(
+              style: AppTextStyles.poppinsRegular(
                 fontSize: 13.sp,
                 color: AppColors.black2,
               ),

@@ -51,7 +51,7 @@ class _ApprovedRequestDialogState
             "YOU_HAVE_BEEN_ACCEPTED_INTO_THE_MATCH".trU(context),
             textAlign: TextAlign.center,
             style:
-                AppTextStyles.qanelasBold(fontSize: 19.sp)
+                AppTextStyles.poppinsBold(fontSize: 19.sp)
                     .copyWith(letterSpacing: 19.sp * 0.12),
           ),
           SizedBox(height: 20.h),
@@ -63,7 +63,7 @@ class _ApprovedRequestDialogState
             alignment: AlignmentDirectional.centerStart,
             child: Text(
               "CURRENT_PLAYERS".tr(context),
-              style: AppTextStyles.qanelasLight().copyWith(
+              style: AppTextStyles.poppinsLight().copyWith(
                 fontSize: 15.sp,
                 height: 1.3,
               ),

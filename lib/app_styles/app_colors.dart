@@ -9,10 +9,13 @@ class AppColors {
   static Color standardGreen35 = const Color(0xff115945).withOpacity(0.35);
   static Color standardGreen10 = const Color(0xff115945).withOpacity(0.10);
 
-  static const Color darkYellow = Color(0xFFEFBE1F);
-  static Color darkYellow25 = const Color(0xFFEFBE1F).withOpacity(0.25);
-  static Color darkYellow30 = const Color(0xFFEFBE1F).withOpacity(0.30);
-  static Color darkYellow50 = const Color(0xFFEFBE1F).withOpacity(0.50);
+  static const Color darkYellow = Color(0xFFCFFC85);
+  static Color darkYellow25 = const Color(0xFFCFFC85).withOpacity(0.25);
+  static Color darkYellow30 = const Color(0xFFCFFC85).withOpacity(0.30);
+  static Color darkYellow35 = const Color(0xFFCFFC85).withOpacity(0.35);
+  static Color darkYellow50 = const Color(0xFFCFFC85).withOpacity(0.50);
+  static Color darkYellow60 = const Color(0xFFCFFC85).withOpacity(0.60);
+  static Color darkYellow80 = const Color(0xFFCFFC85).withOpacity(0.80);
 
   static Color darkGreen = const Color(0xff084030);
   static Color darkGreen50 = const Color(0xff084030).withOpacity(0.50);
@@ -27,17 +30,19 @@ class AppColors {
 
   static const Color greenShowdow =
       Color(0xff051A0E); // TODO: IF not used remove it
-  static const Color black = Color(0xff000000);
-  static Color black90 = const Color(0xff000000).withOpacity(0.90);
+  static const Color black = Color(0xff171717);
+  static Color black90 = const Color(0xff171717).withOpacity(0.90);
 
   static Color black70 =
-      const Color(0xff000000).withOpacity(0.70); // TODO: IF not used remove it
+      const Color(0xff171717).withOpacity(0.70); // TODO: IF not used remove it
   static Color black25 =
-      const Color(0xff000000).withOpacity(0.25); //  TODO: IF not used remove it
-  static Color black5 = const Color(0xff000000).withOpacity(0.05);
+      const Color(0xff171717).withOpacity(0.25); //  TODO: IF not used remove it
+  static Color black5 = const Color(0xff171717).withOpacity(0.05);
   static Color black10 = black2.withOpacity(0.10);
   static Color black50 = black2.withOpacity(0.5);
+  static Color black80 = black2.withOpacity(0.8);
 
+  static const Color whiteNew = Color(0xffFAFAFA);
   static const Color white = Color(0xffFFFFFF);
   static Color white95 = const Color(0xffFFFFFF).withOpacity(0.95);
   static Color white55 = const Color(0xffFFFFFF).withOpacity(0.55);
@@ -54,6 +59,8 @@ class AppColors {
   static Color darkRosewood = Color(0xffAA867B);
   static Color rosewood25 = Color(0xffC1A39A).withOpacity(0.25);
 
+  static const Color gray = Color(0xffDDDDDD);
+  static Color gray5 = Color(0xffDDDDDD).withOpacity(0.05);
   static const Color darkGray = Color(0xff69756F);
   static Color darkGray50 = const Color(0xff69756F).withOpacity(0.50);
   static const Color lightGray = Color(0xffF4F4F4);

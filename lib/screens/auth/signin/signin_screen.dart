@@ -101,15 +101,15 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
                             10.verticalSpace,
                             Text(
                               "SIGN_IN".trU(context),
-                              style: AppTextStyles.qanelasMedium(
-                                  color: AppColors.black2,
+                              style: AppTextStyles.poppinsBold(
+                                  color: AppColors.black,
                                   fontSize: 30.sp,),
                             ),
                             5.verticalSpace,
                             Text(
                               '${"WELCOME_BACK".tr(context)}',
-                              style: AppTextStyles.qanelasRegular(
-                                color: AppColors.black2,
+                              style: AppTextStyles.poppinsMedium(
+                                color: AppColors.black,
                                 fontSize: 18.sp,
                               ),
                             ),
@@ -122,7 +122,7 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
                                 children: [
                                   Text(
                                     "EMAIL".tr(context),
-                                    style: AppTextStyles.qanelasMedium(
+                                    style: AppTextStyles.poppinsMedium(
                                       fontSize: 19.sp,
                                       color: AppColors.black2
                                     ),
@@ -150,7 +150,7 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
                                   SizedBox(height: 50.h),
                                   Text(
                                     "PASSWORD".tr(context),
-                                    style: AppTextStyles.qanelasMedium(
+                                    style: AppTextStyles.poppinsMedium(
                                       fontSize: 19.sp,
                                       color: AppColors.black2,
                                     ),
@@ -186,7 +186,7 @@ class _SigninScreenState extends ConsumerState<SigninScreen> {
                                       },
                                       child: Text(
                                         "FORGOT_MY_PASSWORD".tr(context),
-                                        style: AppTextStyles.qanelasRegular(
+                                        style: AppTextStyles.poppinsRegular(
                                           fontSize: 15.sp,
                                           color: AppColors.black70,
                                           height: 1,

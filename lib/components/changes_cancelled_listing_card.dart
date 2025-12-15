@@ -26,7 +26,7 @@ class ChangesCancelledListingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: color ?? AppColors.darkYellow,
+        color: color ?? AppColors.gray,
         borderRadius: BorderRadius.circular(12.r),
       ),
       padding: padding ?? EdgeInsets.symmetric(vertical: 2.h, horizontal: 10.w),
@@ -43,8 +43,8 @@ class ChangesCancelledListingCard extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 2.h),
             child: Text(
-              isUpperCase ? text.toUpperCase() : text,
-              style: style ?? AppTextStyles.qanelasMedium(fontSize: 13.sp, color: textColor ?? AppColors.black2),
+              isUpperCase ? text : text,
+              style: style ?? AppTextStyles.poppinsBold(fontSize: 13.sp, color: textColor ?? AppColors.black),
             ),
           ),
         ],

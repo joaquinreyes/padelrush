@@ -32,7 +32,7 @@ class NavBarState extends ConsumerState<NavBar> {
       height: 80.h,
       alignment: Alignment.topCenter,
       decoration: BoxDecoration(
-        color: AppColors.backgroundColor,
+        color: AppColors.white,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(5.r),
           topRight: Radius.circular(5.r),
@@ -50,7 +50,7 @@ class NavBarState extends ConsumerState<NavBar> {
         child: Row(
           children: [
             _item(
-              text: 'PLAY\n& MATCH'.trU(context),
+              text: 'Play &\n   Match'.tr(context),
               index: 0,
               textHeight: 0.99,
               isSelected: pageIndex == 0,
@@ -61,7 +61,7 @@ class NavBarState extends ConsumerState<NavBar> {
               },
             ),
             _item(
-              text: '${'RESERVE'.trU(context)}',
+              text: '${'BOOK_AND_COURT'.tr(context)}',
               index: 1,
               textHeight: 0.90,
               isSelected: pageIndex == 1,
@@ -83,7 +83,7 @@ class NavBarState extends ConsumerState<NavBar> {
             //   },
             // ),
             _item(
-              text: 'PROFILE'.trU(context),
+              text: 'PROFILE'.tr(context),
               index: 2,
               textHeight: 0.90,
               isSelected: pageIndex == 2,
@@ -114,33 +114,34 @@ class NavBarState extends ConsumerState<NavBar> {
           // padding: EdgeInsets.symmetric(horizontal: 4.w),
           // height: 40.h,
           // width: 82.w,
-          margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 15.h),
+          margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 5.h),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            boxShadow: [kBoxShadow],
-            color: isSelected ? AppColors.black2 : AppColors.white,
-            borderRadius: BorderRadius.circular(12.r),
+            boxShadow: isSelected ? [kBoxShadow] : null,
+            color: isSelected ? AppColors.darkYellow : AppColors.transparentColor,
+            borderRadius: BorderRadius.circular(100.r),
           ),
-          child: Column(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // if (index == 3) ...[
-              //   const _Profile(),
-              //   SizedBox(height: 2.h),
-              // ],
+              if (index == 2) ...[
+                const _Profile(),
+                SizedBox(height: 2.h),
+              ],
               Padding(
                 padding:
-                    EdgeInsets.symmetric(horizontal: isSelected ? 8.w : 10.w),
+                    EdgeInsets.symmetric(horizontal: isSelected ? 4.w : 10.w),
                 child: Text(
                   text,
                   style: isSelected
-                      ? AppTextStyles.qanelasMedium(
-                          color: AppColors.white,
-                          fontSize: 15.sp,)
-                      : AppTextStyles.qanelasMedium(
+                      ? AppTextStyles.poppinsBold(
+                          color: AppColors.black,
+                          fontSize: 15.sp,).copyWith(height: 1)
+                      : AppTextStyles.poppinsRegular(
                           color: AppColors.black70,
-                          fontSize: 13.sp,
-                        ),
+                          fontSize: 14.sp,
+                        ).copyWith(height: 1),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -162,8 +163,8 @@ class _Profile extends ConsumerWidget {
       path: user?.user?.profileUrl,
       showBG: true,
       borderRadius: BorderRadius.circular(8.r),
-      width: 23.w,
-      height: 23.h,
+      width: 25.w,
+      height: 25.h,
       bgColor: AppColors.darkRosewood,
     );
   }
@@ -172,9 +173,10 @@ class _Profile extends ConsumerWidget {
 Widget _insetContainer({required Widget child}) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 15.w),
+    margin: EdgeInsets.only(left: 14.5.w,right: 14.5.w,top: 10.h,bottom: 18.h),
     decoration: inset.BoxDecoration(
-      color: AppColors.black5,
-      borderRadius: BorderRadius.circular(5.r),
+      color: AppColors.gray,
+      borderRadius: BorderRadius.circular(100.r),
       boxShadow: kInsetShadow,
     ),
     // padding: EdgeInsets.all(4.h),

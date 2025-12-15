@@ -55,20 +55,20 @@ class _UpComingBookingsState extends ConsumerState<Settings> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'PERSONAL_INFORMATION'.trU(context),
-              style: AppTextStyles.qanelasMedium(
-                  fontSize: 17.sp,),
+              'PERSONAL_INFORMATION'.tr(context),
+              style: AppTextStyles.poppinsBold(
+                  fontSize: 16.sp,),
             ),
             SecondaryImageButton(
               label: "EDIT".tr(context),
               image: AppImages.editIcon.path,
               textColor: AppColors.black,
               iconColor: AppColors.black,
-              color: AppColors.tileBgColor,
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
+              // color: AppColors.tileBgColor,
+              // padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
               imageHeight: 13.h,
               imageWidth: 13.h,
-              labelStyle: AppTextStyles.qanelasRegular(fontSize: 13.sp),
+              labelStyle: AppTextStyles.poppinsRegular(fontSize: 11.sp),
               onTap: () {
                 showDialog(
                   context: context,

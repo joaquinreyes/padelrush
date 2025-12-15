@@ -67,6 +67,7 @@
   "MATCH": "Match",
   "PLAY_N_MATCH": "Play & Match",
   "BOOK_COURT": "Book Court",
+  "BOOK_AND_COURT": "Book\n     Court",
   "BOOK": "Book",
   "COURT": "Court",
   "PROFILE": "Profile",

@@ -203,12 +203,12 @@ class UserMemberships {
       if (usesLeft == null && usageDurationLeft != null) {
         return Text(
           "${(usageDurationLeft ?? 0) / 3600} ${"HOUR".tr(context)}",
-          style: AppTextStyles.qanelasRegular(color: color),
+          style: AppTextStyles.poppinsRegular(color: color),
         );
       }
       return Text(
         "UNLIMITED".tr(context),
-        style: AppTextStyles.qanelasRegular(fontSize: 14.sp, color: color),
+        style: AppTextStyles.poppinsRegular(fontSize: 14.sp, color: color),
       );
     }
     return Column(
@@ -221,13 +221,13 @@ class UserMemberships {
           alignment: Alignment.center,
           child: Text(
             usesLeft.toString(),
-            style: AppTextStyles.qanelasRegular(fontSize: 14.sp, color: color),
+            style: AppTextStyles.poppinsRegular(fontSize: 14.sp, color: color),
           ),
         ),
         SizedBox(width: 5.h),
         Text(
           "REMAINING".tr(context).toLowerCase(),
-          style: AppTextStyles.qanelasRegular(fontSize: 14.sp, color: color),
+          style: AppTextStyles.poppinsRegular(fontSize: 14.sp, color: color),
         )
       ],
     );

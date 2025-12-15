@@ -110,7 +110,7 @@ class __EnterMatchResultsState extends ConsumerState<EnterMatchResults> {
                   children: [
                     Text(
                       "YOUR_OPEN_MATCH".tr(context).capitalizeFirst,
-                      style: AppTextStyles.qanelasLight(
+                      style: AppTextStyles.poppinsLight(
                         fontSize: 16.sp,
 
                       ),
@@ -131,10 +131,10 @@ class __EnterMatchResultsState extends ConsumerState<EnterMatchResults> {
                   color: ref.watch(canProceed) ? AppColors.darkYellow : AppColors.black10,
                   label: "ENTER_RESULTS".tr(context).capitalWord(context, ref.watch(canProceed)),
                   labelStyle: ref.watch(canProceed)
-                      ? AppTextStyles.qanelasMedium(
+                      ? AppTextStyles.poppinsMedium(
                           fontSize: 18.sp,
                         )
-                      : AppTextStyles.qanelasMedium(
+                      : AppTextStyles.poppinsMedium(
                           fontSize: 18.sp,
                           color: AppColors.white,
                         ),

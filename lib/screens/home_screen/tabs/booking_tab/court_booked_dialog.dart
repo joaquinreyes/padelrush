@@ -111,7 +111,7 @@ class _CourtBookedDialogState extends ConsumerState<CourtBookedDialog> {
             borderRadius: BorderRadius.circular(10.r),
             bookings: widget.bookings,
             bookingTime: widget.bookingTime,
-            color: AppColors.darkYellow,
+            // color: AppColors.darkYellow,
             textColor: AppColors.black2,
             courtName: "${widget.court.values.first}",
             // headerTextStyle: AppTextStyles.gothicLight(
@@ -228,7 +228,7 @@ class _CourtBookedDialogState extends ConsumerState<CourtBookedDialog> {
             if (organizerNote.isNotEmpty) ...[
               Text(
                 "NOTE_FROM_THE_ORGANIZER".tr(context),
-                style: AppTextStyles.qanelasLight(fontSize: 16.sp),
+                style: AppTextStyles.poppinsLight(fontSize: 16.sp),
               ),
               SizedBox(height: 5.h),
               Container(
@@ -242,7 +242,7 @@ class _CourtBookedDialogState extends ConsumerState<CourtBookedDialog> {
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
                   child: Text(
                     data.organizerNote ?? "",
-                    style: AppTextStyles.qanelasRegular(fontSize: 13.sp),
+                    style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
                   ),
                 ),
               ),
@@ -251,17 +251,16 @@ class _CourtBookedDialogState extends ConsumerState<CourtBookedDialog> {
             // YOUR_OPEN_MATCH
             Text(
               "YOUR_OPEN_MATCH".tr(context),
-              style: AppTextStyles.qanelasLight( fontSize: 17.sp),
+              style: AppTextStyles.poppinsLight( fontSize: 17.sp),
             ),
             SizedBox(height: 5.h),
             OpenMatchParticipantRowWithBG(
               textForAvailableSlot: "RESERVE".trU(context),
               players: combinedPlayers,
-              backgroundColor: AppColors.white25,
+              backgroundColor: AppColors.gray,
               textColor: AppColors.black2,
               imageLogoColor: AppColors.black2,
               imageBgColor: AppColors.white,
-              slotBackgroundColor: AppColors.black2,
             ),
             SizedBox(height: 15.h),
           ],
@@ -339,8 +338,8 @@ class _CourtLessonBookedDialogState extends ConsumerState<CourtLessonBookedDialo
             title: widget.title,
             courtName: '${widget.courtName}',
             price: widget.price,
-            bgColor: AppColors.darkYellow,
-            textColor: AppColors.black2,
+            bgColor: AppColors.gray,
+            textColor: AppColors.black,
             dividerColor: AppColors.black25,
             isBooked: true,
           ),
@@ -351,7 +350,7 @@ class _CourtLessonBookedDialogState extends ConsumerState<CourtLessonBookedDialo
                 label: 'ADD_TO_CALENDAR'.tr(context),
                 isForPopup: true,
                 image: AppImages.calendar.path,
-                labelStyle: AppTextStyles.qanelasLight(fontSize: 13.sp, color: AppColors.white),
+                // labelStyle: AppTextStyles.poppinsLight(fontSize: 13.sp, color: AppColors.white),
                 borderRadius: 100.r,
                 padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
                 onTap: () {
@@ -372,7 +371,7 @@ class _CourtLessonBookedDialogState extends ConsumerState<CourtLessonBookedDialo
                 image: AppImages.tennisBall.path,
                 imageHeight: 13.h,
                 imageWidth: 13.h,
-                labelStyle: AppTextStyles.qanelasLight(fontSize: 13.sp, color: AppColors.white),
+                // labelStyle: AppTextStyles.poppinsLight(fontSize: 13.sp, color: AppColors.white),
                 borderRadius: 100.r,
                 padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
                 onTap: () {

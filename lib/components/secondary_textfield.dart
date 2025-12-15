@@ -120,7 +120,7 @@ class SecondaryTextField extends StatelessWidget {
               ? cursorColor ?? AppColors.orange50Popup
               : AppColors.errorColor,
           style: style ??
-              AppTextStyles.qanelasRegular(
+              AppTextStyles.poppinsRegular(
                 height: 1,
                 color: AppColors.white,
                 ////fontFamily: kPirulen,
@@ -135,11 +135,11 @@ class SecondaryTextField extends StatelessWidget {
                 ),
             alignLabelWithHint: true,
             labelText: labelText,
-            labelStyle: AppTextStyles.qanelasBold(),
+            labelStyle: AppTextStyles.poppinsBold(),
             helperText: helperText,
             hintText: hintText,
             hintStyle: hintTextStyle ??
-                AppTextStyles.qanelasRegular(
+                AppTextStyles.poppinsRegular(
                   height: 1,
                   color: AppColors.white55,
                   fontSize: 13.sp,

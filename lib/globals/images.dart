@@ -4,6 +4,7 @@ enum AppImages {
   logoGif("$kAssets/logo_gif.gif"),
   webHeader("$kAssets/web_header.png"),
   splashLogo("$kAssets/splash_logo.png"),
+  splashLogoNew("$kAssets/splash_logo_new.png"),
   splashLogo2("$kAssets/splash_logo2.png"),
   authBackground("$kAssets/auth_background_new.jpg"),
   rightArrow("$kAssets/right-arrow.png"),

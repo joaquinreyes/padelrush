@@ -223,8 +223,8 @@ class _NotificationScreenState extends ConsumerState<NotificationScreen> {
                   ),
                 Text(
                   "NOTIFICATIONS".trU(context),
-                  style: AppTextStyles.qanelasMedium(
-                    fontSize: 22.sp,
+                  style: AppTextStyles.pragmaticaObliqueExtendedBold(
+                    fontSize: 24.sp,
                   ),
                 ),
                 SizedBox(height: 10.h),
@@ -252,7 +252,7 @@ class _NotificationScreenState extends ConsumerState<NotificationScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(_error!, style: AppTextStyles.qanelasSemiBold(fontSize: 13.sp)),
+            Text(_error!, style: AppTextStyles.poppinsSemiBold(fontSize: 13.sp)),
             SizedBox(height: 16.h),
             TextButton(
               onPressed: _loadNotifications,
@@ -276,7 +276,7 @@ class _NotificationScreenState extends ConsumerState<NotificationScreen> {
             SizedBox(height: 16.h),
             Text(
               "NO_NOTIFICATIONS".trU(context),
-              style: AppTextStyles.qanelasSemiBold(fontSize: 13.sp),
+              style: AppTextStyles.poppinsSemiBold(fontSize: 13.sp),
             ),
           ],
         ),

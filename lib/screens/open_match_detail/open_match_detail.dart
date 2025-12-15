@@ -183,11 +183,11 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                 //     fontSize: 26.sp,
                 //     color: AppColors.black),
                 Text(
-                  "${"MATCH".trU(context)} \n${"INFORMATION".trU(context)}",
-                  style: AppTextStyles.qanelasMedium(
-                    fontSize: 22.sp,
-                  ),
-                  textAlign: TextAlign.center,
+                  "${"MATCH".trU(context)}\n  ${"INFORMATION".trU(context)}",
+                  style: AppTextStyles.pragmaticaObliqueExtendedBold(
+                    fontSize: 24.sp,
+                  ).copyWith(height: 1),
+                  textAlign: TextAlign.start,
                 ),
                 SizedBox(height: 40.h),
                 if (isCancelled) ...[
@@ -205,7 +205,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                   children: [
                     Text(
                       "PLAYERS".trU(context),
-                      style: AppTextStyles.qanelasMedium(
+                      style: AppTextStyles.poppinsMedium(
                         fontSize: 17.sp,
                       ),
                     ),
@@ -218,10 +218,10 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                 OpenMatchParticipantRowWithBG(
                   textForAvailableSlot: "RESERVE".trU(context),
                   players: service.players ?? [],
-                  slotIconColor: AppColors.white,
-                  backgroundColor: AppColors.tileBgColor,
-                  slotBackgroundColor: AppColors.black2,
-                  imageBgColor: AppColors.black2,
+                  slotIconColor: AppColors.black,
+                  backgroundColor: AppColors.gray,
+                  slotBackgroundColor: AppColors.darkYellow80,
+                  imageBgColor: AppColors.black,
                   onTap: (_, __) async {
                     final currentUserID =
                         ref.read(userManagerProvider).user?.user?.id;
@@ -292,11 +292,11 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: MainButton(
                       enabled: isJoined,
-                      color: AppColors.black,
+                      color: AppColors.darkYellow80,
                       padding: EdgeInsets.symmetric(horizontal: 20.w),
                       showArrow: false,
-                      labelStyle: AppTextStyles.qanelasMedium(
-                          fontSize: 18.sp, color: AppColors.white),
+                      labelStyle: AppTextStyles.poppinsMedium(
+                          fontSize: 16.sp,),
                       label: "${"CHAT".tr(context)} $chatCount",
                       onTap: () {
                         ref.read(goRouterProvider).push(RouteNames.chat,
@@ -372,12 +372,10 @@ class _DataBodyState extends ConsumerState<_DataBody> {
   Widget _shareMatchButton(BuildContext context) {
     return SecondaryImageButton(
       label: "SHARE_MATCH".tr(context),
-      decoration: decoration,
       image: AppImages.whatsaapIcon.path,
       imageHeight: 14.w,
       imageWidth: 14.w,
-      padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 5.h),
-      color: AppColors.tileBgColor,
+      // padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 5.h),
       // labelStyle: AppTextStyles.qanelasLight(
       //   fontSize: 13.sp,
       // ),
@@ -390,13 +388,11 @@ class _DataBodyState extends ConsumerState<_DataBody> {
   SecondaryImageButton _addToCalendarButton(
       BuildContext context, ServiceDetail? service) {
     return SecondaryImageButton(
-      decoration: decoration,
       label: "ADD_TO_CALENDAR".tr(context),
       image: AppImages.calendar.path,
       imageHeight: 15.w,
       imageWidth: 15.w,
-      padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
-      color: AppColors.tileBgColor,
+      // padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
       // labelStyle: AppTextStyles.qanelasLight(
       //   fontSize: 13.sp,
       // ),
@@ -414,14 +410,12 @@ class _DataBodyState extends ConsumerState<_DataBody> {
   SecondaryImageButton _leaveOpenMatch(BuildContext context) {
     final int playerCount = widget.service.players?.length ?? 0;
     return SecondaryImageButton(
-      decoration: decoration,
       label: playerCount == 1
           ? "CANCEL_MATCH".tr(context)
           : "LEAVE_OPEN_MATCH".tr(context),
       image: AppImages.crossIcon.path,
       imageHeight: 8.w,
       imageWidth: 8.w,
-      color: AppColors.tileBgColor,
       // labelStyle: AppTextStyles.qanelasLight(
       //   fontSize: 13.sp,
       // ),
@@ -861,15 +855,15 @@ class __ScoreComponentState extends ConsumerState<_ScoreViewComponent> {
       children: [
         Text(
           "SCORE",
-          style: AppTextStyles.qanelasMedium(fontSize: 17.sp),
+          style: AppTextStyles.poppinsMedium(fontSize: 17.sp),
         ),
         SizedBox(height: 10.h),
         Container(
           padding: EdgeInsets.all(15.h),
           decoration: BoxDecoration(
-            color: AppColors.tileBgColor,
+            color: AppColors.gray,
             border: border,
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(25.r),
           ),
           child: Column(
             children: [
@@ -878,14 +872,14 @@ class __ScoreComponentState extends ConsumerState<_ScoreViewComponent> {
                 children: [
                   Text(
                     widget.service.formatBookingDate,
-                    style: AppTextStyles.qanelasSemiBold(
+                    style: AppTextStyles.poppinsSemiBold(
                       fontSize: 16.sp,
                     ),
                   ),
                   _enterButton(teamAScores, teamBScores),
                   Text(
                     widget.service.openMatchLevelRange,
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       fontSize: 15.sp,
                     ),
                   )
@@ -969,7 +963,7 @@ class __ScoreComponentState extends ConsumerState<_ScoreViewComponent> {
         ),
         child: Text(
           "ENTER_MATCH_RESULTS".tr(context),
-          style: AppTextStyles.qanelasSemiBold(
+          style: AppTextStyles.poppinsSemiBold(
             fontSize: 14.sp,
             color: isEnabled ? AppColors.black2 : AppColors.black25,
           ),
@@ -1039,8 +1033,8 @@ class _TeamScore extends ConsumerWidget {
       return Text(
         score.toString(),
         style: isWinner
-            ? AppTextStyles.qanelasMedium(fontSize: 17.sp)
-            : AppTextStyles.qanelasLight(fontSize: 16.sp),
+            ? AppTextStyles.poppinsMedium(fontSize: 17.sp)
+            : AppTextStyles.poppinsLight(fontSize: 16.sp),
       );
     }
     return Container(height: 1, color: AppColors.black);
@@ -1057,7 +1051,7 @@ class _TeamScore extends ConsumerWidget {
       child: Center(
         child: Text(
           'Winners',
-          style: AppTextStyles.qanelasSemiBold(
+          style: AppTextStyles.poppinsSemiBold(
             fontSize: 16.sp,
           ),
         ),
@@ -1076,7 +1070,7 @@ class _TeamScore extends ConsumerWidget {
       child: Center(
         child: Text(
           'Draw',
-          style: AppTextStyles.qanelasSemiBold(
+          style: AppTextStyles.poppinsSemiBold(
             fontSize: 16.sp,
           ),
         ),
@@ -1094,10 +1088,10 @@ class _TeamScore extends ConsumerWidget {
           ? "RESERVED".tr(context)
           : (player.getCustomerName).capitalizeFirst,
       style: isWinner
-          ? AppTextStyles.qanelasSemiBold(
+          ? AppTextStyles.poppinsSemiBold(
               fontSize: 15.sp,
             )
-          : AppTextStyles.qanelasRegular(
+          : AppTextStyles.poppinsRegular(
               fontSize: 15.sp,
             ),
     );

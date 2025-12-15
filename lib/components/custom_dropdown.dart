@@ -67,7 +67,7 @@ class CustomDropDownState<T> extends State<CustomDropDown<T>> {
               horizontal: 12.w,
             ),
             decoration: BoxDecoration(
-              color: AppColors.black25,
+              color: AppColors.gray,
               borderRadius: widget.borderRadius ?? BorderRadius.circular(8.r),
             ),
             child: Row(
@@ -75,7 +75,7 @@ class CustomDropDownState<T> extends State<CustomDropDown<T>> {
                 Expanded(
                   child: Text(
                     widget.label,
-                    style: AppTextStyles.qanelasRegular()
+                    style: AppTextStyles.poppinsRegular()
                   ),
                 ),
                 AnimatedRotation(

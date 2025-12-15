@@ -158,7 +158,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
               ),
               Text(
                 "${"CLASS".trU(context)}\n ${"INFORMATION".trU(context)}",
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                     fontSize: 22.sp,),
                 textAlign: TextAlign.center,
               ),
@@ -207,7 +207,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "${"PLAYERS".trU(context)} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
-                  style: AppTextStyles.qanelasMedium(
+                  style: AppTextStyles.poppinsMedium(
                       fontSize: 17.sp,),
                 ),
               ),

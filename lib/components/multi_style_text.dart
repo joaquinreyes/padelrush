@@ -25,7 +25,7 @@ class MultiStyleTextFirstLight extends StatelessWidget {
       textParts.length <= 1
           ? TextSpan(
               text: " ${textParts[0]}",
-              style: AppTextStyles.qanelasBold(
+              style: AppTextStyles.poppinsBold(
                 fontSize: fontSize,
                 color: color,
                 height: height,
@@ -34,7 +34,7 @@ class MultiStyleTextFirstLight extends StatelessWidget {
             )
           : TextSpan(
               text: textParts[0],
-              style: AppTextStyles.qanelasBold(
+              style: AppTextStyles.poppinsBold(
                 fontSize: fontSize,
                 color: color,
                 height: height,
@@ -46,7 +46,7 @@ class MultiStyleTextFirstLight extends StatelessWidget {
       textSpans.add(
         TextSpan(
           text: " ${textParts[i]}",
-          style: AppTextStyles.qanelasBold(
+          style: AppTextStyles.poppinsBold(
             fontSize: fontSize,
             color: color,
             height: height,
@@ -97,13 +97,13 @@ class MultiStyleTextLastBold extends StatelessWidget {
           text: '${textParts[i]} ',
           style:
               (i >= boldStartPosition && i < boldStartPosition + boldWordCount)
-                  ? AppTextStyles.qanelasBold(
+                  ? AppTextStyles.poppinsBold(
                       fontSize: fontSize,
                       color: color,
                       height: height,
                       letterSpacing: letterSpacing,
                     )
-                  : AppTextStyles.qanelasBold(
+                  : AppTextStyles.poppinsBold(
                       fontSize: fontSize,
                       color: color,
                       height: height,
@@ -145,7 +145,7 @@ class MultiStyleTextFirstBold extends StatelessWidget {
     textSpans.add(
       TextSpan(
         text: textParts[0],
-        style: AppTextStyles.qanelasBold(
+        style: AppTextStyles.poppinsBold(
           fontSize: fontSize,
           color: color,
           height: height,
@@ -157,7 +157,7 @@ class MultiStyleTextFirstBold extends StatelessWidget {
       textSpans.add(
         TextSpan(
           text: " ${textParts[i]}",
-          style: AppTextStyles.qanelasBold(
+          style: AppTextStyles.poppinsBold(
             fontSize: fontSize,
             color: color,
             height: height,
@@ -203,13 +203,13 @@ class MultiStyleTextPositionLight extends StatelessWidget {
         TextSpan(
           text: '${textParts[i]} ',
           style: i < textBoldPosition
-              ? AppTextStyles.qanelasBold(
+              ? AppTextStyles.poppinsBold(
                   fontSize: fontSize,
                   color: color,
                   height: height,
                   letterSpacing: letterSpacing,
                 )
-              : AppTextStyles.qanelasBold(
+              : AppTextStyles.poppinsBold(
                   fontSize: fontSize,
                   color: color,
                   height: height,
@@ -256,13 +256,13 @@ class MultiStyleTextFirstPositionBold extends StatelessWidget {
         TextSpan(
           text: '${textParts[i]} ',
           style: i < textBoldPosition
-              ? AppTextStyles.qanelasBold(
+              ? AppTextStyles.poppinsBold(
                   fontSize: fontSize,
                   color: color,
                   height: height,
                   letterSpacing: letterSpacing,
                 )
-              : AppTextStyles.qanelasBold(
+              : AppTextStyles.poppinsBold(
                   fontSize: fontSize,
                   color: color,
                   height: height,
@@ -309,11 +309,11 @@ class MultiStyleTextAeonikPositionLight extends StatelessWidget {
         TextSpan(
           text: '${textParts[i]} ',
           style: i < textBoldPosition
-              ? AppTextStyles.qanelasRegular(
+              ? AppTextStyles.poppinsRegular(
                   fontSize: fontSize,
                   color: color,
                 )
-              : AppTextStyles.qanelasRegular(),
+              : AppTextStyles.poppinsRegular(),
         ),
       );
     }
@@ -360,13 +360,13 @@ class MultiStyleTextFirstLastLight extends StatelessWidget {
           text: '${textParts[i]} ',
           style:
               (i >= boldStartPosition && i < boldStartPosition + boldWordCount)
-                  ? AppTextStyles.qanelasBold(
+                  ? AppTextStyles.poppinsBold(
                       fontSize: fontSize,
                       color: color,
                       height: height,
                       letterSpacing: letterSpacing,
                     )
-                  : AppTextStyles.qanelasBold(
+                  : AppTextStyles.poppinsBold(
                       fontSize: fontSize,
                       color: color,
                       height: height,
@@ -416,11 +416,11 @@ class MultiStyleTextPositionBoldFromEnd extends StatelessWidget {
         TextSpan(
             text: '${textParts[i]} ',
             style: (i < boldStartPosition)
-                ? AppTextStyles.qanelasBold(
+                ? AppTextStyles.poppinsBold(
                     fontSize: fontSize,
                     color: color,
                   )
-                : AppTextStyles.qanelasBold(
+                : AppTextStyles.poppinsBold(
                     fontSize: fontSize,
                     color: color,
                     height: height,

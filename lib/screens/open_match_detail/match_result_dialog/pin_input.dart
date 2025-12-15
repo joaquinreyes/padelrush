@@ -71,7 +71,7 @@ class _CustomNumberInputState extends ConsumerState<CustomNumberInput> {
                 textAlign: TextAlign.center,
                 cursorColor: widget.color,
                 maxLength: 1,
-                style: AppTextStyles.qanelasMedium(color: widget.color, fontSize: 16.sp,),
+                style: AppTextStyles.poppinsMedium(color: widget.color, fontSize: 16.sp,),
                 decoration: InputDecoration(
                   isDense: true,
                   counterText: '', // Hide the character counter

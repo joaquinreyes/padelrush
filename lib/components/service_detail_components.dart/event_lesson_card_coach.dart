@@ -42,8 +42,8 @@ class EventLessonCardCoach extends StatelessWidget {
         SizedBox(width: 5.w),
         Flexible(
           child: Text(
-            coachName.trU(context),
-            style: AppTextStyles.qanelasMedium(
+            coachName.tr(context),
+            style: AppTextStyles.poppinsMedium(
               color: textColor ?? AppColors.black,
               fontSize: 12.sp,
             ),
@@ -92,7 +92,7 @@ class ClassCardCoach extends StatelessWidget {
           Flexible(
             child: Text(
               '${"COACH".trU(context)} ${coachName.trU(context)}',
-              style: AppTextStyles.qanelasMedium(
+              style: AppTextStyles.poppinsMedium(
                 color: textColor ?? AppColors.black2,
                 fontSize: 12.sp,
               ),

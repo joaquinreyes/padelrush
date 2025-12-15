@@ -64,7 +64,7 @@ class _FollowUnfollowComponentState
                     children: [
                       Text(
                         "FOLLOWING".tr(context),
-                        style: AppTextStyles.qanelasMedium(
+                        style: AppTextStyles.poppinsMedium(
                           fontSize: 13.sp,
                           color: AppColors.black2,
                         ),
@@ -108,7 +108,7 @@ class _FollowUnfollowComponentState
                     alignment: Alignment.center,
                     child: Text(
                       "UNFOLLOW".tr(context),
-                      style: AppTextStyles.qanelasMedium(
+                      style: AppTextStyles.poppinsMedium(
                         fontSize: 13.sp,
                         color: AppColors.black2,
                       ),
@@ -134,7 +134,7 @@ class _FollowUnfollowComponentState
               alignment: Alignment.center,
               child: Text(
                 "FOLLOW".tr(context),
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                   fontSize: 13.sp,
                   color: AppColors.black2,
                 ),
@@ -163,7 +163,7 @@ class _FollowUnfollowComponentState
               Text(
                 "ARE_YOU_SURE_FOLLOW_PLAYER".trU(context),
                 textAlign: TextAlign.center,
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                   fontSize: 19.sp,
                   color: AppColors.black2,
                 ),
@@ -172,7 +172,7 @@ class _FollowUnfollowComponentState
               Text(
                 "FOLLOW_PLAYER_DESCRIPTION".tr(context),
                 textAlign: TextAlign.center,
-                style: AppTextStyles.qanelasRegular(
+                style: AppTextStyles.poppinsRegular(
                   fontSize: 15.sp,
                   color: AppColors.black2,
                 ),
@@ -193,7 +193,7 @@ class _FollowUnfollowComponentState
                   alignment: Alignment.center,
                   child: Text(
                     "YES_FOLLOW".trU(context),
-                    style: AppTextStyles.qanelasBold(
+                    style: AppTextStyles.poppinsBold(
                       fontSize: 18.sp,
                       color: AppColors.black2,
                     ),
@@ -219,7 +219,7 @@ class _FollowUnfollowComponentState
               Text(
                 "ARE_YOU_SURE_UNFOLLOW_PLAYER".trU(context),
                 textAlign: TextAlign.center,
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                   fontSize: 19.sp,
                   color: AppColors.black2,
                 ),
@@ -228,7 +228,7 @@ class _FollowUnfollowComponentState
               Text(
                 "UNFOLLOW_PLAYER_DESCRIPTION".tr(context),
                 textAlign: TextAlign.center,
-                style: AppTextStyles.qanelasRegular(
+                style: AppTextStyles.poppinsRegular(
                   fontSize: 14.sp,
                   color: AppColors.black2,
                 ),
@@ -249,7 +249,7 @@ class _FollowUnfollowComponentState
                   alignment: Alignment.center,
                   child: Text(
                     "YES_UNFOLLOW".trU(context),
-                    style: AppTextStyles.qanelasBold(
+                    style: AppTextStyles.poppinsBold(
                       fontSize: 18.sp,
                       color: AppColors.black2,
                     ),
@@ -297,7 +297,7 @@ class _FollowUnfollowComponentState
               Text(
                 message,
                 textAlign: TextAlign.center,
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                   fontSize: 16.sp,
                   color: AppColors.black2,
                 ),

@@ -50,7 +50,7 @@ class __LevelAssessmentTab extends ConsumerState<LevelAssessmentTab> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'LEVEL_ASSESSMENT'.tr(context),
-                  style: AppTextStyles.qanelasMedium(
+                  style: AppTextStyles.poppinsMedium(
                       fontSize: 20.sp, color: textColor),
                   textAlign: TextAlign.center,
                 ),
@@ -66,7 +66,7 @@ class __LevelAssessmentTab extends ConsumerState<LevelAssessmentTab> {
               alignment: Alignment.centerLeft,
               child: Text(
                 "${widget.index + 1}. ${widget.levelQuestion.question}",
-                style: AppTextStyles.qanelasRegular(
+                style: AppTextStyles.poppinsRegular(
                     fontSize: 16.sp, color: textColor),
               ),
             ),
@@ -127,7 +127,7 @@ class __LevelAssessmentTab extends ConsumerState<LevelAssessmentTab> {
         margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 9.w),
         decoration: BoxDecoration(
           color: selected
-              ? (isPage ? AppColors.black2 : AppColors.black2)
+              ? (isPage ? AppColors.darkYellow35 : AppColors.darkYellow35)
               : (isPage ? AppColors.tileBgColor : AppColors.tileBgColor),
           borderRadius: BorderRadius.circular(12.r),
         ),
@@ -135,9 +135,9 @@ class __LevelAssessmentTab extends ConsumerState<LevelAssessmentTab> {
           children: [
             SelectedTag(
               isSelected: selected,
-              selectedBorderColor: AppColors.white,
+              selectedBorderColor: AppColors.black70,
               unSelectedBorderColor:
-                  !widget.isPage ? AppColors.black2 : AppColors.black2,
+                  !widget.isPage ? AppColors.black70 : AppColors.black70,
               unSelectedColor: AppColors.white,
               shape: BoxShape.circle,
             ),
@@ -146,14 +146,14 @@ class __LevelAssessmentTab extends ConsumerState<LevelAssessmentTab> {
               child: Text(
                 option.text ?? "",
                 style: selected
-                    ? AppTextStyles.qanelasBold(
-                        color: AppColors.white,
+                    ? AppTextStyles.poppinsMedium(
+                        color: AppColors.black,
                         fontSize: 16.sp,
                       )
-                    : AppTextStyles.qanelasRegular(
+                    : AppTextStyles.poppinsRegular(
                         fontSize: 16.sp,
                         color:
-                            !widget.isPage ? AppColors.black2 : AppColors.black2,
+                            !widget.isPage ? AppColors.black70 : AppColors.black70,
                       ),
               ),
             ),
@@ -185,7 +185,7 @@ class _SelectSports extends ConsumerWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 'PICK_YOUR_PREFERRED_SPORT'.tr(context),
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                     fontSize: 20.sp, color: AppColors.black2),
                 textAlign: TextAlign.center,
               ),
@@ -195,7 +195,7 @@ class _SelectSports extends ConsumerWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 "THIS_CAN_BE_CHANGED_LATER".tr(context),
-                style: AppTextStyles.qanelasRegular(fontSize: 16.sp),
+                style: AppTextStyles.poppinsRegular(fontSize: 16.sp),
               ),
             ),
             SizedBox(height: 20.h),
@@ -240,7 +240,7 @@ class _SelectSports extends ConsumerWidget {
               child: SizedBox(
                 width: 154.50.w,
                 child: MainButton(
-                  label: 'NEXT'.trU(context),
+                  label: 'NEXT'.tr(context),
                   // labelStyle: AppTextStyles.qanelasLight(
                   //     fontSize: 18.sp, color: AppColors.white),
                   showArrow: true,
@@ -275,15 +275,15 @@ class _SelectSports extends ConsumerWidget {
           vertical: 5.h,
         ),
         decoration: BoxDecoration(
-          color: selected ? AppColors.black2 : AppColors.tileBgColor,
+          color: selected ? AppColors.darkYellow35 : AppColors.tileBgColor,
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: Row(
           children: [
             SelectedTag(
               isSelected: selected,
-              selectedBorderColor: AppColors.white,
-              unSelectedBorderColor: AppColors.black2,
+              selectedBorderColor: AppColors.black70,
+              unSelectedBorderColor: AppColors.black70,
               unSelectedColor: AppColors.white,
               shape: BoxShape.circle,
             ),
@@ -292,13 +292,13 @@ class _SelectSports extends ConsumerWidget {
               child: Text(
                 title.sportName ?? "",
                 style: selected
-                    ? AppTextStyles.qanelasBold(
+                    ? AppTextStyles.poppinsMedium(
                         fontSize: 16.sp,
-                        color: AppColors.white,
+                        color: AppColors.black,
                       )
-                    : AppTextStyles.qanelasRegular(
-                        fontSize: 16.sp,
-                        color: AppColors.black2,
+                    : AppTextStyles.poppinsRegular(
+                        fontSize: 14.sp,
+                        color: AppColors.black70,
                       ),
               ),
             ),

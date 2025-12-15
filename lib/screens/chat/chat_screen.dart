@@ -95,8 +95,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         ),
         Text(
           "CHAT".trU(context),
-          style: AppTextStyles.qanelasMedium(
-            fontSize: 22.sp,
+          style: AppTextStyles.pragmaticaObliqueExtendedBold(
+            fontSize: 24.sp,
           ),
           textAlign: TextAlign.center,
         ),
@@ -167,7 +167,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                     .format("h:mm");
 
                 // Generate consistent color for each user based on their ID
-                Color incomingMsgColor = AppColors.darkYellow;
+                Color incomingMsgColor = AppColors.darkYellow80;
                 if (!isSend) {
                   // Use user ID to generate consistent color for this user
                   int userId = message.customerId ?? message.adminId ?? 0;
@@ -183,7 +183,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   int offsetG = (((colorVariation ~/ 4) % 4) - 2) * 15; // Range: -30 to +15
                   int offsetB = (((colorVariation ~/ 8) % 4) - 2) * 15; // Range: -30 to +15
 
-                  incomingMsgColor = Color.fromARGB(
+                  incomingMsgColor = AppColors.gray??Color.fromARGB(
                     255,
                     (baseR + offsetR).clamp(200, 255),
                     (baseG + offsetG).clamp(200, 255),
@@ -230,7 +230,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                         child: Text(
                                           "$name ${role.isNotEmpty ? "(${role.trU(context)})" : ""}"
                                               .toUpperCase(),
-                                          style: AppTextStyles.qanelasMedium(
+                                          style: AppTextStyles.poppinsMedium(
                                             fontSize: 14.sp,
                                             color: isPlayer
                                                 ? AppColors.black2
@@ -240,7 +240,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                         )),
                                   Text(
                                     value,
-                                    style: AppTextStyles.qanelasRegular(
+                                    style: AppTextStyles.poppinsRegular(
                                       fontSize: 16.sp,
                                       color: AppColors.black2,
                                     ),
@@ -251,7 +251,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                           SizedBox(width: 5.w),
                           Text(
                             time,
-                            style: AppTextStyles.qanelasRegular(
+                            style: AppTextStyles.poppinsRegular(
                               fontSize: 13.sp,
                                 color: isSend
                                     ? AppColors.black90
@@ -286,7 +286,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             child: CustomTextField(
               hintText: "TYPE_HERE".tr(context),
               controller: _controller,
-              hintTextStyle: AppTextStyles.qanelasRegular(
+              hintTextStyle: AppTextStyles.poppinsRegular(
                   fontSize: 13.sp, color: AppColors.black25),
               // style: AppTextStyles.qanelasLight(fontSize: 16.sp),
               contentPadding: EdgeInsets.only(

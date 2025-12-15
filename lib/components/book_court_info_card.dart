@@ -25,10 +25,10 @@ class BookCourtInfoCard extends ConsumerWidget {
     this.textPrice,
     this.borderRadius,
     this.dividerColor,
-    this.textColor,
+    this.textColor = AppColors.black,
     this.dataTextStyle0,
     Color? color,
-  }) : color = color ?? AppColors.black2;
+  }) : color = color ?? AppColors.gray;
 
   final Bookings bookings;
   final DateTime bookingTime;
@@ -51,7 +51,7 @@ class BookCourtInfoCard extends ConsumerWidget {
       constraints: kComponentWidthConstraint,
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.all(Radius.circular(12.r)),
+        borderRadius: BorderRadius.all(Radius.circular(25.r)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +63,7 @@ class BookCourtInfoCard extends ConsumerWidget {
                 'LOCATION'.tr(context),
                 style: headerTextStyle0 != null
                     ? headerTextStyle0
-                    : AppTextStyles.qanelasMedium(
+                    : AppTextStyles.poppinsMedium(
                         color: textColor ?? AppColors.white,
                         fontSize: 16.sp
                 ),
@@ -73,7 +73,7 @@ class BookCourtInfoCard extends ConsumerWidget {
                 '${"DATE".tr(context)} & ${"TIME".tr(context)}',
                 style: headerTextStyle0 != null
                     ? headerTextStyle0
-                    : AppTextStyles.qanelasMedium(
+                    : AppTextStyles.poppinsMedium(
                         fontSize: 16.sp,
                         color: textColor ?? AppColors.white)
               ),
@@ -95,8 +95,8 @@ class BookCourtInfoCard extends ConsumerWidget {
                       textAlign: TextAlign.start,
                       style: dataTextStyle0 != null
                           ? dataTextStyle0
-                          : AppTextStyles.qanelasRegular(
-                              fontSize: 15.sp,
+                          : AppTextStyles.poppinsRegular(
+                              fontSize: 13.sp,
                               color: textColor ?? AppColors.white,
                             ),
                     ),
@@ -105,8 +105,8 @@ class BookCourtInfoCard extends ConsumerWidget {
                       bookings.location?.locationName?.capitalizeFirst ?? '',
                       style: dataTextStyle0 != null
                           ? dataTextStyle0
-                          :  AppTextStyles.qanelasRegular(
-                        fontSize: 15.sp,
+                          :  AppTextStyles.poppinsRegular(
+                        fontSize: 13.sp,
                         color: textColor ?? AppColors.white,
                       ),
                     ),
@@ -117,8 +117,8 @@ class BookCourtInfoCard extends ConsumerWidget {
                       textAlign: TextAlign.start,
                       style: dataTextStyle0 != null
                           ? dataTextStyle0
-                          :  AppTextStyles.qanelasSemiBold(
-                        fontSize: 15.sp,
+                          :  AppTextStyles.poppinsRegular(
+                        fontSize: 13.sp,
                         color: textColor ?? AppColors.white,
                       ),
                     ),
@@ -158,8 +158,8 @@ class BookCourtInfoCard extends ConsumerWidget {
                       textAlign: TextAlign.center,
                       style: dataTextStyle0 != null
                           ? dataTextStyle0
-                          :  AppTextStyles.qanelasRegular(
-                        fontSize: 15.sp,
+                          :  AppTextStyles.poppinsRegular(
+                        fontSize: 13.sp,
                         color: textColor ?? AppColors.white,
                       ),
                     ),
@@ -169,8 +169,8 @@ class BookCourtInfoCard extends ConsumerWidget {
                       textAlign: TextAlign.center,
                       style: dataTextStyle0 != null
                           ? dataTextStyle0
-                          :  AppTextStyles.qanelasRegular(
-                        fontSize: 15.sp,
+                          :  AppTextStyles.poppinsRegular(
+                        fontSize: 13.sp,
                         color: textColor ?? AppColors.white,
                       ),
                     ),
@@ -180,8 +180,8 @@ class BookCourtInfoCard extends ConsumerWidget {
                       textAlign: TextAlign.center,
                       style: dataTextStyle0 != null
                           ? dataTextStyle0
-                          :  AppTextStyles.qanelasRegular(
-                        fontSize: 15.sp,
+                          :  AppTextStyles.poppinsRegular(
+                        fontSize: 13.sp,
                         color: textColor ?? AppColors.white,
                       ),
                     ),
@@ -245,7 +245,7 @@ class BookCourtInfoCardLesson extends ConsumerWidget {
               Expanded(
                   child: Text(
                 "${"Coach".tr(context)}  ${coachName?.capitalizeFirst ?? ''} - ${courtName?.capitalizeFirst} " /*'LOCATION'.tr(context)*/,
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                     color: textColor ?? AppColors.black90,
                     fontSize: 16.sp),
               ),
@@ -272,14 +272,14 @@ class BookCourtInfoCardLesson extends ConsumerWidget {
                     Text(
                       courtName?.capitalizeFirst ?? '',
                       textAlign: TextAlign.center,
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         color: textColor ?? AppColors.black,fontSize: 15.sp,
                       ),
                     ),
                     SizedBox(height: 2.h),
                     Text(
                       locationName?.capitalizeFirst ?? '',
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         color: textColor ?? AppColors.black,fontSize: 15.sp,
                       ),
                     ),
@@ -287,7 +287,7 @@ class BookCourtInfoCardLesson extends ConsumerWidget {
                     Text(
                       "${"PRICE".tr(context)} ${Utils.formatPrice(price?.toDouble())}",
                       textAlign: TextAlign.center,
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         color: textColor ?? AppColors.black,fontSize: 15.sp,
                       ),
                     )
@@ -301,7 +301,7 @@ class BookCourtInfoCardLesson extends ConsumerWidget {
                     Text(
                       "${startTime.format("h:mm")} - ${endTime.format("h:mm a").toLowerCase()}",
                       textAlign: TextAlign.center,
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         color: textColor ?? AppColors.black,fontSize: 15.sp,
                       ),
                     ),
@@ -309,7 +309,7 @@ class BookCourtInfoCardLesson extends ConsumerWidget {
                     Text(
                       startTime.format("EE dd MMM"),
                       textAlign: TextAlign.center,
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         color: textColor ?? AppColors.black,fontSize: 15.sp,
                       ),
                     ),
@@ -317,7 +317,7 @@ class BookCourtInfoCardLesson extends ConsumerWidget {
                     Text(
                       "$duration mins${lessonVariant != null ? " : ${lessonVariant?.maximumCapacity ?? ""} pax" : ''}",
                       textAlign: TextAlign.center,
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         color: textColor ?? AppColors.black,fontSize: 15.sp,
                       ),
                     ),
@@ -351,7 +351,7 @@ class WellnessClassesCourtInfoCard extends ConsumerWidget {
             children: [
               Text(
                 'DEEP STRETCH',
-                style: AppTextStyles.qanelasBold(
+                style: AppTextStyles.poppinsBold(
                     color: AppColors.black, letterSpacing: 14.sp * 0.10),
               ),
             ],
@@ -368,12 +368,12 @@ class WellnessClassesCourtInfoCard extends ConsumerWidget {
                     Text(
                       'Move Room',
                       textAlign: TextAlign.center,
-                      style: AppTextStyles.qanelasLight(color: AppColors.black),
+                      style: AppTextStyles.poppinsLight(color: AppColors.black),
                     ),
                     SizedBox(height: 2.h),
                     Text(
                       'Price EUR 250',
-                      style: AppTextStyles.qanelasLight(color: AppColors.black),
+                      style: AppTextStyles.poppinsLight(color: AppColors.black),
                     ),
                   ],
                 ),
@@ -385,13 +385,13 @@ class WellnessClassesCourtInfoCard extends ConsumerWidget {
                     Text(
                       "Mon 24 Apr",
                       textAlign: TextAlign.center,
-                      style: AppTextStyles.qanelasLight(color: AppColors.black),
+                      style: AppTextStyles.poppinsLight(color: AppColors.black),
                     ),
                     SizedBox(height: 2.h),
                     Text(
                       '15:00 - 17:30 pm',
                       textAlign: TextAlign.center,
-                      style: AppTextStyles.qanelasLight(color: AppColors.black),
+                      style: AppTextStyles.poppinsLight(color: AppColors.black),
                     ),
                   ],
                 ),
@@ -433,7 +433,7 @@ class WellnessMembershipCourtInfoCard extends ConsumerWidget {
             children: [
               Text(
                 membershipName,
-                style: AppTextStyles.qanelasBold(
+                style: AppTextStyles.poppinsBold(
                     color: AppColors.black90, letterSpacing: 14.sp * 0.10),
               ),
             ],
@@ -452,7 +452,7 @@ class WellnessMembershipCourtInfoCard extends ConsumerWidget {
                     Text(
                       "${"PRICE".tr(context)} ${Utils.formatPrice(membershipPrice)}",
                       textAlign: TextAlign.center,
-                      style: AppTextStyles.qanelasLight(color: AppColors.black),
+                      style: AppTextStyles.poppinsLight(color: AppColors.black),
                     ),
                   ],
                 ),
@@ -464,7 +464,7 @@ class WellnessMembershipCourtInfoCard extends ConsumerWidget {
                     Text(
                       duration,
                       textAlign: TextAlign.center,
-                      style: AppTextStyles.qanelasLight(color: AppColors.black),
+                      style: AppTextStyles.poppinsLight(color: AppColors.black),
                     ),
                   ],
                 ),

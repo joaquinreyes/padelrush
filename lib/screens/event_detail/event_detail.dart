@@ -158,11 +158,16 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                   ),
                 ),
               ),
-              Text(
-                "${"EVENT".trU(context)}\n ${"INFORMATION".trU(context)}",
-                style: AppTextStyles.qanelasMedium(
-                    fontSize: 22.sp,),
-                textAlign: TextAlign.center,
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "${"EVENT".trU(context)}\n ${"INFORMATION".trU(context)}",
+                  style: AppTextStyles.pragmaticaObliqueExtendedBold(
+                      fontSize: 24.sp,
+                  height: 1,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
               ),
               // Text(
               //   "${"EVENT".trU(context)}\n ${"INFORMATION".trU(context)}",
@@ -190,9 +195,9 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                 children: [
                   Expanded(
                     child: Text(
-                      "${service.service?.isDoubleEvent ?? false ? (scoreSubmitted ? "RANKING_POSITIONS".trU(context) : "TEAMS".trU(context)) : (scoreSubmitted ? "RANKING_POSITIONS".trU(context) : "PLAYERS".trU(context))} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
-                      style: AppTextStyles.qanelasMedium(
-                          fontSize: 17.sp,),
+                      "${service.service?.isDoubleEvent ?? false ? (scoreSubmitted ? "RANKING_POSITIONS".tr(context) : "TEAMS".tr(context)) : (scoreSubmitted ? "RANKING_POSITIONS".tr(context) : "PLAYERS".tr(context))} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
+                      style: AppTextStyles.poppinsBold(
+                          fontSize: 16.sp,),
                     ),
                   ),
                   RankedOrFriendly(
@@ -208,7 +213,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                 constraints: kComponentWidthConstraint,
                 decoration: BoxDecoration(
                   border: border,
-                  color: scoreSubmitted ? AppColors.blue : Colors.white,
+                  color: scoreSubmitted ? AppColors.blue : AppColors.gray,
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: _EventPlayersSlots(
@@ -296,17 +301,17 @@ class _DataBodyState extends ConsumerState<_DataBody> {
 
   Widget _shareMatchButton(BuildContext context) {
     return SecondaryImageButton(
-      decoration: decoration,
+      // decoration: decoration,
       label: "SHARE_EVENT".tr(context),
       // labelStyle: AppTextStyles.qanelasLight(
       //   fontSize: 13.sp,
       // ),
       // padding: EdgeInsets.only(right: 3.w, top: 4.h, bottom: 4.h, left: 3.w),
+      // padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 5.h),
       image: AppImages.whatsaapIcon.path,
       imageHeight: 14.h,
       imageWidth: 14.h,
       // borderRadius: 8.r,
-      color: AppColors.tileBgColor,
       onTap: _shareWhatsAap,
     );
   }
@@ -318,7 +323,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
 
   SecondaryImageButton _addToCalendarButton(BuildContext context) {
     return SecondaryImageButton(
-      decoration: decoration,
+      // decoration: decoration,
       label: "ADD_TO_CALENDAR".tr(context),
       // labelStyle: AppTextStyles.qanelasLight(
       //   fontSize: 13.sp,
@@ -329,7 +334,6 @@ class _DataBodyState extends ConsumerState<_DataBody> {
       // padding: EdgeInsets.only(right: 11.w, top: 4.h, bottom: 4.h, left: 5.w),
 
       // borderRadius: 8.r,
-      color: AppColors.tileBgColor,
       textColor: AppColors.black,
       onTap: () {
         String title =
@@ -345,7 +349,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
 
   SecondaryImageButton _leave(BuildContext context, int? playerWaitingListId) {
     return SecondaryImageButton(
-      decoration: decoration,
+      // decoration: decoration,
       label: ((playerWaitingListId != null)
               ? "LEAVE_WAITING_EVENT"
               : "LEAVE_EVENT")
@@ -358,7 +362,6 @@ class _DataBodyState extends ConsumerState<_DataBody> {
       imageHeight: 8.h,
       imageWidth: 8.h,
       // borderRadius: 8.r,
-      color: AppColors.tileBgColor,
       textColor: AppColors.black,
       onTap: () {
         _onLeave(playerWaitingListId);

@@ -49,7 +49,7 @@ class FollowingFollowerComponent extends ConsumerWidget {
                 alignment: Alignment.center,
                 child: Text(
                   "FOLLOWING".tr(context) + " $count",
-                  style: AppTextStyles.qanelasRegular(
+                  style: AppTextStyles.poppinsRegular(
                     fontSize: 13.sp,
                     color: AppColors.black2,
                   ),
@@ -83,7 +83,7 @@ class FollowingFollowerComponent extends ConsumerWidget {
               ),
               child: Text(
                 "FOLLOWING".trU(context) + " 0",
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                   fontSize: 13.sp,
                   color: AppColors.black2,
                 ),
@@ -134,6 +134,7 @@ class FollowPlayersButton extends StatelessWidget {
           AppImages.addUser.path,
           height: 21.h,
           width: 21.h,
+          color: AppColors.black,
         ));
   }
 }
@@ -166,7 +167,7 @@ class _FollowingListState extends ConsumerState<FollowingList> {
           children: [
             Text(
               "FOLLOWING".trU(context) + " $count",
-              style: AppTextStyles.qanelasMedium(
+              style: AppTextStyles.poppinsMedium(
                 fontSize: 19.sp,
                 color: AppColors.black2,
               ),
@@ -178,7 +179,7 @@ class _FollowingListState extends ConsumerState<FollowingList> {
                 child: Center(
                   child: Text(
                     "NO_FOLLOWING_FOUND".tr(context),
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       fontSize: 14.sp,
                       color: AppColors.black2,
                     ),
@@ -282,7 +283,7 @@ class _FollowingUserItem extends ConsumerWidget {
                 children: [
                   Text(
                     user.following?.fullName.toUpperCase() ?? "",
-                    style: AppTextStyles.qanelasMedium(
+                    style: AppTextStyles.poppinsMedium(
                       fontSize: 12.sp,
                       color: AppColors.black2,
                     ),
@@ -317,7 +318,7 @@ class _FollowingUserItem extends ConsumerWidget {
             alignment: Alignment.center,
             child: Text(
               "UNFOLLOW".tr(context),
-              style: AppTextStyles.qanelasRegular(
+              style: AppTextStyles.poppinsRegular(
                 fontSize: 13.sp,
                 color: AppColors.black2,
               ),
@@ -341,7 +342,7 @@ class _FollowingUserItem extends ConsumerWidget {
               Text(
                 "ARE_YOU_SURE_UNFOLLOW_PLAYER".trU(context),
                 textAlign: TextAlign.center,
-                style: AppTextStyles.qanelasMedium(
+                style: AppTextStyles.poppinsMedium(
                   fontSize: 19.sp,
                   color: AppColors.black2,
                 ),
@@ -350,7 +351,7 @@ class _FollowingUserItem extends ConsumerWidget {
               Text(
                 "UNFOLLOW_PLAYER_DESCRIPTION".tr(context),
                 textAlign: TextAlign.center,
-                style: AppTextStyles.qanelasRegular(
+                style: AppTextStyles.poppinsRegular(
                   fontSize: 14.sp,
                   color: AppColors.black2,
                 ),
@@ -371,7 +372,7 @@ class _FollowingUserItem extends ConsumerWidget {
                   alignment: Alignment.center,
                   child: Text(
                     "YES_UNFOLLOW".trU(context),
-                    style: AppTextStyles.qanelasBold(
+                    style: AppTextStyles.poppinsBold(
                       fontSize: 18.sp,
                       color: AppColors.black2,
                     ),
@@ -404,7 +405,7 @@ class _FollowingUserItem extends ConsumerWidget {
                   Text(
                     "YOU_JUST_UNFOLLOWED_PLAYER".trU(context),
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.qanelasMedium(
+                    style: AppTextStyles.poppinsMedium(
                       fontSize: 16.sp,
                       color: AppColors.black2,
                     ),
@@ -596,7 +597,7 @@ class _FollowPlayersDialogState extends ConsumerState<FollowPlayersDialog> {
                   Text(
                     "YOU_ARE_NOW_FOLLOWING_PLAYER".trU(context),
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.qanelasMedium(
+                    style: AppTextStyles.poppinsMedium(
                       fontSize: 16.sp,
                       color: AppColors.black2,
                     ),
@@ -619,7 +620,7 @@ class _FollowPlayersDialogState extends ConsumerState<FollowPlayersDialog> {
       children: [
         Text(
           "FOLLOW_PLAYERS".trU(context),
-          style: AppTextStyles.qanelasMedium(
+          style: AppTextStyles.poppinsMedium(
             fontSize: 19.sp,
             color: AppColors.black2,
           ),
@@ -634,7 +635,7 @@ class _FollowPlayersDialogState extends ConsumerState<FollowPlayersDialog> {
           child: TextField(
             controller: _searchController,
             onChanged: _onSearchChanged,
-            style: AppTextStyles.qanelasRegular(
+            style: AppTextStyles.poppinsRegular(
               color: AppColors.black2,
               fontSize: 13.sp,
             ),
@@ -644,7 +645,7 @@ class _FollowPlayersDialogState extends ConsumerState<FollowPlayersDialog> {
               prefixIconConstraints:
                   BoxConstraints.tightFor(width: 35.h, height: 20.h),
               hintText: "SEARCH".tr(context),
-              hintStyle: AppTextStyles.qanelasRegular(
+              hintStyle: AppTextStyles.poppinsRegular(
                 color: AppColors.black2.withOpacity(0.5),
                 fontSize: 13.sp,
               ),
@@ -673,7 +674,7 @@ class _FollowPlayersDialogState extends ConsumerState<FollowPlayersDialog> {
             child: Center(
               child: Text(
                 _searchError ?? "",
-                style: AppTextStyles.qanelasRegular(
+                style: AppTextStyles.poppinsRegular(
                   fontSize: 14.sp,
                   color: AppColors.black2,
                 ),
@@ -693,7 +694,7 @@ class _FollowPlayersDialogState extends ConsumerState<FollowPlayersDialog> {
         child: Center(
           child: Text(
             "NO_USERS_FOUND".tr(context),
-            style: AppTextStyles.qanelasRegular(
+            style: AppTextStyles.poppinsRegular(
               fontSize: 14.sp,
               color: AppColors.black2,
             ),
@@ -779,7 +780,7 @@ class _FollowPlayerItem extends StatelessWidget {
         Expanded(
           child: Text(
             user.fullName.toUpperCase(),
-            style: AppTextStyles.qanelasMedium(
+            style: AppTextStyles.poppinsMedium(
               fontSize: 12.sp,
               color: AppColors.black2,
             ),
@@ -801,7 +802,7 @@ class _FollowPlayerItem extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               isFollowing ? "FOLLOWING".tr(context) : "FOLLOW".tr(context),
-              style: AppTextStyles.qanelasRegular(
+              style: AppTextStyles.poppinsRegular(
                 fontSize: 13.sp,
                 color: isFollowing
                     ? AppColors.black2.withOpacity(0.5)
@@ -830,7 +831,7 @@ class _FollowConfirmationDialog extends StatelessWidget {
           Text(
             "ARE_YOU_SURE_FOLLOW_PLAYER".trU(context),
             textAlign: TextAlign.center,
-            style: AppTextStyles.qanelasMedium(
+            style: AppTextStyles.poppinsMedium(
               fontSize: 19.sp,
               color: AppColors.black2,
             ),
@@ -839,7 +840,7 @@ class _FollowConfirmationDialog extends StatelessWidget {
           Text(
             "FOLLOW_PLAYER_DESCRIPTION".tr(context),
             textAlign: TextAlign.center,
-            style: AppTextStyles.qanelasRegular(
+            style: AppTextStyles.poppinsRegular(
               fontSize: 14.sp,
               color: AppColors.black2,
             ),
@@ -859,7 +860,7 @@ class _FollowConfirmationDialog extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 "YES_FOLLOW".trU(context),
-                style: AppTextStyles.qanelasBold(
+                style: AppTextStyles.poppinsBold(
                   fontSize: 18.sp,
                   color: AppColors.black2,
                 ),

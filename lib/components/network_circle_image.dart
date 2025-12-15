@@ -39,24 +39,24 @@ class NetworkCircleImage extends StatelessWidget {
         border: boxBorder,
         borderRadius: borderRadius ?? BorderRadius.circular(0.r),
         // shape: isCircle ? BoxShape.circle : BoxShape.rectangle,
-        color:
-            (showBG && (path?.isEmpty ?? true)) ? (bgColor ??  AppColors.darkYellow50) : Colors.transparent,
-        boxShadow: applyShadow
-            ? [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                  spreadRadius: 1,
-                )
-              ]
-            : null,
+        // color:
+        //     (showBG && (path?.isEmpty ?? true)) ? (bgColor ??  AppColors.darkYellow50) : Colors.transparent,
+        // boxShadow: applyShadow
+        //     ? [
+        //         BoxShadow(
+        //           color: Colors.black.withOpacity(0.1),
+        //           blurRadius: 10,
+        //           spreadRadius: 1,
+        //         )
+        //       ]
+        //     : null,
       ),
       child: path?.isEmpty ?? true
           ? Transform.scale(
-              scale: 0.85,
+              scale: 1,
               child: Image.asset(
                 AppImages.buttonIcon.path,
-                color: logoColor,
+                // color: logoColor,
                 fit: BoxFit.cover,
                 height: 36.w,
                 width: 64.w,

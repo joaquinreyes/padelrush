@@ -30,7 +30,7 @@ class PrivateRankedComponent extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 2.h),
               child: Text(
                 "PRIVATE".tr(context),
-                style: AppTextStyles.qanelasSemiBold(
+                style: AppTextStyles.poppinsSemiBold(
                   fontSize: 14.sp,
                 ),
               )),
@@ -43,7 +43,7 @@ class PrivateRankedComponent extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 2.h),
             child: Text(
               (isRanked ? "RANKED" : "FRIENDLY").tr(context),
-              style: AppTextStyles.qanelasSemiBold(
+              style: AppTextStyles.poppinsSemiBold(
                 fontSize: 14.sp,
               ),
             )),

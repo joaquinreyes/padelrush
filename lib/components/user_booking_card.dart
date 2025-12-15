@@ -24,8 +24,8 @@ class UserBookingCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isPlayerPendingPayment = booking.isPlayerPendingPayment(ref);
     bool isCancelled = booking.isCancelled ?? false;
-    final color = isCancelled || isPlayerPendingPayment ? AppColors.black2 : AppColors.tileBgColor;
-    final textColor = isCancelled || isPlayerPendingPayment ? AppColors.white : AppColors.black;
+    final color = isCancelled || isPlayerPendingPayment ? AppColors.darkYellow60 : AppColors.gray;
+    final textColor = isCancelled || isPlayerPendingPayment ? AppColors.black : AppColors.black;
     return Container(
       padding: EdgeInsets.all(15.h),
       decoration: BoxDecoration(
@@ -54,7 +54,7 @@ class UserBookingCard extends ConsumerWidget {
                     iconColor: AppColors.black2,
                     textColor: AppColors.black2,
                     padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 15.w),
-                    style: AppTextStyles.qanelasSemiBold(fontSize: 13.sp, color: AppColors.black2),
+                    style: AppTextStyles.poppinsSemiBold(fontSize: 13.sp, color: AppColors.black2),
                     text: "BOOKING_UNPAID".tr(context),
                   ),
                   MainButton(
@@ -116,7 +116,7 @@ class UserBookingCard extends ConsumerWidget {
                     height: 30.h,
                     isForPopup: true,
 
-                    labelStyle: AppTextStyles.qanelasBold(
+                    labelStyle: AppTextStyles.poppinsBold(
                         fontSize: 14.sp),
                     padding: EdgeInsets.zero,
                   )
@@ -127,17 +127,17 @@ class UserBookingCard extends ConsumerWidget {
             children: [
               Text(
                 "BOOKING".tr(context),
-                style: AppTextStyles.qanelasBold(
+                style: AppTextStyles.poppinsBold(
                   color: textColor,
-                  fontSize: 16.sp,
+                  fontSize: 15.sp,
                 ),
               ),
               const Spacer(),
               Text(
-                (booking.service?.location?.locationName ?? "").toUpperCase(),
-                style: AppTextStyles.qanelasMedium(
+                (booking.service?.location?.locationName ?? ""),
+                style: AppTextStyles.poppinsBold(
                     color: textColor,
-                    fontSize: 14.sp,),
+                    fontSize: 13.sp,),
               ),
             ],
           ),
@@ -153,7 +153,7 @@ class UserBookingCard extends ConsumerWidget {
                 children: [
                   Text(
                     "${booking.courtName}".capitalizeFirst,
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       color: textColor,
                       fontSize: 13.sp,
                     ),
@@ -161,7 +161,7 @@ class UserBookingCard extends ConsumerWidget {
                   SizedBox(height: 2.h),
                   Text(
                     "${"PRICE".tr(context)} ${Utils.formatPrice(booking.pricePaid(ref))}",
-                    style: AppTextStyles.qanelasRegular(
+                    style: AppTextStyles.poppinsRegular(
                       color: textColor,
                       fontSize: 13.sp,
                     ),
@@ -189,14 +189,14 @@ class UserBookingCard extends ConsumerWidget {
                   // ] else ...[
                     Text(
                       booking.formatBookingDate,
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         color: textColor,
                         fontSize: 13.sp,
                       ),
                     ),
                     Text(
                       booking.formatStartEndTimeAM12.toLowerCase(),
-                      style: AppTextStyles.qanelasRegular(
+                      style: AppTextStyles.poppinsRegular(
                         color: textColor,
                         fontSize: 13.sp,
                       ),

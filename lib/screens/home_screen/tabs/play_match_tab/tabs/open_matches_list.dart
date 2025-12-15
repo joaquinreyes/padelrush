@@ -100,9 +100,9 @@ class _OpenMatchesState extends ConsumerState<OpenMatchesList> {
         Padding(
           padding: EdgeInsets.only(bottom: 15.h),
           child: Text(
-            Utils.formatBookingDate(date, context).toUpperCase(),
-            style: AppTextStyles.qanelasMedium(
-                fontSize: 17.sp,),
+            Utils.formatBookingDate(date, context),
+            style: AppTextStyles.poppinsBold(
+                fontSize: 16.sp,),
           ),
         ),
       );
@@ -155,7 +155,7 @@ class _OpenMatchCard extends ConsumerWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 15.h),
       decoration: BoxDecoration(
-        color: AppColors.tileBgColor,
+        color: AppColors.gray,
         border: border,
         borderRadius: BorderRadius.circular(12.r),
       ),
@@ -168,7 +168,7 @@ class _OpenMatchCard extends ConsumerWidget {
                 flex: 10,
                 child: Text(
                   '${match.bookingDate.format("EEE dd MMM")} | ${match.bookingStartTime.format("h:mm")} - ${match.bookingEndTime.format("h:mm a").toLowerCase()}',
-                  style: AppTextStyles.qanelasSemiBold(
+                  style: AppTextStyles.poppinsBold(
                     fontSize: 14.sp,
                   ),
                 ),
@@ -176,10 +176,10 @@ class _OpenMatchCard extends ConsumerWidget {
               Expanded(
                 flex: 3,
                 child: Text(
-                  (match.service?.location?.locationName ?? "").toUpperCase(),
+                  (match.service?.location?.locationName ?? ""),
                   textAlign: TextAlign.end,
-                  style: AppTextStyles.qanelasMedium(
-                      fontSize: 14.sp,),
+                  style: AppTextStyles.poppinsBold(
+                      fontSize: 13.sp,),
                 ),
               ),
             ],
@@ -188,8 +188,8 @@ class _OpenMatchCard extends ConsumerWidget {
           CDivider(color: AppColors.black5,),
           SizedBox(height: 10.h),
           OpenMatchParticipantRow(
-            textForAvailableSlot: "AVAILABLE".trU(context),
-            backGroundColor: Colors.transparent,
+            textForAvailableSlot: "AVAILABLE".tr(context),
+            backGroundColor: AppColors.white,
             slotIconColor: AppColors.black,
             players: match.players ?? [],
             imageBgColor: AppColors.black2,
@@ -200,12 +200,12 @@ class _OpenMatchCard extends ConsumerWidget {
             children: [
               Text(
                 "${match.court}".capitalizeFirst,
-                style: AppTextStyles.qanelasRegular(fontSize: 13.sp),
+                style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
               ),
               const Spacer(),
               Text(
                 level,
-                style: AppTextStyles.qanelasRegular(fontSize: 13.sp),
+                style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
               ),
             ],
           )

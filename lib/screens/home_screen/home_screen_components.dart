@@ -98,7 +98,7 @@ class __AddProfilePictureState extends ConsumerState<_AddProfilePicture> {
                     padding: EdgeInsets.only(right: 15.w, bottom: 5.h),
                     child: Image.asset(
                       AppImages.iconCamera.path,
-                      color: AppColors.black2,
+                      color: AppColors.black,
                       width: 13.w,
                       height: 13.w,
                     ),
@@ -111,20 +111,19 @@ class __AddProfilePictureState extends ConsumerState<_AddProfilePicture> {
           if (widget.selectDate) ...[
             Text(
               "WHEN_DID_YOU_START_PLAYING".tr(context),
-              style: AppTextStyles.qanelasBold(
-                color: AppColors.black2,
-                fontSize: 16.sp,
+              style: AppTextStyles.poppinsMedium(
+                fontSize: 15.sp,
               ),
               textAlign: TextAlign.start,
             ),
             SizedBox(height: 5.h),
             Text(
               "WHEN_DID_YOU_START_PLAYING_EXPLANATION".tr(context),
-              style: AppTextStyles.qanelasRegular(
-                color: AppColors.black70,
-                fontSize: 15.sp,
+              style: AppTextStyles.poppinsRegular(
+                color: AppColors.black90,
+                fontSize: 13.sp,
               ),
-              textAlign: TextAlign.start,
+              textAlign: TextAlign.center,
             ),
             SizedBox(height: 5.h),
             InkWell(
@@ -151,7 +150,7 @@ class __AddProfilePictureState extends ConsumerState<_AddProfilePicture> {
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: AppColors.black25,
+                    color: AppColors.gray,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Padding(
@@ -165,7 +164,7 @@ class __AddProfilePictureState extends ConsumerState<_AddProfilePicture> {
                             selectedDate == null
                                 ? "mm/yyyy"
                                 : selectedDate!.format("MMMM/yyyy"),
-                            style: AppTextStyles.qanelasRegular(
+                            style: AppTextStyles.poppinsRegular(
                               color: AppColors.black2,
                               fontSize: 13.sp,
                             ),
@@ -215,7 +214,7 @@ class __AddProfilePictureState extends ConsumerState<_AddProfilePicture> {
         width: 90.h,
         height: 90.h,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(100.r),
           image: DecorationImage(
             image: PlatformC().isCurrentOSMobile
                 ? FileImage(_img!)
