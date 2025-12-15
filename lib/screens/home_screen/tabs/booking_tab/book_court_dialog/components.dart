@@ -905,41 +905,28 @@ class _PayMyShareInfoDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12.r),
                 boxShadow: [kBoxShadow],
                 border: Border.all(color: AppColors.black2.withOpacity(.05))),
-            child: Column(
-              children: [
-                Text(
-                  "We will put on hold the remaining amount of the booking until all players pay their share.",
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.poppinsRegular(
-                    fontSize: 15.sp,
-                    color: AppColors.black2,
-                  ),
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: AppTextStyles.poppinsRegular(
+                  fontSize: 15.sp,
+                  color: AppColors.black2,
                 ),
-                SizedBox(height: 10.h),
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    style: AppTextStyles.poppinsRegular(
+                children: [
+                  const TextSpan(
+                      text: "We reserve the right to cancel the court if it's not filled before "),
+                  TextSpan(
+                    text:
+                        "${DateFormat('dd MMMM HH:mm').format(bookingTime)}",
+                    style: AppTextStyles.poppinsBold(
                       fontSize: 15.sp,
                       color: AppColors.black2,
                     ),
-                    children: [
-                      const TextSpan(
-                          text: "If other players do not pay before "),
-                      TextSpan(
-                        text:
-                            "${DateFormat('dd MMMM HH:mm').format(bookingTime.add(Duration(hours: 2)))}",
-                        style: AppTextStyles.poppinsBold(
-                          fontSize: 15.sp,
-                          color: AppColors.black2,
-                        ),
-                      ),
-                      const TextSpan(
-                          text: " you will be charged the remaining amount."),
-                    ],
                   ),
-                ),
-              ],
+                  const TextSpan(
+                      text: "."),
+                ],
+              ),
             ),
           ),
           SizedBox(height: 20.h),

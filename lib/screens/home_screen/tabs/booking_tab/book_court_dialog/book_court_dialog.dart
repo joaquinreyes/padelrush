@@ -420,17 +420,17 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                             ),
                             children: [
                               const TextSpan(
-                                  text: "We will put on hold the remaining amount of the booking. If other players do not pay before "),
+                                  text: "We reserve the right to cancel the court if it's not filled before "),
                               TextSpan(
                                 text:
-                                    "${DateFormat('dd MMMM HH:mm').format(widget.bookingTime.add(Duration(hours: 2)))}",
+                                    "${DateFormat('dd MMMM HH:mm').format(widget.bookingTime)}",
                                 style: AppTextStyles.poppinsBold(
                                   fontSize: 13.sp,
                                   color: AppColors.black2,
                                 ),
                               ),
                               const TextSpan(
-                                  text: " you will be charged the remaining amount."),
+                                  text: "."),
                             ],
                           ),
                         ),
