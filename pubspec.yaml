@@ -131,13 +131,14 @@ flutter:
 
 flutter_native_splash:
   color: "#FFFFFF"
-  image: assets/images/splash_screen.png
+  image: assets/images/padelrush_splash_screen.png
   android_gravity: center
   ios_content_mode: center
   android: true
   ios: true
 
   android_12:
+    image: assets/images/padelrush_splash_screen.png
     icon_background_color: "#FFFFFF"
     color: "#FFFFFF"
     color_dark: "#FFFFFF"
