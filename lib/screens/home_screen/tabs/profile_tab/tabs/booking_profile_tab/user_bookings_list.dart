@@ -11,9 +11,12 @@ import 'package:padelrush/globals/utils.dart';
 import 'package:padelrush/managers/user_manager.dart';
 import 'package:padelrush/models/user_bookings.dart';
 import 'package:padelrush/repository/booking_repo.dart';
+import 'package:padelrush/repository/user_repo.dart';
 import 'package:padelrush/routes/app_pages.dart';
 import 'package:padelrush/routes/app_routes.dart';
 import 'package:padelrush/utils/custom_extensions.dart';
+import 'package:padelrush/screens/home_screen/tabs/booking_tab/book_court_dialog/book_court_dialog.dart';
+import 'package:padelrush/models/court_booking.dart' as bookingModel;
 
 import '../../../../../../globals/constants.dart';
 
@@ -151,7 +154,13 @@ class _UpComingBookingsState extends ConsumerState<UserBookingsList> {
   }
 
   _onTap(bool isOpenMatch, bool isEvent, bool isLessonEvent,
-      UserBookings booking) {
+      UserBookings booking) async {
+    // If booking is unpaid, show payment dialog directly
+    if (booking.isPlayerPendingPayment(ref)) {
+      await _showPaymentDialog(booking);
+      return;
+    }
+
     Future nav;
     if (isEvent || isLessonEvent) {
       if (isLessonEvent) {
@@ -175,5 +184,52 @@ class _UpComingBookingsState extends ConsumerState<UserBookingsList> {
     nav.then((value) {
       ref.invalidate(fetchUserAllBookingsProvider);
     });
+  }
+
+  Future<void> _showPaymentDialog(UserBookings booking) async {
+    String sportName = "";
+    if ((booking.players ?? []).isNotEmpty &&
+        booking.players!.first.customer!.sportsLevel.isNotEmpty) {
+      sportName = booking.players!.first.customer!.sportsLevel.first.sportName ?? "";
+    }
+
+    List<bookingModel.BookingCourts> listCourts = [];
+    (booking.courts ?? []).map((e) {
+      listCourts.add(bookingModel.BookingCourts.fromJson(e.toJson()));
+    }).toList();
+
+    dynamic paid = await showDialog(
+      context: context,
+      builder: (context) {
+        return BookCourtDialog(
+          allowPayLater: false,
+          getPendingPayment: true,
+          showRefund: true,
+          coachId: null,
+          courtPriceRequestType: CourtPriceRequestType.join,
+          bookings: bookingModel.Bookings(
+              id: booking.id,
+              price: booking.service!.price,
+              duration: booking.duration2,
+              isOpenMatch: true,
+              sport: bookingModel.Sport(sportName: sportName),
+              location: bookingModel.Location(
+                  id: booking.service!.location!.id,
+                  courts: listCourts,
+                  locationName: booking.service!.location!.locationName)),
+          bookingTime: booking.bookingStartTime,
+          court: {
+            (booking.courts ?? []).first.id ?? 0:
+                (booking.courts ?? []).first.courtName ?? ""
+          },
+        );
+      },
+    );
+
+    if (paid is bool && paid) {
+      Utils.showMessageDialog(context, "YOU_HAVE_PAID_SUCCESSFULLY".tr(context));
+      ref.invalidate(fetchUserAllBookingsProvider);
+      ref.invalidate(walletInfoProvider);
+    }
   }
 }
