@@ -187,18 +187,19 @@ class _UpComingBookingsState extends ConsumerState<UserBookingsList> {
   }
 
   Future<void> _showPaymentDialog(UserBookings booking) async {
-    String sportName = "";
-    if ((booking.players ?? []).isNotEmpty &&
-        booking.players!.first.customer!.sportsLevel.isNotEmpty) {
-      sportName = booking.players!.first.customer!.sportsLevel.first.sportName ?? "";
-    }
+    try {
+      String sportName = "";
+      if ((booking.players ?? []).isNotEmpty &&
+          booking.players!.first.customer?.sportsLevel.isNotEmpty == true) {
+        sportName = booking.players!.first.customer!.sportsLevel.first.sportName ?? "";
+      }
 
-    List<bookingModel.BookingCourts> listCourts = [];
-    (booking.courts ?? []).map((e) {
-      listCourts.add(bookingModel.BookingCourts.fromJson(e.toJson()));
-    }).toList();
+      List<bookingModel.BookingCourts> listCourts = [];
+      for (var e in (booking.courts ?? [])) {
+        listCourts.add(bookingModel.BookingCourts.fromJson(e.toJson()));
+      }
 
-    dynamic paid = await showDialog(
+      dynamic paid = await showDialog(
       context: context,
       builder: (context) {
         return BookCourtDialog(
@@ -218,10 +219,12 @@ class _UpComingBookingsState extends ConsumerState<UserBookingsList> {
                   courts: listCourts,
                   locationName: booking.service!.location!.locationName)),
           bookingTime: booking.bookingStartTime,
-          court: {
-            (booking.courts ?? []).first.id ?? 0:
-                (booking.courts ?? []).first.courtName ?? ""
-          },
+          court: (booking.courts ?? []).isEmpty
+              ? {}
+              : {
+                  (booking.courts ?? []).first.id ?? 0:
+                      (booking.courts ?? []).first.courtName ?? ""
+                },
         );
       },
     );
@@ -230,6 +233,9 @@ class _UpComingBookingsState extends ConsumerState<UserBookingsList> {
       Utils.showMessageDialog(context, "YOU_HAVE_PAID_SUCCESSFULLY".tr(context));
       ref.invalidate(fetchUserAllBookingsProvider);
       ref.invalidate(walletInfoProvider);
+    }
+    } catch (e) {
+      myPrint("Error showing payment dialog: $e");
     }
   }
 }
