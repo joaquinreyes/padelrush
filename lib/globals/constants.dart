@@ -23,7 +23,8 @@ const int kUserSearchPageSize = 30;
 const kDeepLinkUrl = 'https://share.bookandgo.app/hop';
 
 // const currency = "RM";
-const currency = "EUR";
+// const currency = "EUR";
+const currency = "INR";
 
 const double kDesignHeight = 844;
 const double kDesignWidth = 390;

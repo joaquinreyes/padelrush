@@ -372,7 +372,7 @@ class WellnessClassesCourtInfoCard extends ConsumerWidget {
                     ),
                     SizedBox(height: 2.h),
                     Text(
-                      'Price EUR 250',
+                      'Price INR 250',
                       style: AppTextStyles.poppinsLight(color: AppColors.black),
                     ),
                   ],

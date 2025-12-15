@@ -10,6 +10,13 @@ class CoachListModel {
   int? positionList;
   int? minimumBookTime;
   List<LocationLesson>? location;
+  List<Sport>? sports;
+
+  /// Returns comma-separated list of sport names (e.g., "Padel, Pickleball")
+  String get sportNames {
+    if (sports == null || sports!.isEmpty) return '';
+    return sports!.map((s) => s.sportName ?? '').where((s) => s.isNotEmpty).join(', ');
+  }
 
   CoachListModel(
       {this.id,
@@ -20,7 +27,8 @@ class CoachListModel {
         this.description,
         this.positionList,
         this.location,
-        this.minimumBookTime});
+        this.minimumBookTime,
+        this.sports});
 
   CoachListModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -37,6 +45,12 @@ class CoachListModel {
         location!.add(LocationLesson.fromJson(v));
       });
     }
+    if (json['sport'] != null) {
+      sports = <Sport>[];
+      json['sport'].forEach((v) {
+        sports!.add(Sport.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -51,6 +65,9 @@ class CoachListModel {
     data['minimum_book_time'] = minimumBookTime;
     if (location != null) {
       data['location'] = location!.map((v) => v.toJson()).toList();
+    }
+    if (sports != null) {
+      data['sport'] = sports!.map((v) => v.toJson()).toList();
     }
     return data;
   }

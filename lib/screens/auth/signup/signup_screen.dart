@@ -160,8 +160,9 @@ class __SignupFlowState extends ConsumerState<_SignupFlow> {
                       _SignUpFormTab(
                         registerModel: registerModel,
                         onProceed: () {
+                          // Skip sports selection (page 1) and go directly to page 2
                           pageController.animateToPage(
-                            1,
+                            2,
                             duration: kAnimationDuration,
                             curve: Curves.linear,
                           );
@@ -254,7 +255,8 @@ class __SignupFlowState extends ConsumerState<_SignupFlow> {
   _onBack() {
     if (pageIndex == 0) {
       Navigator.pop(context);
-    } else if (pageIndex == 1) {
+    } else if (pageIndex == 1 || pageIndex == 2) {
+      // Skip sports selection page when going back
       pageController.animateToPage(0,
           duration: kAnimationDuration, curve: Curves.linear);
     } else {

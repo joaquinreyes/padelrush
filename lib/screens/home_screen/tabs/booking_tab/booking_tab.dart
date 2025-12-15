@@ -224,7 +224,7 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
         children: [
           _Selector(title: 'COURTS'.trU(context), index: 0),
           _Selector(title: "COACHES".trU(context), index: 1),
-          _Selector(title: "SAUNA".trU(context), index: 2),
+          // _Selector(title: "SAUNA".trU(context), index: 2), // Recovery tab hidden
         ],
       ),
     );
@@ -397,25 +397,25 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
   }
 
   Widget _lessonsBody() {
+    final selectedSport = ref.watch(selectedSportLessonProvider);
     return LayoutBuilder(
       builder: (context, constraint) {
-        // final sportList = [...sports];
-        // sportList.removeWhere(
-        //     (e) => (e.sportName ?? "").toLowerCase() == "recovery");
+        final sportList = [...sports];
+        sportList.removeWhere(
+            (e) => (e.sportName ?? "").toLowerCase() == "recovery");
         return SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: ConstrainedBox(
             constraints: BoxConstraints(minHeight: constraint.maxHeight),
             child: Column(
               children: [
-                // _sportsRow(sportList, selectedSport,
-                //     (ClubLocationSports sport) {
-                //   ref.read(_selectedTimeSlotAndLocationID.notifier).state =
-                //       (null, null);
-                //
-                //   ref.read(selectedSportLessonProvider.notifier).sport = sport;
-                // }),
-                // SizedBox(height: 15.h),
+                _sportsRow(sportList, selectedSport,
+                    (ClubLocationSports sport) {
+                  ref.read(_selectedTimeSlotAndLocationID.notifier).state =
+                      (null, null);
+                  ref.read(selectedSportLessonProvider.notifier).sport = sport;
+                }),
+                SizedBox(height: 15.h),
                 ExpandablePageView(
                   physics: const NeverScrollableScrollPhysics(),
                   controller: ref.watch(_pageViewController),
@@ -821,9 +821,11 @@ class _LessonState extends ConsumerState<LessonsList> {
     final dateLessonsRangeProvider = ref.watch(_dateLessonsRangeProvider);
     final startDate = dateLessonsRangeProvider.startDate!;
     final endDate = dateLessonsRangeProvider.endDate!;
+    final selectedSport = ref.watch(selectedSportLessonProvider);
+    final sportName = selectedSport?.sportName?.toLowerCase() ?? "padel";
     final lessons = ref.watch(lessonsSlotProvider(
         startTime: !isDateLessonSelected ? startDate : date.dateTime,
-        sportName: "padel",
+        sportName: sportName,
         endTime: !isDateLessonSelected ? endDate : null,
         coachId: selectedLessonCoachId,
         duration: null));

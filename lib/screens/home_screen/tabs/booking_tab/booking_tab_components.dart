@@ -695,9 +695,9 @@ class _Selector extends ConsumerWidget {
             title,
             textAlign: TextAlign.center,
             style: isServiceSelected
-                ? AppTextStyles.pragmaticaObliqueExtendedBold(fontSize: 20.sp)
+                ? AppTextStyles.pragmaticaObliqueExtendedBold(fontSize: 26.sp)
                 : AppTextStyles.pragmaticaExtendedBold(
-                    fontSize: 14.sp,
+                    fontSize: 20.sp,
                     color: AppColors.black70,
                   ),
           ),
@@ -1389,6 +1389,7 @@ class _CoachSelection extends ConsumerWidget {
   Widget _buildCoachContent(CoachListModel coach, bool isSelected) {
     final coachName = coach.fullName ?? "";
     final coachProfile = coach.profileUrl ?? "";
+    final sportNames = coach.sportNames;
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1408,7 +1409,16 @@ class _CoachSelection extends ConsumerWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        SizedBox(height: 10.h),
+        if (sportNames.isNotEmpty)
+          Flexible(
+            child: Text(
+              sportNames,
+              style: AppTextStyles.poppinsLight(fontSize: 9.sp, color: AppColors.black70),
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        SizedBox(height: 5.h),
       ],
     );
   }

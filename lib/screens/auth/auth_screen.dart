@@ -81,7 +81,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                     ),
                     const Spacer(),
                     Image.asset(
-                      AppImages.splashLogoNew.path,
+                      'assets/images/padelrush_logo.png',
                       width: double.infinity,
                       alignment: Alignment.center,
                       // height: 92.h,

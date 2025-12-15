@@ -133,7 +133,7 @@ class _SplashBody extends StatelessWidget {
         child: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 55.w),
-            child: Image.asset(AppImages.splashLogoNew.path, height: 298.h),
+            child: Image.asset('assets/images/padelrush_splash_screen.png'),
           ),
         ),
       ),

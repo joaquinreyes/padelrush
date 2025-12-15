@@ -166,17 +166,17 @@ class Utils {
   }
 
   static String formatPrice(double? price) {
-    if (price == null) return '0.00 EUR';
+    if (price == null) return '0.00 INR';
 
-    final formatted = NumberFormat('#,##0.00', 'en_AE').format(price);
-    return '$formatted EUR';
+    final formatted = NumberFormat('#,##0.00', 'en_IN').format(price);
+    return '$formatted INR';
   }
 
   static String formatPriceNew(double? price) {
-    if (price == null) return '0 EUR';
+    if (price == null) return '0 INR';
 
-    final formatted = NumberFormat('', 'en_AE').format(price);
-    return '$formatted EUR';
+    final formatted = NumberFormat('', 'en_IN').format(price);
+    return '$formatted INR';
   }
 
   static String formatPriceProfile(double? price) {

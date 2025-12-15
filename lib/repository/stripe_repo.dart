@@ -147,15 +147,15 @@ class StripeRepo {
           googlePay: GooglePayParams(
             testEnv: true,
             merchantName: 'Padel Rush',
-            merchantCountryCode: 'IE',
-            currencyCode: 'EUR',
+            merchantCountryCode: 'IN',
+            currencyCode: 'INR',
           ),
         );
       } else {
         params = PlatformPayConfirmParams.applePay(
           applePay: ApplePayParams(
-            merchantCountryCode: 'IE',
-            currencyCode: 'EUR',
+            merchantCountryCode: 'IN',
+            currencyCode: 'INR',
             cartItems: [
               ApplePayCartSummaryItem.immediate(
                 label: "Padel Rush",

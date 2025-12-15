@@ -29,7 +29,7 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
 
   // bool isCommunicationChecked = false;
 
-  String dialCode = '+353';
+  String dialCode = '+91';
 
   bool get _canProceed =>
       _firstNameController.text.isNotEmpty &&
@@ -186,8 +186,8 @@ class _SignUpFormTabState extends ConsumerState<_SignUpFormTab> {
                                 onChanged: (value) {
                                   dialCode = value.dialCode ?? dialCode;
                                 },
-                                initialSelection: 'IE',
-                                favorite: const ['IE'],
+                                initialSelection: 'IN',
+                                favorite: const ['IN'],
                                 showCountryOnly: false,
                                 showOnlyCountryWhenClosed: false,
                                 alignLeft: false,
