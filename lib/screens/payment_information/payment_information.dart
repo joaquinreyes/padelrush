@@ -231,17 +231,6 @@ class __PaymentInformationState extends ConsumerState<PaymentInformation> {
             ),
             SizedBox(height: 20.h),
             Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "${"Add_PAYMENT_METHOD".tr(context)}",
-                style: AppTextStyles.poppinsMedium(fontSize: 14.sp),
-                textAlign: TextAlign.start,
-              ),
-            ),
-            5.verticalSpace,
-            _buildAddCardWidget(),
-            SizedBox(height: 20.h),
-            Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "${"SELECT_PAYMENT_METHOD".tr(context)}",
