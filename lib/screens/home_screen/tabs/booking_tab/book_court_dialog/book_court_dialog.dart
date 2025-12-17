@@ -21,7 +21,6 @@ import 'package:padelrush/screens/home_screen/tabs/booking_tab/court_booked_dial
 import 'package:padelrush/screens/payment_information/payment_information.dart';
 import 'package:padelrush/utils/custom_extensions.dart';
 import 'package:intl/intl.dart';
-
 import '../../../../../components/secondary_text.dart';
 import '../../../../../models/court_price_model.dart';
 import '../../../../../models/lesson_model_new.dart';
@@ -29,10 +28,8 @@ import '../../../../../repository/play_repo.dart';
 import '../../../../../routes/app_pages.dart';
 import '../../../../../components/open_match_participant_row.dart';
 import '../../../../../models/base_classes/booking_player_base.dart';
-import '../../../../../models/follow_list.dart';
 import '../../../../../repository/user_repo.dart';
 import '../../../../../components/network_circle_image.dart';
-import '../../../../../models/user_search_response.dart';
 import '../../../../../utils/debouncer.dart';
 import '../../../../../models/app_user.dart';
 
@@ -53,10 +50,11 @@ class BookCourtDialog extends ConsumerStatefulWidget {
       this.allowPayLater = true,
       this.allowAddPlayer = true,
       this.getPendingPayment = false,
-      this.joinEvent = false,
+      this.payRemainingEvent = false,
+      this.payRemainingBooking = false,
       this.eventDoubleJoin = false,
-      this.joinLesson = false,
-      this.joinOpenMatch = true,
+      this.payRemainingLesson = false,
+      this.payRemainingOpenMatch = true,
       required this.court});
 
   final Bookings bookings;
@@ -70,10 +68,11 @@ class BookCourtDialog extends ConsumerStatefulWidget {
 
   final bool getPendingPayment;
   final bool allowPayLater;
-  final bool joinEvent;
-  final bool joinOpenMatch;
+  final bool payRemainingEvent;
+  final bool payRemainingBooking;
+  final bool payRemainingOpenMatch;
   final bool eventDoubleJoin;
-  final bool joinLesson;
+  final bool payRemainingLesson;
   final bool defaultOpenMatch;
 
   @override
@@ -91,23 +90,36 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
   void initState() {
     courtIdList = [widget.court.keys.first];
     Future(() {
-      // Always open match now (both payment options are open matches)
-      ref.read(_isOpenMatchProvider.notifier).state = true;
+      final sportName = (widget.bookings.sport?.sportName ?? "").toLowerCase();
+      final allowNormalBooking = !(sportName == "padel" || sportName == "pickleball");
+      if (allowNormalBooking ||  widget.payRemainingBooking || widget.payRemainingEvent || widget.payRemainingLesson) {
+        ref.read(_isOpenMatchProvider.notifier).state = false;
+      } else {
+        // Always open match now (both payment options are open matches)
+        ref.read(_isOpenMatchProvider.notifier).state = true;
 
-      // Default to "Pay full court" (private open match)
-      ref.read(_isPrivateMatchProvider.notifier).state = true;
+        // Default to "Pay your part" (public open match, not private)
+        ref.read(_isPrivateMatchProvider.notifier).state = true;
 
-      // Always ranked matches (not friendly)
-      ref.read(_isFriendlyMatchProvider.notifier).state = false;
-
+        // Always ranked matches (not friendly)
+        ref.read(_isFriendlyMatchProvider.notifier).state = false;
+      }
+      // // Always open match now (both payment options are open matches)
+      // ref.read(_isOpenMatchProvider.notifier).state = true;
+      //
+      // // Default to "Pay full court" (private open match)
+      // ref.read(_isPrivateMatchProvider.notifier).state = true;
+      //
+      // // Always ranked matches (not friendly)
+      // ref.read(_isFriendlyMatchProvider.notifier).state = false;
+      //
       // Always approve players before they join
-      ref.read(_isApprovePlayersProvider.notifier).state = true;
+      ref.read(_isApprovePlayersProvider.notifier).state = false;
 
       ref.invalidate(_organizerNoteProvider);
       ref.invalidate(_matchLevelProvider);
       ref.invalidate(_reserveSpotsForMatchProvider);
       ref.invalidate(_selectedPlayersProvider);
-      ref.invalidate(_payFullCourtInPrivateProvider);
     });
     super.initState();
   }
@@ -115,11 +127,12 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
   @override
   Widget build(BuildContext context) {
     final sportName = (widget.bookings.sport?.sportName ?? "").toLowerCase();
-    final allowPayMyShare = sportName == "padel" || sportName == "pickleball";
+    final allowNormalBooking = !(sportName == "padel" || sportName == "pickleball");
     final isOpenMatch = ref.watch(_isOpenMatchProvider);
     final reserveSpotsForMatch = ref.watch(_reserveSpotsForMatchProvider);
     final isInfraredSauna =
         (widget.bookings.sport?.sportName ?? "").toLowerCase() == "recovery";
+    final allowShowPrivateAndOpenMatch = !widget.getPendingPayment && !allowNormalBooking ;
     final provider = ref.watch(fetchCourtPriceProvider(
         coachId: widget.coachId,
         serviceId: widget.bookings.id ?? 0,
@@ -138,642 +151,713 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Column(
-        children: [
-          Expanded(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.zero,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Back button and title section
+                      SafeArea(
+                        bottom: false,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20.w, vertical: 10.h),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () => Navigator.of(context).pop(),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.h),
+                                      child: Image.asset(
+                                        AppImages.back_arrow_new.path,
+                                        height: 24.h,
+                                        width: 24.h,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 10.h),
+                              Text(
+                                "BOOKING_INFORMATION".trU(context),
+                                style:
+                                    AppTextStyles.popupHeaderTextStyle.copyWith(
+                                  color: AppColors.black2,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        child: Column(
+                          children: [
+                            SizedBox(height: 10.h),
+                            provider.when(
+                              data: (data) {
+                                int? cancellationHour;
+
+                                String? textPrice;
+                                double pricePaid = 0;
+                                if (data is String) {
+                                  if (data.contains("pay your remaining")) {
+                                    isPaid = true;
+                                    textPrice = "PRICE".trU(context);
+                                  } else {
+                                    isPaid = false;
+                                    textPrice = "REFUND".trU(context);
+                                  }
+                                  data.split(" ").map((e) {
+                                    if (double.tryParse(e.toString()) != null) {
+                                      if (isPaid) {
+                                        price =
+                                            double.tryParse(e.toString()) ?? 0;
+                                      } else {
+                                        price = widget.bookings.price ?? 0;
+                                        refundAmount =
+                                            double.tryParse(e.toString()) ?? 0;
+                                      }
+                                      textPrice =
+                                          "$textPrice : ${Utils.formatPrice(isPaid ? price : refundAmount)}";
+                                    }
+                                  }).toList();
+                                } else {
+                                  CourtPriceModel value =
+                                      courtPriceModel = data;
+                                  final double discountedPrice =
+                                      value.discountedPrice ?? 0;
+                                  final double openMatchDiscountedPrice =
+                                      value.openMatchDiscountedPrice ?? 0;
+                                  final double reservePrice =
+                                      value.reservePrice ?? 0;
+
+                                  final isPrivate =
+                                      ref.watch(_isPrivateMatchProvider);
+
+
+                                  // Calculate price based on match type and payment option
+                                  if (isPrivate) {
+                                    // Private Match
+                                    pricePaid = price =  (discountedPrice /
+                                            4); // Pay my share (1/4 of price)
+                                  } else if (widget.payRemainingEvent ||
+                                      widget.payRemainingLesson || widget.payRemainingBooking || allowNormalBooking) {
+                                    // Open Match (public) - always per-person pricing
+                                    pricePaid = price = discountedPrice;
+                                  } else {
+                                    // Open Match (public) - always per-person pricing
+                                    pricePaid = price =
+                                        (openMatchDiscountedPrice +
+                                            (reservePrice *
+                                                (widget.isOnlyOpenMatch
+                                                    ? 1
+                                                    : (reserveSpotsForMatch))));
+                                  }
+
+                                  cancellationHour = value.cancellationPolicy
+                                      ?.openMatchCancellationTimeInHours;
+                                }
+
+                                return Column(
+                                  children: [
+                                    if (cancellationHour != null)
+                                      Padding(
+                                        padding: EdgeInsets.only(bottom: 20.h),
+                                        child: Text(
+                                          cancellationHour == 0
+                                              ? "YOU_WILL_NOT_GET_REFUND_ON_THIS_BOOKING"
+                                                  .tr(context)
+                                              : "CANCELLATION_POLICY_HOURS"
+                                                  .tr(context, params: {
+                                                  "HOUR": cancellationHour
+                                                      .toString()
+                                                }),
+                                          textAlign: TextAlign.center,
+                                          style:
+                                              AppTextStyles.popupBodyTextStyle,
+                                        ),
+                                      ),
+                                    BookCourtInfoCard(
+                                        textPrice: textPrice,
+                                        price: pricePaid,
+                                        bookings: widget.bookings,
+                                        bookingTime: widget.bookingTime,
+                                        courtName: isInfraredSauna
+                                            ? widget.court.values.first
+                                            : "${widget.court.values.first}",
+                                        borderRadius:
+                                            BorderRadius.circular(12.r)),
+                                  ],
+                                );
+                              },
+                              loading: () =>
+                                  const CupertinoActivityIndicator(radius: 10),
+                              error: (error, stackTrace) {
+                                myPrint("stackTrace: $stackTrace");
+                                return SecondaryText(text: error.toString());
+                              },
+                            ),
+                            SizedBox(height: 20.h),
+                            if (allowShowPrivateAndOpenMatch)
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "BOOKING_PAYMENT".tr(context),
+                                  style: AppTextStyles.poppinsMedium(
+                                      fontSize: 15.sp),
+                                ),
+                              ),
+                            SizedBox(height: 10.h),
+                            // Show both buttons for pay full court and pay my share
+
+                            if (!widget.isOnlyOpenMatch &&
+                                !isInfraredSauna && allowShowPrivateAndOpenMatch) ...[
+                              // Tab selector for payment type
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: AppColors.tileBgColor,
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                                padding: EdgeInsets.all(4.h),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          if (!_isProcessing && price != null) {
+                                            setState(
+                                                () => _isProcessing = true);
+                                            try {
+                                              // Pay everything = Private open match
+                                              // Always open match, private (not public)
+                                              ref
+                                                  .read(_isOpenMatchProvider
+                                                      .notifier)
+                                                  .state = true;
+                                              ref
+                                                  .read(_isPrivateMatchProvider
+                                                      .notifier)
+                                                  .state = true;
+                                            } finally {
+                                              setState(
+                                                  () => _isProcessing = false);
+                                            }
+                                          }
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 8.h),
+                                          decoration: BoxDecoration(
+                                            color: ref.watch(
+                                                    _isPrivateMatchProvider)
+                                                ? AppColors.darkYellow
+                                                : Colors.transparent,
+                                            borderRadius:
+                                                BorderRadius.circular(10.r),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              "PAY_FULL_COURT".tr(context),
+                                              style: ref.watch(
+                                                      _isPrivateMatchProvider)
+                                                  ? AppTextStyles.poppinsBold(
+                                                      fontSize: 14.sp,
+                                                      color: AppColors.black,
+                                                    )
+                                                  : AppTextStyles.poppinsMedium(
+                                                      fontSize: 14.sp,
+                                                      color: AppColors.black70,
+                                                    ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 4.w),
+                                    Expanded(
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          if (!_isProcessing && price != null) {
+                                            setState(
+                                                () => _isProcessing = true);
+                                            try {
+                                              // Pay your part = Public open match
+                                              if (!isOpenMatch) {
+                                                final user =
+                                                    ref.read(userProvider);
+                                                final userLevel = user?.user
+                                                        ?.level(widget
+                                                                .bookings
+                                                                .sport
+                                                                ?.sportName ??
+                                                            "padel") ??
+                                                    0.0;
+
+                                                // If user has level 0, show quiz assessment
+                                                if (userLevel == 0.0) {
+                                                  final shouldProceed =
+                                                      await Utils()
+                                                          .checkForLevelAssessment(
+                                                    ref: ref,
+                                                    context: context,
+                                                    sportsName: widget.bookings
+                                                            .sport?.sportName ??
+                                                        "padel",
+                                                  );
+
+                                                  if (!shouldProceed) {
+                                                    return; // Don't proceed if assessment not completed
+                                                  }
+                                                }
+                                              }
+                                              // Always open match, public (not private)
+                                              ref
+                                                  .read(_isOpenMatchProvider
+                                                      .notifier)
+                                                  .state = true;
+                                              ref
+                                                  .read(_isPrivateMatchProvider
+                                                      .notifier)
+                                                  .state = false;
+                                            } finally {
+                                              setState(
+                                                  () => _isProcessing = false);
+                                            }
+                                          }
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 8.h),
+                                          decoration: BoxDecoration(
+                                            color: !ref.watch(
+                                                    _isPrivateMatchProvider)
+                                                ? AppColors.darkYellow
+                                                : Colors.transparent,
+                                            borderRadius:
+                                                BorderRadius.circular(10.r),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              _isProcessing &&
+                                                      !ref.watch(
+                                                          _isPrivateMatchProvider)
+                                                  ? "Loading..."
+                                                  : "PAY_MY_SHARE".tr(context),
+                                              style: !ref.watch(
+                                                      _isPrivateMatchProvider)
+                                                  ? AppTextStyles.poppinsBold(
+                                                      fontSize: 14.sp,
+                                                      color: AppColors.black,
+                                                    )
+                                                  : AppTextStyles.poppinsMedium(
+                                                      fontSize: 14.sp,
+                                                      color: AppColors.black70,
+                                                    ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              // Disclaimer for Open Match
+                              if (!ref.watch(_isPrivateMatchProvider)) ...[
+                                SizedBox(height: 15.h),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 12.w, vertical: 12.h),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.darkYellow30,
+                                    borderRadius: BorderRadius.circular(12.r),
+                                    border: Border.all(
+                                        color:
+                                            AppColors.black2.withOpacity(.05)),
+                                  ),
+                                  child: RichText(
+                                    textAlign: TextAlign.center,
+                                    text: TextSpan(
+                                      style: AppTextStyles.poppinsRegular(
+                                        fontSize: 13.sp,
+                                        color: AppColors.black2,
+                                      ),
+                                      children: [
+                                        const TextSpan(
+                                            text:
+                                                "We reserve the right to cancel the court if it's not filled before "),
+                                        TextSpan(
+                                          text:
+                                              "${DateFormat('dd MMMM HH:mm').format(widget.bookingTime)}",
+                                          style: AppTextStyles.poppinsBold(
+                                            fontSize: 13.sp,
+                                            color: AppColors.black2,
+                                          ),
+                                        ),
+                                        const TextSpan(text: "."),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                              // Disclaimer for Private Match
+                              if (ref.watch(_isPrivateMatchProvider)) ...[
+                                SizedBox(height: 15.h),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 12.w, vertical: 12.h),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.darkYellow30,
+                                    borderRadius: BorderRadius.circular(12.r),
+                                    border: Border.all(
+                                        color:
+                                            AppColors.black2.withOpacity(.05)),
+                                  ),
+                                  child: Text(
+                                    "You will be charged the full amount. You will be refunded to your club wallet when someone else joins and pays their share.",
+                                    textAlign: TextAlign.center,
+                                    style: AppTextStyles.poppinsRegular(
+                                      fontSize: 13.sp,
+                                      color: AppColors.black2,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ] else
+                              MainButton(
+                                enabled: price != null,
+                                label: widget.isOnlyOpenMatch
+                                    ? "GET_REFUND_AND_OPEN_MATCH".tr(context)
+                                    : (isOpenMatch && !isInfraredSauna && allowShowPrivateAndOpenMatch)
+                                        ? "PAY_MY_SHARE".trU(context)
+                                        : "PAY_BOOKING".trU(context),
+                                isForPopup: true,
+                                onTap: () async {
+                                  await _payCourt(
+                                      false,
+                                      isPaid ? price! : (price! - refundAmount),
+                                      refundAmount,
+                                      false);
+                                },
+                              ),
+                            // Show add players component for both Open Match and Private Match
+                            if (widget.bookings.isOpenMatch == true &&
+                                allowShowPrivateAndOpenMatch &&
+                                !isInfraredSauna) ...[
+                              SizedBox(height: 35.h),
+                              _OpenMatch(
+                                allowAddPlayer: widget.allowAddPlayer,
+                              ),
+                            ],
+                            if (!widget.isOnlyOpenMatch)
+                              if (!isOpenMatch && allowAddToCart) ...[
+                                5.verticalSpace,
+                                MainButton(
+                                  // color: AppColors.selectedGreen,
+                                  enabled: price != null,
+                                  label: "ADD_TO_CART".trU(context),
+                                  labelStyle: AppTextStyles.poppinsMedium(
+                                      fontSize: 18.sp, color: AppColors.white),
+                                  color: AppColors.white25,
+                                  isForPopup: true,
+                                  onTap: () async {
+                                    await _payCourt(true, price!, 0, false);
+                                  },
+                                ),
+                              ],
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // Fixed bottom payment button(s)
+              if (allowShowPrivateAndOpenMatch)
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.black.withOpacity(0.1),
+                      blurRadius: 10,
+                      offset: Offset(0, -2),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.only(
+                    left: 20.w, right: 20.w, top: 16.h, bottom: 16.h),
+                child: SafeArea(
+                  top: false,
+                  child: ref.watch(_isPrivateMatchProvider)
+                      ? // Private Match - Show only PAY FULL COURT button
+                      MainButton(
+                          color: AppColors.darkYellow,
+                          enabled: price != null && !_isProcessing,
+                          isForPopup: false,
+                          labelStyle: AppTextStyles.poppinsMedium(
+                              fontSize: 18.sp, color: AppColors.black),
+                          label: "Continue Payment",
+                          onTap: () async {
+                            final fullCourtPrice =
+                                courtPriceModel?.discountedPrice ?? price!;
+                            // payMyShare = false means pay full court
+                            await _payCourt(
+                                false, fullCourtPrice, refundAmount, false);
+                          },
+                        )
+                      : // Open Match - Show single continue button
+                      MainButton(
+                          color: AppColors.darkYellow,
+                          enabled: price != null && !_isProcessing,
+                          isForPopup: false,
+                          labelStyle: AppTextStyles.poppinsMedium(
+                              fontSize: 18.sp, color: AppColors.black),
+                          label: widget.isOnlyOpenMatch
+                              ? "GET_REFUND_AND_OPEN_MATCH".tr(context)
+                              : "Pay My Share",
+                          onTap: () async {
+                            // Open Match - always pay my share
+                            await _payCourt(false, price!, refundAmount,
+                                false); // Always payMyShare = true for Open Match
+                          },
+                        ),
+                ),
+              ),
+            ],
+          ) ??
+          CustomDialog(
+              child: Flexible(
             child: SingleChildScrollView(
-              padding: EdgeInsets.zero,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Back button and title section
-                  SafeArea(
-                    bottom: false,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                      child: Column(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 6.5.w),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "BOOKING_INFORMATION".trU(context),
+                      style: AppTextStyles.popupHeaderTextStyle,
+                    ),
+                    SizedBox(height: 5.h),
+
+                    provider.when(
+                      data: (data) {
+                        int? cancellationHour;
+
+                        String? textPrice;
+                        double pricePaid = 0;
+                        if (data is String) {
+                          if (data.contains("pay your remaining")) {
+                            isPaid = true;
+                            textPrice = "PRICE".trU(context);
+                          } else {
+                            isPaid = false;
+                            textPrice = "REFUND".trU(context);
+                          }
+                          data.split(" ").map((e) {
+                            if (double.tryParse(e.toString()) != null) {
+                              if (isPaid) {
+                                price = double.tryParse(e.toString()) ?? 0;
+                              } else {
+                                price = widget.bookings.price ?? 0;
+                                refundAmount =
+                                    double.tryParse(e.toString()) ?? 0;
+                              }
+                              textPrice =
+                                  "$textPrice : ${Utils.formatPrice(isPaid ? price : refundAmount)}";
+                            }
+                          }).toList();
+                        } else {
+                          CourtPriceModel value = data;
+                          final double discountedPrice =
+                              value.discountedPrice ?? 0;
+                          final double openMatchDiscountedPrice =
+                              value.openMatchDiscountedPrice ?? 0;
+                          pricePaid = price = ref.read(_isOpenMatchProvider)
+                              ? (openMatchDiscountedPrice *
+                                  (widget.isOnlyOpenMatch
+                                      ? 1
+                                      : (reserveSpotsForMatch + 1)))
+                              : discountedPrice;
+
+                          cancellationHour = isOpenMatch
+                              ? value.cancellationPolicy
+                                  ?.openMatchCancellationTimeInHours
+                              : value
+                                  .cancellationPolicy?.cancellationTimeInHours;
+                        }
+
+                        return Column(
+                          children: [
+                            if (cancellationHour != null &&
+                                !widget.getPendingPayment)
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 20.h),
+                                child: Text(
+                                  cancellationHour == 0
+                                      ? "YOU_WILL_NOT_GET_REFUND_ON_THIS_BOOKING"
+                                          .tr(context)
+                                      : "CANCELLATION_POLICY_HOURS"
+                                          .tr(context, params: {
+                                          "HOUR": cancellationHour.toString()
+                                        }),
+                                  textAlign: TextAlign.center,
+                                  style: AppTextStyles.popupBodyTextStyle,
+                                ),
+                              ),
+                            BookCourtInfoCard(
+                              textPrice: textPrice,
+                              price: pricePaid,
+                              bookings: widget.bookings,
+                              bookingTime: widget.bookingTime,
+                              courtName: widget.court.values.first,
+                            ),
+                          ],
+                        );
+                      },
+                      loading: () => const CupertinoActivityIndicator(
+                        radius: 10,
+                        color: AppColors.darkYellow,
+                      ),
+                      error: (error, stackTrace) {
+                        myPrint("stackTrace: $stackTrace");
+                        return SecondaryText(
+                          text: error.toString(),
+                          color: AppColors.black,
+                        );
+                      },
+                    ),
+                    if (!widget.getPendingPayment) SizedBox(height: 20.h),
+                    if (!widget.isOnlyOpenMatch &&
+                        widget.bookings.isOpenMatch == true &&
+                        !widget.getPendingPayment)
+                      Column(
                         children: [
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              GestureDetector(
-                                onTap: () => Navigator.of(context).pop(),
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.h),
-                                  child: Image.asset(
-                                    AppImages.back_arrow_new.path,
-                                    height: 24.h,
-                                    width: 24.h,
+                              Expanded(
+                                child: Text(
+                                  "DO_YOU_WANT_TO_OPEN_THIS_MATCH".tr(context),
+                                  style: AppTextStyles.poppinsMedium(
+                                    fontSize: 14.sp,
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                          SizedBox(height: 10.h),
-                          Text(
-                            "BOOKING_INFORMATION".trU(context),
-                            style: AppTextStyles.popupHeaderTextStyle.copyWith(
-                              color: AppColors.black2,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 10.h),
-                  provider.when(
-                    data: (data) {
-                int? cancellationHour;
-
-                String? textPrice;
-                double pricePaid = 0;
-                if (data is String) {
-                  if (data.contains("pay your remaining")) {
-                    isPaid = true;
-                    textPrice = "PRICE".trU(context);
-                  } else {
-                    isPaid = false;
-                    textPrice = "REFUND".trU(context);
-                  }
-                  data.split(" ").map((e) {
-                    if (double.tryParse(e.toString()) != null) {
-                      if (isPaid) {
-                        price = double.tryParse(e.toString()) ?? 0;
-                      } else {
-                        price = widget.bookings.price ?? 0;
-                        refundAmount = double.tryParse(e.toString()) ?? 0;
-                      }
-                      textPrice =
-                          "$textPrice : ${Utils.formatPrice(isPaid ? price : refundAmount)}";
-                    }
-                  }).toList();
-                } else {
-                  CourtPriceModel value = courtPriceModel = data;
-                  final double discountedPrice =
-                      value.discountedPrice ?? 0;
-                  final double openMatchDiscountedPrice =
-                      value.openMatchDiscountedPrice ?? 0;
-                  final double reservePrice = value.reservePrice ?? 0;
-
-                  final isPrivate = ref.watch(_isPrivateMatchProvider);
-                  final payFullCourt = ref.watch(_payFullCourtInPrivateProvider);
-
-                  // Calculate price based on match type and payment option
-                  if (isPrivate) {
-                    // Private Match
-                    pricePaid = price = payFullCourt
-                        ? discountedPrice  // Pay full court
-                        : (discountedPrice / 4);  // Pay my share (1/4 of price)
-                  } else {
-                    // Open Match (public) - always per-person pricing
-                    pricePaid = price = (openMatchDiscountedPrice +
-                        (reservePrice *
-                            (widget.isOnlyOpenMatch
-                                ? 1
-                                : (reserveSpotsForMatch))));
-                  }
-
-                  cancellationHour = value.cancellationPolicy
-                      ?.openMatchCancellationTimeInHours;
-                }
-
-                return Column(
-                  children: [
-                    if (cancellationHour != null)
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 20.h),
-                        child: Text(
-                          cancellationHour == 0
-                              ? "YOU_WILL_NOT_GET_REFUND_ON_THIS_BOOKING"
-                                  .tr(context)
-                              : "CANCELLATION_POLICY_HOURS".tr(context,
-                                  params: {
-                                      "HOUR": cancellationHour.toString()
-                                    }),
-                          textAlign: TextAlign.center,
-                          style: AppTextStyles.popupBodyTextStyle,
-                        ),
-                      ),
-                    BookCourtInfoCard(
-                        textPrice: textPrice,
-                        price: pricePaid,
-                        bookings: widget.bookings,
-                        bookingTime: widget.bookingTime,
-                        courtName: isInfraredSauna
-                            ? widget.court.values.first
-                            : "${widget.court.values.first}",
-                        borderRadius: BorderRadius.circular(12.r)),
-                  ],
-                );
-                    },
-                    loading: () => const CupertinoActivityIndicator(radius: 10),
-                    error: (error, stackTrace) {
-                      myPrint("stackTrace: $stackTrace");
-                      return SecondaryText(text: error.toString());
-                    },
-                  ),
-                  SizedBox(height: 20.h),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "BOOKING_PAYMENT".tr(context),
-                      style: AppTextStyles.poppinsMedium(fontSize: 15.sp),
-                    ),
-                  ),
-                  SizedBox(height: 10.h),
-                  // Show both buttons for pay full court and pay my share
-                  if (!widget.isOnlyOpenMatch &&
-                      !isInfraredSauna &&
-                      allowPayMyShare) ...[
-                    // Tab selector for payment type
-                    Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.tileBgColor,
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                      padding: EdgeInsets.all(4.h),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () async {
-                                if (!_isProcessing && price != null) {
-                                  setState(() => _isProcessing = true);
-                                  try {
-                                    // Pay everything = Private open match
-                                    // Always open match, private (not public)
-                                    ref.read(_isOpenMatchProvider.notifier).state = true;
-                                    ref.read(_isPrivateMatchProvider.notifier).state = true;
-                                  } finally {
-                                    setState(() => _isProcessing = false);
-                                  }
-                                }
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(vertical: 8.h),
-                                decoration: BoxDecoration(
-                                  color: ref.watch(_isPrivateMatchProvider) ? AppColors.darkYellow : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "PAY_FULL_COURT".tr(context),
-                                    style: ref.watch(_isPrivateMatchProvider)
-                                        ? AppTextStyles.poppinsBold(
-                                            fontSize: 14.sp,
-                                            color: AppColors.black,
-                                          )
-                                        : AppTextStyles.poppinsMedium(
-                                            fontSize: 14.sp,
-                                            color: AppColors.black70,
-                                          ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 4.w),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () async {
-                                if (!_isProcessing && price != null) {
-                                  setState(() => _isProcessing = true);
-                                  try {
-                                    // Pay your part = Public open match
-                                    if (!isOpenMatch) {
-                                      final user = ref.read(userProvider);
-                                      final userLevel = user?.user?.level(
-                                              widget.bookings.sport?.sportName ??
-                                                  "padel") ??
-                                          0.0;
-
-                                      // If user has level 0, show quiz assessment
-                                      if (userLevel == 0.0) {
-                                        final shouldProceed =
-                                            await Utils().checkForLevelAssessment(
-                                          ref: ref,
-                                          context: context,
-                                          sportsName:
-                                              widget.bookings.sport?.sportName ?? "padel",
-                                        );
-
-                                        if (!shouldProceed) {
-                                          return; // Don't proceed if assessment not completed
-                                        }
-                                      }
-                                    }
-                                    // Always open match, public (not private)
-                                    ref.read(_isOpenMatchProvider.notifier).state = true;
-                                    ref.read(_isPrivateMatchProvider.notifier).state = false;
-                                  } finally {
-                                    setState(() => _isProcessing = false);
-                                  }
-                                }
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(vertical: 8.h),
-                                decoration: BoxDecoration(
-                                  color: !ref.watch(_isPrivateMatchProvider) ? AppColors.darkYellow : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    _isProcessing && !ref.watch(_isPrivateMatchProvider)
-                                        ? "Loading..."
-                                        : "PAY_MY_SHARE".tr(context),
-                                    style: !ref.watch(_isPrivateMatchProvider)
-                                        ? AppTextStyles.poppinsBold(
-                                            fontSize: 14.sp,
-                                            color: AppColors.black,
-                                          )
-                                        : AppTextStyles.poppinsMedium(
-                                            fontSize: 14.sp,
-                                            color: AppColors.black70,
-                                          ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Disclaimer for Open Match
-                    if (!ref.watch(_isPrivateMatchProvider)) ...[
-                      SizedBox(height: 15.h),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-                        decoration: BoxDecoration(
-                          color: AppColors.darkYellow30,
-                          borderRadius: BorderRadius.circular(12.r),
-                          border: Border.all(color: AppColors.black2.withOpacity(.05)),
-                        ),
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            style: AppTextStyles.poppinsRegular(
-                              fontSize: 13.sp,
-                              color: AppColors.black2,
-                            ),
-                            children: [
-                              const TextSpan(
-                                  text: "We reserve the right to cancel the court if it's not filled before "),
-                              TextSpan(
-                                text:
-                                    "${DateFormat('dd MMMM HH:mm').format(widget.bookingTime)}",
-                                style: AppTextStyles.poppinsBold(
+                              Text(
+                                " ${"OPTIONAL".tr(context).toLowerCase()}",
+                                style: AppTextStyles.poppinsRegular(
                                   fontSize: 13.sp,
-                                  color: AppColors.black2,
                                 ),
                               ),
-                              const TextSpan(
-                                  text: "."),
                             ],
                           ),
+                          SizedBox(height: 5.h),
+                          InkWell(
+                            onTap: () {
+                              ref.read(_isOpenMatchProvider.notifier).state =
+                                  !isOpenMatch;
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: isOpenMatch
+                                    ? AppColors.darkYellow35
+                                    : AppColors.gray,
+                                borderRadius: BorderRadius.circular(100.r),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 8),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "OPEN_MATCH_TO_FIND_PLAYERS".tr(context),
+                                      style: AppTextStyles.poppinsRegular(
+                                        fontSize: 13.sp,
+                                      ),
+                                    ),
+                                    SelectedTag(
+                                      isSelected: isOpenMatch,
+                                      unSelectedBorderColor: AppColors.white,
+                                      unSelectedColor: Colors.transparent,
+                                      shape: BoxShape.circle,
+                                      selectedBorderColor: AppColors.darkYellow,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    if (isOpenMatch && !widget.getPendingPayment)
+                      const _OpenMatch(
+                        allowAddPlayer: false,
+                      ),
+                    // ],
+                    SizedBox(height: 20.h),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "BOOKING_PAYMENT".tr(context),
+                        style: AppTextStyles.poppinsBold(
+                          fontSize: 18.sp,
                         ),
                       ),
-                    ],
-                    // Disclaimer for Private Match
-                    if (ref.watch(_isPrivateMatchProvider)) ...[
-                      SizedBox(height: 15.h),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-                        decoration: BoxDecoration(
-                          color: AppColors.darkYellow30,
-                          borderRadius: BorderRadius.circular(12.r),
-                          border: Border.all(color: AppColors.black2.withOpacity(.05)),
-                        ),
-                        child: Text(
-                          "You will be charged the full amount. You will be refunded to your club wallet when someone else joins and pays their share.",
-                          textAlign: TextAlign.center,
-                          style: AppTextStyles.poppinsRegular(
-                            fontSize: 13.sp,
-                            color: AppColors.black2,
-                          ),
-                        ),
-                      ),
-                    ],
-            ] else
-              MainButton(
-                enabled: price != null,
-                label: widget.isOnlyOpenMatch
-                    ? "GET_REFUND_AND_OPEN_MATCH".tr(context)
-                    : (isOpenMatch && !isInfraredSauna)
-                        ? "PAY_MY_SHARE".trU(context)
-                        : "PAY_BOOKING".trU(context),
-                isForPopup: true,
-                onTap: () async {
-                  await _payCourt(
-                      false,
-                      isPaid ? price! : (price! - refundAmount),
-                      refundAmount,
-                      false);
-                },
-              ),
-            // Show add players component for both Open Match and Private Match
-            if (widget.bookings.isOpenMatch == true &&
-                allowOpenMatch &&
-                !isInfraredSauna) ...[
-              SizedBox(height: 35.h),
-              _OpenMatch(allowAddPlayer: widget.allowAddPlayer,),
-            ],
-            if (!widget.isOnlyOpenMatch)
-              if (!isOpenMatch && allowAddToCart) ...[
-                5.verticalSpace,
-                MainButton(
-                  // color: AppColors.selectedGreen,
-                  enabled: price != null,
-                  label: "ADD_TO_CART".trU(context),
-                  labelStyle: AppTextStyles.poppinsMedium(
-                      fontSize: 18.sp, color: AppColors.white),
-                  color: AppColors.white25,
-                  isForPopup: true,
-                  onTap: () async {
-                    await _payCourt(true, price!, 0, false);
-                  },
-                ),
-              ],
-                      ],
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          // Fixed bottom payment button(s)
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                  offset: Offset(0, -2),
-                ),
-              ],
-            ),
-            padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 16.h, bottom: 16.h),
-            child: SafeArea(
-              top: false,
-              child: ref.watch(_isPrivateMatchProvider)
-                  ? // Private Match - Show only PAY FULL COURT button
-                  MainButton(
-                      color: AppColors.darkYellow,
-                      enabled: price != null && !_isProcessing,
-                      isForPopup: false,
-                      labelStyle: AppTextStyles.poppinsMedium(
-                          fontSize: 18.sp, color: AppColors.black),
-                      label: "Continue Payment",
+                    SizedBox(height: 10.h),
+                    MainButton(
+                      // child: MultiStyleTextFirstLora(
+                      //   text: isOpenMatch
+                      //       ? "PAY_MY_SHARE".trU(context)
+                      //       : "PAY_BOOKING".trU(context),
+                      //   fontSize: 16.sp,
+                      //   color: AppColors.black,
+                      // ),
+                      enabled: price != null,
+                      label: isOpenMatch
+                          ? "PAY_MY_SHARE".tr(context)
+                          : "PAY_FULL_COURT".trU(context),
+                      // : "PAY_BOOKING".trU(context),
+                      isForPopup: true,
                       onTap: () async {
-                        // Pay full court - use full court price (discountedPrice)
-                        ref.read(_payFullCourtInPrivateProvider.notifier).state = true;
-                        final fullCourtPrice = courtPriceModel?.discountedPrice ?? price!;
-                        // payMyShare = false means pay full court
-                        await _payCourt(
-                            false, fullCourtPrice, refundAmount, false);
-                      },
-                    )
-                  : // Open Match - Show single continue button
-                  MainButton(
-                      color: AppColors.darkYellow,
-                      enabled: price != null && !_isProcessing,
-                      isForPopup: false,
-                      labelStyle: AppTextStyles.poppinsMedium(
-                          fontSize: 18.sp, color: AppColors.black),
-                      label: widget.isOnlyOpenMatch
-                          ? "GET_REFUND_AND_OPEN_MATCH".tr(context)
-                          : "Pay My Share",
-                      onTap: () async {
-                        // Open Match - always pay my share
                         await _payCourt(
                             false,
-                            price!,
+                            isPaid ? price! : (price! - refundAmount),
                             refundAmount,
-                            true); // Always payMyShare = true for Open Match
+                            false);
                       },
+                      // borderRadius: 12,
+                      // labelStyle: AppTextStyles.halyard(
+                      //     fontSize: 24.sp, color: AppColors.white),
                     ),
+                    SizedBox(height: 5.h),
+                    // Add to Cart button is hidden
+                    // if (!widget.isOnlyOpenMatch)
+                    //   if (!isOpenMatch) ...[
+                    //     MainButton(
+                    //       enabled: price != null,
+                    //       label: "ADD_TO_CART".tr(context),
+                    //       isForPopup: true,
+                    //       onTap: () async {
+                    //         await _payCourt(true, price!, 0);
+                    //       },
+                    //       // borderRadius: 12,
+                    //     ),
+                    //   ]
+                  ],
+                ),
+              ),
             ),
-          ),
-        ],
-      )?? CustomDialog(child: Flexible(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6.5.w),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "BOOKING_INFORMATION".trU(context),
-                  style: AppTextStyles.popupHeaderTextStyle,
-                ),
-                SizedBox(height: 5.h),
-
-                provider.when(
-                  data: (data) {
-                    int? cancellationHour;
-
-                    String? textPrice;
-                    double pricePaid = 0;
-                    if (data is String) {
-                      if (data.contains("pay your remaining")) {
-                        isPaid = true;
-                        textPrice = "PRICE".trU(context);
-                      } else {
-                        isPaid = false;
-                        textPrice = "REFUND".trU(context);
-                      }
-                      data.split(" ").map((e) {
-                        if (double.tryParse(e.toString()) != null) {
-                          if (isPaid) {
-                            price = double.tryParse(e.toString()) ?? 0;
-                          } else {
-                            price = widget.bookings.price ?? 0;
-                            refundAmount = double.tryParse(e.toString()) ?? 0;
-                          }
-                          textPrice =
-                          "$textPrice : ${Utils.formatPrice(isPaid ? price : refundAmount)}";
-                        }
-                      }).toList();
-                    } else {
-                      CourtPriceModel value = data;
-                      final double discountedPrice =
-                          value.discountedPrice ?? 0;
-                      final double openMatchDiscountedPrice =
-                          value.openMatchDiscountedPrice ?? 0;
-                      pricePaid = price = ref.read(_isOpenMatchProvider)
-                          ? (openMatchDiscountedPrice *
-                          (widget.isOnlyOpenMatch
-                              ? 1
-                              : (reserveSpotsForMatch + 1)))
-                          : discountedPrice;
-
-                      cancellationHour = isOpenMatch
-                          ? value.cancellationPolicy
-                          ?.openMatchCancellationTimeInHours
-                          : value.cancellationPolicy?.cancellationTimeInHours;
-                    }
-
-                    return Column(
-                      children: [
-                        if (cancellationHour != null && !widget.getPendingPayment)
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 20.h),
-                            child: Text(
-                              cancellationHour == 0
-                                  ? "YOU_WILL_NOT_GET_REFUND_ON_THIS_BOOKING"
-                                  .tr(context)
-                                  : "CANCELLATION_POLICY_HOURS".tr(context,
-                                  params: {
-                                    "HOUR": cancellationHour.toString()
-                                  }),
-                              textAlign: TextAlign.center,
-                              style: AppTextStyles.popupBodyTextStyle,
-                            ),
-                          ),
-                        BookCourtInfoCard(
-                          textPrice: textPrice,
-                          price: pricePaid,
-                          bookings: widget.bookings,
-                          bookingTime: widget.bookingTime,
-                          courtName: widget.court.values.first,
-                        ),
-                      ],
-                    );
-                  },
-                  loading: () => const CupertinoActivityIndicator(radius: 10,
-                    color: AppColors.darkYellow,
-                  ),
-                  error: (error, stackTrace) {
-                    myPrint("stackTrace: $stackTrace");
-                    return SecondaryText(text: error.toString(),color: AppColors.black,);
-                  },
-                ),
-                if (!widget.getPendingPayment) SizedBox(height: 20.h),
-                if (!widget.isOnlyOpenMatch &&
-                    widget.bookings.isOpenMatch == true &&
-                    !widget.getPendingPayment)
-                  Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "DO_YOU_WANT_TO_OPEN_THIS_MATCH".tr(context),
-                              style: AppTextStyles.poppinsMedium(
-                                fontSize: 14.sp,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            " ${"OPTIONAL".tr(context).toLowerCase()}",
-                            style: AppTextStyles.poppinsRegular(
-                              fontSize: 13.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 5.h),
-                      InkWell(
-                        onTap: () {
-                          ref.read(_isOpenMatchProvider.notifier).state =
-                          !isOpenMatch;
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: isOpenMatch
-                                ? AppColors.darkYellow35
-                                : AppColors.gray,
-                            borderRadius: BorderRadius.circular(100.r),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 8),
-                            child: Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "OPEN_MATCH_TO_FIND_PLAYERS".tr(context),
-                                  style: AppTextStyles.poppinsRegular(
-                                    fontSize: 13.sp,
-                                  ),
-                                ),
-                                SelectedTag(
-                                  isSelected: isOpenMatch,
-                                  unSelectedBorderColor: AppColors.white,
-                                  unSelectedColor: Colors.transparent,
-                                  shape: BoxShape.circle,
-                                  selectedBorderColor: AppColors.darkYellow,
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                if (isOpenMatch && !widget.getPendingPayment)
-                  const _OpenMatch(allowAddPlayer: false,),
-                // ],
-                SizedBox(height: 20.h),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "BOOKING_PAYMENT".tr(context),
-                    style: AppTextStyles.poppinsBold(
-                      fontSize: 18.sp,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10.h),
-                MainButton(
-                  // child: MultiStyleTextFirstLora(
-                  //   text: isOpenMatch
-                  //       ? "PAY_MY_SHARE".trU(context)
-                  //       : "PAY_BOOKING".trU(context),
-                  //   fontSize: 16.sp,
-                  //   color: AppColors.black,
-                  // ),
-                  enabled: price != null,
-                  label: isOpenMatch
-                      ? "PAY_MY_SHARE".tr(context)
-                      : "PAY_FULL_COURT".trU(context),
-                  // : "PAY_BOOKING".trU(context),
-                  isForPopup: true,
-                  onTap: () async {
-                    await _payCourt(
-                        false,
-                        isPaid ? price! : (price! - refundAmount),
-                        refundAmount,false);
-                  },
-                  // borderRadius: 12,
-                  // labelStyle: AppTextStyles.halyard(
-                  //     fontSize: 24.sp, color: AppColors.white),
-                ),
-                SizedBox(height: 5.h),
-                // Add to Cart button is hidden
-                // if (!widget.isOnlyOpenMatch)
-                //   if (!isOpenMatch) ...[
-                //     MainButton(
-                //       enabled: price != null,
-                //       label: "ADD_TO_CART".tr(context),
-                //       isForPopup: true,
-                //       onTap: () async {
-                //         await _payCourt(true, price!, 0);
-                //       },
-                //       // borderRadius: 12,
-                //     ),
-                //   ]
-              ],
-            ),
-          ),
-        ),
-      )),
+          )),
     );
   }
 
@@ -844,11 +928,11 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
       final provider = joinServiceProvider(widget.bookings.id!,
           position: 1,
           pendingPayment: widget.getPendingPayment,
-          isEvent: widget.joinEvent,
-          isOpenMatch: widget.joinOpenMatch,
+          isEvent: widget.payRemainingEvent,
+          isOpenMatch: widget.payRemainingOpenMatch || widget.payRemainingBooking,
           isDouble: widget.eventDoubleJoin,
           isReserve: false,
-          isLesson: widget.joinLesson,
+          isLesson: widget.payRemainingLesson,
           isApprovalNeeded: false);
       final double? price =
           await Utils.showLoadingDialog(context, provider, ref);
@@ -914,13 +998,14 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
             return CourtBookedDialog(
               refundAmount: refundAmount,
               courtPriceModel: courtPriceModel,
-              amountPaid: amount ?? amountPaid,
+              amountPaid: amountPaid,
               bookings: widget.bookings,
               bookingTime: widget.bookingTime,
               court: widget.court,
               isOpenMatch: isOpenMatch,
               serviceID: widget.bookings.id,
-              additionalPlayers: selectedPlayers.isNotEmpty ? selectedPlayers : null,
+              additionalPlayers:
+                  selectedPlayers.isNotEmpty ? selectedPlayers : null,
             );
           },
         );
@@ -955,13 +1040,14 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
             builder: (context) {
               return CourtBookedDialog(
                 courtPriceModel: courtPriceModel,
-                amountPaid: amount2 ?? amountPaid,
+                amountPaid: amountPaid,
                 bookings: widget.bookings,
                 bookingTime: widget.bookingTime,
                 court: widget.court,
                 isOpenMatch: isOpenMatch,
                 serviceID: widget.bookings.id,
-                additionalPlayers: selectedPlayers.isNotEmpty ? selectedPlayers : null,
+                additionalPlayers:
+                    selectedPlayers.isNotEmpty ? selectedPlayers : null,
               );
             },
           );
@@ -988,7 +1074,8 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
       approvalNeeded: isOpenMatch ? isApprovalNeeded : null,
       openMatchMinLevel: minLevel,
       openMatchMaxLevel: maxLevel,
-      customerPlayers: isOpenMatch && selectedPlayers.isNotEmpty ? selectedPlayers : null,
+      customerPlayers:
+          isOpenMatch && selectedPlayers.isNotEmpty ? selectedPlayers : null,
     );
     final double? price = await Utils.showLoadingDialog(context, provider, ref);
 
@@ -1035,13 +1122,14 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
           return CourtBookedDialog(
             courtPriceModel: courtPriceModel,
             // amountPaid: (amount ?? 0) > 0 ? amount : null,
-            amountPaid: amount ?? amountPaid,
+            amountPaid: amountPaid,
             bookings: widget.bookings,
             bookingTime: widget.bookingTime,
             court: widget.court,
             isOpenMatch: isOpenMatch,
             serviceID: serviceID,
-            additionalPlayers: selectedPlayers.isNotEmpty ? selectedPlayers : null,
+            additionalPlayers:
+                selectedPlayers.isNotEmpty ? selectedPlayers : null,
           );
         },
       );

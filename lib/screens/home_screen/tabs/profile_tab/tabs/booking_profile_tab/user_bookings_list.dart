@@ -95,7 +95,9 @@ class _UpComingBookingsState extends ConsumerState<UserBookingsList> {
     for (var date in dateList) {
       widgets.add(
         Padding(
-          padding: EdgeInsets.only(bottom: 10.h,),
+          padding: EdgeInsets.only(
+            bottom: 10.h,
+          ),
           child: Text(
             Utils.formatBookingDate(date, context),
             style: AppTextStyles.poppinsBold(
@@ -123,8 +125,7 @@ class _UpComingBookingsState extends ConsumerState<UserBookingsList> {
                       _onTap(isOpenMatch, isEvent, isLessonEvent, booking);
                     },
                     child: UserLessonsEventsCard(
-                      booking: booking, isPast:widget.isPast
-                    ),
+                        booking: booking, isPast: widget.isPast),
                   );
                 }
                 if (isOpenMatch) {
@@ -191,49 +192,59 @@ class _UpComingBookingsState extends ConsumerState<UserBookingsList> {
       String sportName = "";
       if ((booking.players ?? []).isNotEmpty &&
           booking.players!.first.customer?.sportsLevel.isNotEmpty == true) {
-        sportName = booking.players!.first.customer!.sportsLevel.first.sportName ?? "";
+        sportName =
+            booking.players!.first.customer!.sportsLevel.first.sportName ?? "";
       }
 
       List<bookingModel.BookingCourts> listCourts = [];
       for (var e in (booking.courts ?? [])) {
         listCourts.add(bookingModel.BookingCourts.fromJson(e.toJson()));
       }
+      final isEvent =
+          (booking.service?.serviceType ?? "").toLowerCase() == "event";
+      final singleEvent =
+          (booking.service?.eventType ?? "").toLowerCase() == "single";
 
       dynamic paid = await showDialog(
-      context: context,
-      builder: (context) {
-        return BookCourtDialog(
-          allowPayLater: false,
-          getPendingPayment: true,
-          showRefund: true,
-          coachId: null,
-          courtPriceRequestType: CourtPriceRequestType.join,
-          bookings: bookingModel.Bookings(
-              id: booking.id,
-              price: booking.service!.price,
-              duration: booking.duration2,
-              isOpenMatch: true,
-              sport: bookingModel.Sport(sportName: sportName),
-              location: bookingModel.Location(
-                  id: booking.service!.location!.id,
-                  courts: listCourts,
-                  locationName: booking.service!.location!.locationName)),
-          bookingTime: booking.bookingStartTime,
-          court: (booking.courts ?? []).isEmpty
-              ? {}
-              : {
-                  (booking.courts ?? []).first.id ?? 0:
-                      (booking.courts ?? []).first.courtName ?? ""
-                },
-        );
-      },
-    );
+        context: context,
+        builder: (context) {
+          return BookCourtDialog(
+            allowPayLater: false,
+            getPendingPayment: true,
+            payRemainingOpenMatch: false,
+            payRemainingEvent: isEvent,
+            payRemainingLesson: !isEvent,
+            eventDoubleJoin: !singleEvent,
+            showRefund: true,
+            coachId: null,
+            courtPriceRequestType: CourtPriceRequestType.join,
+            bookings: bookingModel.Bookings(
+                id: booking.id,
+                price: booking.service!.price,
+                duration: booking.duration2,
+                isOpenMatch: true,
+                sport: bookingModel.Sport(sportName: sportName),
+                location: bookingModel.Location(
+                    id: booking.service!.location!.id,
+                    courts: listCourts,
+                    locationName: booking.service!.location!.locationName)),
+            bookingTime: booking.bookingStartTime,
+            court: (booking.courts ?? []).isEmpty
+                ? {}
+                : {
+                    (booking.courts ?? []).first.id ?? 0:
+                        (booking.courts ?? []).first.courtName ?? ""
+                  },
+          );
+        },
+      );
 
-    if (paid is bool && paid) {
-      Utils.showMessageDialog(context, "YOU_HAVE_PAID_SUCCESSFULLY".tr(context));
-      ref.invalidate(fetchUserAllBookingsProvider);
-      ref.invalidate(walletInfoProvider);
-    }
+      if (paid is bool && paid) {
+        Utils.showMessageDialog(
+            context, "YOU_HAVE_PAID_SUCCESSFULLY".tr(context));
+        ref.invalidate(fetchUserAllBookingsProvider);
+        ref.invalidate(walletInfoProvider);
+      }
     } catch (e) {
       myPrint("Error showing payment dialog: $e");
     }

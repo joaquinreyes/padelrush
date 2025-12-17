@@ -862,8 +862,8 @@ class __TimeslotsLessonState extends ConsumerState<_TimeslotsLesson> {
         ),
         onTap: () => _onTap(timeSlotChunked, rowIndex, colIndex),
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 1.w, vertical: 0.h),
-          padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 4.w),
+          margin: EdgeInsets.symmetric(horizontal: 1.w),
+          // padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 4.w),
           alignment: Alignment.center,
           decoration: BoxDecoration(
               color: selected ? AppColors.darkYellow : AppColors.white,

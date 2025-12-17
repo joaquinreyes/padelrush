@@ -12,9 +12,8 @@ import '../routes/app_pages.dart';
 import '../routes/app_routes.dart';
 part 'api_manager.g.dart';
 
-// const kClubID = 73; // for the HOP Ireland
-// const kClubID = 2; //for test club
-const kClubID = 86;
+const kClubID = 86; // For Padel Rush
+// const kClubID = 2; // For Test Club
 const kBaseURL = 'https://api.bookandgo.app/api/v1/apps';
 const kChatBaseURL = 'https://chat.bookandgo.app/websocket/club';
 

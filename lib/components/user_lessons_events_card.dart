@@ -147,9 +147,9 @@ class UserLessonsEventsCard extends ConsumerWidget {
                             allowPayLater: false,
 
                             getPendingPayment: true,
-                            joinOpenMatch: false,
-                            joinEvent: isEvent,
-                            joinLesson: !isEvent,
+                            payRemainingOpenMatch: false,
+                            payRemainingEvent: isEvent,
+                            payRemainingLesson: !isEvent,
                             eventDoubleJoin: !singleEvent,
                             showRefund: true,
                             coachId: null,

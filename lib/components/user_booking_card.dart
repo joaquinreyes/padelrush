@@ -83,6 +83,8 @@ class UserBookingCard extends ConsumerWidget {
                             allowPayLater: false,
                             getPendingPayment: true,
                             showRefund: true,
+                            payRemainingBooking:true,
+                            payRemainingOpenMatch: false,
                             coachId: null,
                             courtPriceRequestType: CourtPriceRequestType.join,
                             bookings: bookingModel.Bookings(
