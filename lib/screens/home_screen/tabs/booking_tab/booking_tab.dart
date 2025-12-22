@@ -397,7 +397,7 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
   }
 
   Widget _lessonsBody() {
-    final selectedSport = ref.watch(selectedSportLessonProvider);
+    // final selectedSport = ref.watch(selectedSportLessonProvider);
     return LayoutBuilder(
       builder: (context, constraint) {
         final sportList = [...sports];
@@ -409,13 +409,13 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
             constraints: BoxConstraints(minHeight: constraint.maxHeight),
             child: Column(
               children: [
-                _sportsRow(sportList, selectedSport,
-                    (ClubLocationSports sport) {
-                  ref.read(_selectedTimeSlotAndLocationID.notifier).state =
-                      (null, null);
-                  ref.read(selectedSportLessonProvider.notifier).sport = sport;
-                }),
-                SizedBox(height: 15.h),
+                // _sportsRow(sportList, selectedSport,
+                //     (ClubLocationSports sport) {
+                //   ref.read(_selectedTimeSlotAndLocationID.notifier).state =
+                //       (null, null);
+                //   ref.read(selectedSportLessonProvider.notifier).sport = sport;
+                // }),
+                // SizedBox(height: 15.h),
                 ExpandablePageView(
                   physics: const NeverScrollableScrollPhysics(),
                   controller: ref.watch(_pageViewController),
