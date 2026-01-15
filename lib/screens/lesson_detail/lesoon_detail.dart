@@ -361,7 +361,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
         context: context,
         builder: (context) {
           return PaymentInformation(
-              title: "PAY_MY_SHARE".trU(context),
+              title: "PAY".trU(context),
               type: PaymentDetailsRequestType.join,
               locationID: service.service!.location!.id!,
               price: price,

@@ -256,6 +256,21 @@ class __WaitingListState extends ConsumerState<_WaitingList> {
       skipLoadingOnRefresh: false,
       data: (list) {
         final data = list.map((e) => e).toList();
+        final user = ref.read(userManagerProvider).user;
+        if (user == null) {
+          return SecondaryText(text: "USER_NOT_FOUND".tr(context));
+        }
+        int uid = user.user?.id ?? -1;
+        final inWaitingList = list.indexWhere((element) => element.customer?.id == uid) !=
+            -1;
+        Future(() {
+          if (inWaitingList) {
+            ref.read(_inWaitingList.notifier).state = true;
+          } else {
+            ref.read(_inWaitingList.notifier).state = false;
+          }
+        });
+
         if (widget.isCurrentOrganizer) {
           // data.removeWhere((element) => element.isApproved);
         } else {
@@ -285,6 +300,299 @@ class __WaitingListState extends ConsumerState<_WaitingList> {
       },
       loading: () => const Center(
         child: CupertinoActivityIndicator(radius: 5),
+      ),
+    );
+  }
+}
+
+class _MatchInfoSettingsTabSelector extends ConsumerWidget {
+  const _MatchInfoSettingsTabSelector();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedTab = ref.watch(_selectedTabIndexProvider);
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 4.w),
+        decoration: BoxDecoration(
+          color: AppColors.gray,
+          border: border,
+          borderRadius: BorderRadius.circular(25.r),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildTab(context, ref, "MATCH_INFO".tr(context), 0, selectedTab),
+            _buildTab(context, ref, "SETTINGS".tr(context), 1, selectedTab),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTab(BuildContext context, WidgetRef ref, String text, int index, int selectedTab) {
+    final isSelected = selectedTab == index;
+    return GestureDetector(
+      onTap: () {
+        ref.read(_selectedTabIndexProvider.notifier).state = index;
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.darkYellow80 : Colors.transparent,
+          borderRadius: BorderRadius.circular(25.r),
+        ),
+        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 18.w),
+        child: Text(
+          text,
+          style: isSelected
+              ? AppTextStyles.poppinsMedium(
+                  fontSize: 13.sp,
+                )
+              : AppTextStyles.poppinsRegular(
+                  color: AppColors.black50,
+                  fontSize: 13.sp,
+                ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SettingsTab extends ConsumerWidget {
+  const _SettingsTab({required this.service});
+
+  final ServiceDetail service;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final approveBeforeJoin = ref.watch(_approveBeforeJoinProvider);
+    final isFriendlyMatch = ref.watch(_isFriendlyMatchProvider);
+    final minLevel = ref.watch(_minLevelProvider);
+    final maxLevel = ref.watch(_maxLevelProvider);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "SETTINGS".tr(context),
+          style: AppTextStyles.poppinsBold(fontSize: 16.sp),
+        ),
+        SizedBox(height: 15.h),
+        // Approve players before they join
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "APPROVE_PLAYERS_BEFORE_THEY_JOIN".tr(context),
+              style: AppTextStyles.poppinsRegular(fontSize: 16.sp, color: AppColors.black),
+            ),
+            GestureDetector(
+              onTap: () {
+                ref.read(_approveBeforeJoinProvider.notifier).state = !approveBeforeJoin;
+              },
+              child: Container(
+                width: 18.w,
+                height: 18.w,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: approveBeforeJoin ? AppColors.darkYellow80 : AppColors.white,
+                  border: Border.all(
+                    color: AppColors.black,
+                    width: 1.5,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 18.h),
+        // Friendly/Ranked Match
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "FRIENDLY_RANKED_MATCH".tr(context),
+              style: AppTextStyles.poppinsRegular(fontSize: 14.sp),
+            ),
+            Row(
+              children: [
+                _buildToggleButton(
+                  context,
+                  ref,
+                  "FRIENDLY".tr(context),
+                  isFriendlyMatch,
+                  () {
+                    ref.read(_isFriendlyMatchProvider.notifier).state = true;
+                  },
+                ),
+                SizedBox(width: 8.w),
+                _buildToggleButton(
+                  context,
+                  ref,
+                  "RANKED".tr(context),
+                  !isFriendlyMatch,
+                  () {
+                    ref.read(_isFriendlyMatchProvider.notifier).state = false;
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(height: 18.h),
+        // Match Level
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "MATCH_LEVEL".tr(context),
+              style: AppTextStyles.poppinsRegular(fontSize: 16.sp, color: AppColors.black),
+            ),
+            Text(
+              "${minLevel.toStringAsFixed(1)} - ${maxLevel.toStringAsFixed(1)}",
+              style: AppTextStyles.poppinsRegular(fontSize: 14.sp),
+            ),
+          ],
+        ),
+        SizedBox(height: 10.h),
+        SliderTheme(
+          data: SliderTheme.of(context).copyWith(
+            activeTrackColor: AppColors.darkYellow80.withOpacity(0.3),
+            inactiveTrackColor: AppColors.black.withOpacity(0.1),
+            thumbColor: AppColors.darkYellow80,
+            overlayColor: AppColors.darkYellow80.withOpacity(0.1),
+            trackHeight: 4.h,
+            rangeThumbShape: RoundRangeSliderThumbShape(
+              enabledThumbRadius: 10.r,
+            ),
+          ),
+          child: RangeSlider(
+            values: RangeValues(minLevel, maxLevel),
+            min: 0,
+            max: 7,
+            divisions: 14,
+            onChanged: (values) {
+              ref.read(_minLevelProvider.notifier).state = values.start;
+              ref.read(_maxLevelProvider.notifier).state = values.end;
+            },
+          ),
+        ),
+        // Level labels
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(8, (index) {
+              return Text(
+                "$index",
+                style: AppTextStyles.poppinsRegular(
+                  fontSize: 12.sp,
+                  color: AppColors.black50,
+                ),
+              );
+            }),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildToggleButton(
+    BuildContext context,
+    WidgetRef ref,
+    String text,
+    bool isSelected,
+    VoidCallback onTap,
+  ) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.darkYellow80 : AppColors.white,
+          borderRadius: BorderRadius.circular(20.r),
+          border: Border.all(
+            color: isSelected ? AppColors.darkYellow80 : AppColors.black70,
+            width: 1,
+          ),
+        ),
+        padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 14.w),
+        child: Text(
+          text,
+          style: isSelected
+              ? AppTextStyles.poppinsBold(
+                  fontSize: 13.sp,
+                )
+              : AppTextStyles.poppinsRegular(
+                  color: AppColors.black70,
+                  fontSize: 13.sp,
+                ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SaveSettingsButton extends ConsumerWidget {
+  const _SaveSettingsButton({required this.serviceId, required this.service});
+
+  final int serviceId;
+  final ServiceDetail service;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final approveBeforeJoin = ref.watch(_approveBeforeJoinProvider);
+    final isFriendlyMatch = ref.watch(_isFriendlyMatchProvider);
+    final minLevel = ref.watch(_minLevelProvider);
+    final maxLevel = ref.watch(_maxLevelProvider);
+
+    // Compare current values with original service values
+    final originalApproveBeforeJoin = service.approveBeforeJoin ?? false;
+    final originalIsFriendlyMatch = service.isFriendlyMatch ?? true;
+    final originalMinLevel = service.options?.minLevel?.toDouble() ?? 0;
+    final originalMaxLevel = service.options?.maxLevel?.toDouble() ?? 7;
+
+    final hasChanges = approveBeforeJoin != originalApproveBeforeJoin ||
+        isFriendlyMatch != originalIsFriendlyMatch ||
+        minLevel != originalMinLevel ||
+        maxLevel != originalMaxLevel;
+
+    if (!hasChanges) return const SizedBox.shrink();
+
+    return Padding(
+      padding: EdgeInsets.only(top: 20.h),
+      child: MainButton(
+        label: "SAVE".trU(context),
+        onTap: () async {
+          final approveBeforeJoin = ref.read(_approveBeforeJoinProvider);
+          final isFriendlyMatch = ref.read(_isFriendlyMatchProvider);
+          final minLevel = ref.read(_minLevelProvider);
+          final maxLevel = ref.read(_maxLevelProvider);
+
+          try {
+            final provider = updateServiceSettingsProvider(
+              serviceId: serviceId,
+              approveBeforeJoin: approveBeforeJoin,
+              friendlyMatch: isFriendlyMatch,
+              minLevel: minLevel,
+              maxLevel: maxLevel,
+            );
+            await Utils.showLoadingDialog(context, provider, ref);
+
+            ref.invalidate(fetchServiceDetailProvider(serviceId));
+
+            if (context.mounted) {
+              Utils.showMessageDialog(
+                context,
+                "SETTINGS_SAVED_SUCCESSFULLY".tr(context),
+              );
+            }
+          } catch (e) {
+            if (context.mounted) {
+              Utils.showMessageDialog(context, e.toString());
+            }
+          }
+        },
       ),
     );
   }

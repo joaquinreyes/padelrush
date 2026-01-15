@@ -393,7 +393,7 @@
   "Add_PAYMENT_METHOD":"Add payment method",
   "CANCELLATION_POLICY_LESSON": "Cancelation up to 12 hours before the lesson starts can be credited.",
   "SEE_PROFILE": "See profile",
-  "PAY_LESSON": "Pay Lesson",
+  "PAY_LESSON": "Pay",
   "SEE_MY_BOOKINGS": "See my bookings",
   "YOU_WILL_NOT_GET_REFUND_ON_THIS_BOOKING": "On cancellation you will not get refund on this booking",
   "CANCELLATION_POLICY_3": "Cancellation up to {HOUR} hours before the booking starts can be credited.\nYou will get refund of EUR {REFUND}",
@@ -529,5 +529,10 @@
   "SEARCH_RESULTS": "Search Results",
   "FOLLOW_PLAYERS": "Follow Players",
   "NO_USERS_FOUND": "No users found",
-  "NO_NOTIFICATIONS": "No Notifications"
+  "NO_NOTIFICATIONS": "No Notifications",
+  "MATCH_INFO": "Match Info",
+  "APPROVE_PLAYERS_BEFORE_THEY_JOIN": "Approve players before they join",
+  "FRIENDLY_RANKED_MATCH": "Friendly/Ranked Match",
+  "MATCH_LEVEL": "Match Level",
+  "SETTINGS_SAVED_SUCCESSFULLY": "Settings saved successfully"
 }

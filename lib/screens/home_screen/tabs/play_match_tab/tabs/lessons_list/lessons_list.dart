@@ -290,7 +290,7 @@ class _LessonsState extends ConsumerState<_Lessons> {
           context: context,
           builder: (context) {
             return PaymentInformation(
-                title: "PAY_MY_SHARE".trU(context),
+                title: "PAY".trU(context),
                 // boldPosition: 1,
                 type: PaymentDetailsRequestType.join,
                 locationID: widget.lesson.location!.id!,

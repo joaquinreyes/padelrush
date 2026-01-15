@@ -3692,5 +3692,260 @@ class _FetchBlockedCoachesProviderElement
   @override
   String get sportName => (origin as FetchBlockedCoachesProvider).sportName;
 }
+
+String _$updateServiceSettingsHash() =>
+    r'2f89f01b9db1e8aba1391ae6a0514ca25ac787c4';
+
+/// See also [updateServiceSettings].
+@ProviderFor(updateServiceSettings)
+const updateServiceSettingsProvider = UpdateServiceSettingsFamily();
+
+/// See also [updateServiceSettings].
+class UpdateServiceSettingsFamily extends Family {
+  /// See also [updateServiceSettings].
+  const UpdateServiceSettingsFamily();
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'updateServiceSettingsProvider';
+
+  /// See also [updateServiceSettings].
+  UpdateServiceSettingsProvider call({
+    required int serviceId,
+    required bool approveBeforeJoin,
+    required bool friendlyMatch,
+    required double minLevel,
+    required double maxLevel,
+  }) {
+    return UpdateServiceSettingsProvider(
+      serviceId: serviceId,
+      approveBeforeJoin: approveBeforeJoin,
+      friendlyMatch: friendlyMatch,
+      minLevel: minLevel,
+      maxLevel: maxLevel,
+    );
+  }
+
+  @visibleForOverriding
+  @override
+  UpdateServiceSettingsProvider getProviderOverride(
+    covariant UpdateServiceSettingsProvider provider,
+  ) {
+    return call(
+      serviceId: provider.serviceId,
+      approveBeforeJoin: provider.approveBeforeJoin,
+      friendlyMatch: provider.friendlyMatch,
+      minLevel: provider.minLevel,
+      maxLevel: provider.maxLevel,
+    );
+  }
+
+  /// Enables overriding the behavior of this provider, no matter the parameters.
+  Override overrideWith(
+      FutureOr<bool> Function(UpdateServiceSettingsRef ref) create) {
+    return _$UpdateServiceSettingsFamilyOverride(this, create);
+  }
+}
+
+class _$UpdateServiceSettingsFamilyOverride implements FamilyOverride {
+  _$UpdateServiceSettingsFamilyOverride(this.overriddenFamily, this.create);
+
+  final FutureOr<bool> Function(UpdateServiceSettingsRef ref) create;
+
+  @override
+  final UpdateServiceSettingsFamily overriddenFamily;
+
+  @override
+  UpdateServiceSettingsProvider getProviderOverride(
+    covariant UpdateServiceSettingsProvider provider,
+  ) {
+    return provider._copyWith(create);
+  }
+}
+
+/// See also [updateServiceSettings].
+class UpdateServiceSettingsProvider extends AutoDisposeFutureProvider<bool> {
+  /// See also [updateServiceSettings].
+  UpdateServiceSettingsProvider({
+    required int serviceId,
+    required bool approveBeforeJoin,
+    required bool friendlyMatch,
+    required double minLevel,
+    required double maxLevel,
+  }) : this._internal(
+          (ref) => updateServiceSettings(
+            ref as UpdateServiceSettingsRef,
+            serviceId: serviceId,
+            approveBeforeJoin: approveBeforeJoin,
+            friendlyMatch: friendlyMatch,
+            minLevel: minLevel,
+            maxLevel: maxLevel,
+          ),
+          from: updateServiceSettingsProvider,
+          name: r'updateServiceSettingsProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$updateServiceSettingsHash,
+          dependencies: UpdateServiceSettingsFamily._dependencies,
+          allTransitiveDependencies:
+              UpdateServiceSettingsFamily._allTransitiveDependencies,
+          serviceId: serviceId,
+          approveBeforeJoin: approveBeforeJoin,
+          friendlyMatch: friendlyMatch,
+          minLevel: minLevel,
+          maxLevel: maxLevel,
+        );
+
+  UpdateServiceSettingsProvider._internal(
+    super.create, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.serviceId,
+    required this.approveBeforeJoin,
+    required this.friendlyMatch,
+    required this.minLevel,
+    required this.maxLevel,
+  }) : super.internal();
+
+  final int serviceId;
+  final bool approveBeforeJoin;
+  final bool friendlyMatch;
+  final double minLevel;
+  final double maxLevel;
+
+  @override
+  Override overrideWith(
+    FutureOr<bool> Function(UpdateServiceSettingsRef ref) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: UpdateServiceSettingsProvider._internal(
+        (ref) => create(ref as UpdateServiceSettingsRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        serviceId: serviceId,
+        approveBeforeJoin: approveBeforeJoin,
+        friendlyMatch: friendlyMatch,
+        minLevel: minLevel,
+        maxLevel: maxLevel,
+      ),
+    );
+  }
+
+  @override
+  ({
+    int serviceId,
+    bool approveBeforeJoin,
+    bool friendlyMatch,
+    double minLevel,
+    double maxLevel,
+  }) get argument {
+    return (
+      serviceId: serviceId,
+      approveBeforeJoin: approveBeforeJoin,
+      friendlyMatch: friendlyMatch,
+      minLevel: minLevel,
+      maxLevel: maxLevel,
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<bool> createElement() {
+    return _UpdateServiceSettingsProviderElement(this);
+  }
+
+  UpdateServiceSettingsProvider _copyWith(
+    FutureOr<bool> Function(UpdateServiceSettingsRef ref) create,
+  ) {
+    return UpdateServiceSettingsProvider._internal(
+      (ref) => create(ref as UpdateServiceSettingsRef),
+      name: name,
+      dependencies: dependencies,
+      allTransitiveDependencies: allTransitiveDependencies,
+      debugGetCreateSourceHash: debugGetCreateSourceHash,
+      from: from,
+      serviceId: serviceId,
+      approveBeforeJoin: approveBeforeJoin,
+      friendlyMatch: friendlyMatch,
+      minLevel: minLevel,
+      maxLevel: maxLevel,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is UpdateServiceSettingsProvider &&
+        other.serviceId == serviceId &&
+        other.approveBeforeJoin == approveBeforeJoin &&
+        other.friendlyMatch == friendlyMatch &&
+        other.minLevel == minLevel &&
+        other.maxLevel == maxLevel;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, serviceId.hashCode);
+    hash = _SystemHash.combine(hash, approveBeforeJoin.hashCode);
+    hash = _SystemHash.combine(hash, friendlyMatch.hashCode);
+    hash = _SystemHash.combine(hash, minLevel.hashCode);
+    hash = _SystemHash.combine(hash, maxLevel.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin UpdateServiceSettingsRef on AutoDisposeFutureProviderRef<bool> {
+  /// The parameter `serviceId` of this provider.
+  int get serviceId;
+
+  /// The parameter `approveBeforeJoin` of this provider.
+  bool get approveBeforeJoin;
+
+  /// The parameter `friendlyMatch` of this provider.
+  bool get friendlyMatch;
+
+  /// The parameter `minLevel` of this provider.
+  double get minLevel;
+
+  /// The parameter `maxLevel` of this provider.
+  double get maxLevel;
+}
+
+class _UpdateServiceSettingsProviderElement
+    extends AutoDisposeFutureProviderElement<bool>
+    with UpdateServiceSettingsRef {
+  _UpdateServiceSettingsProviderElement(super.provider);
+
+  @override
+  int get serviceId => (origin as UpdateServiceSettingsProvider).serviceId;
+  @override
+  bool get approveBeforeJoin =>
+      (origin as UpdateServiceSettingsProvider).approveBeforeJoin;
+  @override
+  bool get friendlyMatch =>
+      (origin as UpdateServiceSettingsProvider).friendlyMatch;
+  @override
+  double get minLevel => (origin as UpdateServiceSettingsProvider).minLevel;
+  @override
+  double get maxLevel => (origin as UpdateServiceSettingsProvider).maxLevel;
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

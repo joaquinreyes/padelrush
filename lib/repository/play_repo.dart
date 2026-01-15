@@ -572,6 +572,40 @@ class PlayRepo {
       rethrow;
     }
   }
+
+  Future<bool> updateServiceSettings(
+    Ref ref, {
+    required int serviceId,
+    required bool approveBeforeJoin,
+    required bool friendlyMatch,
+    required double minLevel,
+    required double maxLevel,
+  }) async {
+    try {
+      final apiManager = ref.read(apiManagerProvider);
+      final token = ref.read(userManagerProvider).user?.accessToken ?? "";
+      Map<String, dynamic> data = {
+        "approve_before_join": approveBeforeJoin,
+        "friendly_match": friendlyMatch,
+        "min_level": minLevel,
+        "max_level": maxLevel,
+      };
+
+      await apiManager.patch(
+        ref,
+        ApiEndPoint.updateServiceSettings,
+        data,
+        token: token,
+        pathParams: [serviceId.toString()],
+      );
+      return true;
+    } catch (e) {
+      if (e is Map<String, dynamic>) {
+        throw e['message'];
+      }
+      rethrow;
+    }
+  }
 }
 
 @riverpod
@@ -759,4 +793,23 @@ Future<List<String>> fetchBlockedCoaches(FetchBlockedCoachesRef ref,
     required String sportName}) async {
   return ref.read(playRepoProvider).fetchBlockedCoaches(ref,
       startDate: startDate, endDate: endDate, sportName: sportName);
+}
+
+@riverpod
+Future<bool> updateServiceSettings(
+  UpdateServiceSettingsRef ref, {
+  required int serviceId,
+  required bool approveBeforeJoin,
+  required bool friendlyMatch,
+  required double minLevel,
+  required double maxLevel,
+}) async {
+  return ref.read(playRepoProvider).updateServiceSettings(
+        ref,
+        serviceId: serviceId,
+        approveBeforeJoin: approveBeforeJoin,
+        friendlyMatch: friendlyMatch,
+        minLevel: minLevel,
+        maxLevel: maxLevel,
+      );
 }

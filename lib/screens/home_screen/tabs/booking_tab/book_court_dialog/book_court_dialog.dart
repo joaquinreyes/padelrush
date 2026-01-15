@@ -949,7 +949,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
               allowPayLater: widget.allowPayLater,
               isOpenMatch: isOpenMatch,
               getPendingPayment: true,
-              title: "PAY_MY_SHARE".trU(context),
+              title: "PAY".trU(context),
               type: PaymentDetailsRequestType.join,
               locationID: widget.bookings.location!.id!,
               isJoiningApproval: false,

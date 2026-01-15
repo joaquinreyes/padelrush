@@ -139,6 +139,15 @@ class _DataBodyState extends ConsumerState<_DataBody> {
     final organizerID = widget.service.organizer?.customer?.id;
     isCurrentUserOrganizer = currentPlayerID == organizerID;
     isRankedMatch = !(widget.service.isFriendlyMatch ?? true);
+
+    // Initialize settings providers with current service values
+    Future(() {
+      ref.read(_selectedTabIndexProvider.notifier).state = 0;
+      ref.read(_approveBeforeJoinProvider.notifier).state = widget.service.approveBeforeJoin ?? false;
+      ref.read(_isFriendlyMatchProvider.notifier).state = widget.service.isFriendlyMatch ?? true;
+      ref.read(_minLevelProvider.notifier).state = widget.service.options?.minLevel?.toDouble() ?? 0;
+      ref.read(_maxLevelProvider.notifier).state = widget.service.options?.maxLevel?.toDouble() ?? 7;
+    });
     super.initState();
   }
 
@@ -198,116 +207,141 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                   SizedBox(height: 10.h),
                 ],
                 _InfoCard(service: service),
-                // SizedBox(height: 20.h),
-                _OrganizerNote(note: service.organizerNote ?? ""),
-                SizedBox(height: 20.h),
-                Row(
-                  children: [
-                    Text(
-                      "PLAYERS".trU(context),
-                      style: AppTextStyles.poppinsMedium(
-                        fontSize: 17.sp,
-                      ),
-                    ),
-                    const Spacer(),
-                    _RankedOrFriendly(
-                        isRanked: !(widget.service.isFriendlyMatch ?? true)),
-                  ],
-                ),
-                SizedBox(height: 10.h),
-                OpenMatchParticipantRowWithBG(
-                  textForAvailableSlot: "RESERVE".trU(context),
-                  players: service.players ?? [],
-                  slotIconColor: AppColors.black,
-                  backgroundColor: AppColors.gray,
-                  slotBackgroundColor: AppColors.darkYellow80,
-                  imageBgColor: AppColors.black,
-                  onTap: (_, __) async {
-                    final currentUserID =
-                        ref.read(userManagerProvider).user?.user?.id;
-
-                    if (currentUserID == null || isCancelled) return;
-
-                    // Check if user is already in the player list
-                    final isUserInPlayerList = service.players?.any(
-                            (player) => player.customer?.id == currentUserID) ??
-                        false;
-
-                    // Check if user is in waiting list
-                    final provider = fetchServiceWaitingPlayersProvider(
-                        service.id!, RequestServiceType.booking);
-                    final data =
-                        await Utils.showLoadingDialog(context, provider, ref);
-                    if (isCurrentUserOrganizer) {
-                      await _showPlayerSelectionDialog(context);
-                      return;
-                    }
-
-                    bool isUserInWaitingList = false;
-                    if (data is List<ServiceWaitingPlayers>) {
-                      isUserInWaitingList =
-                          data.any((e) => e.customer?.id == currentUserID);
-                    }
-                    if (isCurrentUserOrganizer) {
-                      await _showPlayerSelectionDialog(context);
-                      return;
-                    }
-                    if (isUserInWaitingList || isUserInPlayerList) {
-                      return;
-                    }
-                    if (!isJoined) {
-                      _onJoin(false, false);
-                    }
-                  },
-                  showReserveReleaseButton: true,
-                  currentPlayerID: ref.read(userProvider)?.user?.id ?? -1,
-                  onRelease: _onRelease,
-                ),
-                SizedBox(height: 20.h),
-                _secondaryButtons(isJoined, context, service),
-                if (isApprovalNeeded) ...[
-                  SizedBox(height: 20.h),
-                  _WaitingList(
-                    id: service.id!,
-                    onApprove: _onApprove,
-                    isCurrentOrganizer: isCurrentUserOrganizer,
-                    onJoinAfterApproval: (customerID) {
-                      _joinAfterApproval(customerID);
-                    },
-                    refreshApis: () {
-                      ref.invalidate(fetchServiceDetailProvider(service.id!));
-                      ref.invalidate(fetchServiceWaitingPlayersProvider(
-                          service.id!, RequestServiceType.booking));
-                    },
-                    onWithdraw: _withdraw,
-                  ),
-                  SizedBox(height: 5.h),
-                ],
-                if (isRankedMatch && (service.players?.length ?? 0) > 0) ...[
-                  SizedBox(height: 20.h),
-                  _ScoreViewComponent(service: service),
+                // Tab selector - only show for organizer
+                if (isCurrentUserOrganizer) ...[
+                  SizedBox(height: 15.h),
+                  const _MatchInfoSettingsTabSelector(),
                 ],
                 SizedBox(height: 15.h),
-                Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: MainButton(
-                      enabled: isJoined,
-                      color: AppColors.darkYellow80,
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      showArrow: false,
-                      labelStyle: AppTextStyles.poppinsMedium(
-                          fontSize: 16.sp,),
-                      label: "${"CHAT".tr(context)} $chatCount",
-                      onTap: () {
-                        ref.read(goRouterProvider).push(RouteNames.chat,
-                            extra: [service.id ?? 0]).then((e) {
-                          ref.read(chatSocketProvider.notifier).offSocket();
-                          final provider =
-                              fetchChatCountProvider(matchId: service.id ?? 0);
-                          ref.invalidate(provider);
-                        });
-                      },
-                    ))
+                // Show content based on selected tab
+                Builder(
+                  builder: (context) {
+                    final selectedTab = ref.watch(_selectedTabIndexProvider);
+                    if (selectedTab == 1 && isCurrentUserOrganizer) {
+                      // Settings Tab
+                      return Column(
+                        children: [
+                          _SettingsTab(service: service),
+                          _SaveSettingsButton(serviceId: service.id!, service: service),
+                        ],
+                      );
+                    }
+                    // Match Info Tab (default)
+                    return Column(
+                      children: [
+                        _OrganizerNote(note: service.organizerNote ?? ""),
+                        SizedBox(height: 20.h),
+                        Row(
+                          children: [
+                            Text(
+                              "PLAYERS".trU(context),
+                              style: AppTextStyles.poppinsMedium(
+                                fontSize: 17.sp,
+                              ),
+                            ),
+                            const Spacer(),
+                            _RankedOrFriendly(
+                                isRanked: !(widget.service.isFriendlyMatch ?? true)),
+                          ],
+                        ),
+                        SizedBox(height: 10.h),
+                        OpenMatchParticipantRowWithBG(
+                          textForAvailableSlot: isCurrentUserOrganizer ? "ADD".trU(context) : "RESERVE".trU(context),
+                          players: service.players ?? [],
+                          slotIconColor: AppColors.black,
+                          backgroundColor: AppColors.gray,
+                          slotBackgroundColor: AppColors.darkYellow80,
+                          imageBgColor: AppColors.black,
+                          onTap: (_, __) async {
+                            final currentUserID =
+                                ref.read(userManagerProvider).user?.user?.id;
+
+                            if (currentUserID == null || isCancelled) return;
+
+                            // Check if user is already in the player list
+                            final isUserInPlayerList = service.players?.any(
+                                    (player) => player.customer?.id == currentUserID) ??
+                                false;
+
+                            // Check if user is in waiting list
+                            final provider = fetchServiceWaitingPlayersProvider(
+                                service.id!, RequestServiceType.booking);
+                            final data =
+                                await Utils.showLoadingDialog(context, provider, ref);
+                            if (isCurrentUserOrganizer) {
+                              await _showPlayerSelectionDialog(context);
+                              return;
+                            }
+
+                            bool isUserInWaitingList = false;
+                            if (data is List<ServiceWaitingPlayers>) {
+                              isUserInWaitingList =
+                                  data.any((e) => e.customer?.id == currentUserID);
+                            }
+                            if (isCurrentUserOrganizer) {
+                              await _showPlayerSelectionDialog(context);
+                              return;
+                            }
+                            if (isUserInWaitingList || isUserInPlayerList) {
+                              return;
+                            }
+                            if (!isJoined) {
+                              _onJoin(false, false);
+                            }
+                          },
+                          showReserveReleaseButton: true,
+                          currentPlayerID: ref.read(userProvider)?.user?.id ?? -1,
+                          onRelease: _onRelease,
+                        ),
+                        SizedBox(height: 20.h),
+                        _secondaryButtons(isJoined, context, service),
+                        if (isApprovalNeeded) ...[
+                          SizedBox(height: 20.h),
+                          _WaitingList(
+                            id: service.id!,
+                            onApprove: _onApprove,
+                            isCurrentOrganizer: isCurrentUserOrganizer,
+                            onJoinAfterApproval: (customerID) {
+                              _joinAfterApproval(customerID);
+                            },
+                            refreshApis: () {
+                              ref.invalidate(fetchServiceDetailProvider(service.id!));
+                              ref.invalidate(fetchServiceWaitingPlayersProvider(
+                                  service.id!, RequestServiceType.booking));
+                            },
+                            onWithdraw: _withdraw,
+                          ),
+                          SizedBox(height: 5.h),
+                        ],
+                        if (isRankedMatch && (service.players?.length ?? 0) > 0) ...[
+                          SizedBox(height: 20.h),
+                          _ScoreViewComponent(service: service),
+                        ],
+                        SizedBox(height: 15.h),
+                        Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            child: MainButton(
+                              enabled: isJoined,
+                              color: AppColors.darkYellow80,
+                              padding: EdgeInsets.symmetric(horizontal: 20.w),
+                              showArrow: false,
+                              labelStyle: AppTextStyles.poppinsMedium(
+                                  fontSize: 16.sp,),
+                              label: "${"CHAT".tr(context)} $chatCount",
+                              onTap: () {
+                                ref.read(goRouterProvider).push(RouteNames.chat,
+                                    extra: [service.id ?? 0]).then((e) {
+                                  ref.read(chatSocketProvider.notifier).offSocket();
+                                  final provider =
+                                      fetchChatCountProvider(matchId: service.id ?? 0);
+                                  ref.invalidate(provider);
+                                });
+                              },
+                            )),
+                      ],
+                    );
+                  },
+                )
                 // if(isJoined)
                 //   Padding(
                 //       padding: const EdgeInsets.symmetric(vertical: 15),
@@ -684,7 +718,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
       context: context,
       builder: (context) {
         return PaymentInformation(
-            title: "PAY_MY_SHARE".tr(context),
+            title: "PAY".tr(context),
             isOpenMatch: true,
             courtId: service.courtId,
             // boldPosition: 1,

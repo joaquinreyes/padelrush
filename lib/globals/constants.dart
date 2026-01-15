@@ -20,7 +20,7 @@ const kWhatsAppContact = "+353870356077";
 const int kMinimumLimit = 8;
 const int kPageLimit = 30;
 const int kUserSearchPageSize = 30;
-const kDeepLinkUrl = 'https://share.bookandgo.app/hop';
+const kDeepLinkUrl = 'https://share.bookandgo.app/padelrush';
 
 // const currency = "RM";
 // const currency = "EUR";

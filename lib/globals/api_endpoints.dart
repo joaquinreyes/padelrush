@@ -89,6 +89,7 @@ enum ApiEndPoint {
   notificationMarkAllAsRead("notifications/read-all", isAuthRequired: true),
   notificationDelete("notifications", isAuthRequired: true),
   notificationClearAll("notifications", isAuthRequired: true),
+  updateServiceSettings("services", isAuthRequired: true),
   ;
 
   final String _path;
@@ -184,6 +185,9 @@ enum ApiEndPoint {
     }
     if (this == ApiEndPoint.notificationDelete) {
       return "notifications/${id.first}";
+    }
+    if (this == ApiEndPoint.updateServiceSettings) {
+      return "services/${id.first}/update";
     }
 
     return _path;
