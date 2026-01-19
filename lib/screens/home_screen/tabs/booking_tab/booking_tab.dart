@@ -62,7 +62,8 @@ class BookingTab extends ConsumerStatefulWidget {
   ConsumerState<BookingTab> createState() => _BookingTabState();
 }
 
-class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObserver {
+class _BookingTabState extends ConsumerState<BookingTab>
+    with WidgetsBindingObserver {
   List<ClubLocationSports> sports = [];
 
   @override
@@ -141,7 +142,9 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
           SizedBox(height: 20.h),
           Row(
             children: [
-              SizedBox(width: 30.w,),
+              SizedBox(
+                width: 30.w,
+              ),
               FollowPlayersButton(),
               const Spacer(),
               Builder(
@@ -149,7 +152,9 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
                   final chatState = ref.watch(privateChatSocketProvider);
                   return InkWell(
                     onTap: () {
-                      ref.read(goRouterProvider).push(RouteNames.privateChatList);
+                      ref
+                          .read(goRouterProvider)
+                          .push(RouteNames.privateChatList);
                     },
                     child: ChatIconComponent(
                       hasUnread: chatState.unreadSenderCount > 0,
@@ -256,7 +261,9 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
                 margin: EdgeInsets.only(left: 15.w),
                 decoration: BoxDecoration(
                   color: AppColors.gray,
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(100.r),bottomLeft: Radius.circular(100.r)),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(100.r),
+                      bottomLeft: Radius.circular(100.r)),
                 ),
                 child: Row(
                   children: [
@@ -381,7 +388,8 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
         margin: EdgeInsets.symmetric(horizontal: 4.w),
         padding: EdgeInsets.all(5.h),
         decoration: BoxDecoration(
-          color: isDateLessonSelected ? AppColors.darkYellow : Colors.transparent,
+          color:
+              isDateLessonSelected ? AppColors.darkYellow : Colors.transparent,
           borderRadius: BorderRadius.circular(100.r),
         ),
         alignment: Alignment.center,
@@ -397,7 +405,7 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
   }
 
   Widget _lessonsBody() {
-    // final selectedSport = ref.watch(selectedSportLessonProvider);
+    final selectedSport = ref.watch(selectedSportLessonProvider);
     return LayoutBuilder(
       builder: (context, constraint) {
         final sportList = [...sports];
@@ -409,13 +417,16 @@ class _BookingTabState extends ConsumerState<BookingTab> with WidgetsBindingObse
             constraints: BoxConstraints(minHeight: constraint.maxHeight),
             child: Column(
               children: [
-                // _sportsRow(sportList, selectedSport,
-                //     (ClubLocationSports sport) {
-                //   ref.read(_selectedTimeSlotAndLocationID.notifier).state =
-                //       (null, null);
-                //   ref.read(selectedSportLessonProvider.notifier).sport = sport;
-                // }),
-                // SizedBox(height: 15.h),
+                _sportsRow(
+                    sportList
+                        .where((e) => e.sportName?.toLowerCase() == "padel")
+                        .toList(),
+                    selectedSport, (ClubLocationSports sport) {
+                  ref.read(_selectedTimeSlotAndLocationID.notifier).state =
+                      (null, null);
+                  ref.read(selectedSportLessonProvider.notifier).sport = sport;
+                }),
+                SizedBox(height: 15.h),
                 ExpandablePageView(
                   physics: const NeverScrollableScrollPhysics(),
                   controller: ref.watch(_pageViewController),

@@ -21,7 +21,6 @@ class _MembershipDialog extends StatelessWidget {
 
     return CustomDialog(
       maxHeight: MediaQuery.of(context).size.height * 0.85,
-
       child: Column(
         children: [
           // Image.asset(
@@ -54,7 +53,8 @@ class _MembershipDialog extends StatelessWidget {
             constraints: kComponentWidthConstraint,
             decoration: BoxDecoration(
                 color: AppColors.white,
-                borderRadius: BorderRadius.circular(12.r)),
+                borderRadius: BorderRadius.circular(12.r),
+                border: Border.all(color: AppColors.black2)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -66,7 +66,7 @@ class _MembershipDialog extends StatelessWidget {
                   textAlign: TextAlign.start,
                 ),
                 CDivider(
-                  color: AppColors.black5,
+                  color: AppColors.black2,
                 ),
                 SizedBox(height: 4.h),
                 Row(
@@ -127,34 +127,32 @@ class _MembershipDialog extends StatelessWidget {
                   Text(
                     "${"DESCRIPTION".tr(context)} :",
                     style: AppTextStyles.poppinsMedium(
-                        color: AppColors.white, fontSize: 17.sp),
+                        color: AppColors.black2, fontSize: 17.sp),
                   ),
                   SizedBox(height: 5.h),
-                  Text(
-                    membershipDescription,
-                    style: AppTextStyles.popupBodyTextStyle,
-                  ),
+                  Text(membershipDescription,
+                      style: AppTextStyles.popupBodyTextStyle),
                 ],
               ),
             ),
-
-          SizedBox(height: 25.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.w),
-            child: MainButton(
-              isForPopup: true,
-              padding: EdgeInsets.only(top: 9.h, bottom: 5.h),
-              label: "PAY_MEMBERSHIP".trU(context),
-              // labelStyle: AppTextStyles.qanelasRegular(
-              //   color: AppColors.white,
-              //   fontSize: 17.sp,
-              //   letterSpacing: 17.sp * 0.12,
-              // ),
-              onTap: () {
-                Navigator.pop(context, true);
-              },
-            ),
-          )
+          if (activeMembership == null) SizedBox(height: 25.h),
+          if (activeMembership == null)
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              child: MainButton(
+                isForPopup: true,
+                padding: EdgeInsets.only(top: 9.h, bottom: 5.h),
+                label: "PAY_MEMBERSHIP".trU(context),
+                // labelStyle: AppTextStyles.qanelasRegular(
+                //   color: AppColors.white,
+                //   fontSize: 17.sp,
+                //   letterSpacing: 17.sp * 0.12,
+                // ),
+                onTap: () {
+                  Navigator.pop(context, true);
+                },
+              ),
+            )
         ],
       ),
     );
@@ -367,16 +365,16 @@ class MembershipListComponent extends ConsumerWidget {
                                   context: context,
                                   builder: (context) {
                                     return PaymentInformation(
-                                      type: PaymentDetailsRequestType
-                                          .membership,
+                                      type:
+                                          PaymentDetailsRequestType.membership,
                                       locationID: e.locationId,
                                       allowCoupon: false,
                                       allowMembership: false,
                                       allowWallet: false,
                                       purchaseMembership: true,
                                       price: e.price ?? 0,
-                                      requestType: PaymentProcessRequestType
-                                          .membership,
+                                      requestType:
+                                          PaymentProcessRequestType.membership,
                                       serviceID: e.id ?? 0,
                                       startDate: null,
                                       duration: null,
@@ -463,8 +461,7 @@ class MembershipListComponent extends ConsumerWidget {
                               );
                             },
                           );
-                          var (int? paymentDone, double? amount) =
-                              (null, null);
+                          var (int? paymentDone, double? amount) = (null, null);
                           if (data is (int, double?)) {
                             (paymentDone, amount) = data;
                           }
@@ -475,8 +472,7 @@ class MembershipListComponent extends ConsumerWidget {
                                   .tr(context),
                             );
                           }
-                          ref.invalidate(
-                              fetchActiveAndAllMembershipsProvider);
+                          ref.invalidate(fetchActiveAndAllMembershipsProvider);
                         },
                         child: activeMembership == null
                             ? Container(
@@ -489,8 +485,7 @@ class MembershipListComponent extends ConsumerWidget {
                                 decoration: inset.BoxDecoration(
                                     color: AppColors.black5,
                                     boxShadow: kInsetShadow,
-                                    borderRadius:
-                                        BorderRadius.circular(12.r)),
+                                    borderRadius: BorderRadius.circular(12.r)),
                                 alignment: Alignment.center,
                                 child: Text(
                                   "GET_MEMBERSHIP".tr(context),
@@ -508,8 +503,7 @@ class MembershipListComponent extends ConsumerWidget {
                                 decoration: inset.BoxDecoration(
                                     color: AppColors.black2,
                                     boxShadow: kInsetShadow,
-                                    borderRadius:
-                                        BorderRadius.circular(12.r)),
+                                    borderRadius: BorderRadius.circular(12.r)),
                                 alignment: Alignment.center,
                                 child: Center(
                                     child: activeMembership
