@@ -473,7 +473,7 @@ class Utils {
     final playersList = allPlayers.join("\n");
 
     String shareStr = """
-• MATCH IN HOUSE OF PADEL
+• MATCH IN PADEL RUSH
 📅 $date
 📍 $court
 📊 Level $level
