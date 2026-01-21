@@ -381,19 +381,11 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
       imagePath: AppImages.walletIcon.path,
       onTap: () => _selectPaymentMethod(paymentMethod, mdr: mdr),
       showDelete: isSelected,
-      onDelete: isSelected
-          ? () {
-              _deletePaymentMethod(paymentMethod);
-            }
-          : null,
+      onDelete: null,
     );
   }
 
   Widget _buildPaymentMethodItem(AppPaymentMethods paymentMethod, {Widget? prefix}) {
-    bool isStripeMethod = paymentMethod.methodType == kStripeMethod;
-    // if (paymentMethod.methodType == kPayLaterMethod) {
-    //   return Container();
-    // }
     final selectedPaymentMethod = ref.watch(_selectedPaymentMethod);
     final selectedRedeemMethod = ref.watch(_selectedRedeem);
     final isRedeemSelected = selectedRedeemMethod != null;
@@ -411,12 +403,7 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
       );
     }
     String title = _getPaymentMethodTitle(paymentMethod, isRedeemSelected);
-    bool isSelected = false;
-    if (isStripeMethod) {
-      isSelected = selectedPaymentMethod?.stripePaymentMethodID == paymentMethod.stripePaymentMethodID;
-    } else {
-      isSelected = selectedPaymentMethod?.id == paymentMethod.id;
-    }
+    bool isSelected = selectedPaymentMethod?.id == paymentMethod.id;
     bool isRedeemAvailable = _isRedeemAvailable(paymentMethod);
 
     if (isRedeemAvailable) {
@@ -436,14 +423,10 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
       title: title,
       isSelected: isSelected,
       prefix: prefix,
-      imagePath: isStripeMethod ? AppImages.creditCard2.path : AppImages.walletIcon.path,
+      imagePath: AppImages.walletIcon.path,
       onTap: () => _selectPaymentMethod(paymentMethod),
-      showDelete: isStripeMethod,
-      onDelete: isStripeMethod
-          ? () {
-              _deletePaymentMethod(paymentMethod);
-            }
-          : null,
+      showDelete: false,
+      onDelete: null,
     );
   }
 
@@ -561,17 +544,6 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
     ref.read(_selectedMDR.notifier).state = mdr;
   }
 
-  Future<void> _deletePaymentMethod(AppPaymentMethods paymentMethod) async {
-    final id = paymentMethod.stripePaymentMethodID;
-    ref.read(_selectedPaymentMethod.notifier).state = null;
-    if (id != null) {
-      final isDelete = await Utils.showLoadingDialog(context, deletePaymentMethodProvider(id), ref);
-      if (isDelete != null && isDelete) {
-        ref.invalidate(
-            fetchAllPaymentMethodsProvider(widget.locationID, widget.serviceID ?? 0, widget.requestType, widget.startDate, widget.duration,courtId: widget.courtId,variantId: widget.variantId,isOpenMatch: widget.isOpenMatch));
-      }
-    }
-  }
 
   Widget _buildPaymentMethodOption(
       {required String title,
@@ -610,9 +582,6 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
   }
 
   String _getPaymentMethodTitle(AppPaymentMethods paymentMethod, bool isRedeemSelected) {
-    if (paymentMethod.methodType == kStripeMethod) {
-      return "${paymentMethod.brand?.capitalizeFirst} ${paymentMethod.last4}";
-    }
     if (paymentMethod.methodType == kWalletMethod) {
       final walletBalance = paymentMethod.walletBalance ?? 0.0;
       return widget.price > walletBalance
@@ -620,6 +589,8 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
           : "${"WALLET".tr(context)} ${Utils.formatPrice(walletBalance)}";
     } else if (paymentMethod.methodType == kPayLaterMethod) {
       return "PAY_LATER".tr(context);
+    } else if (paymentMethod.methodType == kRazorPayMethod) {
+      return "EWALLET".tr(context);
     } else {
       return paymentMethod.methodTypeText ?? "";
     }

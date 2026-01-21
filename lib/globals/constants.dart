@@ -22,8 +22,6 @@ const int kPageLimit = 30;
 const int kUserSearchPageSize = 30;
 const kDeepLinkUrl = 'https://share.bookandgo.app/padelrush';
 
-// const currency = "RM";
-// const currency = "EUR";
 const currency = "INR";
 
 const double kDesignHeight = 844;
@@ -44,9 +42,9 @@ const sendUsMessageUrl = "https://line.me/R/ti/p/@427tckwu";
 
 String kFormatForAPI = "yyyy-MM-dd";
 
-String kStripDevKey =
-    "pk_live_51SCh4PROOlv4UXRHdxRlYHCo4iLpuD9UZwHiPwY2AOlVJ7rurKakW5XEmTwdQbNU6UNRCsG0EX3D6c82UzWnJuOf00PW3Wt9C4";
-// "pk_test_51SCh4PROOlv4UXRHPltsjAQR6duYemRjKZCchlrechHOnIYhnPTiCXITf2KeTlU7mlmPRlWviJSbPF0zh9ZNkwu300XKK8axoT";
+// Razorpay configuration
+// String kRazorPayKey = 'rzp_test_w3YOxd0E5CnOLm';  // Test key Pickle Park
+String kRazorPayKey = 'rzp_live_sh7zGdn337MMsZ';     // Live key Pickle Park
 
 final kComponentWidthConstraint = BoxConstraints(maxWidth: 450.w);
 const kAnimationDuration = Duration(milliseconds: 250);

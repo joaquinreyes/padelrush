@@ -17,17 +17,13 @@ import 'package:padelrush/globals/utils.dart';
 import 'package:padelrush/models/coupon_model.dart';
 import 'package:padelrush/models/payment_methods.dart';
 import 'package:padelrush/repository/payment_repo.dart';
-import 'package:padelrush/repository/stripe_repo.dart';
 import 'package:padelrush/utils/custom_extensions.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 
 import '../../globals/constants.dart';
 import '../../models/court_price_model.dart';
 import '../../repository/booking_repo.dart';
 import '../../routes/app_pages.dart';
 import '../home_screen/tabs/booking_tab/book_court_dialog/book_court_dialog.dart';
-
-part 'add_card.dart';
 
 part 'payment_components.dart';
 
@@ -305,45 +301,6 @@ class __PaymentInformationState extends ConsumerState<PaymentInformation> {
     );
   }
 
-  Widget _buildAddCardWidget() {
-    return InkWell(
-      onTap: () async {
-        final bool? added = await showDialog(
-          context: context,
-          builder: (context) {
-            return _AddCard();
-          },
-        );
-        if (added == true) {
-          ref.invalidate(fetchAllPaymentMethodsProvider(widget.locationID, widget.serviceID ?? 0, widget.type, widget.startDate, widget.duration,courtId: widget.courtId,variantId: widget.variantId,isOpenMatch: widget.isOpenMatch));
-        }
-      },
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.only(top: 15.h, bottom: 10.h),
-        decoration: BoxDecoration(
-          color: AppColors.whiteNew,
-          borderRadius: BorderRadius.circular(10.r),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              AppImages.creditCardIcon.path,
-              height: 67.h,
-              width: 67.h,
-              color: Colors.black,
-            ),
-            SizedBox(height: 15.h),
-            Text(
-              "ADD_CREDIT_DEBIT_CARD".tr(context),
-              style: AppTextStyles.poppinsRegular(fontSize: 15.sp),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
 // double _calculateAmountPayable() {
 //   final coupon = ref.watch(_appliedCoupon);

@@ -1,15 +1,14 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:razorpay_web/razorpay_web.dart';
 import 'package:padelrush/globals/api_endpoints.dart';
 import 'package:padelrush/managers/api_manager.dart';
 import 'package:padelrush/managers/user_manager.dart';
 import 'package:padelrush/models/coupon_model.dart';
 import 'package:padelrush/models/payment_methods.dart';
-import 'package:padelrush/models/stripe_payment_method.dart';
 import 'package:padelrush/utils/custom_extensions.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:padelrush/repository/stripe_repo.dart';
 
 import '../globals/constants.dart';
 import '../models/multi_booking_model.dart';
@@ -125,24 +124,14 @@ class PaymentRepo {
     int? couponID,
   }) async {
     try {
-      final bool isStripePayment =
-          paymentMethod?.any((method) => method.methodType == kStripeMethod) ??
+      final bool isRazorPayment =
+          paymentMethod?.any((method) => method.methodType == kRazorPayMethod) ??
               false;
       final bool isNativePayment = paymentMethod?.any((method) =>
               method.methodType == kApplePayMethod ||
               method.methodType == kGooglePayMethod) ??
           false;
 
-      // Check for Native Payment availability
-      if (isNativePayment) {
-        final isNativeAvailable =
-            await ref.read(isNativeAvailableProvider.future);
-        if (!isNativeAvailable) {
-          throw Platform.isIOS
-              ? "PLEASE_SETUP_APPLE_PAY"
-              : "PLEASE_SETUP_GOOGLE_PAY";
-        }
-      }
 
       final token = ref.read(userManagerProvider).user?.accessToken;
       final Map<String, dynamic> data = {
@@ -192,26 +181,12 @@ class PaymentRepo {
                 isV2Version: bookingToOpenMatch ? false : true,
               );
 
-      if (isStripePayment) {
-        return await _handleStripePayment(
-            ref, response, false, paymentMethod, purchaseMembership) as (
+      if (isRazorPayment) {
+        return await _handleRazorPayment(
+            ref, response, false, purchaseMembership, paymentMethod) as (
           int,
           double?
         );
-      } else if (isNativePayment) {
-        final amount = paymentMethod!
-            .firstWhere(
-              (element) =>
-                  element.methodType == kApplePayMethod ||
-                  element.methodType == kGooglePayMethod,
-            )
-            .amountToPay;
-        return await _handleNativePayment(
-            ref,
-            response,
-            amount ?? totalAmount ?? 0.0,
-            false,
-            purchaseMembership) as (int, double?);
       } else {
         if (bookingToOpenMatch) {
           return (0, null);
@@ -225,76 +200,93 @@ class PaymentRepo {
     }
   }
 
-// Helper method to handle Stripe payment
-  Future<(dynamic, double?)> _handleStripePayment(
-      Ref ref,
-      dynamic response,
-      bool isCart,
-      List<AppPaymentMethods>? paymentMethod,
-      bool isMembership) async {
-    try {
-      await Future.delayed(const Duration(seconds: 2));
-      final rdata = isCart ?  response['data'] : response['data']['gatewayUrl'];
-      String status = (rdata['status'] ?? "").toLowerCase();
-      final clientSecret = rdata['clientSecret'].toString();
-      final transactionID = rdata['transaction_id'].toString();
+// Helper method to handle Razorpay payment
+  Future<(dynamic, double?)> _handleRazorPayment(
+    Ref ref,
+    dynamic response,
+    bool isCart,
+    bool isMembership,
+    List<AppPaymentMethods>? paymentMethod,
+  ) async {
+    // Create a completer that will complete when a payment event occurs.
+    final Completer<Map<String, dynamic>> completer = Completer();
 
-      while (status == "requires_action") {
-        String stripePaymentMethodId = "";
-
-        if ((paymentMethod ?? []).isNotEmpty) {
-          stripePaymentMethodId =
-              paymentMethod!.first.stripePaymentMethodID ?? "";
-        }
-
-        final PaymentIntent? paymentIntent = await ref.read(
-            stripeRequireActionProvider(clientSecret, stripePaymentMethodId)
-                .future);
-        status = paymentIntent?.toJson()['status'].toString().toLowerCase() ??
-            "unknown";
-      }
-
-      while (status == "requires_payment_method") {
-        await ref.read(stripePaymentMethodProvider(clientSecret).future);
-        status = "succeeded";
-      }
-
-      if (status == "succeeded") {
-        myPrint("chargeID: $transactionID");
-        return _fetchServiceIDFromChargeID(ref,
-            chargeID: transactionID,
-            isCart: isCart,
-            isMembership: isMembership);
-      }
-      throw "SOMETHING_WENT_WRONG";
-    } catch (e) {
-      if (e is StripeError) {
-        throw e.message;
-      }
-      throw e.toString();
-    }
-  }
-
-// Helper method to handle Native payment
-  Future<(dynamic, double?)> _handleNativePayment(Ref ref, dynamic response,
-      double totalAmount, bool isCart, bool isMembership) async {
     final rdata = response['data']['gatewayUrl'];
-    final clientSecret = rdata['clientSecret'].toString();
-    final transactionID = rdata['transaction_id'].toString();
+    final orderId = rdata['transaction_id'].toString();
 
-    final PaymentIntent? paymentIntent = await ref.read(
-      startNativePayProvider(
-        clientSec: clientSecret,
-        amount: totalAmount.toString(),
-      ).future,
-    );
+    Razorpay razorpay = Razorpay();
 
-    if (paymentIntent == null) {
-      throw "SOMETHING_WENT_WRONG";
+    Map prefill = {};
+    final currentUserNumber =
+        ref.read(userManagerProvider).user?.user?.phoneNumber;
+    final currentUserEmail = ref.read(userManagerProvider).user?.user?.email;
+
+    if (currentUserNumber != null) {
+      prefill["contact"] = currentUserNumber;
+    }
+    if (currentUserEmail != null) {
+      prefill["email"] = currentUserEmail;
     }
 
-    return _fetchServiceIDFromChargeID(ref,
-        chargeID: transactionID, isCart: isCart, isMembership: isMembership);
+    // Payment options
+    var options = {
+      'key': kRazorPayKey,
+      'prefill': prefill,
+      'retry': {
+        'enabled': false,
+        'max_count': 0,
+      },
+      'order_id': orderId,
+      'currency': currency,
+    };
+
+    // Payment success event callback
+    razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS,
+        (PaymentSuccessResponse response) {
+      if (!completer.isCompleted) {
+        completer.complete({
+          'status': 'success',
+          'data': response,
+        });
+      }
+    });
+
+    // Payment error event callback
+    razorpay.on(Razorpay.EVENT_PAYMENT_ERROR,
+        (PaymentFailureResponse response) {
+      myPrint("------------ Razor Pay Error ${response.error}");
+      if (!completer.isCompleted) {
+        completer.complete({
+          'status': 'error',
+          'error': response.message,
+        });
+      }
+    });
+
+    // External wallet selected event callback
+    razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET,
+        (ExternalWalletResponse response) {
+      if (!completer.isCompleted) {
+        completer.complete({
+          'status': 'external_wallet',
+          'wallet': response.walletName,
+        });
+      }
+    });
+
+    // Open the Razorpay payment interface.
+    razorpay.open(options);
+
+    final value = await completer.future;
+
+    if (value["status"] == "success") {
+      await Future.delayed(Duration(seconds: 5));
+      return _fetchServiceIDFromChargeID(ref,
+          chargeID: orderId, isCart: isCart, isMembership: isMembership);
+    } else if (value["status"] == "error") {
+      throw value["error"] ?? "SOMETHING_WENT_WRONG";
+    }
+    throw "SOMETHING_WENT_WRONG";
   }
 
 // Helper method to extract service booking ID
@@ -314,9 +306,6 @@ class PaymentRepo {
 
 // Error handling helper
   void _handlePaymentError(dynamic error) {
-    if (error is StripeException) {
-      throw error.error.localizedMessage ?? "SOMETHING_WENT_WRONG";
-    }
     if (error is Map<String, dynamic>) {
       throw error['message'];
     }
@@ -413,7 +402,7 @@ class PaymentRepo {
       if (payLater == true && paymentMethod != null) {
         throw 'Can not use pay later with other payment methods';
       }
-      final bool isStripePayment = (paymentMethod?.methodType == kStripeMethod);
+      final bool isRazorPayment = (paymentMethod?.methodType == kRazorPayMethod);
       if (payLater == true) {
         data['pay_on_arrival'] = true;
       } else if (paymentMethod != null) {
@@ -438,9 +427,9 @@ class PaymentRepo {
             token: token,
             queryParams: queryParams,
           );
-      if (isStripePayment) {
-        final temp = await _handleStripePayment(
-            ref, response, true, [paymentMethod!], false);
+      if (isRazorPayment) {
+        final temp = await _handleRazorPayment(
+            ref, response, true, false, [paymentMethod!]);
         final (value, amount) = temp;
         List<MultipleBookings> list = [];
         if (value != null && value is List) {
@@ -496,42 +485,12 @@ Future<PaymentDetails> fetchAllPaymentMethods(
 
     DateTime? startDate,
     int? duration,{int? courtId,int? variantId,required bool isOpenMatch}) async {
-  final future = await Future.wait([
-    ref.refresh(fetchPaymentDetailsProvider(
-            locationID, type, serviceID, isOpenMatch, startDate, duration,courtId: courtId,variantId:variantId)
-        .future),
-    ref.refresh(fetchStripPaymentMethodsProvider.future),
-  ]);
-
-  final paymentMethods = future[0] as PaymentDetails;
-  final stripePaymentMethods = future[1] as List<StripePaymentMethod>;
-
-  final List<AppPaymentMethods> appPaymentMethods =
-      paymentMethods.appPaymentMethods ?? [];
-  final stripeIDIndex = appPaymentMethods.indexWhere((element) =>
-      element.methodType?.toLowerCase() == kStripeMethod.toLowerCase());
-
-  if (stripeIDIndex == -1) {
-    return PaymentDetails(
-        appPaymentMethods: appPaymentMethods,
-        userMemberships: paymentMethods.userMemberships);
-  }
-
-  final stripeID = appPaymentMethods[stripeIDIndex].id;
-  for (final paymentMethod in stripePaymentMethods) {
-    paymentMethods.appPaymentMethods?.add(AppPaymentMethods(
-      id: stripeID,
-      methodType: kStripeMethod,
-      stripePaymentMethodID: paymentMethod.id,
-      last4: paymentMethod.card?.last4 ?? "",
-      brand: paymentMethod.card?.brand ?? "",
-    ));
-  }
-
-  appPaymentMethods.removeAt(stripeIDIndex);
+  final paymentMethods = await ref.refresh(fetchPaymentDetailsProvider(
+          locationID, type, serviceID, isOpenMatch, startDate, duration,courtId: courtId,variantId:variantId)
+      .future);
 
   return PaymentDetails(
-      appPaymentMethods: appPaymentMethods,
+      appPaymentMethods: paymentMethods.appPaymentMethods,
       userMemberships: paymentMethods.userMemberships);
 }
 

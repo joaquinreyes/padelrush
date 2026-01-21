@@ -7,7 +7,7 @@ import '../app_styles/app_text_styles.dart';
 
 const String kWalletMethod = "wallet";
 const String kPayLaterMethod = "cash";
-const String kStripeMethod = "stripe";
+const String kRazorPayMethod = "razor pay";
 const String kApplePayMethod = "apple pay";
 const String kGooglePayMethod = "google pay";
 const String kMembershipMethod = "membership";
@@ -142,11 +142,6 @@ class AppPaymentMethods {
   String? methodTypeText;
   double? walletBalance;
   double? amountToPay;
-
-  //Stripe Related
-  String? stripePaymentMethodID;
-  String? brand;
-  String? last4;
   int? membershipId;
 
   AppPaymentMethods({
@@ -155,10 +150,7 @@ class AppPaymentMethods {
     this.walletBalance,
     this.methodTypeText,
     this.amountToPay,
-    this.stripePaymentMethodID,
-    this.brand,
     this.membershipId,
-    this.last4,
   });
 
   Map<String, dynamic> toJsonForProcess() {
@@ -166,9 +158,6 @@ class AppPaymentMethods {
     data['method_id'] = id;
     data['method_type'] = methodType;
     data["amount"] = amountToPay;
-    if (methodType == kStripeMethod) {
-      data["stripe_method_id"] = stripePaymentMethodID;
-    }
     if (methodType == kMembershipMethod) {
       data["customer_membership_id"] = membershipId;
     }
