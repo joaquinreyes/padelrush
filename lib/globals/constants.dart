@@ -43,8 +43,8 @@ const sendUsMessageUrl = "https://line.me/R/ti/p/@427tckwu";
 String kFormatForAPI = "yyyy-MM-dd";
 
 // Razorpay configuration
-// String kRazorPayKey = 'rzp_test_w3YOxd0E5CnOLm';  // Test key Pickle Park
-String kRazorPayKey = 'rzp_live_sh7zGdn337MMsZ';     // Live key Pickle Park
+// String kRazorPayKey = 'rzp_test_S9ApvLfcaZQz0d';  // Test key Padel Rush
+String kRazorPayKey = 'rzp_live_S6yUfKtDfMPOED';     // Live key Padel Rush
 
 final kComponentWidthConstraint = BoxConstraints(maxWidth: 450.w);
 const kAnimationDuration = Duration(milliseconds: 250);
