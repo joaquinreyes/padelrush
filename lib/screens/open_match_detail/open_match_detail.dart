@@ -684,6 +684,26 @@ class _DataBodyState extends ConsumerState<_DataBody> {
       required bool isReserve,
       required bool isApprovalNeeded,
       bool isJoinApproval = false}) async {
+    // Check level restrictions first
+    final sportsName = service.getSportsName(ref) ?? "padel";
+    final userLevel = ref.read(userProvider)?.user?.level(sportsName) ?? 0.0;
+    final minLevel = service.options?.minLevel ?? 0.0;
+    final maxLevel = service.options?.maxLevel ?? 7.0;
+
+    // Check if user level is within allowed range
+    if (userLevel < minLevel || userLevel > maxLevel) {
+      if (mounted) {
+        String message;
+        if (userLevel < minLevel) {
+          message = "Your level ($userLevel) is below the minimum required level ($minLevel) for this match.";
+        } else {
+          message = "Your level ($userLevel) is above the maximum allowed level ($maxLevel) for this match.";
+        }
+        await Utils.showMessageDialog(context, message);
+      }
+      return;
+    }
+
     final provider = joinServiceProvider(service.id!,
         position: index + 1,
         isEvent: false,

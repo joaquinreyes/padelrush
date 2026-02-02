@@ -404,6 +404,27 @@ class _AddPlayerToWaitingListDialogState
   }
 
   Future<void> _handleAddPlayer(User user) async {
+    // Check level restrictions first
+    final serviceDetail = await ref.read(fetchServiceDetailProvider(widget.serviceId).future);
+    final sportsName = serviceDetail.getSportsName(ref) ?? "padel";
+    final userLevel = user.level(sportsName) ?? 0.0;
+    final minLevel = serviceDetail.options?.minLevel ?? 0.0;
+    final maxLevel = serviceDetail.options?.maxLevel ?? 7.0;
+
+    // Check if user level is within allowed range
+    if (userLevel < minLevel || userLevel > maxLevel) {
+      if (mounted) {
+        String message;
+        if (userLevel < minLevel) {
+          message = "${user.fullName}'s level ($userLevel) is below the minimum required level ($minLevel) for this match.";
+        } else {
+          message = "${user.fullName}'s level ($userLevel) is above the maximum allowed level ($maxLevel) for this match.";
+        }
+        await Utils.showMessageDialog(context, message);
+      }
+      return;
+    }
+
     // Show confirmation dialog
     final bool? confirmed = await showDialog<bool>(
       context: context,
