@@ -914,7 +914,7 @@ class __ScoreComponentState extends ConsumerState<_ScoreViewComponent> {
                   Text(
                     widget.service.openMatchLevelRange,
                     style: AppTextStyles.poppinsRegular(
-                      fontSize: 15.sp,
+                      fontSize: 11.sp,
                     ),
                   )
                 ],

@@ -71,7 +71,7 @@ class _CourtBookedDialogState extends ConsumerState<CourtBookedDialog> {
           Center(
             child: widget.title ??
                 Text(
-                  "BOOKING_INFORMATION".trU(context),
+                  "BOOKING_CONFIRMED".trU(context),
                   style: AppTextStyles.popupHeaderTextStyle,
                   textAlign: TextAlign.center,
                 ),

@@ -396,7 +396,7 @@
   "SEE_PROFILE": "See profile",
   "PAY_LESSON": "Pay",
   "SEE_MY_BOOKINGS": "See my bookings",
-  "YOU_WILL_NOT_GET_REFUND_ON_THIS_BOOKING": "On cancellation you will not get refund on this booking",
+  "YOU_WILL_NOT_GET_REFUND_ON_THIS_BOOKING": "Kindly note that on cancellation you will not refund on this booking",
   "CANCELLATION_POLICY_3": "Cancellation up to {HOUR} hours before the booking starts can be credited.\nYou will get refund of EUR {REFUND}",
   "REFUND_DESCRIPTION": "{PERCENTAGE}% refund {HOUR} hours before the booking starts",
   "CANCELLATION_POLICY_HOURS": "Cancellation up to {HOUR} hours before the booking starts can be credited.",

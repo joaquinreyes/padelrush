@@ -461,25 +461,25 @@ class Utils {
     final confirmedPlayers = players.map((e) {
       final name = (e.reserved ?? false) ? "Reserved" : e.getCustomerName;
       final ranking = e.customer?.level(getSportsName(ref)) ?? "";
-      return ranking.isNotEmpty ? "✅ $name ($ranking)" : "✅ $name";
+      return ranking.isNotEmpty ? "*✅ $name ($ranking)*" : "*✅ $name*";
     }).toList();
 
     // Build available spots list with circles
     final missingPlayers = 4 - players.length;
-    final availableSpots = List.generate(missingPlayers, (_) => "⚪ ??");
+    final availableSpots = List.generate(missingPlayers, (_) => "*⚪ ??*");
 
     // Combine all players
     final allPlayers = [...confirmedPlayers, ...availableSpots];
     final playersList = allPlayers.join("\n");
 
     String shareStr = """
-• MATCH IN PADEL RUSHH
-📅 $date
-📍 $court
-📊 Level $level
+*• MATCH IN PADEL RUSHH*
+*📅 $date*
+*📍 $court*
+*📊 Level $level*
 $playersList
 
-Click to join 👇🏼
+*Click to join 👇🏼*
 $link
 """;
     Utils.openWhatsapp(context: context, message: shareStr);
