@@ -690,18 +690,23 @@ class _DataBodyState extends ConsumerState<_DataBody> {
     final minLevel = service.options?.minLevel ?? 0.0;
     final maxLevel = service.options?.maxLevel ?? 7.0;
 
+    bool effectiveApprovalNeeded = isApprovalNeeded;
+
     // Check if user level is within allowed range
     if (userLevel < minLevel || userLevel > maxLevel) {
-      if (mounted) {
-        String message;
-        if (userLevel < minLevel) {
-          message = "Your level ($userLevel) is below the minimum required level ($minLevel) for this match.";
-        } else {
-          message = "Your level ($userLevel) is above the maximum allowed level ($maxLevel) for this match.";
-        }
-        await Utils.showMessageDialog(context, message);
+      if (!mounted) return;
+      String message;
+      if (userLevel < minLevel) {
+        message = "Your level ($userLevel) is below the minimum required level ($minLevel) for this match.";
+      } else {
+        message = "Your level ($userLevel) is above the maximum allowed level ($maxLevel) for this match.";
       }
-      return;
+      final bool? wantsToRequest = await showDialog<bool>(
+        context: context,
+        builder: (context) => _OutsideRankingRequestDialog(message: message),
+      );
+      if (wantsToRequest != true || !mounted) return;
+      effectiveApprovalNeeded = true;
     }
 
     final provider = joinServiceProvider(service.id!,
@@ -711,13 +716,13 @@ class _DataBodyState extends ConsumerState<_DataBody> {
         isDouble: false,
         isReserve: isReserve,
         isLesson: false,
-        isApprovalNeeded: isApprovalNeeded);
+        isApprovalNeeded: effectiveApprovalNeeded);
     final double? price = await Utils.showLoadingDialog(context, provider, ref);
 
     if (!mounted || price == null) {
       return;
     }
-    if (isApprovalNeeded && price < 0) {
+    if (effectiveApprovalNeeded && price < 0) {
       await showDialog(
         context: context,
         builder: (_) => _WaitingForApprovalDialog(serviceID: service.id!),

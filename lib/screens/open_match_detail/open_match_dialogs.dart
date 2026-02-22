@@ -254,6 +254,49 @@ class ConfirmationDialog extends StatelessWidget {
   }
 }
 
+class _OutsideRankingRequestDialog extends StatelessWidget {
+  const _OutsideRankingRequestDialog({required this.message});
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomDialog(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(height: 5.h),
+          Text(
+            "Outside Ranking Range",
+            style: AppTextStyles.popupHeaderTextStyle,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 20.h),
+          Text(
+            message,
+            textAlign: TextAlign.center,
+            style: AppTextStyles.popupBodyTextStyle,
+          ),
+          SizedBox(height: 10.h),
+          Text(
+            "You can still request to join and the organizer will decide whether to approve you.",
+            textAlign: TextAlign.center,
+            style: AppTextStyles.popupBodyTextStyle,
+          ),
+          SizedBox(height: 20.h),
+          MainButton(
+            isForPopup: true,
+            label: "REQUEST TO JOIN",
+            onTap: () {
+              Navigator.pop(context, true);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _AddPlayerToWaitingListDialog extends ConsumerStatefulWidget {
   const _AddPlayerToWaitingListDialog({
     required this.serviceId,
@@ -412,20 +455,17 @@ class _AddPlayerToWaitingListDialogState
     final maxLevel = serviceDetail.options?.maxLevel ?? 7.0;
 
     // Check if user level is within allowed range
-    if (userLevel < minLevel || userLevel > maxLevel) {
-      if (mounted) {
-        String message;
-        if (userLevel < minLevel) {
-          message = "${user.fullName}'s level ($userLevel) is below the minimum required level ($minLevel) for this match.";
-        } else {
-          message = "${user.fullName}'s level ($userLevel) is above the maximum allowed level ($maxLevel) for this match.";
-        }
-        await Utils.showMessageDialog(context, message);
+    bool isOutsideRange = userLevel < minLevel || userLevel > maxLevel;
+    String? outsideRangeWarning;
+    if (isOutsideRange) {
+      if (userLevel < minLevel) {
+        outsideRangeWarning = "${user.fullName}'s level ($userLevel) is below the minimum required level ($minLevel).";
+      } else {
+        outsideRangeWarning = "${user.fullName}'s level ($userLevel) is above the maximum allowed level ($maxLevel).";
       }
-      return;
     }
 
-    // Show confirmation dialog
+    // Show confirmation dialog (with optional outside-range warning for organizer override)
     final bool? confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => CustomDialog(
@@ -442,6 +482,17 @@ class _AddPlayerToWaitingListDialogState
               ),
             ),
             SizedBox(height: 15.h),
+            if (outsideRangeWarning != null) ...[
+              Text(
+                outsideRangeWarning,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.poppinsRegular(
+                  fontSize: 14.sp,
+                  color: Colors.orange.shade700,
+                ),
+              ),
+              SizedBox(height: 8.h),
+            ],
             Text(
               "DO_YOU_WANT_TO_ADD_PLAYER_TO_WAITING_LIST".tr(context, params: {
                 "PLAYER_NAME": user.fullName
