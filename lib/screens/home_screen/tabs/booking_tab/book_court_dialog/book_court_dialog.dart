@@ -243,9 +243,8 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
 
                                   // Calculate price based on match type and payment option
                                   if (isPrivate) {
-                                    // Private Match
-                                    pricePaid = price =  (discountedPrice /
-                                            4); // Pay my share (1/4 of price)
+                                    // Private Match - full court price
+                                    pricePaid = price = discountedPrice;
                                   } else if (widget.payRemainingEvent ||
                                       widget.payRemainingLesson || widget.payRemainingBooking || allowNormalBooking) {
                                     // Open Match (public) - always per-person pricing

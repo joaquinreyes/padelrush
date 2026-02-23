@@ -53,19 +53,19 @@ class MembershipTab extends ConsumerWidget {
 
               if (data.showMembershipCategories.isNotEmpty &&
                   selectedMembershipCategory.isEmpty) {
-                final wellnessCategory = data.showMembershipCategories
+                final pickleballCategory = data.showMembershipCategories
                     .firstWhere(
                         (element) =>
                             (element.categoryName ?? "")
                                 .toString()
                                 .trim()
                                 .toLowerCase() ==
-                            "wellness",
+                            "pickleball",
                         orElse: () => data.showMembershipCategories.first);
 
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   ref.read(selectedMembershipCatIndex.notifier).state =
-                      wellnessCategory.id;
+                      pickleballCategory.id;
                 });
               }
 

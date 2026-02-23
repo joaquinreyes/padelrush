@@ -6,7 +6,7 @@ final _selectedTabIndex = StateProvider<int>((ref) => 0);
 final dateRangeProvider = StateProvider<PickerDateRange>(
   (ref) => PickerDateRange(
     DateTime.now(),
-    DateTime.now().add(const Duration(days: 7)),
+    DateTime.now().add(const Duration(days: 30)),
   ),
 );
 final _storeAllLocationsProvider =

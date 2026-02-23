@@ -63,6 +63,7 @@ class _LessonState extends ConsumerState<LessonsList> {
       onRefresh: () => ref.refresh(lessonsListProvider(
         startDate: widget.start,
         endDate: widget.end,
+        locationIDs: widget.locationIds,
         sportsIds: widget.sportsIds,
       ).future),
       child: lessons.when(
@@ -80,6 +81,7 @@ class _LessonState extends ConsumerState<LessonsList> {
                 start: widget.start,
                 end: widget.end,
                 locationIds: widget.locationIds,
+                sportsIds: widget.sportsIds,
               );
             },
           );
@@ -97,12 +99,14 @@ class _Lessons extends ConsumerStatefulWidget {
     required this.start,
     required this.end,
     required this.locationIds,
+    required this.sportsIds,
   });
 
   final LessonsModel lesson;
   final DateTime start;
   final DateTime end;
   final List<int> locationIds;
+  final List<int> sportsIds;
 
   @override
   ConsumerState<_Lessons> createState() => _LessonsState();
@@ -240,13 +244,12 @@ class _LessonsState extends ConsumerState<_Lessons> {
           .read(goRouterProvider)
           .push("${RouteNames.lesson_info}/${serviceBooking?.id}");
     }
-    ref.read(
-      lessonsListProvider(
-        startDate: widget.start,
-        endDate: widget.end,
-        locationIDs: widget.locationIds,
-      ),
-    );
+    ref.invalidate(lessonsListProvider(
+      startDate: widget.start,
+      endDate: widget.end,
+      locationIDs: widget.locationIds,
+      sportsIds: widget.sportsIds,
+    ));
   }
 
   Future<void> _joinSingle(LessonServiceBookings? serviceBooking) async {

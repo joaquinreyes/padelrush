@@ -106,8 +106,8 @@ class UserActiveMembership {
 
   void _prepareShowMembershipCategories() {
     try {
-      ShowMembershipCategory recoveryCategory =
-          ShowMembershipCategory(categoryName: "recovery");
+      ShowMembershipCategory pickleballCategory =
+          ShowMembershipCategory(categoryName: "pickleball");
       ShowMembershipCategory padelCategory =
           ShowMembershipCategory(categoryName: "padel");
       final tempMembershipCategories = [];
@@ -115,14 +115,14 @@ class UserActiveMembership {
         if ((e.categoryName ?? "").toLowerCase() == "padel") {
           padelCategory.id.add(e.id ?? 0);
         } else {
-          recoveryCategory.id.add(e.id ?? 0);
+          pickleballCategory.id.add(e.id ?? 0);
         }
       });
       if (padelCategory.id.isNotEmpty) {
         tempMembershipCategories.add(padelCategory);
       }
-      if (recoveryCategory.id.isNotEmpty) {
-        tempMembershipCategories.add(recoveryCategory);
+      if (pickleballCategory.id.isNotEmpty) {
+        tempMembershipCategories.add(pickleballCategory);
       }
       this.showMembershipCategories = [...tempMembershipCategories];
     } catch (e) {

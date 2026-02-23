@@ -12,7 +12,7 @@ const allowAddToCart = false;
 const allowShowPadelMembershipInProfile = true;
 const kAllowPlayerRanking = true;
 
-const kAppName = 'Padel Rush';
+const kAppName = 'Padel Rushh';
 const kSportName = "padel"; //sport
 const kPadelName = "padel"; //sport
 const kPickleBallName = "pickleball"; //sport

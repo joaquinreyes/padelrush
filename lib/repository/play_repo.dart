@@ -57,9 +57,9 @@ class PlayRepo {
         "min_level": minLevel,
         "max_level": maxLevel,
       };
-      locationIds.remove(-1);
-      if (locationIds.isNotEmpty) {
-        queryParams["location_id"] = locationIds.join(",");
+      final filteredLocationIds = [...locationIds]..remove(-1);
+      if (filteredLocationIds.isNotEmpty) {
+        queryParams["location_id"] = filteredLocationIds.join(",");
       }
       // sportsIds.remove(-1);
       if (sportsIds.isNotEmpty) {
@@ -149,13 +149,13 @@ class PlayRepo {
         "start_date": startDate.format(kFormatForAPI),
         "end_date": endDate.format(kFormatForAPI),
       };
-      locationIds.remove(-1);
-      if (locationIds.isNotEmpty) {
-        queryParams["location_id"] = locationIds.join(",");
+      final filteredLocationIds = [...locationIds]..remove(-1);
+      if (filteredLocationIds.isNotEmpty) {
+        queryParams["location_id"] = filteredLocationIds.join(",");
       }
-      sportsIds.remove(-1);
-      if (sportsIds.isNotEmpty) {
-        queryParams["sports_id"] = sportsIds.join(",");
+      final filteredSportsIds = [...sportsIds]..remove(-1);
+      if (filteredSportsIds.isNotEmpty) {
+        queryParams["sports_id"] = filteredSportsIds.join(",");
       }
       final response = await apiManager.get(
         ref,

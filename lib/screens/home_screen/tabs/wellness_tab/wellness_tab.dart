@@ -362,7 +362,12 @@ class _WellnessTabState extends ConsumerState<WellnessTab> {
                 await ref
                     .read(goRouterProvider)
                     .push("${RouteNames.class_info}/${event.id}");
-                ref.invalidate(eventsListProvider);
+                ref.invalidate(eventsListProvider(
+                  startDate: widget.start,
+                  endDate: widget.end,
+                  locationIDs: widget.locationIds,
+                  sportsIds: widget.sportsIds,
+                ));
               },
               child: ClassesCard(event: event),
             ),

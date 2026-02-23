@@ -91,7 +91,7 @@ class _HOPIrelandState extends ConsumerState<HOPIreland> {
       data: MediaQuery.of(context)
           .copyWith(textScaler: const TextScaler.linear(1)),
       child: MaterialApp.router(
-        title: "Padel Rush",
+        title: "Padel Rushh",
         routerConfig: router,
         debugShowCheckedModeBanner: false,
         locale: const Locale('en'),
