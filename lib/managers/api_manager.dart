@@ -14,7 +14,7 @@ part 'api_manager.g.dart';
 
 const kClubID = 86; // For Padel Rush
 // const kClubID = 2; // For Test Club
-const kBaseURL = 'http://localhost:8081/api/v1/apps';
+const kBaseURL = 'https://api.bookandgo.app/api/v1/apps';
 const kChatBaseURL = 'https://chat.bookandgo.app/websocket/club';
 
 @Riverpod(keepAlive: true)
