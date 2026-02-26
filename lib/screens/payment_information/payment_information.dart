@@ -58,6 +58,7 @@ class PaymentInformation extends ConsumerStatefulWidget {
       this.isMultiBooking = false,
       this.getPendingPayment = false,
       this.isOpenMatch = false,
+      this.isPrivateMatch = false,
       this.allowPayLater = true,
       this.title});
 
@@ -82,6 +83,7 @@ class PaymentInformation extends ConsumerStatefulWidget {
   final bool purchaseMembership;
   final bool allowPayLater;
   final bool isOpenMatch;
+  final bool isPrivateMatch;
   final bool getPendingPayment;
 
   @override
@@ -109,18 +111,12 @@ class __PaymentInformationState extends ConsumerState<PaymentInformation> {
   @override
   Widget build(BuildContext context) {
     final paymentDetails =
-        ref.watch(fetchAllPaymentMethodsProvider(widget.locationID, widget.serviceID ?? 0, widget.type, widget.startDate, widget.duration,courtId: widget.courtId,variantId: widget.variantId,isOpenMatch: widget.isOpenMatch));
+        ref.watch(fetchAllPaymentMethodsProvider(widget.locationID, widget.serviceID ?? 0, widget.type, widget.startDate, widget.duration,courtId: widget.courtId,variantId: widget.variantId,isOpenMatch: widget.isOpenMatch,isPrivateMatch: widget.isPrivateMatch));
     final appliedCoupon = ref.watch(_appliedCoupon);
     final cancellationHour = widget.courtPriceModel?.cancellationPolicy?.cancellationTimeInHours;
     return CustomDialog(
       maxHeight: MediaQuery.of(context).size.height * 0.85,
       onTapCloseIcon: () async {
-        // final confirmationDialog = await showDialog(
-        //   context: context,
-        //   builder: (context) {
-        //     return _CloseConfirmationDialog(showDescription: !widget.purchaseMembership);
-        //   },
-        // );
         final confirmationDialog = true;
 
         if (confirmationDialog == true) {
@@ -135,109 +131,82 @@ class __PaymentInformationState extends ConsumerState<PaymentInformation> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // SizedBox(height: 5.h),
+            SizedBox(height: 4.h),
             Text(
               "PAYMENT_INFORMATION".trU(context),
-              style: AppTextStyles.popupHeaderTextStyle,
+              style: AppTextStyles.poppinsBold(fontSize: 20.sp),
             ),
-            SizedBox(height: 5.h),
-            cancellationHour != null
-                ? Text(
-                    cancellationHour == 0
-                        ? "YOU_WILL_NOT_GET_REFUND_ON_THIS_BOOKING".tr(context)
-                        : "CANCELLATION_POLICY_HOURS".tr(context, params: {"HOUR": cancellationHour.toString()}),
-                    style: AppTextStyles.popupBodyTextStyle,
-                    textAlign: TextAlign.center,
-                  )
-                : Text(
-                    "PAYMENT_INFORMATION_TEXT".tr(context),
-                    style: AppTextStyles.popupBodyTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
-
-            if (widget.allowCoupon)
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(height: 20.h),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                      Flexible(
-                        child: Text(
-                          "DO_YOU_HAVE_A_DISCOUNT_COUPON".tr(context),
-                          style: AppTextStyles.poppinsMedium(fontSize: 14.sp),
-                        ),
-                      ),
-                      Text(
-                        " ${"OPTIONAL".tr(context).toLowerCase()}",
-                        style: AppTextStyles.poppinsRegular(
-                          fontSize: 13.sp,
-                        ),
-                      )
-                    ]),
-                  ),
-                  SizedBox(height: 5.h),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.gray,
-                      borderRadius: BorderRadius.circular(100.r),
-                    ),
-                    child: SecondaryTextField(
-                      hintText: "ENTER_COUPON_HERE".tr(context),
-                      controller: _couponController,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-                      onChanged: (value) {
-                        setState(() {});
-                        ref.read(_appliedCoupon.notifier).state = null;
-                        ref.read(_invalidCoupon.notifier).state = false;
-                        ref.read(totalMultiBookingAmount.notifier).state = calculateAmountPayable(ref, widget.price);
-                      },
-                      hintTextStyle: AppTextStyles.poppinsLight(
-                          color: AppColors.black2, fontSize: 13.sp),
-                      style: AppTextStyles.poppinsRegular()
-                          .copyWith(color: AppColors.black2, fontSize: 13.sp),
-                      suffixIcon: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (appliedCoupon == null || _couponController.text != appliedCoupon.coupon) ...[
-                            _CouponApplyButton(
-                              price: widget.price,
-                              couponController: _couponController,
-                            ),
-                          ] else ...[
-                            Image.asset(
-                              AppImages.checkMark.path,
-                              width: 16.h,
-                              height: 16.h,
-                              color: AppColors.darkYellow,
-                            ),
-                          ],
-                          SizedBox(width: 4.w),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+            SizedBox(height: 6.h),
+            if (cancellationHour != null)
+              Text(
+                cancellationHour == 0
+                    ? "YOU_WILL_NOT_GET_REFUND_ON_THIS_BOOKING".tr(context)
+                    : "CANCELLATION_POLICY_HOURS".tr(context, params: {"HOUR": cancellationHour.toString()}),
+                style: AppTextStyles.poppinsRegular(fontSize: 12.sp, color: AppColors.black70),
+                textAlign: TextAlign.center,
+              )
+            else
+              Text(
+                "PAYMENT_INFORMATION_TEXT".tr(context),
+                style: AppTextStyles.poppinsRegular(fontSize: 12.sp, color: AppColors.black70),
+                textAlign: TextAlign.center,
               ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 16.h),
             _AmountPayable(
               originalAmount: widget.price,
             ),
+            if (widget.allowCoupon)
+              Padding(
+                padding: EdgeInsets.only(top: 12.h),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.lightGray,
+                    borderRadius: BorderRadius.circular(12.r),
+                    border: Border.all(color: AppColors.gray, width: 1),
+                  ),
+                  child: SecondaryTextField(
+                    hintText: "${"ENTER_COUPON_HERE".tr(context)} (${"OPTIONAL".tr(context).toLowerCase()})",
+                    controller: _couponController,
+                    contentPadding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
+                    onChanged: (value) {
+                      setState(() {});
+                      ref.read(_appliedCoupon.notifier).state = null;
+                      ref.read(_invalidCoupon.notifier).state = false;
+                      ref.read(totalMultiBookingAmount.notifier).state = calculateAmountPayable(ref, widget.price);
+                    },
+                    hintTextStyle: AppTextStyles.poppinsRegular(
+                        color: AppColors.black25, fontSize: 13.sp),
+                    style: AppTextStyles.poppinsRegular()
+                        .copyWith(color: AppColors.black2, fontSize: 13.sp),
+                    suffixIcon: Padding(
+                      padding: EdgeInsets.only(right: 6.w),
+                      child: appliedCoupon == null || _couponController.text != appliedCoupon.coupon
+                          ? _CouponApplyButton(
+                              price: widget.price,
+                              couponController: _couponController,
+                            )
+                          : Image.asset(
+                              AppImages.checkMark.path,
+                              width: 18.h,
+                              height: 18.h,
+                              color: AppColors.darkYellow,
+                            ),
+                    ),
+                  ),
+                ),
+              ),
             SizedBox(height: 20.h),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "${"SELECT_PAYMENT_METHOD".tr(context)}",
-                  style: AppTextStyles.poppinsLight(fontSize: 16.sp),
+                  style: AppTextStyles.poppinsSemiBold(fontSize: 14.sp),
                   textAlign: TextAlign.start,
                 )),
-            SizedBox(height: 15.h),
+            SizedBox(height: 10.h),
             paymentDetails.when(
               skipLoadingOnRefresh: false,
               data: (data) {
-                // return Container();
                 return Flexible(child: _body(data));
               },
               error: (error, stackTrace) {
@@ -283,7 +252,7 @@ class __PaymentInformationState extends ConsumerState<PaymentInformation> {
             startDate: widget.startDate,
           ),
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 16.h),
         _PaymentButton(
           title: widget.title,
           // boldPosition: widget.boldPosition,

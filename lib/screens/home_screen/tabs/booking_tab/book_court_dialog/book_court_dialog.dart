@@ -92,8 +92,9 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
     Future(() {
       final sportName = (widget.bookings.sport?.sportName ?? "").toLowerCase();
       final allowNormalBooking = !(sportName == "padel" || sportName == "pickleball");
-      if (allowNormalBooking ||  widget.payRemainingBooking || widget.payRemainingEvent || widget.payRemainingLesson) {
+      if (allowNormalBooking || widget.payRemainingBooking || widget.payRemainingEvent || widget.payRemainingLesson || widget.bookings.isOpenMatch != true) {
         ref.read(_isOpenMatchProvider.notifier).state = false;
+        ref.read(_isPrivateMatchProvider.notifier).state = true;
       } else {
         // Always open match now (both payment options are open matches)
         ref.read(_isOpenMatchProvider.notifier).state = true;
@@ -132,7 +133,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
     final reserveSpotsForMatch = ref.watch(_reserveSpotsForMatchProvider);
     final isInfraredSauna =
         (widget.bookings.sport?.sportName ?? "").toLowerCase() == "recovery";
-    final allowShowPrivateAndOpenMatch = !widget.getPendingPayment && !allowNormalBooking ;
+    final allowShowPrivateAndOpenMatch = !widget.getPendingPayment && !allowNormalBooking && widget.bookings.isOpenMatch == true;
     final provider = ref.watch(fetchCourtPriceProvider(
         coachId: widget.coachId,
         serviceId: widget.bookings.id ?? 0,
@@ -947,6 +948,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
               courtId: widget.court.keys.first,
               allowPayLater: widget.allowPayLater,
               isOpenMatch: isOpenMatch,
+              isPrivateMatch: isPrivateMatch,
               getPendingPayment: true,
               title: "PAY".trU(context),
               type: PaymentDetailsRequestType.join,
@@ -1019,6 +1021,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                 bookingToOpenMatch: true,
                 serviceID: widget.bookings.id,
                 isOpenMatch: isOpenMatch,
+                isPrivateMatch: isPrivateMatch,
                 type: PaymentDetailsRequestType.booking,
                 locationID: widget.bookings.location!.id!,
                 requestType: PaymentProcessRequestType.courtBooking,
@@ -1097,6 +1100,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
         return PaymentInformation(
             serviceID: widget.bookings.id,
             isOpenMatch: isOpenMatch,
+            isPrivateMatch: isPrivateMatch,
             type: PaymentDetailsRequestType.booking,
             locationID: widget.bookings.location!.id!,
             requestType: PaymentProcessRequestType.courtBooking,

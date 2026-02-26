@@ -22,34 +22,37 @@ class _AmountPayable extends ConsumerWidget {
     }
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.gray,
-        borderRadius: BorderRadius.circular(12.r),
+        color: AppColors.black2,
+        borderRadius: BorderRadius.circular(14.r),
       ),
-      padding: EdgeInsets.only(left: 12.w, right: 12.w, top: 8.h, bottom: 8.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
       child: Row(
         children: [
           Text(
             "AMOUNT_PAYABLE".tr(context),
             style: AppTextStyles.poppinsMedium(
-              fontSize: 11.sp,
+              fontSize: 13.sp,
+              color: AppColors.white,
             ),
           ),
           const Spacer(),
           if (originalAmount > payableAmount) ...[
             Text(
               Utils.formatPrice(originalAmount),
-              style: AppTextStyles.poppinsMedium(
-                fontSize: 11.sp,
+              style: AppTextStyles.poppinsRegular(
+                fontSize: 12.sp,
+                color: AppColors.white55,
               ).copyWith(
                 decoration: TextDecoration.lineThrough,
               ),
             ),
-            SizedBox(width: 4.h),
+            SizedBox(width: 6.w),
           ],
           Text(
             Utils.formatPrice(payableAmount),
-            style: AppTextStyles.poppinsMedium(
-              fontSize: 11.sp,
+            style: AppTextStyles.poppinsSemiBold(
+              fontSize: 16.sp,
+              color: AppColors.darkYellow,
             ),
           ),
         ],
@@ -380,7 +383,7 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
       prefix: prefix,
       imagePath: AppImages.walletIcon.path,
       onTap: () => _selectPaymentMethod(paymentMethod, mdr: mdr),
-      showDelete: isSelected,
+      showDelete: false,
       onDelete: null,
     );
   }
@@ -606,47 +609,60 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
     bool showSwitch = false,
     bool showDelete = false,
   }) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.darkYellow35 : AppColors.gray,
-          borderRadius: BorderRadius.circular(100.r),
+          color: isSelected ? AppColors.darkYellow.withOpacity(0.15) : AppColors.white,
+          borderRadius: BorderRadius.circular(14.r),
+          border: Border.all(
+            color: isSelected ? AppColors.darkYellow : AppColors.gray,
+            width: isSelected ? 1.5 : 1,
+          ),
         ),
-        margin: EdgeInsets.only(bottom: 10.h),
-        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+        margin: EdgeInsets.only(bottom: 8.h),
+        padding: EdgeInsets.symmetric(vertical: 13.h, horizontal: 14.w),
         child: Row(
           children: [
-            Image.asset(
-              imagePath,
-              width: 22.w,
-              height: 22.w,
-              color: isSelected ? AppColors.black : AppColors.black2,
+            Container(
+              width: 36.w,
+              height: 36.w,
+              decoration: BoxDecoration(
+                color: isSelected ? AppColors.darkYellow.withOpacity(0.3) : AppColors.lightGray,
+                borderRadius: BorderRadius.circular(10.r),
+              ),
+              child: Center(
+                child: Image.asset(
+                  imagePath,
+                  width: 18.w,
+                  height: 18.w,
+                  color: isSelected ? AppColors.black : AppColors.black50,
+                ),
+              ),
             ),
-            SizedBox(width: 15.w),
+            SizedBox(width: 12.w),
             Expanded(
-              flex: 100,
               child: Text(
                 title.capitalizeFirst,
                 style: isSelected
                     ? AppTextStyles.poppinsMedium(
-                        fontSize: 15.sp,
+                        fontSize: 14.sp,
                         color: AppColors.black,
                       )
-                    : AppTextStyles.poppinsRegular(color: AppColors.black2, fontSize: 13.sp),
+                    : AppTextStyles.poppinsRegular(color: AppColors.black70, fontSize: 14.sp),
               ),
             ),
-            const Spacer(),
             if (showSwitch)
               SizedBox(
-                height: 22.h,
+                height: 24.h,
                 child: Transform.scale(
                   scale: 0.75,
                   child: CupertinoSwitch(
                     value: isSelected,
                     thumbColor: AppColors.white,
                     activeColor: AppColors.darkYellow,
-                    trackColor: AppColors.white55,
+                    trackColor: AppColors.gray,
                     onChanged: (value) {
                       onTap();
                     },
@@ -665,7 +681,10 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
                   color: AppColors.black2,
                 ),
               ),
-            if (prefix != null) prefix,
+            if (prefix != null) ...[
+              SizedBox(width: 8.w),
+              prefix,
+            ],
           ],
         ),
       ),

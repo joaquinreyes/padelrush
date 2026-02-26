@@ -84,16 +84,6 @@ class _DateSelectorWidgetState extends ConsumerState<_DateSelectorWidget> {
     final selectedIndex = ref.watch(_selectedTabIndex);
     final isCourtActive = selectedIndex == 0;
 
-    if (isCourtActive && index > 6) {
-      if (membership?.haveActiveHOPMembership != null) {
-        color = isSelected ? AppColors.darkYellow : AppColors.darkYellow30;
-      } else {
-        color = isSelected
-            ? AppColors.darkYellow
-            : AppColors.darkYellow50.withOpacity(0.12);
-      }
-    }
-
     return Padding(
       padding: EdgeInsets.only(right: 8.w),
       child: InkWell(
@@ -547,24 +537,6 @@ class __AvailableTimeslotState extends ConsumerState<_AvailableTimeslot> {
                           ref.read(goRouterProvider).push(RouteNames.auth);
                           return;
                         }
-                        if (selectedDate.dateTime
-                                .difference(DateTime.now())
-                                .inDays >
-                            5) {
-                          final membership = ref
-                              .read(fetchActiveAndAllMembershipsProvider)
-                              .value;
-                          if (membership?.haveActiveHOPMembership == null) {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return _NonMembershipUser();
-                              },
-                            );
-                            return;
-                          }
-                        }
-
                         final booking = widget.data.getBooking(
                             selectedDate.dateTime,
                             timeslot,

@@ -64,13 +64,14 @@ class PaymentRepo {
       DateTime? startDate,
       bool isOpenMatch,
       int? duration,
-      {int? courtId,int? variantId}) async {
+      {int? courtId,int? variantId,bool isPrivateMatch = false}) async {
     try {
       final token = ref.read(userManagerProvider).user?.accessToken ?? "";
       final Map<String, dynamic> queryParams = {
         "booking_type": type.value,
         "booking_id": id,
-        "is_open_match": isOpenMatch
+        "is_open_match": isOpenMatch,
+        "is_private_match": isPrivateMatch
       };
 
       if (courtId != null) {
@@ -470,10 +471,10 @@ Future<PaymentDetails> fetchPaymentDetails(
     bool isOpenMatch,
     DateTime? startDate,
     int? duration,
-    {int? courtId,int? variantId}) {
+    {int? courtId,int? variantId,bool isPrivateMatch = false}) {
   return ref.read(paymentRepoProvider).fetchPaymentDetails(
       locationID, ref, type, id, startDate, isOpenMatch, duration,
-      courtId: courtId,variantId: variantId);
+      courtId: courtId,variantId: variantId,isPrivateMatch: isPrivateMatch);
 }
 
 @riverpod
@@ -484,9 +485,9 @@ Future<PaymentDetails> fetchAllPaymentMethods(
     PaymentDetailsRequestType type,
 
     DateTime? startDate,
-    int? duration,{int? courtId,int? variantId,required bool isOpenMatch}) async {
+    int? duration,{int? courtId,int? variantId,required bool isOpenMatch,bool isPrivateMatch = false}) async {
   final paymentMethods = await ref.refresh(fetchPaymentDetailsProvider(
-          locationID, type, serviceID, isOpenMatch, startDate, duration,courtId: courtId,variantId:variantId)
+          locationID, type, serviceID, isOpenMatch, startDate, duration,courtId: courtId,variantId:variantId,isPrivateMatch: isPrivateMatch)
       .future);
 
   return PaymentDetails(

@@ -50,7 +50,7 @@ class NavBarState extends ConsumerState<NavBar> {
         child: Row(
           children: [
             _item(
-              text: 'Play &\n   Match'.tr(context),
+              text: 'Play &\n   Learn'.tr(context),
               index: 0,
               textHeight: 0.99,
               isSelected: pageIndex == 0,

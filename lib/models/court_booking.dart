@@ -4,6 +4,7 @@ import 'package:padelrush/utils/dubai_date_time.dart';
 
 class CourtBookingData {
   List<Bookings>? bookings;
+  int? membershipMaxAdvanceDays;
 
   List<int> get durationsToShow {
     final locationIDs = bookings!.map((e) => e.location!.id).toSet().toList();
@@ -186,7 +187,7 @@ class CourtBookingData {
     return null;
   }
 
-  CourtBookingData({this.bookings});
+  CourtBookingData({this.bookings, this.membershipMaxAdvanceDays});
 
   CourtBookingData.fromJson(Map<String, dynamic> json) {
     if (json['bookings'] != null) {
@@ -195,6 +196,7 @@ class CourtBookingData {
         bookings!.add(Bookings.fromJson(v));
       });
     }
+    membershipMaxAdvanceDays = json['membership_max_advance_days'];
   }
 
   Map<String, dynamic> toJson() {

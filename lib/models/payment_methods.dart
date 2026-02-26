@@ -186,39 +186,45 @@ class UserMemberships {
   Membership? membership;
 
   Widget usesLeftString(BuildContext context, bool isSelected) {
-    final color = isSelected ? AppColors.black : AppColors.white;
-    final containerColor = isSelected ? AppColors.white : AppColors.black;
+    final textColor = isSelected ? AppColors.black : AppColors.black70;
     if (usesLeft == null || usesLeft == -1) {
       if (usesLeft == null && usageDurationLeft != null) {
-        return Text(
-          "${(usageDurationLeft ?? 0) / 3600} ${"HOUR".tr(context)}",
-          style: AppTextStyles.poppinsRegular(color: color),
+        final hours = (usageDurationLeft ?? 0) / 3600;
+        final hoursStr = hours % 1 == 0 ? hours.toInt().toString() : hours.toStringAsFixed(1);
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+          decoration: BoxDecoration(
+            color: isSelected ? AppColors.darkYellow.withOpacity(0.3) : AppColors.gray,
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+          child: Text(
+            "$hoursStr ${"HOUR".tr(context)}",
+            style: AppTextStyles.poppinsMedium(fontSize: 11.sp, color: textColor),
+          ),
         );
       }
-      return Text(
-        "UNLIMITED".tr(context),
-        style: AppTextStyles.poppinsRegular(fontSize: 14.sp, color: color),
+      return Container(
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.darkYellow.withOpacity(0.3) : AppColors.gray,
+          borderRadius: BorderRadius.circular(8.r),
+        ),
+        child: Text(
+          "UNLIMITED".tr(context),
+          style: AppTextStyles.poppinsMedium(fontSize: 11.sp, color: textColor),
+        ),
       );
     }
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          decoration:
-              BoxDecoration(color: containerColor, shape: BoxShape.circle),
-          padding: EdgeInsets.all(4.w),
-          alignment: Alignment.center,
-          child: Text(
-            usesLeft.toString(),
-            style: AppTextStyles.poppinsRegular(fontSize: 14.sp, color: color),
-          ),
-        ),
-        SizedBox(width: 5.h),
-        Text(
-          "REMAINING".tr(context).toLowerCase(),
-          style: AppTextStyles.poppinsRegular(fontSize: 14.sp, color: color),
-        )
-      ],
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+      decoration: BoxDecoration(
+        color: isSelected ? AppColors.darkYellow.withOpacity(0.3) : AppColors.gray,
+        borderRadius: BorderRadius.circular(8.r),
+      ),
+      child: Text(
+        "$usesLeft ${"REMAINING".tr(context).toLowerCase()}",
+        style: AppTextStyles.poppinsMedium(fontSize: 11.sp, color: textColor),
+      ),
     );
   }
 

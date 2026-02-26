@@ -240,6 +240,13 @@ class _BookingTabState extends ConsumerState<BookingTab>
     final lessonSelected = ref.watch(_selectedTabIndex) == 1;
     final isDateLessonSelected = ref.watch(_dateBookableLesson);
     final coachesProvider = ref.watch(fetchAllCoachesProvider);
+
+    // Get membership advance days from court-bookings response (extends date picker)
+    final courtBookingData = ref.watch(getCourtBookingProvider).valueOrNull;
+    final membershipDays = courtBookingData?.membershipMaxAdvanceDays ?? 0;
+    final locationDays = Utils.getFutureDateLength(locationsData, getSportsName(ref));
+    final futureDayLength = membershipDays > locationDays ? membershipDays : locationDays;
+
     return coachesProvider.when(
         data: (coachesList) {
           final selectedLessonCoachId = ref.read(_selectedLessonCoachId);
@@ -272,8 +279,7 @@ class _BookingTabState extends ConsumerState<BookingTab>
                       child: !isDateLessonSelected && lessonSelected
                           ? const _CoachSelection()
                           : _DateSelectorWidget(
-                              futureDayLength: Utils.getFutureDateLength(
-                                  locationsData, getSportsName(ref)),
+                              futureDayLength: futureDayLength,
                             ),
                     )
                   ],
@@ -506,8 +512,10 @@ class _BookingTabState extends ConsumerState<BookingTab>
     final bookingSelected = ref.watch(_selectedTabIndex) == 0;
     final courtBookings = ref.watch(getCourtBookingProvider);
     final sport = ref.watch(selectedSportProvider);
-    final futureDateLength =
+    final locationDays =
         Utils.getFutureDateLength(locationsData, sport?.sportName ?? '');
+    final membershipDays = courtBookings.valueOrNull?.membershipMaxAdvanceDays ?? 0;
+    final futureDateLength = membershipDays > locationDays ? membershipDays : locationDays;
     if (bookingSelected) {
       _invalidateDateIfBeyondFutureLimit(futureDateLength);
     }
@@ -750,8 +758,10 @@ class _BookingTabState extends ConsumerState<BookingTab>
     final saunaSelected = ref.watch(_selectedTabIndex) == 2;
     final courtBookings = ref.watch(getCourtBookingProvider);
     final sport = ClubLocationSports(sportName: 'Recovery');
-    final futureDateLength =
+    final locationDays =
         Utils.getFutureDateLength(locationsData, sport.sportName ?? '');
+    final membershipDays = courtBookings.valueOrNull?.membershipMaxAdvanceDays ?? 0;
+    final futureDateLength = membershipDays > locationDays ? membershipDays : locationDays;
     if (saunaSelected) {
       _invalidateDateIfBeyondFutureLimit(futureDateLength);
     }

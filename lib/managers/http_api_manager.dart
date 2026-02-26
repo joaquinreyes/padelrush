@@ -190,7 +190,7 @@ class HttpApiManager {
       }
 
       final headers = {
-        if (endpoint.isAuthRequired && token != null)
+        if (token != null && token.isNotEmpty)
           'Authorization': 'Bearer $token',
       };
       myPrint("-------------------- Get Request Api ---------------");

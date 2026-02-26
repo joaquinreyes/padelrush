@@ -21,7 +21,7 @@ final paymentRepoProvider = AutoDisposeProvider<PaymentRepo>.internal(
 
 typedef PaymentRepoRef = AutoDisposeProviderRef<PaymentRepo>;
 String _$fetchPaymentDetailsHash() =>
-    r'75a398ab4ebbf615875d9697e2c8c107fcc44622';
+    r'85fd4de5cdfb30300e04ee57dc6a6111a8414f4a';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -77,6 +77,7 @@ class FetchPaymentDetailsFamily extends Family {
     int? duration, {
     int? courtId,
     int? variantId,
+    bool isPrivateMatch = false,
   }) {
     return FetchPaymentDetailsProvider(
       locationID,
@@ -87,6 +88,7 @@ class FetchPaymentDetailsFamily extends Family {
       duration,
       courtId: courtId,
       variantId: variantId,
+      isPrivateMatch: isPrivateMatch,
     );
   }
 
@@ -104,6 +106,7 @@ class FetchPaymentDetailsFamily extends Family {
       provider.duration,
       courtId: provider.courtId,
       variantId: provider.variantId,
+      isPrivateMatch: provider.isPrivateMatch,
     );
   }
 
@@ -143,6 +146,7 @@ class FetchPaymentDetailsProvider
     int? duration, {
     int? courtId,
     int? variantId,
+    bool isPrivateMatch = false,
   }) : this._internal(
           (ref) => fetchPaymentDetails(
             ref as FetchPaymentDetailsRef,
@@ -154,6 +158,7 @@ class FetchPaymentDetailsProvider
             duration,
             courtId: courtId,
             variantId: variantId,
+            isPrivateMatch: isPrivateMatch,
           ),
           from: fetchPaymentDetailsProvider,
           name: r'fetchPaymentDetailsProvider',
@@ -172,6 +177,7 @@ class FetchPaymentDetailsProvider
           duration: duration,
           courtId: courtId,
           variantId: variantId,
+          isPrivateMatch: isPrivateMatch,
         );
 
   FetchPaymentDetailsProvider._internal(
@@ -189,6 +195,7 @@ class FetchPaymentDetailsProvider
     required this.duration,
     required this.courtId,
     required this.variantId,
+    required this.isPrivateMatch,
   }) : super.internal();
 
   final int locationID;
@@ -199,6 +206,7 @@ class FetchPaymentDetailsProvider
   final int? duration;
   final int? courtId;
   final int? variantId;
+  final bool isPrivateMatch;
 
   @override
   Override overrideWith(
@@ -221,6 +229,7 @@ class FetchPaymentDetailsProvider
         duration: duration,
         courtId: courtId,
         variantId: variantId,
+        isPrivateMatch: isPrivateMatch,
       ),
     );
   }
@@ -235,6 +244,7 @@ class FetchPaymentDetailsProvider
     int?, {
     int? courtId,
     int? variantId,
+    bool isPrivateMatch,
   }) get argument {
     return (
       locationID,
@@ -245,6 +255,7 @@ class FetchPaymentDetailsProvider
       duration,
       courtId: courtId,
       variantId: variantId,
+      isPrivateMatch: isPrivateMatch,
     );
   }
 
@@ -271,6 +282,7 @@ class FetchPaymentDetailsProvider
       duration: duration,
       courtId: courtId,
       variantId: variantId,
+      isPrivateMatch: isPrivateMatch,
     );
   }
 
@@ -284,7 +296,8 @@ class FetchPaymentDetailsProvider
         other.startDate == startDate &&
         other.duration == duration &&
         other.courtId == courtId &&
-        other.variantId == variantId;
+        other.variantId == variantId &&
+        other.isPrivateMatch == isPrivateMatch;
   }
 
   @override
@@ -298,6 +311,7 @@ class FetchPaymentDetailsProvider
     hash = _SystemHash.combine(hash, duration.hashCode);
     hash = _SystemHash.combine(hash, courtId.hashCode);
     hash = _SystemHash.combine(hash, variantId.hashCode);
+    hash = _SystemHash.combine(hash, isPrivateMatch.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -327,6 +341,9 @@ mixin FetchPaymentDetailsRef on AutoDisposeFutureProviderRef<PaymentDetails> {
 
   /// The parameter `variantId` of this provider.
   int? get variantId;
+
+  /// The parameter `isPrivateMatch` of this provider.
+  bool get isPrivateMatch;
 }
 
 class _FetchPaymentDetailsProviderElement
@@ -351,10 +368,13 @@ class _FetchPaymentDetailsProviderElement
   int? get courtId => (origin as FetchPaymentDetailsProvider).courtId;
   @override
   int? get variantId => (origin as FetchPaymentDetailsProvider).variantId;
+  @override
+  bool get isPrivateMatch =>
+      (origin as FetchPaymentDetailsProvider).isPrivateMatch;
 }
 
 String _$fetchAllPaymentMethodsHash() =>
-    r'3598941dd7f3a5a235e570f02a16b0bf44a5b8ce';
+    r'959623918a1832c7a952a0be4e68a43d74fe4925';
 
 /// See also [fetchAllPaymentMethods].
 @ProviderFor(fetchAllPaymentMethods)
@@ -389,6 +409,7 @@ class FetchAllPaymentMethodsFamily extends Family {
     int? courtId,
     int? variantId,
     required bool isOpenMatch,
+    bool isPrivateMatch = false,
   }) {
     return FetchAllPaymentMethodsProvider(
       locationID,
@@ -399,6 +420,7 @@ class FetchAllPaymentMethodsFamily extends Family {
       courtId: courtId,
       variantId: variantId,
       isOpenMatch: isOpenMatch,
+      isPrivateMatch: isPrivateMatch,
     );
   }
 
@@ -416,6 +438,7 @@ class FetchAllPaymentMethodsFamily extends Family {
       courtId: provider.courtId,
       variantId: provider.variantId,
       isOpenMatch: provider.isOpenMatch,
+      isPrivateMatch: provider.isPrivateMatch,
     );
   }
 
@@ -455,6 +478,7 @@ class FetchAllPaymentMethodsProvider
     int? courtId,
     int? variantId,
     required bool isOpenMatch,
+    bool isPrivateMatch = false,
   }) : this._internal(
           (ref) => fetchAllPaymentMethods(
             ref as FetchAllPaymentMethodsRef,
@@ -466,6 +490,7 @@ class FetchAllPaymentMethodsProvider
             courtId: courtId,
             variantId: variantId,
             isOpenMatch: isOpenMatch,
+            isPrivateMatch: isPrivateMatch,
           ),
           from: fetchAllPaymentMethodsProvider,
           name: r'fetchAllPaymentMethodsProvider',
@@ -484,6 +509,7 @@ class FetchAllPaymentMethodsProvider
           courtId: courtId,
           variantId: variantId,
           isOpenMatch: isOpenMatch,
+          isPrivateMatch: isPrivateMatch,
         );
 
   FetchAllPaymentMethodsProvider._internal(
@@ -501,6 +527,7 @@ class FetchAllPaymentMethodsProvider
     required this.courtId,
     required this.variantId,
     required this.isOpenMatch,
+    required this.isPrivateMatch,
   }) : super.internal();
 
   final int locationID;
@@ -511,6 +538,7 @@ class FetchAllPaymentMethodsProvider
   final int? courtId;
   final int? variantId;
   final bool isOpenMatch;
+  final bool isPrivateMatch;
 
   @override
   Override overrideWith(
@@ -533,6 +561,7 @@ class FetchAllPaymentMethodsProvider
         courtId: courtId,
         variantId: variantId,
         isOpenMatch: isOpenMatch,
+        isPrivateMatch: isPrivateMatch,
       ),
     );
   }
@@ -547,6 +576,7 @@ class FetchAllPaymentMethodsProvider
     int? courtId,
     int? variantId,
     bool isOpenMatch,
+    bool isPrivateMatch,
   }) get argument {
     return (
       locationID,
@@ -557,6 +587,7 @@ class FetchAllPaymentMethodsProvider
       courtId: courtId,
       variantId: variantId,
       isOpenMatch: isOpenMatch,
+      isPrivateMatch: isPrivateMatch,
     );
   }
 
@@ -583,6 +614,7 @@ class FetchAllPaymentMethodsProvider
       courtId: courtId,
       variantId: variantId,
       isOpenMatch: isOpenMatch,
+      isPrivateMatch: isPrivateMatch,
     );
   }
 
@@ -596,7 +628,8 @@ class FetchAllPaymentMethodsProvider
         other.duration == duration &&
         other.courtId == courtId &&
         other.variantId == variantId &&
-        other.isOpenMatch == isOpenMatch;
+        other.isOpenMatch == isOpenMatch &&
+        other.isPrivateMatch == isPrivateMatch;
   }
 
   @override
@@ -610,6 +643,7 @@ class FetchAllPaymentMethodsProvider
     hash = _SystemHash.combine(hash, courtId.hashCode);
     hash = _SystemHash.combine(hash, variantId.hashCode);
     hash = _SystemHash.combine(hash, isOpenMatch.hashCode);
+    hash = _SystemHash.combine(hash, isPrivateMatch.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -640,6 +674,9 @@ mixin FetchAllPaymentMethodsRef
 
   /// The parameter `isOpenMatch` of this provider.
   bool get isOpenMatch;
+
+  /// The parameter `isPrivateMatch` of this provider.
+  bool get isPrivateMatch;
 }
 
 class _FetchAllPaymentMethodsProviderElement
@@ -666,6 +703,9 @@ class _FetchAllPaymentMethodsProviderElement
   @override
   bool get isOpenMatch =>
       (origin as FetchAllPaymentMethodsProvider).isOpenMatch;
+  @override
+  bool get isPrivateMatch =>
+      (origin as FetchAllPaymentMethodsProvider).isPrivateMatch;
 }
 
 String _$paymentProcessHash() => r'ec470890d66bb669205957fdefb3a132d3945b28';

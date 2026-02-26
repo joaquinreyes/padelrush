@@ -14,7 +14,7 @@ part 'api_manager.g.dart';
 
 const kClubID = 86; // For Padel Rush
 // const kClubID = 2; // For Test Club
-const kBaseURL = 'https://api.bookandgo.app/api/v1/apps';
+const kBaseURL = 'http://localhost:8081/api/v1/apps';
 const kChatBaseURL = 'https://chat.bookandgo.app/websocket/club';
 
 @Riverpod(keepAlive: true)
@@ -167,9 +167,9 @@ class APIManager {
       List<String> pathParams = const [""],
       bool isV2Version = false}) async {
     try {
-      if (endpoint.isAuthRequired && token != null) {
+      if (token != null && token.isNotEmpty) {
         dio.options.headers['Authorization'] = 'Bearer $token';
-      } else if (endpoint.isAuthRequired && token == null) {
+      } else if (endpoint.isAuthRequired) {
         throw DioException(
             response: Response(
                 requestOptions: RequestOptions(),
