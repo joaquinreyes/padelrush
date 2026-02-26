@@ -35,6 +35,7 @@ import '../../../../models/service_detail_model.dart';
 import '../../../../repository/user_repo.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../routes/app_routes.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 part 'play_match_providers.dart';
 

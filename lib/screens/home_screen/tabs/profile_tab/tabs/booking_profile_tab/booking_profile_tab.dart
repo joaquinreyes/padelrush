@@ -8,6 +8,7 @@ import 'package:padelrush/utils/custom_extensions.dart';
 import '../../../../../../app_styles/app_colors.dart';
 import '../../../../../../app_styles/app_text_styles.dart';
 import '../../../../../../globals/constants.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 part 'booking_profile_tab_provider.dart';
 

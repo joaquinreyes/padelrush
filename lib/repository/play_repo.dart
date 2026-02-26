@@ -612,7 +612,7 @@ class PlayRepo {
 PlayRepo playRepo(Ref ref) => PlayRepo();
 
 @riverpod
-Future<List<OpenMatchModel>> openMatchesList(OpenMatchesListRef ref,
+Future<List<OpenMatchModel>> openMatchesList(Ref ref,
     {required DateTime startDate,
     required DateTime endDate,
     List<int> locationIDs = const [],
@@ -630,7 +630,7 @@ Future<List<OpenMatchModel>> openMatchesList(OpenMatchesListRef ref,
 
 @riverpod
 Future<List<EventsModel>> eventsList(
-  EventsListRef ref, {
+  Ref ref, {
   required DateTime startDate,
   required DateTime endDate,
   List<int>? locationIDs,
@@ -647,7 +647,7 @@ Future<List<EventsModel>> eventsList(
 
 @riverpod
 Future<List<LessonsModel>> lessonsList(
-  LessonsListRef ref, {
+  Ref ref, {
   required DateTime startDate,
   required DateTime endDate,
   List<int> locationIDs = const [],
@@ -664,12 +664,12 @@ Future<List<LessonsModel>> lessonsList(
 
 @riverpod
 Future<ServiceDetail> fetchServiceDetail(
-    FetchServiceDetailRef ref, int serviceID) async {
+    Ref ref, int serviceID) async {
   return ref.read(playRepoProvider).fetchService(ref, serviceID);
 }
 
 @riverpod
-Future<double?> joinService(JoinServiceRef ref, int id,
+Future<double?> joinService(Ref ref, int id,
     {int? playerId,
     required int position,
     required bool isEvent,
@@ -695,13 +695,13 @@ Future<double?> joinService(JoinServiceRef ref, int id,
 }
 
 @riverpod
-Future<bool?> cancelService(CancelServiceRef ref, int id) async {
+Future<bool?> cancelService(Ref ref, int id) async {
   return ref.read(playRepoProvider).cancelService(ref, id);
 }
 
 @riverpod
 Future<List<ServiceWaitingPlayers>> fetchServiceWaitingPlayers(
-    FetchServiceWaitingPlayersRef ref,
+    Ref ref,
     int id,
     RequestServiceType requestServiceType) async {
   return ref
@@ -710,7 +710,7 @@ Future<List<ServiceWaitingPlayers>> fetchServiceWaitingPlayers(
 }
 
 @riverpod
-Future<bool> approvePlayer(ApprovePlayerRef ref,
+Future<bool> approvePlayer(Ref ref,
     {bool isApprove = true,
     required int serviceID,
     required int playerID}) async {
@@ -720,24 +720,24 @@ Future<bool> approvePlayer(ApprovePlayerRef ref,
 
 @riverpod
 Future<bool> deleteReserved(
-    DeleteReservedRef ref, int serviceID, int reservedID) async {
+    Ref ref, int serviceID, int reservedID) async {
   return ref.read(playRepoProvider).deleteReserved(ref, serviceID, reservedID);
 }
 
 @riverpod
-Future<bool> submitAssessment(SubmitAssessmentRef ref,
+Future<bool> submitAssessment(Ref ref,
     {required AssessmentReqModel model, required int serviceID}) async {
   return ref.read(playRepoProvider).submitAssessment(ref, model, serviceID);
 }
 
 @riverpod
 Future<AssessmentResModel> fetchAssessment(
-    FetchAssessmentRef ref, int serviceID) async {
+    Ref ref, int serviceID) async {
   return ref.read(playRepoProvider).fetchAssessment(ref, serviceID);
 }
 
 @riverpod
-Future<LessonModelNew> lessonsSlot(LessonsSlotRef ref,
+Future<LessonModelNew> lessonsSlot(Ref ref,
     {required DateTime startTime,
     DateTime? endTime,
     required int? duration,
@@ -752,7 +752,7 @@ Future<LessonModelNew> lessonsSlot(LessonsSlotRef ref,
 }
 
 @riverpod
-Future<String?> joinWaitingList(JoinWaitingListRef ref,
+Future<String?> joinWaitingList(Ref ref,
     {required int position, required int serviceId}) async {
   return ref
       .read(playRepoProvider)
@@ -761,12 +761,12 @@ Future<String?> joinWaitingList(JoinWaitingListRef ref,
 
 @riverpod
 Future<CancellationPolicy> cancellationPolicy(
-    CancellationPolicyRef ref, int id) async {
+    Ref ref, int id) async {
   return ref.read(playRepoProvider).cancellationPolicy(ref, id);
 }
 
 @riverpod
-Future<bool> addPlayersToWaitingList(AddPlayersToWaitingListRef ref,
+Future<bool> addPlayersToWaitingList(Ref ref,
     {required int serviceId,
     required List<Map<String, dynamic>> customerPlayers}) async {
   return ref.read(playRepoProvider).addPlayersToWaitingList(ref,
@@ -774,7 +774,7 @@ Future<bool> addPlayersToWaitingList(AddPlayersToWaitingListRef ref,
 }
 
 @riverpod
-Future<bool> waitingListActionProvider(WaitingListActionProviderRef ref,
+Future<bool> waitingListActionProvider(Ref ref,
     {required int waitingListId, required String action}) async {
   return ref
       .read(playRepoProvider)
@@ -782,12 +782,12 @@ Future<bool> waitingListActionProvider(WaitingListActionProviderRef ref,
 }
 
 @riverpod
-Future<List<CoachListModel>> fetchAllCoaches(FetchAllCoachesRef ref) async {
+Future<List<CoachListModel>> fetchAllCoaches(Ref ref) async {
   return ref.read(playRepoProvider).fetchAllCoaches(ref);
 }
 
 @riverpod
-Future<List<String>> fetchBlockedCoaches(FetchBlockedCoachesRef ref,
+Future<List<String>> fetchBlockedCoaches(Ref ref,
     {required DateTime startDate,
     required DateTime endDate,
     required String sportName}) async {
@@ -797,7 +797,7 @@ Future<List<String>> fetchBlockedCoaches(FetchBlockedCoachesRef ref,
 
 @riverpod
 Future<bool> updateServiceSettings(
-  UpdateServiceSettingsRef ref, {
+  Ref ref, {
   required int serviceId,
   required bool approveBeforeJoin,
   required bool friendlyMatch,

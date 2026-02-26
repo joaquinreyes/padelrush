@@ -32,6 +32,7 @@ import '../../../../../repository/user_repo.dart';
 import '../../../../../components/network_circle_image.dart';
 import '../../../../../utils/debouncer.dart';
 import '../../../../../models/app_user.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 part 'components.dart';
 

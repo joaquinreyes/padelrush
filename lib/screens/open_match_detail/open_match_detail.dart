@@ -44,6 +44,7 @@ import '../../utils/debouncer.dart';
 import '../../models/app_user.dart';
 import 'dupr_ranked_component.dart';
 import 'match_result_dialog/enter_match_result.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 part 'open_match_components.dart';
 

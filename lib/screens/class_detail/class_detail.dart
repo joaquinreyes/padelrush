@@ -39,6 +39,7 @@ import 'dart:math' as math;
 import '../../components/refund_description_component.dart';
 import '../../models/cancellation_policy_model.dart';
 import '../../models/court_price_model.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 part 'class_detail_provider.dart';
 

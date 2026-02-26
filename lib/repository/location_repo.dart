@@ -33,9 +33,9 @@ class LocationRepo {
 }
 
 @riverpod
-LocationRepo locationRepo(LocationRepoRef ref) => LocationRepo();
+LocationRepo locationRepo(Ref ref) => LocationRepo();
 
 @Riverpod(keepAlive: true)
-Future<Position?> fetchLocation(FetchLocationRef ref) {
+Future<Position?> fetchLocation(Ref ref) {
   return ref.read(locationRepoProvider).determinePosition();
 }

@@ -6,19 +6,46 @@ part of 'api_manager.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$apiManagerHash() => r'835a9dbc9bd052ad17caac484e65e5bce1f343b3';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [apiManager].
 @ProviderFor(apiManager)
-final apiManagerProvider = Provider<HttpApiManager>.internal(
-  apiManager,
-  name: r'apiManagerProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$apiManagerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final apiManagerProvider = ApiManagerProvider._();
 
-typedef ApiManagerRef = ProviderRef<HttpApiManager>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package
+final class ApiManagerProvider
+    extends $FunctionalProvider<HttpApiManager, HttpApiManager, HttpApiManager>
+    with $Provider<HttpApiManager> {
+  ApiManagerProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'apiManagerProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$apiManagerHash();
+
+  @$internal
+  @override
+  $ProviderElement<HttpApiManager> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  HttpApiManager create(Ref ref) {
+    return apiManager(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(HttpApiManager value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<HttpApiManager>(value),
+    );
+  }
+}
+
+String _$apiManagerHash() => r'835a9dbc9bd052ad17caac484e65e5bce1f343b3';

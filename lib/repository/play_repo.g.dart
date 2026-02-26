@@ -6,67 +6,150 @@ part of 'play_repo.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$playRepoHash() => r'76b578b12e07c15077c1338a15980b902cefba90';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [playRepo].
 @ProviderFor(playRepo)
-final playRepoProvider = AutoDisposeProvider<PlayRepo>.internal(
-  playRepo,
-  name: r'playRepoProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$playRepoHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final playRepoProvider = PlayRepoProvider._();
 
-typedef PlayRepoRef = AutoDisposeProviderRef<PlayRepo>;
-String _$openMatchesListHash() => r'7414a324fa4ef27c79e63fef9b10c87cc7a0009a';
+final class PlayRepoProvider
+    extends $FunctionalProvider<PlayRepo, PlayRepo, PlayRepo>
+    with $Provider<PlayRepo> {
+  PlayRepoProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'playRepoProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
+  @override
+  String debugGetCreateSourceHash() => _$playRepoHash();
 
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
+  @$internal
+  @override
+  $ProviderElement<PlayRepo> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  PlayRepo create(Ref ref) {
+    return playRepo(ref);
   }
 
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(PlayRepo value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<PlayRepo>(value),
+    );
   }
 }
 
-/// See also [openMatchesList].
+String _$playRepoHash() => r'76b578b12e07c15077c1338a15980b902cefba90';
+
 @ProviderFor(openMatchesList)
-const openMatchesListProvider = OpenMatchesListFamily();
+final openMatchesListProvider = OpenMatchesListFamily._();
 
-/// See also [openMatchesList].
-class OpenMatchesListFamily extends Family {
-  /// See also [openMatchesList].
-  const OpenMatchesListFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+final class OpenMatchesListProvider extends $FunctionalProvider<
+        AsyncValue<List<OpenMatchModel>>,
+        List<OpenMatchModel>,
+        FutureOr<List<OpenMatchModel>>>
+    with
+        $FutureModifier<List<OpenMatchModel>>,
+        $FutureProvider<List<OpenMatchModel>> {
+  OpenMatchesListProvider._(
+      {required OpenMatchesListFamily super.from,
+      required ({
+        DateTime startDate,
+        DateTime endDate,
+        List<int> locationIDs,
+        List<int> sportsIds,
+        int minLevel,
+        int maxLevel,
+      })
+          super.argument})
+      : super(
+          retry: null,
+          name: r'openMatchesListProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
   @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+  String debugGetCreateSourceHash() => _$openMatchesListHash();
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
+  String toString() {
+    return r'openMatchesListProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<List<OpenMatchModel>> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
 
   @override
-  String? get name => r'openMatchesListProvider';
+  FutureOr<List<OpenMatchModel>> create(Ref ref) {
+    final argument = this.argument as ({
+      DateTime startDate,
+      DateTime endDate,
+      List<int> locationIDs,
+      List<int> sportsIds,
+      int minLevel,
+      int maxLevel,
+    });
+    return openMatchesList(
+      ref,
+      startDate: argument.startDate,
+      endDate: argument.endDate,
+      locationIDs: argument.locationIDs,
+      sportsIds: argument.sportsIds,
+      minLevel: argument.minLevel,
+      maxLevel: argument.maxLevel,
+    );
+  }
 
-  /// See also [openMatchesList].
+  @override
+  bool operator ==(Object other) {
+    return other is OpenMatchesListProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$openMatchesListHash() => r'5d944d6a078acd11b5c29e996f37fa3bd7453c3a';
+
+final class OpenMatchesListFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<List<OpenMatchModel>>,
+            ({
+              DateTime startDate,
+              DateTime endDate,
+              List<int> locationIDs,
+              List<int> sportsIds,
+              int minLevel,
+              int maxLevel,
+            })> {
+  OpenMatchesListFamily._()
+      : super(
+          retry: null,
+          name: r'openMatchesListProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
+
   OpenMatchesListProvider call({
     required DateTime startDate,
     required DateTime endDate,
@@ -74,911 +157,425 @@ class OpenMatchesListFamily extends Family {
     List<int> sportsIds = const [],
     required int minLevel,
     required int maxLevel,
-  }) {
-    return OpenMatchesListProvider(
-      startDate: startDate,
-      endDate: endDate,
-      locationIDs: locationIDs,
-      sportsIds: sportsIds,
-      minLevel: minLevel,
-      maxLevel: maxLevel,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  OpenMatchesListProvider getProviderOverride(
-    covariant OpenMatchesListProvider provider,
-  ) {
-    return call(
-      startDate: provider.startDate,
-      endDate: provider.endDate,
-      locationIDs: provider.locationIDs,
-      sportsIds: provider.sportsIds,
-      minLevel: provider.minLevel,
-      maxLevel: provider.maxLevel,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<List<OpenMatchModel>> Function(OpenMatchesListRef ref) create) {
-    return _$OpenMatchesListFamilyOverride(this, create);
-  }
-}
-
-class _$OpenMatchesListFamilyOverride implements FamilyOverride {
-  _$OpenMatchesListFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<List<OpenMatchModel>> Function(OpenMatchesListRef ref) create;
-
-  @override
-  final OpenMatchesListFamily overriddenFamily;
-
-  @override
-  OpenMatchesListProvider getProviderOverride(
-    covariant OpenMatchesListProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [openMatchesList].
-class OpenMatchesListProvider
-    extends AutoDisposeFutureProvider<List<OpenMatchModel>> {
-  /// See also [openMatchesList].
-  OpenMatchesListProvider({
-    required DateTime startDate,
-    required DateTime endDate,
-    List<int> locationIDs = const [],
-    List<int> sportsIds = const [],
-    required int minLevel,
-    required int maxLevel,
-  }) : this._internal(
-          (ref) => openMatchesList(
-            ref as OpenMatchesListRef,
-            startDate: startDate,
-            endDate: endDate,
-            locationIDs: locationIDs,
-            sportsIds: sportsIds,
-            minLevel: minLevel,
-            maxLevel: maxLevel,
-          ),
-          from: openMatchesListProvider,
-          name: r'openMatchesListProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$openMatchesListHash,
-          dependencies: OpenMatchesListFamily._dependencies,
-          allTransitiveDependencies:
-              OpenMatchesListFamily._allTransitiveDependencies,
-          startDate: startDate,
-          endDate: endDate,
-          locationIDs: locationIDs,
-          sportsIds: sportsIds,
-          minLevel: minLevel,
-          maxLevel: maxLevel,
-        );
-
-  OpenMatchesListProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.startDate,
-    required this.endDate,
-    required this.locationIDs,
-    required this.sportsIds,
-    required this.minLevel,
-    required this.maxLevel,
-  }) : super.internal();
-
-  final DateTime startDate;
-  final DateTime endDate;
-  final List<int> locationIDs;
-  final List<int> sportsIds;
-  final int minLevel;
-  final int maxLevel;
-
-  @override
-  Override overrideWith(
-    FutureOr<List<OpenMatchModel>> Function(OpenMatchesListRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: OpenMatchesListProvider._internal(
-        (ref) => create(ref as OpenMatchesListRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
+  }) =>
+      OpenMatchesListProvider._(argument: (
         startDate: startDate,
         endDate: endDate,
         locationIDs: locationIDs,
         sportsIds: sportsIds,
         minLevel: minLevel,
         maxLevel: maxLevel,
-      ),
-    );
-  }
+      ), from: this);
 
   @override
-  ({
-    DateTime startDate,
-    DateTime endDate,
-    List<int> locationIDs,
-    List<int> sportsIds,
-    int minLevel,
-    int maxLevel,
-  }) get argument {
-    return (
-      startDate: startDate,
-      endDate: endDate,
-      locationIDs: locationIDs,
-      sportsIds: sportsIds,
-      minLevel: minLevel,
-      maxLevel: maxLevel,
-    );
-  }
+  String toString() => r'openMatchesListProvider';
+}
+
+@ProviderFor(eventsList)
+final eventsListProvider = EventsListFamily._();
+
+final class EventsListProvider extends $FunctionalProvider<
+        AsyncValue<List<EventsModel>>,
+        List<EventsModel>,
+        FutureOr<List<EventsModel>>>
+    with
+        $FutureModifier<List<EventsModel>>,
+        $FutureProvider<List<EventsModel>> {
+  EventsListProvider._(
+      {required EventsListFamily super.from,
+      required ({
+        DateTime startDate,
+        DateTime endDate,
+        List<int>? locationIDs,
+        List<int>? sportsIds,
+      })
+          super.argument})
+      : super(
+          retry: null,
+          name: r'eventsListProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
   @override
-  AutoDisposeFutureProviderElement<List<OpenMatchModel>> createElement() {
-    return _OpenMatchesListProviderElement(this);
+  String debugGetCreateSourceHash() => _$eventsListHash();
+
+  @override
+  String toString() {
+    return r'eventsListProvider'
+        ''
+        '$argument';
   }
 
-  OpenMatchesListProvider _copyWith(
-    FutureOr<List<OpenMatchModel>> Function(OpenMatchesListRef ref) create,
-  ) {
-    return OpenMatchesListProvider._internal(
-      (ref) => create(ref as OpenMatchesListRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      startDate: startDate,
-      endDate: endDate,
-      locationIDs: locationIDs,
-      sportsIds: sportsIds,
-      minLevel: minLevel,
-      maxLevel: maxLevel,
+  @$internal
+  @override
+  $FutureProviderElement<List<EventsModel>> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<EventsModel>> create(Ref ref) {
+    final argument = this.argument as ({
+      DateTime startDate,
+      DateTime endDate,
+      List<int>? locationIDs,
+      List<int>? sportsIds,
+    });
+    return eventsList(
+      ref,
+      startDate: argument.startDate,
+      endDate: argument.endDate,
+      locationIDs: argument.locationIDs,
+      sportsIds: argument.sportsIds,
     );
   }
 
   @override
   bool operator ==(Object other) {
-    return other is OpenMatchesListProvider &&
-        other.startDate == startDate &&
-        other.endDate == endDate &&
-        other.locationIDs == locationIDs &&
-        other.sportsIds == sportsIds &&
-        other.minLevel == minLevel &&
-        other.maxLevel == maxLevel;
+    return other is EventsListProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, startDate.hashCode);
-    hash = _SystemHash.combine(hash, endDate.hashCode);
-    hash = _SystemHash.combine(hash, locationIDs.hashCode);
-    hash = _SystemHash.combine(hash, sportsIds.hashCode);
-    hash = _SystemHash.combine(hash, minLevel.hashCode);
-    hash = _SystemHash.combine(hash, maxLevel.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-mixin OpenMatchesListRef on AutoDisposeFutureProviderRef<List<OpenMatchModel>> {
-  /// The parameter `startDate` of this provider.
-  DateTime get startDate;
+String _$eventsListHash() => r'b2c1ef627e78ef7bf0953b7a1dbbf5f6e1b0c307';
 
-  /// The parameter `endDate` of this provider.
-  DateTime get endDate;
+final class EventsListFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<List<EventsModel>>,
+            ({
+              DateTime startDate,
+              DateTime endDate,
+              List<int>? locationIDs,
+              List<int>? sportsIds,
+            })> {
+  EventsListFamily._()
+      : super(
+          retry: null,
+          name: r'eventsListProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
 
-  /// The parameter `locationIDs` of this provider.
-  List<int> get locationIDs;
-
-  /// The parameter `sportsIds` of this provider.
-  List<int> get sportsIds;
-
-  /// The parameter `minLevel` of this provider.
-  int get minLevel;
-
-  /// The parameter `maxLevel` of this provider.
-  int get maxLevel;
-}
-
-class _OpenMatchesListProviderElement
-    extends AutoDisposeFutureProviderElement<List<OpenMatchModel>>
-    with OpenMatchesListRef {
-  _OpenMatchesListProviderElement(super.provider);
-
-  @override
-  DateTime get startDate => (origin as OpenMatchesListProvider).startDate;
-  @override
-  DateTime get endDate => (origin as OpenMatchesListProvider).endDate;
-  @override
-  List<int> get locationIDs => (origin as OpenMatchesListProvider).locationIDs;
-  @override
-  List<int> get sportsIds => (origin as OpenMatchesListProvider).sportsIds;
-  @override
-  int get minLevel => (origin as OpenMatchesListProvider).minLevel;
-  @override
-  int get maxLevel => (origin as OpenMatchesListProvider).maxLevel;
-}
-
-String _$eventsListHash() => r'b5a5860e4656ce00ea6ccc3c99d6f41f6d932d3d';
-
-/// See also [eventsList].
-@ProviderFor(eventsList)
-const eventsListProvider = EventsListFamily();
-
-/// See also [eventsList].
-class EventsListFamily extends Family {
-  /// See also [eventsList].
-  const EventsListFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'eventsListProvider';
-
-  /// See also [eventsList].
   EventsListProvider call({
     required DateTime startDate,
     required DateTime endDate,
     List<int>? locationIDs,
     List<int>? sportsIds,
-  }) {
-    return EventsListProvider(
-      startDate: startDate,
-      endDate: endDate,
-      locationIDs: locationIDs,
-      sportsIds: sportsIds,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  EventsListProvider getProviderOverride(
-    covariant EventsListProvider provider,
-  ) {
-    return call(
-      startDate: provider.startDate,
-      endDate: provider.endDate,
-      locationIDs: provider.locationIDs,
-      sportsIds: provider.sportsIds,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<List<EventsModel>> Function(EventsListRef ref) create) {
-    return _$EventsListFamilyOverride(this, create);
-  }
-}
-
-class _$EventsListFamilyOverride implements FamilyOverride {
-  _$EventsListFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<List<EventsModel>> Function(EventsListRef ref) create;
-
-  @override
-  final EventsListFamily overriddenFamily;
-
-  @override
-  EventsListProvider getProviderOverride(
-    covariant EventsListProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [eventsList].
-class EventsListProvider extends AutoDisposeFutureProvider<List<EventsModel>> {
-  /// See also [eventsList].
-  EventsListProvider({
-    required DateTime startDate,
-    required DateTime endDate,
-    List<int>? locationIDs,
-    List<int>? sportsIds,
-  }) : this._internal(
-          (ref) => eventsList(
-            ref as EventsListRef,
-            startDate: startDate,
-            endDate: endDate,
-            locationIDs: locationIDs,
-            sportsIds: sportsIds,
-          ),
-          from: eventsListProvider,
-          name: r'eventsListProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$eventsListHash,
-          dependencies: EventsListFamily._dependencies,
-          allTransitiveDependencies:
-              EventsListFamily._allTransitiveDependencies,
-          startDate: startDate,
-          endDate: endDate,
-          locationIDs: locationIDs,
-          sportsIds: sportsIds,
-        );
-
-  EventsListProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.startDate,
-    required this.endDate,
-    required this.locationIDs,
-    required this.sportsIds,
-  }) : super.internal();
-
-  final DateTime startDate;
-  final DateTime endDate;
-  final List<int>? locationIDs;
-  final List<int>? sportsIds;
-
-  @override
-  Override overrideWith(
-    FutureOr<List<EventsModel>> Function(EventsListRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: EventsListProvider._internal(
-        (ref) => create(ref as EventsListRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
+  }) =>
+      EventsListProvider._(argument: (
         startDate: startDate,
         endDate: endDate,
         locationIDs: locationIDs,
         sportsIds: sportsIds,
-      ),
-    );
-  }
+      ), from: this);
 
   @override
-  ({
-    DateTime startDate,
-    DateTime endDate,
-    List<int>? locationIDs,
-    List<int>? sportsIds,
-  }) get argument {
-    return (
-      startDate: startDate,
-      endDate: endDate,
-      locationIDs: locationIDs,
-      sportsIds: sportsIds,
-    );
-  }
+  String toString() => r'eventsListProvider';
+}
+
+@ProviderFor(lessonsList)
+final lessonsListProvider = LessonsListFamily._();
+
+final class LessonsListProvider extends $FunctionalProvider<
+        AsyncValue<List<LessonsModel>>,
+        List<LessonsModel>,
+        FutureOr<List<LessonsModel>>>
+    with
+        $FutureModifier<List<LessonsModel>>,
+        $FutureProvider<List<LessonsModel>> {
+  LessonsListProvider._(
+      {required LessonsListFamily super.from,
+      required ({
+        DateTime startDate,
+        DateTime endDate,
+        List<int> locationIDs,
+        List<int> sportsIds,
+      })
+          super.argument})
+      : super(
+          retry: null,
+          name: r'lessonsListProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
   @override
-  AutoDisposeFutureProviderElement<List<EventsModel>> createElement() {
-    return _EventsListProviderElement(this);
+  String debugGetCreateSourceHash() => _$lessonsListHash();
+
+  @override
+  String toString() {
+    return r'lessonsListProvider'
+        ''
+        '$argument';
   }
 
-  EventsListProvider _copyWith(
-    FutureOr<List<EventsModel>> Function(EventsListRef ref) create,
-  ) {
-    return EventsListProvider._internal(
-      (ref) => create(ref as EventsListRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      startDate: startDate,
-      endDate: endDate,
-      locationIDs: locationIDs,
-      sportsIds: sportsIds,
+  @$internal
+  @override
+  $FutureProviderElement<List<LessonsModel>> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<LessonsModel>> create(Ref ref) {
+    final argument = this.argument as ({
+      DateTime startDate,
+      DateTime endDate,
+      List<int> locationIDs,
+      List<int> sportsIds,
+    });
+    return lessonsList(
+      ref,
+      startDate: argument.startDate,
+      endDate: argument.endDate,
+      locationIDs: argument.locationIDs,
+      sportsIds: argument.sportsIds,
     );
   }
 
   @override
   bool operator ==(Object other) {
-    return other is EventsListProvider &&
-        other.startDate == startDate &&
-        other.endDate == endDate &&
-        other.locationIDs == locationIDs &&
-        other.sportsIds == sportsIds;
+    return other is LessonsListProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, startDate.hashCode);
-    hash = _SystemHash.combine(hash, endDate.hashCode);
-    hash = _SystemHash.combine(hash, locationIDs.hashCode);
-    hash = _SystemHash.combine(hash, sportsIds.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-mixin EventsListRef on AutoDisposeFutureProviderRef<List<EventsModel>> {
-  /// The parameter `startDate` of this provider.
-  DateTime get startDate;
+String _$lessonsListHash() => r'2ced34d337190cd5c4e33f233f7fbac607bc6e32';
 
-  /// The parameter `endDate` of this provider.
-  DateTime get endDate;
+final class LessonsListFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<List<LessonsModel>>,
+            ({
+              DateTime startDate,
+              DateTime endDate,
+              List<int> locationIDs,
+              List<int> sportsIds,
+            })> {
+  LessonsListFamily._()
+      : super(
+          retry: null,
+          name: r'lessonsListProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
 
-  /// The parameter `locationIDs` of this provider.
-  List<int>? get locationIDs;
-
-  /// The parameter `sportsIds` of this provider.
-  List<int>? get sportsIds;
-}
-
-class _EventsListProviderElement
-    extends AutoDisposeFutureProviderElement<List<EventsModel>>
-    with EventsListRef {
-  _EventsListProviderElement(super.provider);
-
-  @override
-  DateTime get startDate => (origin as EventsListProvider).startDate;
-  @override
-  DateTime get endDate => (origin as EventsListProvider).endDate;
-  @override
-  List<int>? get locationIDs => (origin as EventsListProvider).locationIDs;
-  @override
-  List<int>? get sportsIds => (origin as EventsListProvider).sportsIds;
-}
-
-String _$lessonsListHash() => r'682a0fd567515c7f56bcb2f10073424f4036b680';
-
-/// See also [lessonsList].
-@ProviderFor(lessonsList)
-const lessonsListProvider = LessonsListFamily();
-
-/// See also [lessonsList].
-class LessonsListFamily extends Family {
-  /// See also [lessonsList].
-  const LessonsListFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'lessonsListProvider';
-
-  /// See also [lessonsList].
   LessonsListProvider call({
     required DateTime startDate,
     required DateTime endDate,
     List<int> locationIDs = const [],
     List<int> sportsIds = const [],
-  }) {
-    return LessonsListProvider(
-      startDate: startDate,
-      endDate: endDate,
-      locationIDs: locationIDs,
-      sportsIds: sportsIds,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  LessonsListProvider getProviderOverride(
-    covariant LessonsListProvider provider,
-  ) {
-    return call(
-      startDate: provider.startDate,
-      endDate: provider.endDate,
-      locationIDs: provider.locationIDs,
-      sportsIds: provider.sportsIds,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<List<LessonsModel>> Function(LessonsListRef ref) create) {
-    return _$LessonsListFamilyOverride(this, create);
-  }
-}
-
-class _$LessonsListFamilyOverride implements FamilyOverride {
-  _$LessonsListFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<List<LessonsModel>> Function(LessonsListRef ref) create;
-
-  @override
-  final LessonsListFamily overriddenFamily;
-
-  @override
-  LessonsListProvider getProviderOverride(
-    covariant LessonsListProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [lessonsList].
-class LessonsListProvider
-    extends AutoDisposeFutureProvider<List<LessonsModel>> {
-  /// See also [lessonsList].
-  LessonsListProvider({
-    required DateTime startDate,
-    required DateTime endDate,
-    List<int> locationIDs = const [],
-    List<int> sportsIds = const [],
-  }) : this._internal(
-          (ref) => lessonsList(
-            ref as LessonsListRef,
-            startDate: startDate,
-            endDate: endDate,
-            locationIDs: locationIDs,
-            sportsIds: sportsIds,
-          ),
-          from: lessonsListProvider,
-          name: r'lessonsListProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$lessonsListHash,
-          dependencies: LessonsListFamily._dependencies,
-          allTransitiveDependencies:
-              LessonsListFamily._allTransitiveDependencies,
-          startDate: startDate,
-          endDate: endDate,
-          locationIDs: locationIDs,
-          sportsIds: sportsIds,
-        );
-
-  LessonsListProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.startDate,
-    required this.endDate,
-    required this.locationIDs,
-    required this.sportsIds,
-  }) : super.internal();
-
-  final DateTime startDate;
-  final DateTime endDate;
-  final List<int> locationIDs;
-  final List<int> sportsIds;
-
-  @override
-  Override overrideWith(
-    FutureOr<List<LessonsModel>> Function(LessonsListRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: LessonsListProvider._internal(
-        (ref) => create(ref as LessonsListRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
+  }) =>
+      LessonsListProvider._(argument: (
         startDate: startDate,
         endDate: endDate,
         locationIDs: locationIDs,
         sportsIds: sportsIds,
-      ),
-    );
-  }
+      ), from: this);
 
   @override
-  ({
-    DateTime startDate,
-    DateTime endDate,
-    List<int> locationIDs,
-    List<int> sportsIds,
-  }) get argument {
-    return (
-      startDate: startDate,
-      endDate: endDate,
-      locationIDs: locationIDs,
-      sportsIds: sportsIds,
-    );
-  }
+  String toString() => r'lessonsListProvider';
+}
+
+@ProviderFor(fetchServiceDetail)
+final fetchServiceDetailProvider = FetchServiceDetailFamily._();
+
+final class FetchServiceDetailProvider extends $FunctionalProvider<
+        AsyncValue<ServiceDetail>, ServiceDetail, FutureOr<ServiceDetail>>
+    with $FutureModifier<ServiceDetail>, $FutureProvider<ServiceDetail> {
+  FetchServiceDetailProvider._(
+      {required FetchServiceDetailFamily super.from,
+      required int super.argument})
+      : super(
+          retry: null,
+          name: r'fetchServiceDetailProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
   @override
-  AutoDisposeFutureProviderElement<List<LessonsModel>> createElement() {
-    return _LessonsListProviderElement(this);
+  String debugGetCreateSourceHash() => _$fetchServiceDetailHash();
+
+  @override
+  String toString() {
+    return r'fetchServiceDetailProvider'
+        ''
+        '($argument)';
   }
 
-  LessonsListProvider _copyWith(
-    FutureOr<List<LessonsModel>> Function(LessonsListRef ref) create,
-  ) {
-    return LessonsListProvider._internal(
-      (ref) => create(ref as LessonsListRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      startDate: startDate,
-      endDate: endDate,
-      locationIDs: locationIDs,
-      sportsIds: sportsIds,
+  @$internal
+  @override
+  $FutureProviderElement<ServiceDetail> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<ServiceDetail> create(Ref ref) {
+    final argument = this.argument as int;
+    return fetchServiceDetail(
+      ref,
+      argument,
     );
   }
 
   @override
   bool operator ==(Object other) {
-    return other is LessonsListProvider &&
-        other.startDate == startDate &&
-        other.endDate == endDate &&
-        other.locationIDs == locationIDs &&
-        other.sportsIds == sportsIds;
+    return other is FetchServiceDetailProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, startDate.hashCode);
-    hash = _SystemHash.combine(hash, endDate.hashCode);
-    hash = _SystemHash.combine(hash, locationIDs.hashCode);
-    hash = _SystemHash.combine(hash, sportsIds.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
-}
-
-mixin LessonsListRef on AutoDisposeFutureProviderRef<List<LessonsModel>> {
-  /// The parameter `startDate` of this provider.
-  DateTime get startDate;
-
-  /// The parameter `endDate` of this provider.
-  DateTime get endDate;
-
-  /// The parameter `locationIDs` of this provider.
-  List<int> get locationIDs;
-
-  /// The parameter `sportsIds` of this provider.
-  List<int> get sportsIds;
-}
-
-class _LessonsListProviderElement
-    extends AutoDisposeFutureProviderElement<List<LessonsModel>>
-    with LessonsListRef {
-  _LessonsListProviderElement(super.provider);
-
-  @override
-  DateTime get startDate => (origin as LessonsListProvider).startDate;
-  @override
-  DateTime get endDate => (origin as LessonsListProvider).endDate;
-  @override
-  List<int> get locationIDs => (origin as LessonsListProvider).locationIDs;
-  @override
-  List<int> get sportsIds => (origin as LessonsListProvider).sportsIds;
 }
 
 String _$fetchServiceDetailHash() =>
-    r'7bbf7c699be5b4c4814d8648a4d43ce57f986e6d';
+    r'd98c29a6dcac33936632a779b1a38320e2dc44e6';
 
-/// See also [fetchServiceDetail].
-@ProviderFor(fetchServiceDetail)
-const fetchServiceDetailProvider = FetchServiceDetailFamily();
-
-/// See also [fetchServiceDetail].
-class FetchServiceDetailFamily extends Family {
-  /// See also [fetchServiceDetail].
-  const FetchServiceDetailFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'fetchServiceDetailProvider';
-
-  /// See also [fetchServiceDetail].
-  FetchServiceDetailProvider call(
-    int serviceID,
-  ) {
-    return FetchServiceDetailProvider(
-      serviceID,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  FetchServiceDetailProvider getProviderOverride(
-    covariant FetchServiceDetailProvider provider,
-  ) {
-    return call(
-      provider.serviceID,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<ServiceDetail> Function(FetchServiceDetailRef ref) create) {
-    return _$FetchServiceDetailFamilyOverride(this, create);
-  }
-}
-
-class _$FetchServiceDetailFamilyOverride implements FamilyOverride {
-  _$FetchServiceDetailFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<ServiceDetail> Function(FetchServiceDetailRef ref) create;
-
-  @override
-  final FetchServiceDetailFamily overriddenFamily;
-
-  @override
-  FetchServiceDetailProvider getProviderOverride(
-    covariant FetchServiceDetailProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [fetchServiceDetail].
-class FetchServiceDetailProvider
-    extends AutoDisposeFutureProvider<ServiceDetail> {
-  /// See also [fetchServiceDetail].
-  FetchServiceDetailProvider(
-    int serviceID,
-  ) : this._internal(
-          (ref) => fetchServiceDetail(
-            ref as FetchServiceDetailRef,
-            serviceID,
-          ),
-          from: fetchServiceDetailProvider,
+final class FetchServiceDetailFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<ServiceDetail>, int> {
+  FetchServiceDetailFamily._()
+      : super(
+          retry: null,
           name: r'fetchServiceDetailProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$fetchServiceDetailHash,
-          dependencies: FetchServiceDetailFamily._dependencies,
-          allTransitiveDependencies:
-              FetchServiceDetailFamily._allTransitiveDependencies,
-          serviceID: serviceID,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
         );
 
-  FetchServiceDetailProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.serviceID,
-  }) : super.internal();
-
-  final int serviceID;
+  FetchServiceDetailProvider call(
+    int serviceID,
+  ) =>
+      FetchServiceDetailProvider._(argument: serviceID, from: this);
 
   @override
-  Override overrideWith(
-    FutureOr<ServiceDetail> Function(FetchServiceDetailRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: FetchServiceDetailProvider._internal(
-        (ref) => create(ref as FetchServiceDetailRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        serviceID: serviceID,
-      ),
-    );
-  }
+  String toString() => r'fetchServiceDetailProvider';
+}
+
+@ProviderFor(joinService)
+final joinServiceProvider = JoinServiceFamily._();
+
+final class JoinServiceProvider
+    extends $FunctionalProvider<AsyncValue<double?>, double?, FutureOr<double?>>
+    with $FutureModifier<double?>, $FutureProvider<double?> {
+  JoinServiceProvider._(
+      {required JoinServiceFamily super.from,
+      required (
+        int, {
+        int? playerId,
+        int position,
+        bool isEvent,
+        bool isOpenMatch,
+        bool isDouble,
+        bool isReserve,
+        bool isLesson,
+        bool? pendingPayment,
+        bool isApprovalNeeded,
+      })
+          super.argument})
+      : super(
+          retry: null,
+          name: r'joinServiceProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
   @override
-  (int,) get argument {
-    return (serviceID,);
-  }
+  String debugGetCreateSourceHash() => _$joinServiceHash();
 
   @override
-  AutoDisposeFutureProviderElement<ServiceDetail> createElement() {
-    return _FetchServiceDetailProviderElement(this);
+  String toString() {
+    return r'joinServiceProvider'
+        ''
+        '$argument';
   }
 
-  FetchServiceDetailProvider _copyWith(
-    FutureOr<ServiceDetail> Function(FetchServiceDetailRef ref) create,
-  ) {
-    return FetchServiceDetailProvider._internal(
-      (ref) => create(ref as FetchServiceDetailRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      serviceID: serviceID,
+  @$internal
+  @override
+  $FutureProviderElement<double?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<double?> create(Ref ref) {
+    final argument = this.argument as (
+      int, {
+      int? playerId,
+      int position,
+      bool isEvent,
+      bool isOpenMatch,
+      bool isDouble,
+      bool isReserve,
+      bool isLesson,
+      bool? pendingPayment,
+      bool isApprovalNeeded,
+    });
+    return joinService(
+      ref,
+      argument.$1,
+      playerId: argument.playerId,
+      position: argument.position,
+      isEvent: argument.isEvent,
+      isOpenMatch: argument.isOpenMatch,
+      isDouble: argument.isDouble,
+      isReserve: argument.isReserve,
+      isLesson: argument.isLesson,
+      pendingPayment: argument.pendingPayment,
+      isApprovalNeeded: argument.isApprovalNeeded,
     );
   }
 
   @override
   bool operator ==(Object other) {
-    return other is FetchServiceDetailProvider && other.serviceID == serviceID;
+    return other is JoinServiceProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, serviceID.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-mixin FetchServiceDetailRef on AutoDisposeFutureProviderRef<ServiceDetail> {
-  /// The parameter `serviceID` of this provider.
-  int get serviceID;
-}
+String _$joinServiceHash() => r'c11d99e7024691f2cc03f4d439374953d402e216';
 
-class _FetchServiceDetailProviderElement
-    extends AutoDisposeFutureProviderElement<ServiceDetail>
-    with FetchServiceDetailRef {
-  _FetchServiceDetailProviderElement(super.provider);
+final class JoinServiceFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<double?>,
+            (
+              int, {
+              int? playerId,
+              int position,
+              bool isEvent,
+              bool isOpenMatch,
+              bool isDouble,
+              bool isReserve,
+              bool isLesson,
+              bool? pendingPayment,
+              bool isApprovalNeeded,
+            })> {
+  JoinServiceFamily._()
+      : super(
+          retry: null,
+          name: r'joinServiceProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
 
-  @override
-  int get serviceID => (origin as FetchServiceDetailProvider).serviceID;
-}
-
-String _$joinServiceHash() => r'c28c9698bd077d5664a4debd15d91686f157b88d';
-
-/// See also [joinService].
-@ProviderFor(joinService)
-const joinServiceProvider = JoinServiceFamily();
-
-/// See also [joinService].
-class JoinServiceFamily extends Family {
-  /// See also [joinService].
-  const JoinServiceFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'joinServiceProvider';
-
-  /// See also [joinService].
   JoinServiceProvider call(
     int id, {
     int? playerId,
@@ -990,155 +587,9 @@ class JoinServiceFamily extends Family {
     required bool isLesson,
     bool? pendingPayment,
     bool isApprovalNeeded = false,
-  }) {
-    return JoinServiceProvider(
-      id,
-      playerId: playerId,
-      position: position,
-      isEvent: isEvent,
-      isOpenMatch: isOpenMatch,
-      isDouble: isDouble,
-      isReserve: isReserve,
-      isLesson: isLesson,
-      pendingPayment: pendingPayment,
-      isApprovalNeeded: isApprovalNeeded,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  JoinServiceProvider getProviderOverride(
-    covariant JoinServiceProvider provider,
-  ) {
-    return call(
-      provider.id,
-      playerId: provider.playerId,
-      position: provider.position,
-      isEvent: provider.isEvent,
-      isOpenMatch: provider.isOpenMatch,
-      isDouble: provider.isDouble,
-      isReserve: provider.isReserve,
-      isLesson: provider.isLesson,
-      pendingPayment: provider.pendingPayment,
-      isApprovalNeeded: provider.isApprovalNeeded,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(FutureOr<double?> Function(JoinServiceRef ref) create) {
-    return _$JoinServiceFamilyOverride(this, create);
-  }
-}
-
-class _$JoinServiceFamilyOverride implements FamilyOverride {
-  _$JoinServiceFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<double?> Function(JoinServiceRef ref) create;
-
-  @override
-  final JoinServiceFamily overriddenFamily;
-
-  @override
-  JoinServiceProvider getProviderOverride(
-    covariant JoinServiceProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [joinService].
-class JoinServiceProvider extends AutoDisposeFutureProvider<double?> {
-  /// See also [joinService].
-  JoinServiceProvider(
-    int id, {
-    int? playerId,
-    required int position,
-    required bool isEvent,
-    required bool isOpenMatch,
-    required bool isDouble,
-    required bool isReserve,
-    required bool isLesson,
-    bool? pendingPayment,
-    bool isApprovalNeeded = false,
-  }) : this._internal(
-          (ref) => joinService(
-            ref as JoinServiceRef,
-            id,
-            playerId: playerId,
-            position: position,
-            isEvent: isEvent,
-            isOpenMatch: isOpenMatch,
-            isDouble: isDouble,
-            isReserve: isReserve,
-            isLesson: isLesson,
-            pendingPayment: pendingPayment,
-            isApprovalNeeded: isApprovalNeeded,
-          ),
-          from: joinServiceProvider,
-          name: r'joinServiceProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$joinServiceHash,
-          dependencies: JoinServiceFamily._dependencies,
-          allTransitiveDependencies:
-              JoinServiceFamily._allTransitiveDependencies,
-          id: id,
-          playerId: playerId,
-          position: position,
-          isEvent: isEvent,
-          isOpenMatch: isOpenMatch,
-          isDouble: isDouble,
-          isReserve: isReserve,
-          isLesson: isLesson,
-          pendingPayment: pendingPayment,
-          isApprovalNeeded: isApprovalNeeded,
-        );
-
-  JoinServiceProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.id,
-    required this.playerId,
-    required this.position,
-    required this.isEvent,
-    required this.isOpenMatch,
-    required this.isDouble,
-    required this.isReserve,
-    required this.isLesson,
-    required this.pendingPayment,
-    required this.isApprovalNeeded,
-  }) : super.internal();
-
-  final int id;
-  final int? playerId;
-  final int position;
-  final bool isEvent;
-  final bool isOpenMatch;
-  final bool isDouble;
-  final bool isReserve;
-  final bool isLesson;
-  final bool? pendingPayment;
-  final bool isApprovalNeeded;
-
-  @override
-  Override overrideWith(
-    FutureOr<double?> Function(JoinServiceRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: JoinServiceProvider._internal(
-        (ref) => create(ref as JoinServiceRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        id: id,
+  }) =>
+      JoinServiceProvider._(argument: (
+        id,
         playerId: playerId,
         position: position,
         isEvent: isEvent,
@@ -1148,2804 +599,1260 @@ class JoinServiceProvider extends AutoDisposeFutureProvider<double?> {
         isLesson: isLesson,
         pendingPayment: pendingPayment,
         isApprovalNeeded: isApprovalNeeded,
-      ),
-    );
-  }
+      ), from: this);
 
   @override
-  (
-    int, {
-    int? playerId,
-    int position,
-    bool isEvent,
-    bool isOpenMatch,
-    bool isDouble,
-    bool isReserve,
-    bool isLesson,
-    bool? pendingPayment,
-    bool isApprovalNeeded,
-  }) get argument {
-    return (
-      id,
-      playerId: playerId,
-      position: position,
-      isEvent: isEvent,
-      isOpenMatch: isOpenMatch,
-      isDouble: isDouble,
-      isReserve: isReserve,
-      isLesson: isLesson,
-      pendingPayment: pendingPayment,
-      isApprovalNeeded: isApprovalNeeded,
-    );
-  }
+  String toString() => r'joinServiceProvider';
+}
+
+@ProviderFor(cancelService)
+final cancelServiceProvider = CancelServiceFamily._();
+
+final class CancelServiceProvider
+    extends $FunctionalProvider<AsyncValue<bool?>, bool?, FutureOr<bool?>>
+    with $FutureModifier<bool?>, $FutureProvider<bool?> {
+  CancelServiceProvider._(
+      {required CancelServiceFamily super.from, required int super.argument})
+      : super(
+          retry: null,
+          name: r'cancelServiceProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
   @override
-  AutoDisposeFutureProviderElement<double?> createElement() {
-    return _JoinServiceProviderElement(this);
+  String debugGetCreateSourceHash() => _$cancelServiceHash();
+
+  @override
+  String toString() {
+    return r'cancelServiceProvider'
+        ''
+        '($argument)';
   }
 
-  JoinServiceProvider _copyWith(
-    FutureOr<double?> Function(JoinServiceRef ref) create,
-  ) {
-    return JoinServiceProvider._internal(
-      (ref) => create(ref as JoinServiceRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      id: id,
-      playerId: playerId,
-      position: position,
-      isEvent: isEvent,
-      isOpenMatch: isOpenMatch,
-      isDouble: isDouble,
-      isReserve: isReserve,
-      isLesson: isLesson,
-      pendingPayment: pendingPayment,
-      isApprovalNeeded: isApprovalNeeded,
+  @$internal
+  @override
+  $FutureProviderElement<bool?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<bool?> create(Ref ref) {
+    final argument = this.argument as int;
+    return cancelService(
+      ref,
+      argument,
     );
   }
 
   @override
   bool operator ==(Object other) {
-    return other is JoinServiceProvider &&
-        other.id == id &&
-        other.playerId == playerId &&
-        other.position == position &&
-        other.isEvent == isEvent &&
-        other.isOpenMatch == isOpenMatch &&
-        other.isDouble == isDouble &&
-        other.isReserve == isReserve &&
-        other.isLesson == isLesson &&
-        other.pendingPayment == pendingPayment &&
-        other.isApprovalNeeded == isApprovalNeeded;
+    return other is CancelServiceProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, playerId.hashCode);
-    hash = _SystemHash.combine(hash, position.hashCode);
-    hash = _SystemHash.combine(hash, isEvent.hashCode);
-    hash = _SystemHash.combine(hash, isOpenMatch.hashCode);
-    hash = _SystemHash.combine(hash, isDouble.hashCode);
-    hash = _SystemHash.combine(hash, isReserve.hashCode);
-    hash = _SystemHash.combine(hash, isLesson.hashCode);
-    hash = _SystemHash.combine(hash, pendingPayment.hashCode);
-    hash = _SystemHash.combine(hash, isApprovalNeeded.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-mixin JoinServiceRef on AutoDisposeFutureProviderRef<double?> {
-  /// The parameter `id` of this provider.
-  int get id;
+String _$cancelServiceHash() => r'14e5982e94f4436ac86b07bc38e8fd94626c2897';
 
-  /// The parameter `playerId` of this provider.
-  int? get playerId;
+final class CancelServiceFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<bool?>, int> {
+  CancelServiceFamily._()
+      : super(
+          retry: null,
+          name: r'cancelServiceProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
 
-  /// The parameter `position` of this provider.
-  int get position;
-
-  /// The parameter `isEvent` of this provider.
-  bool get isEvent;
-
-  /// The parameter `isOpenMatch` of this provider.
-  bool get isOpenMatch;
-
-  /// The parameter `isDouble` of this provider.
-  bool get isDouble;
-
-  /// The parameter `isReserve` of this provider.
-  bool get isReserve;
-
-  /// The parameter `isLesson` of this provider.
-  bool get isLesson;
-
-  /// The parameter `pendingPayment` of this provider.
-  bool? get pendingPayment;
-
-  /// The parameter `isApprovalNeeded` of this provider.
-  bool get isApprovalNeeded;
-}
-
-class _JoinServiceProviderElement
-    extends AutoDisposeFutureProviderElement<double?> with JoinServiceRef {
-  _JoinServiceProviderElement(super.provider);
-
-  @override
-  int get id => (origin as JoinServiceProvider).id;
-  @override
-  int? get playerId => (origin as JoinServiceProvider).playerId;
-  @override
-  int get position => (origin as JoinServiceProvider).position;
-  @override
-  bool get isEvent => (origin as JoinServiceProvider).isEvent;
-  @override
-  bool get isOpenMatch => (origin as JoinServiceProvider).isOpenMatch;
-  @override
-  bool get isDouble => (origin as JoinServiceProvider).isDouble;
-  @override
-  bool get isReserve => (origin as JoinServiceProvider).isReserve;
-  @override
-  bool get isLesson => (origin as JoinServiceProvider).isLesson;
-  @override
-  bool? get pendingPayment => (origin as JoinServiceProvider).pendingPayment;
-  @override
-  bool get isApprovalNeeded => (origin as JoinServiceProvider).isApprovalNeeded;
-}
-
-String _$cancelServiceHash() => r'90ea059f4614d1253c8f3fba67fc9584b27e9cb9';
-
-/// See also [cancelService].
-@ProviderFor(cancelService)
-const cancelServiceProvider = CancelServiceFamily();
-
-/// See also [cancelService].
-class CancelServiceFamily extends Family {
-  /// See also [cancelService].
-  const CancelServiceFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'cancelServiceProvider';
-
-  /// See also [cancelService].
   CancelServiceProvider call(
     int id,
-  ) {
-    return CancelServiceProvider(
-      id,
-    );
-  }
+  ) =>
+      CancelServiceProvider._(argument: id, from: this);
 
-  @visibleForOverriding
   @override
-  CancelServiceProvider getProviderOverride(
-    covariant CancelServiceProvider provider,
-  ) {
-    return call(
-      provider.id,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(FutureOr<bool?> Function(CancelServiceRef ref) create) {
-    return _$CancelServiceFamilyOverride(this, create);
-  }
+  String toString() => r'cancelServiceProvider';
 }
 
-class _$CancelServiceFamilyOverride implements FamilyOverride {
-  _$CancelServiceFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<bool?> Function(CancelServiceRef ref) create;
-
-  @override
-  final CancelServiceFamily overriddenFamily;
-
-  @override
-  CancelServiceProvider getProviderOverride(
-    covariant CancelServiceProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [cancelService].
-class CancelServiceProvider extends AutoDisposeFutureProvider<bool?> {
-  /// See also [cancelService].
-  CancelServiceProvider(
-    int id,
-  ) : this._internal(
-          (ref) => cancelService(
-            ref as CancelServiceRef,
-            id,
-          ),
-          from: cancelServiceProvider,
-          name: r'cancelServiceProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$cancelServiceHash,
-          dependencies: CancelServiceFamily._dependencies,
-          allTransitiveDependencies:
-              CancelServiceFamily._allTransitiveDependencies,
-          id: id,
-        );
-
-  CancelServiceProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.id,
-  }) : super.internal();
-
-  final int id;
-
-  @override
-  Override overrideWith(
-    FutureOr<bool?> Function(CancelServiceRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: CancelServiceProvider._internal(
-        (ref) => create(ref as CancelServiceRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        id: id,
-      ),
-    );
-  }
-
-  @override
-  (int,) get argument {
-    return (id,);
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<bool?> createElement() {
-    return _CancelServiceProviderElement(this);
-  }
-
-  CancelServiceProvider _copyWith(
-    FutureOr<bool?> Function(CancelServiceRef ref) create,
-  ) {
-    return CancelServiceProvider._internal(
-      (ref) => create(ref as CancelServiceRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      id: id,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is CancelServiceProvider && other.id == id;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-mixin CancelServiceRef on AutoDisposeFutureProviderRef<bool?> {
-  /// The parameter `id` of this provider.
-  int get id;
-}
-
-class _CancelServiceProviderElement
-    extends AutoDisposeFutureProviderElement<bool?> with CancelServiceRef {
-  _CancelServiceProviderElement(super.provider);
-
-  @override
-  int get id => (origin as CancelServiceProvider).id;
-}
-
-String _$fetchServiceWaitingPlayersHash() =>
-    r'bd46107762ffc1b7bc8efe00c6ea5fe59af9915b';
-
-/// See also [fetchServiceWaitingPlayers].
 @ProviderFor(fetchServiceWaitingPlayers)
-const fetchServiceWaitingPlayersProvider = FetchServiceWaitingPlayersFamily();
+final fetchServiceWaitingPlayersProvider = FetchServiceWaitingPlayersFamily._();
 
-/// See also [fetchServiceWaitingPlayers].
-class FetchServiceWaitingPlayersFamily extends Family {
-  /// See also [fetchServiceWaitingPlayers].
-  const FetchServiceWaitingPlayersFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'fetchServiceWaitingPlayersProvider';
-
-  /// See also [fetchServiceWaitingPlayers].
-  FetchServiceWaitingPlayersProvider call(
-    int id,
-    RequestServiceType requestServiceType,
-  ) {
-    return FetchServiceWaitingPlayersProvider(
-      id,
-      requestServiceType,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  FetchServiceWaitingPlayersProvider getProviderOverride(
-    covariant FetchServiceWaitingPlayersProvider provider,
-  ) {
-    return call(
-      provider.id,
-      provider.requestServiceType,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<List<ServiceWaitingPlayers>> Function(
-              FetchServiceWaitingPlayersRef ref)
-          create) {
-    return _$FetchServiceWaitingPlayersFamilyOverride(this, create);
-  }
-}
-
-class _$FetchServiceWaitingPlayersFamilyOverride implements FamilyOverride {
-  _$FetchServiceWaitingPlayersFamilyOverride(
-      this.overriddenFamily, this.create);
-
-  final FutureOr<List<ServiceWaitingPlayers>> Function(
-      FetchServiceWaitingPlayersRef ref) create;
-
-  @override
-  final FetchServiceWaitingPlayersFamily overriddenFamily;
-
-  @override
-  FetchServiceWaitingPlayersProvider getProviderOverride(
-    covariant FetchServiceWaitingPlayersProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [fetchServiceWaitingPlayers].
-class FetchServiceWaitingPlayersProvider
-    extends AutoDisposeFutureProvider<List<ServiceWaitingPlayers>> {
-  /// See also [fetchServiceWaitingPlayers].
-  FetchServiceWaitingPlayersProvider(
-    int id,
-    RequestServiceType requestServiceType,
-  ) : this._internal(
-          (ref) => fetchServiceWaitingPlayers(
-            ref as FetchServiceWaitingPlayersRef,
-            id,
-            requestServiceType,
-          ),
-          from: fetchServiceWaitingPlayersProvider,
+final class FetchServiceWaitingPlayersProvider extends $FunctionalProvider<
+        AsyncValue<List<ServiceWaitingPlayers>>,
+        List<ServiceWaitingPlayers>,
+        FutureOr<List<ServiceWaitingPlayers>>>
+    with
+        $FutureModifier<List<ServiceWaitingPlayers>>,
+        $FutureProvider<List<ServiceWaitingPlayers>> {
+  FetchServiceWaitingPlayersProvider._(
+      {required FetchServiceWaitingPlayersFamily super.from,
+      required (
+        int,
+        RequestServiceType,
+      )
+          super.argument})
+      : super(
+          retry: null,
           name: r'fetchServiceWaitingPlayersProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$fetchServiceWaitingPlayersHash,
-          dependencies: FetchServiceWaitingPlayersFamily._dependencies,
-          allTransitiveDependencies:
-              FetchServiceWaitingPlayersFamily._allTransitiveDependencies,
-          id: id,
-          requestServiceType: requestServiceType,
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
         );
 
-  FetchServiceWaitingPlayersProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.id,
-    required this.requestServiceType,
-  }) : super.internal();
-
-  final int id;
-  final RequestServiceType requestServiceType;
+  @override
+  String debugGetCreateSourceHash() => _$fetchServiceWaitingPlayersHash();
 
   @override
-  Override overrideWith(
-    FutureOr<List<ServiceWaitingPlayers>> Function(
-            FetchServiceWaitingPlayersRef ref)
-        create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: FetchServiceWaitingPlayersProvider._internal(
-        (ref) => create(ref as FetchServiceWaitingPlayersRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        id: id,
-        requestServiceType: requestServiceType,
-      ),
+  String toString() {
+    return r'fetchServiceWaitingPlayersProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<List<ServiceWaitingPlayers>> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<ServiceWaitingPlayers>> create(Ref ref) {
+    final argument = this.argument as (
+      int,
+      RequestServiceType,
     );
-  }
-
-  @override
-  (
-    int,
-    RequestServiceType,
-  ) get argument {
-    return (
-      id,
-      requestServiceType,
-    );
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<List<ServiceWaitingPlayers>>
-      createElement() {
-    return _FetchServiceWaitingPlayersProviderElement(this);
-  }
-
-  FetchServiceWaitingPlayersProvider _copyWith(
-    FutureOr<List<ServiceWaitingPlayers>> Function(
-            FetchServiceWaitingPlayersRef ref)
-        create,
-  ) {
-    return FetchServiceWaitingPlayersProvider._internal(
-      (ref) => create(ref as FetchServiceWaitingPlayersRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      id: id,
-      requestServiceType: requestServiceType,
+    return fetchServiceWaitingPlayers(
+      ref,
+      argument.$1,
+      argument.$2,
     );
   }
 
   @override
   bool operator ==(Object other) {
     return other is FetchServiceWaitingPlayersProvider &&
-        other.id == id &&
-        other.requestServiceType == requestServiceType;
+        other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, requestServiceType.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-mixin FetchServiceWaitingPlayersRef
-    on AutoDisposeFutureProviderRef<List<ServiceWaitingPlayers>> {
-  /// The parameter `id` of this provider.
-  int get id;
+String _$fetchServiceWaitingPlayersHash() =>
+    r'5dc8f805ba2536f2daa454c21d22fddc1d51a388';
 
-  /// The parameter `requestServiceType` of this provider.
-  RequestServiceType get requestServiceType;
-}
+final class FetchServiceWaitingPlayersFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<List<ServiceWaitingPlayers>>,
+            (
+              int,
+              RequestServiceType,
+            )> {
+  FetchServiceWaitingPlayersFamily._()
+      : super(
+          retry: null,
+          name: r'fetchServiceWaitingPlayersProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
 
-class _FetchServiceWaitingPlayersProviderElement
-    extends AutoDisposeFutureProviderElement<List<ServiceWaitingPlayers>>
-    with FetchServiceWaitingPlayersRef {
-  _FetchServiceWaitingPlayersProviderElement(super.provider);
+  FetchServiceWaitingPlayersProvider call(
+    int id,
+    RequestServiceType requestServiceType,
+  ) =>
+      FetchServiceWaitingPlayersProvider._(argument: (
+        id,
+        requestServiceType,
+      ), from: this);
 
   @override
-  int get id => (origin as FetchServiceWaitingPlayersProvider).id;
-  @override
-  RequestServiceType get requestServiceType =>
-      (origin as FetchServiceWaitingPlayersProvider).requestServiceType;
+  String toString() => r'fetchServiceWaitingPlayersProvider';
 }
 
-String _$approvePlayerHash() => r'4fd8ab8406e2dbc47fe3d4f21aa3837111feee5b';
-
-/// See also [approvePlayer].
 @ProviderFor(approvePlayer)
-const approvePlayerProvider = ApprovePlayerFamily();
+final approvePlayerProvider = ApprovePlayerFamily._();
 
-/// See also [approvePlayer].
-class ApprovePlayerFamily extends Family {
-  /// See also [approvePlayer].
-  const ApprovePlayerFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+final class ApprovePlayerProvider
+    extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
+    with $FutureModifier<bool>, $FutureProvider<bool> {
+  ApprovePlayerProvider._(
+      {required ApprovePlayerFamily super.from,
+      required ({
+        bool isApprove,
+        int serviceID,
+        int playerID,
+      })
+          super.argument})
+      : super(
+          retry: null,
+          name: r'approvePlayerProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
   @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+  String debugGetCreateSourceHash() => _$approvePlayerHash();
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
+  String toString() {
+    return r'approvePlayerProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
 
   @override
-  String? get name => r'approvePlayerProvider';
+  FutureOr<bool> create(Ref ref) {
+    final argument = this.argument as ({
+      bool isApprove,
+      int serviceID,
+      int playerID,
+    });
+    return approvePlayer(
+      ref,
+      isApprove: argument.isApprove,
+      serviceID: argument.serviceID,
+      playerID: argument.playerID,
+    );
+  }
 
-  /// See also [approvePlayer].
+  @override
+  bool operator ==(Object other) {
+    return other is ApprovePlayerProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$approvePlayerHash() => r'e99edc7be9b082b9f82197c6d1d2a37d2d90841f';
+
+final class ApprovePlayerFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<bool>,
+            ({
+              bool isApprove,
+              int serviceID,
+              int playerID,
+            })> {
+  ApprovePlayerFamily._()
+      : super(
+          retry: null,
+          name: r'approvePlayerProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
+
   ApprovePlayerProvider call({
     bool isApprove = true,
     required int serviceID,
     required int playerID,
-  }) {
-    return ApprovePlayerProvider(
-      isApprove: isApprove,
-      serviceID: serviceID,
-      playerID: playerID,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  ApprovePlayerProvider getProviderOverride(
-    covariant ApprovePlayerProvider provider,
-  ) {
-    return call(
-      isApprove: provider.isApprove,
-      serviceID: provider.serviceID,
-      playerID: provider.playerID,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(FutureOr<bool> Function(ApprovePlayerRef ref) create) {
-    return _$ApprovePlayerFamilyOverride(this, create);
-  }
-}
-
-class _$ApprovePlayerFamilyOverride implements FamilyOverride {
-  _$ApprovePlayerFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<bool> Function(ApprovePlayerRef ref) create;
-
-  @override
-  final ApprovePlayerFamily overriddenFamily;
-
-  @override
-  ApprovePlayerProvider getProviderOverride(
-    covariant ApprovePlayerProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [approvePlayer].
-class ApprovePlayerProvider extends AutoDisposeFutureProvider<bool> {
-  /// See also [approvePlayer].
-  ApprovePlayerProvider({
-    bool isApprove = true,
-    required int serviceID,
-    required int playerID,
-  }) : this._internal(
-          (ref) => approvePlayer(
-            ref as ApprovePlayerRef,
-            isApprove: isApprove,
-            serviceID: serviceID,
-            playerID: playerID,
-          ),
-          from: approvePlayerProvider,
-          name: r'approvePlayerProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$approvePlayerHash,
-          dependencies: ApprovePlayerFamily._dependencies,
-          allTransitiveDependencies:
-              ApprovePlayerFamily._allTransitiveDependencies,
-          isApprove: isApprove,
-          serviceID: serviceID,
-          playerID: playerID,
-        );
-
-  ApprovePlayerProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.isApprove,
-    required this.serviceID,
-    required this.playerID,
-  }) : super.internal();
-
-  final bool isApprove;
-  final int serviceID;
-  final int playerID;
-
-  @override
-  Override overrideWith(
-    FutureOr<bool> Function(ApprovePlayerRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: ApprovePlayerProvider._internal(
-        (ref) => create(ref as ApprovePlayerRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
+  }) =>
+      ApprovePlayerProvider._(argument: (
         isApprove: isApprove,
         serviceID: serviceID,
         playerID: playerID,
-      ),
-    );
-  }
+      ), from: this);
 
   @override
-  ({
-    bool isApprove,
-    int serviceID,
-    int playerID,
-  }) get argument {
-    return (
-      isApprove: isApprove,
-      serviceID: serviceID,
-      playerID: playerID,
-    );
-  }
+  String toString() => r'approvePlayerProvider';
+}
+
+@ProviderFor(deleteReserved)
+final deleteReservedProvider = DeleteReservedFamily._();
+
+final class DeleteReservedProvider
+    extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
+    with $FutureModifier<bool>, $FutureProvider<bool> {
+  DeleteReservedProvider._(
+      {required DeleteReservedFamily super.from,
+      required (
+        int,
+        int,
+      )
+          super.argument})
+      : super(
+          retry: null,
+          name: r'deleteReservedProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
   @override
-  AutoDisposeFutureProviderElement<bool> createElement() {
-    return _ApprovePlayerProviderElement(this);
+  String debugGetCreateSourceHash() => _$deleteReservedHash();
+
+  @override
+  String toString() {
+    return r'deleteReservedProvider'
+        ''
+        '$argument';
   }
 
-  ApprovePlayerProvider _copyWith(
-    FutureOr<bool> Function(ApprovePlayerRef ref) create,
-  ) {
-    return ApprovePlayerProvider._internal(
-      (ref) => create(ref as ApprovePlayerRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      isApprove: isApprove,
-      serviceID: serviceID,
-      playerID: playerID,
+  @$internal
+  @override
+  $FutureProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<bool> create(Ref ref) {
+    final argument = this.argument as (
+      int,
+      int,
+    );
+    return deleteReserved(
+      ref,
+      argument.$1,
+      argument.$2,
     );
   }
 
   @override
   bool operator ==(Object other) {
-    return other is ApprovePlayerProvider &&
-        other.isApprove == isApprove &&
-        other.serviceID == serviceID &&
-        other.playerID == playerID;
+    return other is DeleteReservedProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, isApprove.hashCode);
-    hash = _SystemHash.combine(hash, serviceID.hashCode);
-    hash = _SystemHash.combine(hash, playerID.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-mixin ApprovePlayerRef on AutoDisposeFutureProviderRef<bool> {
-  /// The parameter `isApprove` of this provider.
-  bool get isApprove;
+String _$deleteReservedHash() => r'd8afe6e550cf0a55a1d66aad140a0c42831db904';
 
-  /// The parameter `serviceID` of this provider.
-  int get serviceID;
+final class DeleteReservedFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<bool>,
+            (
+              int,
+              int,
+            )> {
+  DeleteReservedFamily._()
+      : super(
+          retry: null,
+          name: r'deleteReservedProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
 
-  /// The parameter `playerID` of this provider.
-  int get playerID;
-}
-
-class _ApprovePlayerProviderElement
-    extends AutoDisposeFutureProviderElement<bool> with ApprovePlayerRef {
-  _ApprovePlayerProviderElement(super.provider);
-
-  @override
-  bool get isApprove => (origin as ApprovePlayerProvider).isApprove;
-  @override
-  int get serviceID => (origin as ApprovePlayerProvider).serviceID;
-  @override
-  int get playerID => (origin as ApprovePlayerProvider).playerID;
-}
-
-String _$deleteReservedHash() => r'e1ad84f0134d958488a0301006db7b2953b7c2b6';
-
-/// See also [deleteReserved].
-@ProviderFor(deleteReserved)
-const deleteReservedProvider = DeleteReservedFamily();
-
-/// See also [deleteReserved].
-class DeleteReservedFamily extends Family {
-  /// See also [deleteReserved].
-  const DeleteReservedFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'deleteReservedProvider';
-
-  /// See also [deleteReserved].
   DeleteReservedProvider call(
     int serviceID,
     int reservedID,
-  ) {
-    return DeleteReservedProvider(
-      serviceID,
-      reservedID,
-    );
-  }
+  ) =>
+      DeleteReservedProvider._(argument: (
+        serviceID,
+        reservedID,
+      ), from: this);
 
-  @visibleForOverriding
   @override
-  DeleteReservedProvider getProviderOverride(
-    covariant DeleteReservedProvider provider,
-  ) {
-    return call(
-      provider.serviceID,
-      provider.reservedID,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(FutureOr<bool> Function(DeleteReservedRef ref) create) {
-    return _$DeleteReservedFamilyOverride(this, create);
-  }
+  String toString() => r'deleteReservedProvider';
 }
 
-class _$DeleteReservedFamilyOverride implements FamilyOverride {
-  _$DeleteReservedFamilyOverride(this.overriddenFamily, this.create);
+@ProviderFor(submitAssessment)
+final submitAssessmentProvider = SubmitAssessmentFamily._();
 
-  final FutureOr<bool> Function(DeleteReservedRef ref) create;
-
-  @override
-  final DeleteReservedFamily overriddenFamily;
-
-  @override
-  DeleteReservedProvider getProviderOverride(
-    covariant DeleteReservedProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [deleteReserved].
-class DeleteReservedProvider extends AutoDisposeFutureProvider<bool> {
-  /// See also [deleteReserved].
-  DeleteReservedProvider(
-    int serviceID,
-    int reservedID,
-  ) : this._internal(
-          (ref) => deleteReserved(
-            ref as DeleteReservedRef,
-            serviceID,
-            reservedID,
-          ),
-          from: deleteReservedProvider,
-          name: r'deleteReservedProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$deleteReservedHash,
-          dependencies: DeleteReservedFamily._dependencies,
-          allTransitiveDependencies:
-              DeleteReservedFamily._allTransitiveDependencies,
-          serviceID: serviceID,
-          reservedID: reservedID,
+final class SubmitAssessmentProvider
+    extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
+    with $FutureModifier<bool>, $FutureProvider<bool> {
+  SubmitAssessmentProvider._(
+      {required SubmitAssessmentFamily super.from,
+      required ({
+        AssessmentReqModel model,
+        int serviceID,
+      })
+          super.argument})
+      : super(
+          retry: null,
+          name: r'submitAssessmentProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
         );
 
-  DeleteReservedProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.serviceID,
-    required this.reservedID,
-  }) : super.internal();
-
-  final int serviceID;
-  final int reservedID;
+  @override
+  String debugGetCreateSourceHash() => _$submitAssessmentHash();
 
   @override
-  Override overrideWith(
-    FutureOr<bool> Function(DeleteReservedRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: DeleteReservedProvider._internal(
-        (ref) => create(ref as DeleteReservedRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        serviceID: serviceID,
-        reservedID: reservedID,
-      ),
-    );
+  String toString() {
+    return r'submitAssessmentProvider'
+        ''
+        '$argument';
   }
+
+  @$internal
+  @override
+  $FutureProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
 
   @override
-  (
-    int,
-    int,
-  ) get argument {
-    return (
-      serviceID,
-      reservedID,
-    );
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<bool> createElement() {
-    return _DeleteReservedProviderElement(this);
-  }
-
-  DeleteReservedProvider _copyWith(
-    FutureOr<bool> Function(DeleteReservedRef ref) create,
-  ) {
-    return DeleteReservedProvider._internal(
-      (ref) => create(ref as DeleteReservedRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      serviceID: serviceID,
-      reservedID: reservedID,
+  FutureOr<bool> create(Ref ref) {
+    final argument = this.argument as ({
+      AssessmentReqModel model,
+      int serviceID,
+    });
+    return submitAssessment(
+      ref,
+      model: argument.model,
+      serviceID: argument.serviceID,
     );
   }
 
   @override
   bool operator ==(Object other) {
-    return other is DeleteReservedProvider &&
-        other.serviceID == serviceID &&
-        other.reservedID == reservedID;
+    return other is SubmitAssessmentProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, serviceID.hashCode);
-    hash = _SystemHash.combine(hash, reservedID.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-mixin DeleteReservedRef on AutoDisposeFutureProviderRef<bool> {
-  /// The parameter `serviceID` of this provider.
-  int get serviceID;
+String _$submitAssessmentHash() => r'898dc52ba672081185f872f6a0f60bbb7416cac7';
 
-  /// The parameter `reservedID` of this provider.
-  int get reservedID;
-}
+final class SubmitAssessmentFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<bool>,
+            ({
+              AssessmentReqModel model,
+              int serviceID,
+            })> {
+  SubmitAssessmentFamily._()
+      : super(
+          retry: null,
+          name: r'submitAssessmentProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
 
-class _DeleteReservedProviderElement
-    extends AutoDisposeFutureProviderElement<bool> with DeleteReservedRef {
-  _DeleteReservedProviderElement(super.provider);
-
-  @override
-  int get serviceID => (origin as DeleteReservedProvider).serviceID;
-  @override
-  int get reservedID => (origin as DeleteReservedProvider).reservedID;
-}
-
-String _$submitAssessmentHash() => r'1ae169ac972cc963880cddaca1881c209d154265';
-
-/// See also [submitAssessment].
-@ProviderFor(submitAssessment)
-const submitAssessmentProvider = SubmitAssessmentFamily();
-
-/// See also [submitAssessment].
-class SubmitAssessmentFamily extends Family {
-  /// See also [submitAssessment].
-  const SubmitAssessmentFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'submitAssessmentProvider';
-
-  /// See also [submitAssessment].
   SubmitAssessmentProvider call({
     required AssessmentReqModel model,
     required int serviceID,
-  }) {
-    return SubmitAssessmentProvider(
-      model: model,
-      serviceID: serviceID,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  SubmitAssessmentProvider getProviderOverride(
-    covariant SubmitAssessmentProvider provider,
-  ) {
-    return call(
-      model: provider.model,
-      serviceID: provider.serviceID,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<bool> Function(SubmitAssessmentRef ref) create) {
-    return _$SubmitAssessmentFamilyOverride(this, create);
-  }
-}
-
-class _$SubmitAssessmentFamilyOverride implements FamilyOverride {
-  _$SubmitAssessmentFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<bool> Function(SubmitAssessmentRef ref) create;
-
-  @override
-  final SubmitAssessmentFamily overriddenFamily;
-
-  @override
-  SubmitAssessmentProvider getProviderOverride(
-    covariant SubmitAssessmentProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [submitAssessment].
-class SubmitAssessmentProvider extends AutoDisposeFutureProvider<bool> {
-  /// See also [submitAssessment].
-  SubmitAssessmentProvider({
-    required AssessmentReqModel model,
-    required int serviceID,
-  }) : this._internal(
-          (ref) => submitAssessment(
-            ref as SubmitAssessmentRef,
-            model: model,
-            serviceID: serviceID,
-          ),
-          from: submitAssessmentProvider,
-          name: r'submitAssessmentProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$submitAssessmentHash,
-          dependencies: SubmitAssessmentFamily._dependencies,
-          allTransitiveDependencies:
-              SubmitAssessmentFamily._allTransitiveDependencies,
-          model: model,
-          serviceID: serviceID,
-        );
-
-  SubmitAssessmentProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.model,
-    required this.serviceID,
-  }) : super.internal();
-
-  final AssessmentReqModel model;
-  final int serviceID;
-
-  @override
-  Override overrideWith(
-    FutureOr<bool> Function(SubmitAssessmentRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: SubmitAssessmentProvider._internal(
-        (ref) => create(ref as SubmitAssessmentRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
+  }) =>
+      SubmitAssessmentProvider._(argument: (
         model: model,
         serviceID: serviceID,
-      ),
-    );
-  }
+      ), from: this);
 
   @override
-  ({
-    AssessmentReqModel model,
-    int serviceID,
-  }) get argument {
-    return (
-      model: model,
-      serviceID: serviceID,
-    );
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<bool> createElement() {
-    return _SubmitAssessmentProviderElement(this);
-  }
-
-  SubmitAssessmentProvider _copyWith(
-    FutureOr<bool> Function(SubmitAssessmentRef ref) create,
-  ) {
-    return SubmitAssessmentProvider._internal(
-      (ref) => create(ref as SubmitAssessmentRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      model: model,
-      serviceID: serviceID,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is SubmitAssessmentProvider &&
-        other.model == model &&
-        other.serviceID == serviceID;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, model.hashCode);
-    hash = _SystemHash.combine(hash, serviceID.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
+  String toString() => r'submitAssessmentProvider';
 }
 
-mixin SubmitAssessmentRef on AutoDisposeFutureProviderRef<bool> {
-  /// The parameter `model` of this provider.
-  AssessmentReqModel get model;
-
-  /// The parameter `serviceID` of this provider.
-  int get serviceID;
-}
-
-class _SubmitAssessmentProviderElement
-    extends AutoDisposeFutureProviderElement<bool> with SubmitAssessmentRef {
-  _SubmitAssessmentProviderElement(super.provider);
-
-  @override
-  AssessmentReqModel get model => (origin as SubmitAssessmentProvider).model;
-  @override
-  int get serviceID => (origin as SubmitAssessmentProvider).serviceID;
-}
-
-String _$fetchAssessmentHash() => r'361a15d57adaab882a7db0e0a92aab6611ee8b49';
-
-/// See also [fetchAssessment].
 @ProviderFor(fetchAssessment)
-const fetchAssessmentProvider = FetchAssessmentFamily();
+final fetchAssessmentProvider = FetchAssessmentFamily._();
 
-/// See also [fetchAssessment].
-class FetchAssessmentFamily extends Family {
-  /// See also [fetchAssessment].
-  const FetchAssessmentFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'fetchAssessmentProvider';
-
-  /// See also [fetchAssessment].
-  FetchAssessmentProvider call(
-    int serviceID,
-  ) {
-    return FetchAssessmentProvider(
-      serviceID,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  FetchAssessmentProvider getProviderOverride(
-    covariant FetchAssessmentProvider provider,
-  ) {
-    return call(
-      provider.serviceID,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<AssessmentResModel> Function(FetchAssessmentRef ref) create) {
-    return _$FetchAssessmentFamilyOverride(this, create);
-  }
-}
-
-class _$FetchAssessmentFamilyOverride implements FamilyOverride {
-  _$FetchAssessmentFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<AssessmentResModel> Function(FetchAssessmentRef ref) create;
-
-  @override
-  final FetchAssessmentFamily overriddenFamily;
-
-  @override
-  FetchAssessmentProvider getProviderOverride(
-    covariant FetchAssessmentProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [fetchAssessment].
-class FetchAssessmentProvider
-    extends AutoDisposeFutureProvider<AssessmentResModel> {
-  /// See also [fetchAssessment].
-  FetchAssessmentProvider(
-    int serviceID,
-  ) : this._internal(
-          (ref) => fetchAssessment(
-            ref as FetchAssessmentRef,
-            serviceID,
-          ),
-          from: fetchAssessmentProvider,
+final class FetchAssessmentProvider extends $FunctionalProvider<
+        AsyncValue<AssessmentResModel>,
+        AssessmentResModel,
+        FutureOr<AssessmentResModel>>
+    with
+        $FutureModifier<AssessmentResModel>,
+        $FutureProvider<AssessmentResModel> {
+  FetchAssessmentProvider._(
+      {required FetchAssessmentFamily super.from, required int super.argument})
+      : super(
+          retry: null,
           name: r'fetchAssessmentProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$fetchAssessmentHash,
-          dependencies: FetchAssessmentFamily._dependencies,
-          allTransitiveDependencies:
-              FetchAssessmentFamily._allTransitiveDependencies,
-          serviceID: serviceID,
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
         );
 
-  FetchAssessmentProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.serviceID,
-  }) : super.internal();
-
-  final int serviceID;
+  @override
+  String debugGetCreateSourceHash() => _$fetchAssessmentHash();
 
   @override
-  Override overrideWith(
-    FutureOr<AssessmentResModel> Function(FetchAssessmentRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: FetchAssessmentProvider._internal(
-        (ref) => create(ref as FetchAssessmentRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        serviceID: serviceID,
-      ),
-    );
+  String toString() {
+    return r'fetchAssessmentProvider'
+        ''
+        '($argument)';
   }
+
+  @$internal
+  @override
+  $FutureProviderElement<AssessmentResModel> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
 
   @override
-  (int,) get argument {
-    return (serviceID,);
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<AssessmentResModel> createElement() {
-    return _FetchAssessmentProviderElement(this);
-  }
-
-  FetchAssessmentProvider _copyWith(
-    FutureOr<AssessmentResModel> Function(FetchAssessmentRef ref) create,
-  ) {
-    return FetchAssessmentProvider._internal(
-      (ref) => create(ref as FetchAssessmentRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      serviceID: serviceID,
+  FutureOr<AssessmentResModel> create(Ref ref) {
+    final argument = this.argument as int;
+    return fetchAssessment(
+      ref,
+      argument,
     );
   }
 
   @override
   bool operator ==(Object other) {
-    return other is FetchAssessmentProvider && other.serviceID == serviceID;
+    return other is FetchAssessmentProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, serviceID.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-mixin FetchAssessmentRef on AutoDisposeFutureProviderRef<AssessmentResModel> {
-  /// The parameter `serviceID` of this provider.
-  int get serviceID;
-}
+String _$fetchAssessmentHash() => r'ca05e1d2d62609da67af1a523e4eb596f3abe4a4';
 
-class _FetchAssessmentProviderElement
-    extends AutoDisposeFutureProviderElement<AssessmentResModel>
-    with FetchAssessmentRef {
-  _FetchAssessmentProviderElement(super.provider);
+final class FetchAssessmentFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<AssessmentResModel>, int> {
+  FetchAssessmentFamily._()
+      : super(
+          retry: null,
+          name: r'fetchAssessmentProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
+
+  FetchAssessmentProvider call(
+    int serviceID,
+  ) =>
+      FetchAssessmentProvider._(argument: serviceID, from: this);
 
   @override
-  int get serviceID => (origin as FetchAssessmentProvider).serviceID;
+  String toString() => r'fetchAssessmentProvider';
 }
 
-String _$lessonsSlotHash() => r'a83f658b579a1a7ff3a9de7da9409ac645cd8633';
-
-/// See also [lessonsSlot].
 @ProviderFor(lessonsSlot)
-const lessonsSlotProvider = LessonsSlotFamily();
+final lessonsSlotProvider = LessonsSlotFamily._();
 
-/// See also [lessonsSlot].
-class LessonsSlotFamily extends Family {
-  /// See also [lessonsSlot].
-  const LessonsSlotFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+final class LessonsSlotProvider extends $FunctionalProvider<
+        AsyncValue<LessonModelNew>, LessonModelNew, FutureOr<LessonModelNew>>
+    with $FutureModifier<LessonModelNew>, $FutureProvider<LessonModelNew> {
+  LessonsSlotProvider._(
+      {required LessonsSlotFamily super.from,
+      required ({
+        DateTime startTime,
+        DateTime? endTime,
+        int? duration,
+        List<int> coachId,
+        String sportName,
+      })
+          super.argument})
+      : super(
+          retry: null,
+          name: r'lessonsSlotProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
   @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+  String debugGetCreateSourceHash() => _$lessonsSlotHash();
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
+  String toString() {
+    return r'lessonsSlotProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<LessonModelNew> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
 
   @override
-  String? get name => r'lessonsSlotProvider';
+  FutureOr<LessonModelNew> create(Ref ref) {
+    final argument = this.argument as ({
+      DateTime startTime,
+      DateTime? endTime,
+      int? duration,
+      List<int> coachId,
+      String sportName,
+    });
+    return lessonsSlot(
+      ref,
+      startTime: argument.startTime,
+      endTime: argument.endTime,
+      duration: argument.duration,
+      coachId: argument.coachId,
+      sportName: argument.sportName,
+    );
+  }
 
-  /// See also [lessonsSlot].
+  @override
+  bool operator ==(Object other) {
+    return other is LessonsSlotProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$lessonsSlotHash() => r'9adec31c9d475fdbab49b034564d34f16e5f6b25';
+
+final class LessonsSlotFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<LessonModelNew>,
+            ({
+              DateTime startTime,
+              DateTime? endTime,
+              int? duration,
+              List<int> coachId,
+              String sportName,
+            })> {
+  LessonsSlotFamily._()
+      : super(
+          retry: null,
+          name: r'lessonsSlotProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
+
   LessonsSlotProvider call({
     required DateTime startTime,
     DateTime? endTime,
     required int? duration,
     required List<int> coachId,
     required String sportName,
-  }) {
-    return LessonsSlotProvider(
-      startTime: startTime,
-      endTime: endTime,
-      duration: duration,
-      coachId: coachId,
-      sportName: sportName,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  LessonsSlotProvider getProviderOverride(
-    covariant LessonsSlotProvider provider,
-  ) {
-    return call(
-      startTime: provider.startTime,
-      endTime: provider.endTime,
-      duration: provider.duration,
-      coachId: provider.coachId,
-      sportName: provider.sportName,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<LessonModelNew> Function(LessonsSlotRef ref) create) {
-    return _$LessonsSlotFamilyOverride(this, create);
-  }
-}
-
-class _$LessonsSlotFamilyOverride implements FamilyOverride {
-  _$LessonsSlotFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<LessonModelNew> Function(LessonsSlotRef ref) create;
-
-  @override
-  final LessonsSlotFamily overriddenFamily;
-
-  @override
-  LessonsSlotProvider getProviderOverride(
-    covariant LessonsSlotProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [lessonsSlot].
-class LessonsSlotProvider extends AutoDisposeFutureProvider<LessonModelNew> {
-  /// See also [lessonsSlot].
-  LessonsSlotProvider({
-    required DateTime startTime,
-    DateTime? endTime,
-    required int? duration,
-    required List<int> coachId,
-    required String sportName,
-  }) : this._internal(
-          (ref) => lessonsSlot(
-            ref as LessonsSlotRef,
-            startTime: startTime,
-            endTime: endTime,
-            duration: duration,
-            coachId: coachId,
-            sportName: sportName,
-          ),
-          from: lessonsSlotProvider,
-          name: r'lessonsSlotProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$lessonsSlotHash,
-          dependencies: LessonsSlotFamily._dependencies,
-          allTransitiveDependencies:
-              LessonsSlotFamily._allTransitiveDependencies,
-          startTime: startTime,
-          endTime: endTime,
-          duration: duration,
-          coachId: coachId,
-          sportName: sportName,
-        );
-
-  LessonsSlotProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.startTime,
-    required this.endTime,
-    required this.duration,
-    required this.coachId,
-    required this.sportName,
-  }) : super.internal();
-
-  final DateTime startTime;
-  final DateTime? endTime;
-  final int? duration;
-  final List<int> coachId;
-  final String sportName;
-
-  @override
-  Override overrideWith(
-    FutureOr<LessonModelNew> Function(LessonsSlotRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: LessonsSlotProvider._internal(
-        (ref) => create(ref as LessonsSlotRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
+  }) =>
+      LessonsSlotProvider._(argument: (
         startTime: startTime,
         endTime: endTime,
         duration: duration,
         coachId: coachId,
         sportName: sportName,
-      ),
-    );
-  }
+      ), from: this);
 
   @override
-  ({
-    DateTime startTime,
-    DateTime? endTime,
-    int? duration,
-    List<int> coachId,
-    String sportName,
-  }) get argument {
-    return (
-      startTime: startTime,
-      endTime: endTime,
-      duration: duration,
-      coachId: coachId,
-      sportName: sportName,
-    );
-  }
+  String toString() => r'lessonsSlotProvider';
+}
+
+@ProviderFor(joinWaitingList)
+final joinWaitingListProvider = JoinWaitingListFamily._();
+
+final class JoinWaitingListProvider
+    extends $FunctionalProvider<AsyncValue<String?>, String?, FutureOr<String?>>
+    with $FutureModifier<String?>, $FutureProvider<String?> {
+  JoinWaitingListProvider._(
+      {required JoinWaitingListFamily super.from,
+      required ({
+        int position,
+        int serviceId,
+      })
+          super.argument})
+      : super(
+          retry: null,
+          name: r'joinWaitingListProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
   @override
-  AutoDisposeFutureProviderElement<LessonModelNew> createElement() {
-    return _LessonsSlotProviderElement(this);
+  String debugGetCreateSourceHash() => _$joinWaitingListHash();
+
+  @override
+  String toString() {
+    return r'joinWaitingListProvider'
+        ''
+        '$argument';
   }
 
-  LessonsSlotProvider _copyWith(
-    FutureOr<LessonModelNew> Function(LessonsSlotRef ref) create,
-  ) {
-    return LessonsSlotProvider._internal(
-      (ref) => create(ref as LessonsSlotRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      startTime: startTime,
-      endTime: endTime,
-      duration: duration,
-      coachId: coachId,
-      sportName: sportName,
+  @$internal
+  @override
+  $FutureProviderElement<String?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<String?> create(Ref ref) {
+    final argument = this.argument as ({
+      int position,
+      int serviceId,
+    });
+    return joinWaitingList(
+      ref,
+      position: argument.position,
+      serviceId: argument.serviceId,
     );
   }
 
   @override
   bool operator ==(Object other) {
-    return other is LessonsSlotProvider &&
-        other.startTime == startTime &&
-        other.endTime == endTime &&
-        other.duration == duration &&
-        other.coachId == coachId &&
-        other.sportName == sportName;
+    return other is JoinWaitingListProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, startTime.hashCode);
-    hash = _SystemHash.combine(hash, endTime.hashCode);
-    hash = _SystemHash.combine(hash, duration.hashCode);
-    hash = _SystemHash.combine(hash, coachId.hashCode);
-    hash = _SystemHash.combine(hash, sportName.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-mixin LessonsSlotRef on AutoDisposeFutureProviderRef<LessonModelNew> {
-  /// The parameter `startTime` of this provider.
-  DateTime get startTime;
+String _$joinWaitingListHash() => r'8a8ab8ebfbfed6d84f93398c8dabbfbc53966611';
 
-  /// The parameter `endTime` of this provider.
-  DateTime? get endTime;
+final class JoinWaitingListFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<String?>,
+            ({
+              int position,
+              int serviceId,
+            })> {
+  JoinWaitingListFamily._()
+      : super(
+          retry: null,
+          name: r'joinWaitingListProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
 
-  /// The parameter `duration` of this provider.
-  int? get duration;
-
-  /// The parameter `coachId` of this provider.
-  List<int> get coachId;
-
-  /// The parameter `sportName` of this provider.
-  String get sportName;
-}
-
-class _LessonsSlotProviderElement
-    extends AutoDisposeFutureProviderElement<LessonModelNew>
-    with LessonsSlotRef {
-  _LessonsSlotProviderElement(super.provider);
-
-  @override
-  DateTime get startTime => (origin as LessonsSlotProvider).startTime;
-  @override
-  DateTime? get endTime => (origin as LessonsSlotProvider).endTime;
-  @override
-  int? get duration => (origin as LessonsSlotProvider).duration;
-  @override
-  List<int> get coachId => (origin as LessonsSlotProvider).coachId;
-  @override
-  String get sportName => (origin as LessonsSlotProvider).sportName;
-}
-
-String _$joinWaitingListHash() => r'd5f14e98a6568e18526b0fae0e90bbf343d53b2d';
-
-/// See also [joinWaitingList].
-@ProviderFor(joinWaitingList)
-const joinWaitingListProvider = JoinWaitingListFamily();
-
-/// See also [joinWaitingList].
-class JoinWaitingListFamily extends Family {
-  /// See also [joinWaitingList].
-  const JoinWaitingListFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'joinWaitingListProvider';
-
-  /// See also [joinWaitingList].
   JoinWaitingListProvider call({
     required int position,
     required int serviceId,
-  }) {
-    return JoinWaitingListProvider(
-      position: position,
-      serviceId: serviceId,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  JoinWaitingListProvider getProviderOverride(
-    covariant JoinWaitingListProvider provider,
-  ) {
-    return call(
-      position: provider.position,
-      serviceId: provider.serviceId,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<String?> Function(JoinWaitingListRef ref) create) {
-    return _$JoinWaitingListFamilyOverride(this, create);
-  }
-}
-
-class _$JoinWaitingListFamilyOverride implements FamilyOverride {
-  _$JoinWaitingListFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<String?> Function(JoinWaitingListRef ref) create;
-
-  @override
-  final JoinWaitingListFamily overriddenFamily;
-
-  @override
-  JoinWaitingListProvider getProviderOverride(
-    covariant JoinWaitingListProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [joinWaitingList].
-class JoinWaitingListProvider extends AutoDisposeFutureProvider<String?> {
-  /// See also [joinWaitingList].
-  JoinWaitingListProvider({
-    required int position,
-    required int serviceId,
-  }) : this._internal(
-          (ref) => joinWaitingList(
-            ref as JoinWaitingListRef,
-            position: position,
-            serviceId: serviceId,
-          ),
-          from: joinWaitingListProvider,
-          name: r'joinWaitingListProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$joinWaitingListHash,
-          dependencies: JoinWaitingListFamily._dependencies,
-          allTransitiveDependencies:
-              JoinWaitingListFamily._allTransitiveDependencies,
-          position: position,
-          serviceId: serviceId,
-        );
-
-  JoinWaitingListProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.position,
-    required this.serviceId,
-  }) : super.internal();
-
-  final int position;
-  final int serviceId;
-
-  @override
-  Override overrideWith(
-    FutureOr<String?> Function(JoinWaitingListRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: JoinWaitingListProvider._internal(
-        (ref) => create(ref as JoinWaitingListRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
+  }) =>
+      JoinWaitingListProvider._(argument: (
         position: position,
         serviceId: serviceId,
-      ),
-    );
-  }
+      ), from: this);
 
   @override
-  ({
-    int position,
-    int serviceId,
-  }) get argument {
-    return (
-      position: position,
-      serviceId: serviceId,
-    );
-  }
+  String toString() => r'joinWaitingListProvider';
+}
+
+@ProviderFor(cancellationPolicy)
+final cancellationPolicyProvider = CancellationPolicyFamily._();
+
+final class CancellationPolicyProvider extends $FunctionalProvider<
+        AsyncValue<CancellationPolicy>,
+        CancellationPolicy,
+        FutureOr<CancellationPolicy>>
+    with
+        $FutureModifier<CancellationPolicy>,
+        $FutureProvider<CancellationPolicy> {
+  CancellationPolicyProvider._(
+      {required CancellationPolicyFamily super.from,
+      required int super.argument})
+      : super(
+          retry: null,
+          name: r'cancellationPolicyProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
   @override
-  AutoDisposeFutureProviderElement<String?> createElement() {
-    return _JoinWaitingListProviderElement(this);
+  String debugGetCreateSourceHash() => _$cancellationPolicyHash();
+
+  @override
+  String toString() {
+    return r'cancellationPolicyProvider'
+        ''
+        '($argument)';
   }
 
-  JoinWaitingListProvider _copyWith(
-    FutureOr<String?> Function(JoinWaitingListRef ref) create,
-  ) {
-    return JoinWaitingListProvider._internal(
-      (ref) => create(ref as JoinWaitingListRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      position: position,
-      serviceId: serviceId,
+  @$internal
+  @override
+  $FutureProviderElement<CancellationPolicy> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<CancellationPolicy> create(Ref ref) {
+    final argument = this.argument as int;
+    return cancellationPolicy(
+      ref,
+      argument,
     );
   }
 
   @override
   bool operator ==(Object other) {
-    return other is JoinWaitingListProvider &&
-        other.position == position &&
-        other.serviceId == serviceId;
+    return other is CancellationPolicyProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, position.hashCode);
-    hash = _SystemHash.combine(hash, serviceId.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
-}
-
-mixin JoinWaitingListRef on AutoDisposeFutureProviderRef<String?> {
-  /// The parameter `position` of this provider.
-  int get position;
-
-  /// The parameter `serviceId` of this provider.
-  int get serviceId;
-}
-
-class _JoinWaitingListProviderElement
-    extends AutoDisposeFutureProviderElement<String?> with JoinWaitingListRef {
-  _JoinWaitingListProviderElement(super.provider);
-
-  @override
-  int get position => (origin as JoinWaitingListProvider).position;
-  @override
-  int get serviceId => (origin as JoinWaitingListProvider).serviceId;
 }
 
 String _$cancellationPolicyHash() =>
-    r'5f15e6523ecc22454f4f2a0e8b0e8c207da06264';
+    r'4a516613818cdfea94baf8f49490bf07bce63206';
 
-/// See also [cancellationPolicy].
-@ProviderFor(cancellationPolicy)
-const cancellationPolicyProvider = CancellationPolicyFamily();
+final class CancellationPolicyFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<CancellationPolicy>, int> {
+  CancellationPolicyFamily._()
+      : super(
+          retry: null,
+          name: r'cancellationPolicyProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
 
-/// See also [cancellationPolicy].
-class CancellationPolicyFamily extends Family {
-  /// See also [cancellationPolicy].
-  const CancellationPolicyFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'cancellationPolicyProvider';
-
-  /// See also [cancellationPolicy].
   CancellationPolicyProvider call(
     int id,
-  ) {
-    return CancellationPolicyProvider(
-      id,
-    );
-  }
+  ) =>
+      CancellationPolicyProvider._(argument: id, from: this);
 
-  @visibleForOverriding
   @override
-  CancellationPolicyProvider getProviderOverride(
-    covariant CancellationPolicyProvider provider,
-  ) {
-    return call(
-      provider.id,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<CancellationPolicy> Function(CancellationPolicyRef ref) create) {
-    return _$CancellationPolicyFamilyOverride(this, create);
-  }
+  String toString() => r'cancellationPolicyProvider';
 }
 
-class _$CancellationPolicyFamilyOverride implements FamilyOverride {
-  _$CancellationPolicyFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<CancellationPolicy> Function(CancellationPolicyRef ref) create;
-
-  @override
-  final CancellationPolicyFamily overriddenFamily;
-
-  @override
-  CancellationPolicyProvider getProviderOverride(
-    covariant CancellationPolicyProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [cancellationPolicy].
-class CancellationPolicyProvider
-    extends AutoDisposeFutureProvider<CancellationPolicy> {
-  /// See also [cancellationPolicy].
-  CancellationPolicyProvider(
-    int id,
-  ) : this._internal(
-          (ref) => cancellationPolicy(
-            ref as CancellationPolicyRef,
-            id,
-          ),
-          from: cancellationPolicyProvider,
-          name: r'cancellationPolicyProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$cancellationPolicyHash,
-          dependencies: CancellationPolicyFamily._dependencies,
-          allTransitiveDependencies:
-              CancellationPolicyFamily._allTransitiveDependencies,
-          id: id,
-        );
-
-  CancellationPolicyProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.id,
-  }) : super.internal();
-
-  final int id;
-
-  @override
-  Override overrideWith(
-    FutureOr<CancellationPolicy> Function(CancellationPolicyRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: CancellationPolicyProvider._internal(
-        (ref) => create(ref as CancellationPolicyRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        id: id,
-      ),
-    );
-  }
-
-  @override
-  (int,) get argument {
-    return (id,);
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<CancellationPolicy> createElement() {
-    return _CancellationPolicyProviderElement(this);
-  }
-
-  CancellationPolicyProvider _copyWith(
-    FutureOr<CancellationPolicy> Function(CancellationPolicyRef ref) create,
-  ) {
-    return CancellationPolicyProvider._internal(
-      (ref) => create(ref as CancellationPolicyRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      id: id,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is CancellationPolicyProvider && other.id == id;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-mixin CancellationPolicyRef
-    on AutoDisposeFutureProviderRef<CancellationPolicy> {
-  /// The parameter `id` of this provider.
-  int get id;
-}
-
-class _CancellationPolicyProviderElement
-    extends AutoDisposeFutureProviderElement<CancellationPolicy>
-    with CancellationPolicyRef {
-  _CancellationPolicyProviderElement(super.provider);
-
-  @override
-  int get id => (origin as CancellationPolicyProvider).id;
-}
-
-String _$addPlayersToWaitingListHash() =>
-    r'13ccd2a677d8a7462907eea50421b3e7765f32e2';
-
-/// See also [addPlayersToWaitingList].
 @ProviderFor(addPlayersToWaitingList)
-const addPlayersToWaitingListProvider = AddPlayersToWaitingListFamily();
+final addPlayersToWaitingListProvider = AddPlayersToWaitingListFamily._();
 
-/// See also [addPlayersToWaitingList].
-class AddPlayersToWaitingListFamily extends Family {
-  /// See also [addPlayersToWaitingList].
-  const AddPlayersToWaitingListFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'addPlayersToWaitingListProvider';
-
-  /// See also [addPlayersToWaitingList].
-  AddPlayersToWaitingListProvider call({
-    required int serviceId,
-    required List<Map<String, dynamic>> customerPlayers,
-  }) {
-    return AddPlayersToWaitingListProvider(
-      serviceId: serviceId,
-      customerPlayers: customerPlayers,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  AddPlayersToWaitingListProvider getProviderOverride(
-    covariant AddPlayersToWaitingListProvider provider,
-  ) {
-    return call(
-      serviceId: provider.serviceId,
-      customerPlayers: provider.customerPlayers,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<bool> Function(AddPlayersToWaitingListRef ref) create) {
-    return _$AddPlayersToWaitingListFamilyOverride(this, create);
-  }
-}
-
-class _$AddPlayersToWaitingListFamilyOverride implements FamilyOverride {
-  _$AddPlayersToWaitingListFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<bool> Function(AddPlayersToWaitingListRef ref) create;
-
-  @override
-  final AddPlayersToWaitingListFamily overriddenFamily;
-
-  @override
-  AddPlayersToWaitingListProvider getProviderOverride(
-    covariant AddPlayersToWaitingListProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [addPlayersToWaitingList].
-class AddPlayersToWaitingListProvider extends AutoDisposeFutureProvider<bool> {
-  /// See also [addPlayersToWaitingList].
-  AddPlayersToWaitingListProvider({
-    required int serviceId,
-    required List<Map<String, dynamic>> customerPlayers,
-  }) : this._internal(
-          (ref) => addPlayersToWaitingList(
-            ref as AddPlayersToWaitingListRef,
-            serviceId: serviceId,
-            customerPlayers: customerPlayers,
-          ),
-          from: addPlayersToWaitingListProvider,
+final class AddPlayersToWaitingListProvider
+    extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
+    with $FutureModifier<bool>, $FutureProvider<bool> {
+  AddPlayersToWaitingListProvider._(
+      {required AddPlayersToWaitingListFamily super.from,
+      required ({
+        int serviceId,
+        List<Map<String, dynamic>> customerPlayers,
+      })
+          super.argument})
+      : super(
+          retry: null,
           name: r'addPlayersToWaitingListProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$addPlayersToWaitingListHash,
-          dependencies: AddPlayersToWaitingListFamily._dependencies,
-          allTransitiveDependencies:
-              AddPlayersToWaitingListFamily._allTransitiveDependencies,
-          serviceId: serviceId,
-          customerPlayers: customerPlayers,
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
         );
 
-  AddPlayersToWaitingListProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.serviceId,
-    required this.customerPlayers,
-  }) : super.internal();
-
-  final int serviceId;
-  final List<Map<String, dynamic>> customerPlayers;
+  @override
+  String debugGetCreateSourceHash() => _$addPlayersToWaitingListHash();
 
   @override
-  Override overrideWith(
-    FutureOr<bool> Function(AddPlayersToWaitingListRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: AddPlayersToWaitingListProvider._internal(
-        (ref) => create(ref as AddPlayersToWaitingListRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        serviceId: serviceId,
-        customerPlayers: customerPlayers,
-      ),
-    );
+  String toString() {
+    return r'addPlayersToWaitingListProvider'
+        ''
+        '$argument';
   }
+
+  @$internal
+  @override
+  $FutureProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
 
   @override
-  ({
-    int serviceId,
-    List<Map<String, dynamic>> customerPlayers,
-  }) get argument {
-    return (
-      serviceId: serviceId,
-      customerPlayers: customerPlayers,
-    );
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<bool> createElement() {
-    return _AddPlayersToWaitingListProviderElement(this);
-  }
-
-  AddPlayersToWaitingListProvider _copyWith(
-    FutureOr<bool> Function(AddPlayersToWaitingListRef ref) create,
-  ) {
-    return AddPlayersToWaitingListProvider._internal(
-      (ref) => create(ref as AddPlayersToWaitingListRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      serviceId: serviceId,
-      customerPlayers: customerPlayers,
+  FutureOr<bool> create(Ref ref) {
+    final argument = this.argument as ({
+      int serviceId,
+      List<Map<String, dynamic>> customerPlayers,
+    });
+    return addPlayersToWaitingList(
+      ref,
+      serviceId: argument.serviceId,
+      customerPlayers: argument.customerPlayers,
     );
   }
 
   @override
   bool operator ==(Object other) {
     return other is AddPlayersToWaitingListProvider &&
-        other.serviceId == serviceId &&
-        other.customerPlayers == customerPlayers;
+        other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, serviceId.hashCode);
-    hash = _SystemHash.combine(hash, customerPlayers.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-mixin AddPlayersToWaitingListRef on AutoDisposeFutureProviderRef<bool> {
-  /// The parameter `serviceId` of this provider.
-  int get serviceId;
+String _$addPlayersToWaitingListHash() =>
+    r'6f266db30485235fc0bca8e8a1e9da5dffd827c4';
 
-  /// The parameter `customerPlayers` of this provider.
-  List<Map<String, dynamic>> get customerPlayers;
-}
-
-class _AddPlayersToWaitingListProviderElement
-    extends AutoDisposeFutureProviderElement<bool>
-    with AddPlayersToWaitingListRef {
-  _AddPlayersToWaitingListProviderElement(super.provider);
-
-  @override
-  int get serviceId => (origin as AddPlayersToWaitingListProvider).serviceId;
-  @override
-  List<Map<String, dynamic>> get customerPlayers =>
-      (origin as AddPlayersToWaitingListProvider).customerPlayers;
-}
-
-String _$waitingListActionProviderHash() =>
-    r'2b6d63f69904a492a98faa780ce6fc3998b8ac94';
-
-/// See also [waitingListActionProvider].
-@ProviderFor(waitingListActionProvider)
-const waitingListActionProviderProvider = WaitingListActionProviderFamily();
-
-/// See also [waitingListActionProvider].
-class WaitingListActionProviderFamily extends Family {
-  /// See also [waitingListActionProvider].
-  const WaitingListActionProviderFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'waitingListActionProviderProvider';
-
-  /// See also [waitingListActionProvider].
-  WaitingListActionProviderProvider call({
-    required int waitingListId,
-    required String action,
-  }) {
-    return WaitingListActionProviderProvider(
-      waitingListId: waitingListId,
-      action: action,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  WaitingListActionProviderProvider getProviderOverride(
-    covariant WaitingListActionProviderProvider provider,
-  ) {
-    return call(
-      waitingListId: provider.waitingListId,
-      action: provider.action,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<bool> Function(WaitingListActionProviderRef ref) create) {
-    return _$WaitingListActionProviderFamilyOverride(this, create);
-  }
-}
-
-class _$WaitingListActionProviderFamilyOverride implements FamilyOverride {
-  _$WaitingListActionProviderFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<bool> Function(WaitingListActionProviderRef ref) create;
-
-  @override
-  final WaitingListActionProviderFamily overriddenFamily;
-
-  @override
-  WaitingListActionProviderProvider getProviderOverride(
-    covariant WaitingListActionProviderProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [waitingListActionProvider].
-class WaitingListActionProviderProvider
-    extends AutoDisposeFutureProvider<bool> {
-  /// See also [waitingListActionProvider].
-  WaitingListActionProviderProvider({
-    required int waitingListId,
-    required String action,
-  }) : this._internal(
-          (ref) => waitingListActionProvider(
-            ref as WaitingListActionProviderRef,
-            waitingListId: waitingListId,
-            action: action,
-          ),
-          from: waitingListActionProviderProvider,
-          name: r'waitingListActionProviderProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$waitingListActionProviderHash,
-          dependencies: WaitingListActionProviderFamily._dependencies,
-          allTransitiveDependencies:
-              WaitingListActionProviderFamily._allTransitiveDependencies,
-          waitingListId: waitingListId,
-          action: action,
+final class AddPlayersToWaitingListFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<bool>,
+            ({
+              int serviceId,
+              List<Map<String, dynamic>> customerPlayers,
+            })> {
+  AddPlayersToWaitingListFamily._()
+      : super(
+          retry: null,
+          name: r'addPlayersToWaitingListProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
         );
 
-  WaitingListActionProviderProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.waitingListId,
-    required this.action,
-  }) : super.internal();
-
-  final int waitingListId;
-  final String action;
+  AddPlayersToWaitingListProvider call({
+    required int serviceId,
+    required List<Map<String, dynamic>> customerPlayers,
+  }) =>
+      AddPlayersToWaitingListProvider._(argument: (
+        serviceId: serviceId,
+        customerPlayers: customerPlayers,
+      ), from: this);
 
   @override
-  Override overrideWith(
-    FutureOr<bool> Function(WaitingListActionProviderRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: WaitingListActionProviderProvider._internal(
-        (ref) => create(ref as WaitingListActionProviderRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        waitingListId: waitingListId,
-        action: action,
-      ),
-    );
-  }
+  String toString() => r'addPlayersToWaitingListProvider';
+}
+
+@ProviderFor(waitingListActionProvider)
+final waitingListActionProviderProvider = WaitingListActionProviderFamily._();
+
+final class WaitingListActionProviderProvider
+    extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
+    with $FutureModifier<bool>, $FutureProvider<bool> {
+  WaitingListActionProviderProvider._(
+      {required WaitingListActionProviderFamily super.from,
+      required ({
+        int waitingListId,
+        String action,
+      })
+          super.argument})
+      : super(
+          retry: null,
+          name: r'waitingListActionProviderProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
   @override
-  ({
-    int waitingListId,
-    String action,
-  }) get argument {
-    return (
-      waitingListId: waitingListId,
-      action: action,
-    );
-  }
+  String debugGetCreateSourceHash() => _$waitingListActionProviderHash();
 
   @override
-  AutoDisposeFutureProviderElement<bool> createElement() {
-    return _WaitingListActionProviderProviderElement(this);
+  String toString() {
+    return r'waitingListActionProviderProvider'
+        ''
+        '$argument';
   }
 
-  WaitingListActionProviderProvider _copyWith(
-    FutureOr<bool> Function(WaitingListActionProviderRef ref) create,
-  ) {
-    return WaitingListActionProviderProvider._internal(
-      (ref) => create(ref as WaitingListActionProviderRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      waitingListId: waitingListId,
-      action: action,
+  @$internal
+  @override
+  $FutureProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<bool> create(Ref ref) {
+    final argument = this.argument as ({
+      int waitingListId,
+      String action,
+    });
+    return waitingListActionProvider(
+      ref,
+      waitingListId: argument.waitingListId,
+      action: argument.action,
     );
   }
 
   @override
   bool operator ==(Object other) {
     return other is WaitingListActionProviderProvider &&
-        other.waitingListId == waitingListId &&
-        other.action == action;
+        other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, waitingListId.hashCode);
-    hash = _SystemHash.combine(hash, action.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-mixin WaitingListActionProviderRef on AutoDisposeFutureProviderRef<bool> {
-  /// The parameter `waitingListId` of this provider.
-  int get waitingListId;
+String _$waitingListActionProviderHash() =>
+    r'43ea66176c36a51a02c8fe48bddcc5095fe67f9d';
 
-  /// The parameter `action` of this provider.
-  String get action;
-}
-
-class _WaitingListActionProviderProviderElement
-    extends AutoDisposeFutureProviderElement<bool>
-    with WaitingListActionProviderRef {
-  _WaitingListActionProviderProviderElement(super.provider);
-
-  @override
-  int get waitingListId =>
-      (origin as WaitingListActionProviderProvider).waitingListId;
-  @override
-  String get action => (origin as WaitingListActionProviderProvider).action;
-}
-
-String _$fetchAllCoachesHash() => r'259e738358908a42fa30143520c85b5de5964a99';
-
-/// See also [fetchAllCoaches].
-@ProviderFor(fetchAllCoaches)
-final fetchAllCoachesProvider =
-    AutoDisposeFutureProvider<List<CoachListModel>>.internal(
-  fetchAllCoaches,
-  name: r'fetchAllCoachesProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fetchAllCoachesHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef FetchAllCoachesRef = AutoDisposeFutureProviderRef<List<CoachListModel>>;
-String _$fetchBlockedCoachesHash() =>
-    r'2acae18e4b1cf4d9806358f2dd6d048ce46cb225';
-
-/// See also [fetchBlockedCoaches].
-@ProviderFor(fetchBlockedCoaches)
-const fetchBlockedCoachesProvider = FetchBlockedCoachesFamily();
-
-/// See also [fetchBlockedCoaches].
-class FetchBlockedCoachesFamily extends Family {
-  /// See also [fetchBlockedCoaches].
-  const FetchBlockedCoachesFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'fetchBlockedCoachesProvider';
-
-  /// See also [fetchBlockedCoaches].
-  FetchBlockedCoachesProvider call({
-    required DateTime startDate,
-    required DateTime endDate,
-    required String sportName,
-  }) {
-    return FetchBlockedCoachesProvider(
-      startDate: startDate,
-      endDate: endDate,
-      sportName: sportName,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  FetchBlockedCoachesProvider getProviderOverride(
-    covariant FetchBlockedCoachesProvider provider,
-  ) {
-    return call(
-      startDate: provider.startDate,
-      endDate: provider.endDate,
-      sportName: provider.sportName,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<List<String>> Function(FetchBlockedCoachesRef ref) create) {
-    return _$FetchBlockedCoachesFamilyOverride(this, create);
-  }
-}
-
-class _$FetchBlockedCoachesFamilyOverride implements FamilyOverride {
-  _$FetchBlockedCoachesFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<List<String>> Function(FetchBlockedCoachesRef ref) create;
-
-  @override
-  final FetchBlockedCoachesFamily overriddenFamily;
-
-  @override
-  FetchBlockedCoachesProvider getProviderOverride(
-    covariant FetchBlockedCoachesProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [fetchBlockedCoaches].
-class FetchBlockedCoachesProvider
-    extends AutoDisposeFutureProvider<List<String>> {
-  /// See also [fetchBlockedCoaches].
-  FetchBlockedCoachesProvider({
-    required DateTime startDate,
-    required DateTime endDate,
-    required String sportName,
-  }) : this._internal(
-          (ref) => fetchBlockedCoaches(
-            ref as FetchBlockedCoachesRef,
-            startDate: startDate,
-            endDate: endDate,
-            sportName: sportName,
-          ),
-          from: fetchBlockedCoachesProvider,
-          name: r'fetchBlockedCoachesProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$fetchBlockedCoachesHash,
-          dependencies: FetchBlockedCoachesFamily._dependencies,
-          allTransitiveDependencies:
-              FetchBlockedCoachesFamily._allTransitiveDependencies,
-          startDate: startDate,
-          endDate: endDate,
-          sportName: sportName,
+final class WaitingListActionProviderFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<bool>,
+            ({
+              int waitingListId,
+              String action,
+            })> {
+  WaitingListActionProviderFamily._()
+      : super(
+          retry: null,
+          name: r'waitingListActionProviderProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
         );
 
-  FetchBlockedCoachesProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.startDate,
-    required this.endDate,
-    required this.sportName,
-  }) : super.internal();
-
-  final DateTime startDate;
-  final DateTime endDate;
-  final String sportName;
+  WaitingListActionProviderProvider call({
+    required int waitingListId,
+    required String action,
+  }) =>
+      WaitingListActionProviderProvider._(argument: (
+        waitingListId: waitingListId,
+        action: action,
+      ), from: this);
 
   @override
-  Override overrideWith(
-    FutureOr<List<String>> Function(FetchBlockedCoachesRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: FetchBlockedCoachesProvider._internal(
-        (ref) => create(ref as FetchBlockedCoachesRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        startDate: startDate,
-        endDate: endDate,
-        sportName: sportName,
-      ),
-    );
-  }
+  String toString() => r'waitingListActionProviderProvider';
+}
+
+@ProviderFor(fetchAllCoaches)
+final fetchAllCoachesProvider = FetchAllCoachesProvider._();
+
+final class FetchAllCoachesProvider extends $FunctionalProvider<
+        AsyncValue<List<CoachListModel>>,
+        List<CoachListModel>,
+        FutureOr<List<CoachListModel>>>
+    with
+        $FutureModifier<List<CoachListModel>>,
+        $FutureProvider<List<CoachListModel>> {
+  FetchAllCoachesProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'fetchAllCoachesProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
   @override
-  ({
-    DateTime startDate,
-    DateTime endDate,
-    String sportName,
-  }) get argument {
-    return (
-      startDate: startDate,
-      endDate: endDate,
-      sportName: sportName,
-    );
-  }
+  String debugGetCreateSourceHash() => _$fetchAllCoachesHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<CoachListModel>> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
 
   @override
-  AutoDisposeFutureProviderElement<List<String>> createElement() {
-    return _FetchBlockedCoachesProviderElement(this);
+  FutureOr<List<CoachListModel>> create(Ref ref) {
+    return fetchAllCoaches(ref);
+  }
+}
+
+String _$fetchAllCoachesHash() => r'00b63a66750257be5d65c6287820e078ac2adf54';
+
+@ProviderFor(fetchBlockedCoaches)
+final fetchBlockedCoachesProvider = FetchBlockedCoachesFamily._();
+
+final class FetchBlockedCoachesProvider extends $FunctionalProvider<
+        AsyncValue<List<String>>, List<String>, FutureOr<List<String>>>
+    with $FutureModifier<List<String>>, $FutureProvider<List<String>> {
+  FetchBlockedCoachesProvider._(
+      {required FetchBlockedCoachesFamily super.from,
+      required ({
+        DateTime startDate,
+        DateTime endDate,
+        String sportName,
+      })
+          super.argument})
+      : super(
+          retry: null,
+          name: r'fetchBlockedCoachesProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchBlockedCoachesHash();
+
+  @override
+  String toString() {
+    return r'fetchBlockedCoachesProvider'
+        ''
+        '$argument';
   }
 
-  FetchBlockedCoachesProvider _copyWith(
-    FutureOr<List<String>> Function(FetchBlockedCoachesRef ref) create,
-  ) {
-    return FetchBlockedCoachesProvider._internal(
-      (ref) => create(ref as FetchBlockedCoachesRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      startDate: startDate,
-      endDate: endDate,
-      sportName: sportName,
+  @$internal
+  @override
+  $FutureProviderElement<List<String>> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<String>> create(Ref ref) {
+    final argument = this.argument as ({
+      DateTime startDate,
+      DateTime endDate,
+      String sportName,
+    });
+    return fetchBlockedCoaches(
+      ref,
+      startDate: argument.startDate,
+      endDate: argument.endDate,
+      sportName: argument.sportName,
     );
   }
 
   @override
   bool operator ==(Object other) {
-    return other is FetchBlockedCoachesProvider &&
-        other.startDate == startDate &&
-        other.endDate == endDate &&
-        other.sportName == sportName;
+    return other is FetchBlockedCoachesProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, startDate.hashCode);
-    hash = _SystemHash.combine(hash, endDate.hashCode);
-    hash = _SystemHash.combine(hash, sportName.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-mixin FetchBlockedCoachesRef on AutoDisposeFutureProviderRef<List<String>> {
-  /// The parameter `startDate` of this provider.
-  DateTime get startDate;
+String _$fetchBlockedCoachesHash() =>
+    r'3571e2ce40a948111bd5a0ca0b29895f859de794';
 
-  /// The parameter `endDate` of this provider.
-  DateTime get endDate;
+final class FetchBlockedCoachesFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<List<String>>,
+            ({
+              DateTime startDate,
+              DateTime endDate,
+              String sportName,
+            })> {
+  FetchBlockedCoachesFamily._()
+      : super(
+          retry: null,
+          name: r'fetchBlockedCoachesProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
 
-  /// The parameter `sportName` of this provider.
-  String get sportName;
+  FetchBlockedCoachesProvider call({
+    required DateTime startDate,
+    required DateTime endDate,
+    required String sportName,
+  }) =>
+      FetchBlockedCoachesProvider._(argument: (
+        startDate: startDate,
+        endDate: endDate,
+        sportName: sportName,
+      ), from: this);
+
+  @override
+  String toString() => r'fetchBlockedCoachesProvider';
 }
 
-class _FetchBlockedCoachesProviderElement
-    extends AutoDisposeFutureProviderElement<List<String>>
-    with FetchBlockedCoachesRef {
-  _FetchBlockedCoachesProviderElement(super.provider);
+@ProviderFor(updateServiceSettings)
+final updateServiceSettingsProvider = UpdateServiceSettingsFamily._();
+
+final class UpdateServiceSettingsProvider
+    extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
+    with $FutureModifier<bool>, $FutureProvider<bool> {
+  UpdateServiceSettingsProvider._(
+      {required UpdateServiceSettingsFamily super.from,
+      required ({
+        int serviceId,
+        bool approveBeforeJoin,
+        bool friendlyMatch,
+        double minLevel,
+        double maxLevel,
+      })
+          super.argument})
+      : super(
+          retry: null,
+          name: r'updateServiceSettingsProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
   @override
-  DateTime get startDate => (origin as FetchBlockedCoachesProvider).startDate;
+  String debugGetCreateSourceHash() => _$updateServiceSettingsHash();
+
   @override
-  DateTime get endDate => (origin as FetchBlockedCoachesProvider).endDate;
+  String toString() {
+    return r'updateServiceSettingsProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
   @override
-  String get sportName => (origin as FetchBlockedCoachesProvider).sportName;
+  $FutureProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<bool> create(Ref ref) {
+    final argument = this.argument as ({
+      int serviceId,
+      bool approveBeforeJoin,
+      bool friendlyMatch,
+      double minLevel,
+      double maxLevel,
+    });
+    return updateServiceSettings(
+      ref,
+      serviceId: argument.serviceId,
+      approveBeforeJoin: argument.approveBeforeJoin,
+      friendlyMatch: argument.friendlyMatch,
+      minLevel: argument.minLevel,
+      maxLevel: argument.maxLevel,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is UpdateServiceSettingsProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
 }
 
 String _$updateServiceSettingsHash() =>
-    r'2f89f01b9db1e8aba1391ae6a0514ca25ac787c4';
+    r'aabeeec67d56d2b80a951ee85094be9816fc295a';
 
-/// See also [updateServiceSettings].
-@ProviderFor(updateServiceSettings)
-const updateServiceSettingsProvider = UpdateServiceSettingsFamily();
+final class UpdateServiceSettingsFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<bool>,
+            ({
+              int serviceId,
+              bool approveBeforeJoin,
+              bool friendlyMatch,
+              double minLevel,
+              double maxLevel,
+            })> {
+  UpdateServiceSettingsFamily._()
+      : super(
+          retry: null,
+          name: r'updateServiceSettingsProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
 
-/// See also [updateServiceSettings].
-class UpdateServiceSettingsFamily extends Family {
-  /// See also [updateServiceSettings].
-  const UpdateServiceSettingsFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'updateServiceSettingsProvider';
-
-  /// See also [updateServiceSettings].
   UpdateServiceSettingsProvider call({
     required int serviceId,
     required bool approveBeforeJoin,
     required bool friendlyMatch,
     required double minLevel,
     required double maxLevel,
-  }) {
-    return UpdateServiceSettingsProvider(
-      serviceId: serviceId,
-      approveBeforeJoin: approveBeforeJoin,
-      friendlyMatch: friendlyMatch,
-      minLevel: minLevel,
-      maxLevel: maxLevel,
-    );
-  }
-
-  @visibleForOverriding
-  @override
-  UpdateServiceSettingsProvider getProviderOverride(
-    covariant UpdateServiceSettingsProvider provider,
-  ) {
-    return call(
-      serviceId: provider.serviceId,
-      approveBeforeJoin: provider.approveBeforeJoin,
-      friendlyMatch: provider.friendlyMatch,
-      minLevel: provider.minLevel,
-      maxLevel: provider.maxLevel,
-    );
-  }
-
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<bool> Function(UpdateServiceSettingsRef ref) create) {
-    return _$UpdateServiceSettingsFamilyOverride(this, create);
-  }
-}
-
-class _$UpdateServiceSettingsFamilyOverride implements FamilyOverride {
-  _$UpdateServiceSettingsFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<bool> Function(UpdateServiceSettingsRef ref) create;
-
-  @override
-  final UpdateServiceSettingsFamily overriddenFamily;
-
-  @override
-  UpdateServiceSettingsProvider getProviderOverride(
-    covariant UpdateServiceSettingsProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
-}
-
-/// See also [updateServiceSettings].
-class UpdateServiceSettingsProvider extends AutoDisposeFutureProvider<bool> {
-  /// See also [updateServiceSettings].
-  UpdateServiceSettingsProvider({
-    required int serviceId,
-    required bool approveBeforeJoin,
-    required bool friendlyMatch,
-    required double minLevel,
-    required double maxLevel,
-  }) : this._internal(
-          (ref) => updateServiceSettings(
-            ref as UpdateServiceSettingsRef,
-            serviceId: serviceId,
-            approveBeforeJoin: approveBeforeJoin,
-            friendlyMatch: friendlyMatch,
-            minLevel: minLevel,
-            maxLevel: maxLevel,
-          ),
-          from: updateServiceSettingsProvider,
-          name: r'updateServiceSettingsProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$updateServiceSettingsHash,
-          dependencies: UpdateServiceSettingsFamily._dependencies,
-          allTransitiveDependencies:
-              UpdateServiceSettingsFamily._allTransitiveDependencies,
-          serviceId: serviceId,
-          approveBeforeJoin: approveBeforeJoin,
-          friendlyMatch: friendlyMatch,
-          minLevel: minLevel,
-          maxLevel: maxLevel,
-        );
-
-  UpdateServiceSettingsProvider._internal(
-    super.create, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.serviceId,
-    required this.approveBeforeJoin,
-    required this.friendlyMatch,
-    required this.minLevel,
-    required this.maxLevel,
-  }) : super.internal();
-
-  final int serviceId;
-  final bool approveBeforeJoin;
-  final bool friendlyMatch;
-  final double minLevel;
-  final double maxLevel;
-
-  @override
-  Override overrideWith(
-    FutureOr<bool> Function(UpdateServiceSettingsRef ref) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: UpdateServiceSettingsProvider._internal(
-        (ref) => create(ref as UpdateServiceSettingsRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
+  }) =>
+      UpdateServiceSettingsProvider._(argument: (
         serviceId: serviceId,
         approveBeforeJoin: approveBeforeJoin,
         friendlyMatch: friendlyMatch,
         minLevel: minLevel,
         maxLevel: maxLevel,
-      ),
-    );
-  }
+      ), from: this);
 
   @override
-  ({
-    int serviceId,
-    bool approveBeforeJoin,
-    bool friendlyMatch,
-    double minLevel,
-    double maxLevel,
-  }) get argument {
-    return (
-      serviceId: serviceId,
-      approveBeforeJoin: approveBeforeJoin,
-      friendlyMatch: friendlyMatch,
-      minLevel: minLevel,
-      maxLevel: maxLevel,
-    );
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<bool> createElement() {
-    return _UpdateServiceSettingsProviderElement(this);
-  }
-
-  UpdateServiceSettingsProvider _copyWith(
-    FutureOr<bool> Function(UpdateServiceSettingsRef ref) create,
-  ) {
-    return UpdateServiceSettingsProvider._internal(
-      (ref) => create(ref as UpdateServiceSettingsRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      serviceId: serviceId,
-      approveBeforeJoin: approveBeforeJoin,
-      friendlyMatch: friendlyMatch,
-      minLevel: minLevel,
-      maxLevel: maxLevel,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is UpdateServiceSettingsProvider &&
-        other.serviceId == serviceId &&
-        other.approveBeforeJoin == approveBeforeJoin &&
-        other.friendlyMatch == friendlyMatch &&
-        other.minLevel == minLevel &&
-        other.maxLevel == maxLevel;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, serviceId.hashCode);
-    hash = _SystemHash.combine(hash, approveBeforeJoin.hashCode);
-    hash = _SystemHash.combine(hash, friendlyMatch.hashCode);
-    hash = _SystemHash.combine(hash, minLevel.hashCode);
-    hash = _SystemHash.combine(hash, maxLevel.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
+  String toString() => r'updateServiceSettingsProvider';
 }
-
-mixin UpdateServiceSettingsRef on AutoDisposeFutureProviderRef<bool> {
-  /// The parameter `serviceId` of this provider.
-  int get serviceId;
-
-  /// The parameter `approveBeforeJoin` of this provider.
-  bool get approveBeforeJoin;
-
-  /// The parameter `friendlyMatch` of this provider.
-  bool get friendlyMatch;
-
-  /// The parameter `minLevel` of this provider.
-  double get minLevel;
-
-  /// The parameter `maxLevel` of this provider.
-  double get maxLevel;
-}
-
-class _UpdateServiceSettingsProviderElement
-    extends AutoDisposeFutureProviderElement<bool>
-    with UpdateServiceSettingsRef {
-  _UpdateServiceSettingsProviderElement(super.provider);
-
-  @override
-  int get serviceId => (origin as UpdateServiceSettingsProvider).serviceId;
-  @override
-  bool get approveBeforeJoin =>
-      (origin as UpdateServiceSettingsProvider).approveBeforeJoin;
-  @override
-  bool get friendlyMatch =>
-      (origin as UpdateServiceSettingsProvider).friendlyMatch;
-  @override
-  double get minLevel => (origin as UpdateServiceSettingsProvider).minLevel;
-  @override
-  double get maxLevel => (origin as UpdateServiceSettingsProvider).maxLevel;
-}
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

@@ -24,6 +24,7 @@ import '../../models/court_price_model.dart';
 import '../../repository/booking_repo.dart';
 import '../../routes/app_pages.dart';
 import '../home_screen/tabs/booking_tab/book_court_dialog/book_court_dialog.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 part 'payment_components.dart';
 

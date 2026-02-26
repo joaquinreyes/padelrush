@@ -38,6 +38,7 @@ import '../../../../globals/current_platform.dart';
 import '../../../../repository/payment_repo.dart';
 import '../../../payment_information/payment_information.dart';
 import '../../../ranking_profile/ranking_profile.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 part 'profile_tab_components.dart';
 

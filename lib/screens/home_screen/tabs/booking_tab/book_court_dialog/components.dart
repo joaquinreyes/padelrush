@@ -485,7 +485,7 @@ class _AddPlayersDialogState extends ConsumerState<_AddPlayersDialog> {
   @override
   Widget build(BuildContext context) {
     final followingList = ref.watch(getFollowingListProvider);
-    final followingIds = followingList.valueOrNull?.following
+    final followingIds = followingList.value?.following
         ?.map((f) => f.following?.id)
         .whereType<int>()
         .toSet() ?? <int>{};

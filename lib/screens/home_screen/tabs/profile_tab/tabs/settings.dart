@@ -26,6 +26,7 @@ import '../../../../../components/secondary_text.dart';
 import '../../../../../globals/constants.dart';
 import '../../../../../models/transaction_model.dart';
 import '../../../../auth/signin/signin_screen.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 part 'settings_edit_profile.dart';
 part 'providers.dart';

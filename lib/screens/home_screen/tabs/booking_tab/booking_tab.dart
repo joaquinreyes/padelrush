@@ -50,6 +50,7 @@ import '../../../auth/signup/signup_screen.dart';
 import '../../../payment_information/payment_information.dart';
 import '../play_match_tab/play_match_tab.dart';
 import '../profile_tab/tabs/membership_tab/membership_tab.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 part 'booking_tab_components.dart';
 
@@ -242,7 +243,7 @@ class _BookingTabState extends ConsumerState<BookingTab>
     final coachesProvider = ref.watch(fetchAllCoachesProvider);
 
     // Get membership advance days from court-bookings response (extends date picker)
-    final courtBookingData = ref.watch(getCourtBookingProvider).valueOrNull;
+    final courtBookingData = ref.watch(getCourtBookingProvider).value;
     final membershipDays = courtBookingData?.membershipMaxAdvanceDays ?? 0;
     final locationDays = Utils.getFutureDateLength(locationsData, getSportsName(ref));
     final futureDayLength = membershipDays > locationDays ? membershipDays : locationDays;
@@ -514,7 +515,7 @@ class _BookingTabState extends ConsumerState<BookingTab>
     final sport = ref.watch(selectedSportProvider);
     final locationDays =
         Utils.getFutureDateLength(locationsData, sport?.sportName ?? '');
-    final membershipDays = courtBookings.valueOrNull?.membershipMaxAdvanceDays ?? 0;
+    final membershipDays = courtBookings.value?.membershipMaxAdvanceDays ?? 0;
     final futureDateLength = membershipDays > locationDays ? membershipDays : locationDays;
     if (bookingSelected) {
       _invalidateDateIfBeyondFutureLimit(futureDateLength);
@@ -760,7 +761,7 @@ class _BookingTabState extends ConsumerState<BookingTab>
     final sport = ClubLocationSports(sportName: 'Recovery');
     final locationDays =
         Utils.getFutureDateLength(locationsData, sport.sportName ?? '');
-    final membershipDays = courtBookings.valueOrNull?.membershipMaxAdvanceDays ?? 0;
+    final membershipDays = courtBookings.value?.membershipMaxAdvanceDays ?? 0;
     final futureDateLength = membershipDays > locationDays ? membershipDays : locationDays;
     if (saunaSelected) {
       _invalidateDateIfBeyondFutureLimit(futureDateLength);

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:geolocator/geolocator.dart' as position;
 import 'package:intl/intl.dart';
 import 'package:padelrush/components/async_dialog.dart';
@@ -58,9 +59,9 @@ class Utils {
   }
 
   static showLoadingDialog<T>(
-      BuildContext context, AutoDisposeFutureProvider value, WidgetRef ref,
+      BuildContext context, ProviderListenable<AsyncValue> value, WidgetRef ref,
       {bool isUpperCase = false, bool? barrierDismissible}) async {
-    ref.invalidate(value);
+    ref.invalidate(value as ProviderOrFamily);
     return await showDialog(
       context: context,
       barrierDismissible: barrierDismissible ?? false,

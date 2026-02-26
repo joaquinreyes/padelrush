@@ -500,7 +500,7 @@ class BookingRepo {
 BookingRepo bookingRepo(Ref ref) => BookingRepo();
 
 @riverpod
-Future<double?> bookCourt(BookCourtRef ref,
+Future<double?> bookCourt(Ref ref,
     {required Bookings booking,
     required int courtID,
     required DateTime dateTime,
@@ -533,19 +533,19 @@ Future<double?> bookCourt(BookCourtRef ref,
 }
 
 @riverpod
-Future<List<UserBookings>> fetchUserBooking(FetchUserBookingRef ref) {
+Future<List<UserBookings>> fetchUserBooking(Ref ref) {
   return ref.read(bookingRepoProvider).fetchUserBooking(ref);
 }
 
 @riverpod
 Future<List<UserBookings>> fetchUserBookingWaitingList(
-    FetchUserBookingWaitingListRef ref) {
+    Ref ref) {
   return ref.read(bookingRepoProvider).fetchUserBookingWaitingList(ref);
 }
 
 @riverpod
 Future<List<UserBookings>> fetchUserAllBookings(
-    FetchUserAllBookingsRef ref) async {
+    Ref ref) async {
   final results = await Future.wait([
     ref.refresh(fetchUserBookingProvider.future),
     // ref.refresh(fetchUserBookingWaitingListProvider.future),
@@ -560,7 +560,7 @@ Future<List<UserBookings>> fetchUserAllBookings(
 }
 
 @riverpod
-Future<bool> addToCalendar(AddToCalendarRef ref,
+Future<bool> addToCalendar(Ref ref,
     {required String title,
     required DateTime startDate,
     required DateTime endDate}) {
@@ -569,7 +569,7 @@ Future<bool> addToCalendar(AddToCalendarRef ref,
 
 @riverpod
 Future<dynamic> fetchCourtPrice(
-  FetchCourtPriceRef ref, {
+  Ref ref, {
   required int serviceId,
   required CourtPriceRequestType requestType,
   required DateTime dateTime,
@@ -596,17 +596,17 @@ Future<dynamic> fetchCourtPrice(
 
 @riverpod
 Future<List<MultipleBookings>> fetchBookingCartList(
-    FetchBookingCartListRef ref) {
+    Ref ref) {
   return ref.read(bookingRepoProvider).fetchBookingCartList(ref);
 }
 
 @riverpod
-Future<bool> deleteCart(DeleteCartRef ref, String bookingId) async {
+Future<bool> deleteCart(Ref ref, String bookingId) async {
   return ref.read(bookingRepoProvider).deleteCartBooking(ref, bookingId);
 }
 
 @riverpod
-Future<(int?, double?)> upgradeBookingToOpen(UpgradeBookingToOpenRef ref,
+Future<(int?, double?)> upgradeBookingToOpen(Ref ref,
     {required Bookings booking,
     required int reservedPlayers,
     String? organizerNote,
@@ -627,14 +627,14 @@ Future<(int?, double?)> upgradeBookingToOpen(UpgradeBookingToOpenRef ref,
 }
 
 @riverpod
-Future<double?> fetchChatCount(FetchChatCountRef ref,
+Future<double?> fetchChatCount(Ref ref,
     {required int matchId}) async {
   return ref.read(bookingRepoProvider).fetchChatCount(ref, matchId: matchId);
 }
 
 @riverpod
 Future<void> bookLessonCourt(
-  BookLessonCourtRef ref, {
+  Ref ref, {
   required int lessonTime,
   required int courtId,
   required int lessonId,
@@ -656,23 +656,23 @@ Future<void> bookLessonCourt(
 }
 
 @riverpod
-Future<List<ActiveMemberships>> activeMembership(ActiveMembershipRef ref) {
+Future<List<ActiveMemberships>> activeMembership(Ref ref) {
   return ref.read(bookingRepoProvider).fetchActiveMemberships(ref);
 }
 
 @riverpod
 Future<UserActiveMembership> fetchActiveAndAllMemberships(
-    FetchActiveAndAllMembershipsRef ref) {
+    Ref ref) {
   return ref.read(bookingRepoProvider).fetchActiveAndAllMemberships(ref);
 }
 
 @riverpod
-Future<List<MembershipModel>> fetchAllMemberships(FetchAllMembershipsRef ref) {
+Future<List<MembershipModel>> fetchAllMemberships(Ref ref) {
   return ref.read(bookingRepoProvider).fetchAllMemberships(ref);
 }
 
 @riverpod
 Future<List<MembershipCategory>> fetchMembershipCategory(
-    FetchMembershipCategoryRef ref) {
+    Ref ref) {
   return ref.read(bookingRepoProvider).fetchMembershipCategory(ref);
 }

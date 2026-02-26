@@ -6,95 +6,255 @@ part of 'club_repo.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(clubRepo)
+final clubRepoProvider = ClubRepoProvider._();
+
+final class ClubRepoProvider
+    extends $FunctionalProvider<CourtRepo, CourtRepo, CourtRepo>
+    with $Provider<CourtRepo> {
+  ClubRepoProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'clubRepoProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$clubRepoHash();
+
+  @$internal
+  @override
+  $ProviderElement<CourtRepo> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  CourtRepo create(Ref ref) {
+    return clubRepo(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(CourtRepo value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<CourtRepo>(value),
+    );
+  }
+}
+
 String _$clubRepoHash() => r'135ddaadfa3cfc55a766302c5e4c7e8fd3bf4d5f';
 
-/// See also [clubRepo].
-@ProviderFor(clubRepo)
-final clubRepoProvider = AutoDisposeProvider<CourtRepo>.internal(
-  clubRepo,
-  name: r'clubRepoProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$clubRepoHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+@ProviderFor(clubLocations)
+final clubLocationsProvider = ClubLocationsProvider._();
 
-typedef ClubRepoRef = AutoDisposeProviderRef<CourtRepo>;
+final class ClubLocationsProvider extends $FunctionalProvider<
+        AsyncValue<List<ClubLocationData>?>,
+        List<ClubLocationData>?,
+        FutureOr<List<ClubLocationData>?>>
+    with
+        $FutureModifier<List<ClubLocationData>?>,
+        $FutureProvider<List<ClubLocationData>?> {
+  ClubLocationsProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'clubLocationsProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$clubLocationsHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<ClubLocationData>?> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<ClubLocationData>?> create(Ref ref) {
+    return clubLocations(ref);
+  }
+}
+
 String _$clubLocationsHash() => r'c969b935efa64bc175bf663731134be83d27f411';
 
-/// See also [clubLocations].
-@ProviderFor(clubLocations)
-final clubLocationsProvider = FutureProvider<List<ClubLocationData>?>.internal(
-  clubLocations,
-  name: r'clubLocationsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$clubLocationsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+@ProviderFor(getCourtBooking)
+final getCourtBookingProvider = GetCourtBookingProvider._();
 
-typedef ClubLocationsRef = FutureProviderRef<List<ClubLocationData>?>;
+final class GetCourtBookingProvider extends $FunctionalProvider<
+        AsyncValue<CourtBookingData?>,
+        CourtBookingData?,
+        FutureOr<CourtBookingData?>>
+    with
+        $FutureModifier<CourtBookingData?>,
+        $FutureProvider<CourtBookingData?> {
+  GetCourtBookingProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'getCourtBookingProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$getCourtBookingHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<CourtBookingData?> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<CourtBookingData?> create(Ref ref) {
+    return getCourtBooking(ref);
+  }
+}
+
 String _$getCourtBookingHash() => r'd8bceb225ca3fa4f7c529f03f51ff52e3b0bdbdb';
 
-/// See also [getCourtBooking].
-@ProviderFor(getCourtBooking)
-final getCourtBookingProvider = FutureProvider<CourtBookingData?>.internal(
-  getCourtBooking,
-  name: r'getCourtBookingProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$getCourtBookingHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+@ProviderFor(SelectedDate)
+final selectedDateProvider = SelectedDateProvider._();
 
-typedef GetCourtBookingRef = FutureProviderRef<CourtBookingData?>;
-String _$checkUpdateHash() => r'77cfa3a2fab1c4a931cb6c5a9b266f2de5439945';
+final class SelectedDateProvider
+    extends $NotifierProvider<SelectedDate, DubaiDateTime> {
+  SelectedDateProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'selectedDateProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
 
-/// See also [checkUpdate].
-@ProviderFor(checkUpdate)
-final checkUpdateProvider = AutoDisposeFutureProvider<AppUpdateModel?>.internal(
-  checkUpdate,
-  name: r'checkUpdateProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$checkUpdateHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+  @override
+  String debugGetCreateSourceHash() => _$selectedDateHash();
 
-typedef CheckUpdateRef = AutoDisposeFutureProviderRef<AppUpdateModel?>;
+  @$internal
+  @override
+  SelectedDate create() => SelectedDate();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DubaiDateTime value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DubaiDateTime>(value),
+    );
+  }
+}
+
 String _$selectedDateHash() => r'9c9b25e83b91321a82f2c350cabe9f67eaf4912b';
 
-/// See also [SelectedDate].
-@ProviderFor(SelectedDate)
-final selectedDateProvider =
-    NotifierProvider<SelectedDate, DubaiDateTime>.internal(
-  SelectedDate.new,
-  name: r'selectedDateProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$selectedDateHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+abstract class _$SelectedDate extends $Notifier<DubaiDateTime> {
+  DubaiDateTime build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<DubaiDateTime, DubaiDateTime>;
+    final element = ref.element as $ClassProviderElement<
+        AnyNotifier<DubaiDateTime, DubaiDateTime>,
+        DubaiDateTime,
+        Object?,
+        Object?>;
+    element.handleCreate(ref, build);
+  }
+}
 
-typedef _$SelectedDate = Notifier<DubaiDateTime>;
+@ProviderFor(SelectedDateLesson)
+final selectedDateLessonProvider = SelectedDateLessonProvider._();
+
+final class SelectedDateLessonProvider
+    extends $NotifierProvider<SelectedDateLesson, DubaiDateTime> {
+  SelectedDateLessonProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'selectedDateLessonProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$selectedDateLessonHash();
+
+  @$internal
+  @override
+  SelectedDateLesson create() => SelectedDateLesson();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DubaiDateTime value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DubaiDateTime>(value),
+    );
+  }
+}
+
 String _$selectedDateLessonHash() =>
     r'1ee726bea866475f17abcff2825c9088a7bbaffe';
 
-/// See also [SelectedDateLesson].
-@ProviderFor(SelectedDateLesson)
-final selectedDateLessonProvider =
-    NotifierProvider<SelectedDateLesson, DubaiDateTime>.internal(
-  SelectedDateLesson.new,
-  name: r'selectedDateLessonProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$selectedDateLessonHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+abstract class _$SelectedDateLesson extends $Notifier<DubaiDateTime> {
+  DubaiDateTime build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<DubaiDateTime, DubaiDateTime>;
+    final element = ref.element as $ClassProviderElement<
+        AnyNotifier<DubaiDateTime, DubaiDateTime>,
+        DubaiDateTime,
+        Object?,
+        Object?>;
+    element.handleCreate(ref, build);
+  }
+}
 
-typedef _$SelectedDateLesson = Notifier<DubaiDateTime>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package
+@ProviderFor(checkUpdate)
+final checkUpdateProvider = CheckUpdateProvider._();
+
+final class CheckUpdateProvider extends $FunctionalProvider<
+        AsyncValue<AppUpdateModel?>, AppUpdateModel?, FutureOr<AppUpdateModel?>>
+    with $FutureModifier<AppUpdateModel?>, $FutureProvider<AppUpdateModel?> {
+  CheckUpdateProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'checkUpdateProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$checkUpdateHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<AppUpdateModel?> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<AppUpdateModel?> create(Ref ref) {
+    return checkUpdate(ref);
+  }
+}
+
+String _$checkUpdateHash() => r'77cfa3a2fab1c4a931cb6c5a9b266f2de5439945';

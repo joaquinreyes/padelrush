@@ -16,6 +16,7 @@ import 'package:padelrush/utils/custom_extensions.dart';
 
 import '../../../components/custom_dialog.dart';
 import '../../../repository/assessment_req_model.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 part 'pin_input.dart';
 

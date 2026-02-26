@@ -16,6 +16,7 @@ import '../../../../globals/utils.dart';
 import '../../../../repository/payment_repo.dart';
 import '../../../payment_information/payment_information.dart';
 import '../cart_booked_dialog.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 part 'components.dart';
 

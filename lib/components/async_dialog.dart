@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:padelrush/app_styles/app_colors.dart';
 import 'package:padelrush/app_styles/app_text_styles.dart';
@@ -11,12 +12,12 @@ class AsyncDialog<T> extends ConsumerWidget {
   const AsyncDialog(
       {Key? key, required this.provider, this.isUpperCase = false})
       : super(key: key);
-  final AutoDisposeFutureProvider<T> provider;
+  final ProviderListenable<AsyncValue<T>> provider;
   final bool isUpperCase;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final async = ref.watch(provider);
-    ref.listen(provider, (pre, next) {
+    ref.listen<AsyncValue<T>>(provider, (AsyncValue<T>? pre, AsyncValue<T> next) {
       if (pre == next) {
         return;
       }
