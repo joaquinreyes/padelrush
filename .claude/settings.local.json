@@ -8,7 +8,14 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" --max-time 10 https://groundzero.bookandgo.app/mcp)",
       "Bash(curl -s --max-time 10 -H \"Authorization: Bearer taskforce2026\" -H \"Content-Type: application/json\" https://groundzero.bookandgo.app/mcp)",
       "Bash(curl -s --max-time 10 -H \"Authorization: Bearer taskforce2026\" -H \"Content-Type: application/json\" https://groundzzero-production.up.railway.app/mcp)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" --max-time 5 http://192.168.68.108:8081/api/v1/apps/86/app-updates 2>&1 || echo \"timeout/unreachable\")"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" --max-time 5 http://192.168.68.108:8081/api/v1/apps/86/app-updates 2>&1 || echo \"timeout/unreachable\")",
+      "Bash(dart run:*)",
+      "Bash(python3:*)",
+      "Bash(flutter build:*)",
+      "Bash(flutter devices:*)",
+      "Bash(identify:*)",
+      "Bash(sips:*)",
+      "Bash(git add:*)"
     ]
   }
 }

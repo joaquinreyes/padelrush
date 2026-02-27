@@ -59,4 +59,19 @@ class SharedPrefManager {
   clearUser() async {
     await prefs.remove(userKey);
   }
+
+  static String _waitingApprovalKey(int serviceId, int userId) =>
+      "${prefix}_waiting_approval_${serviceId}_$userId";
+
+  setWaitingApproval(int serviceId, int userId) async {
+    await prefs.setBool(_waitingApprovalKey(serviceId, userId), true);
+  }
+
+  bool getWaitingApproval(int serviceId, int userId) {
+    return prefs.getBool(_waitingApprovalKey(serviceId, userId)) ?? false;
+  }
+
+  clearWaitingApproval(int serviceId, int userId) async {
+    await prefs.remove(_waitingApprovalKey(serviceId, userId));
+  }
 }

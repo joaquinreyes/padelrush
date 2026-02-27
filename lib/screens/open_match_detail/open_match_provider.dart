@@ -2,6 +2,7 @@ part of 'open_match_detail.dart';
 
 final _isJoined = StateProvider<bool>((ref) => false);
 final _inWaitingList = StateProvider<bool>((ref) => false);
+final _waitingForApprovalProvider = StateProvider<bool>((ref) => false);
 
 // Settings tab providers
 final _selectedTabIndexProvider = StateProvider<int>((ref) => 0);

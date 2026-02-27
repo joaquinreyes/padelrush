@@ -1,5 +1,229 @@
 part of 'open_match_detail.dart';
 
+class _RequestWaitingApprovalCard extends ConsumerWidget {
+  const _RequestWaitingApprovalCard({required this.onWithdraw});
+
+  final VoidCallback onWithdraw;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.read(userProvider)?.user;
+    final sportsName = getSportsName(ref);
+    final levelValue = user?.level(sportsName);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "YOU_ARE_WAITING_FOR_APPROVAL".trU(context),
+          style: AppTextStyles.poppinsMedium(fontSize: 17.sp),
+        ),
+        SizedBox(height: 10.h),
+        Container(
+          decoration: BoxDecoration(
+            color: AppColors.gray,
+            border: border,
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 15.h),
+          child: Row(
+            children: [
+              NetworkCircleImage(
+                path: user?.profileUrl,
+                width: 37.w,
+                height: 37.h,
+                logoColor: AppColors.white,
+                borderRadius: BorderRadius.circular(4.r),
+                bgColor: AppColors.black2,
+                boxBorder: Border.all(color: AppColors.white25),
+              ),
+              SizedBox(width: 15.w),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    (user?.firstName ?? "").toUpperCase(),
+                    style: AppTextStyles.poppinsMedium(fontSize: 12.sp),
+                  ),
+                  if (levelValue != null)
+                    Text(
+                      levelValue.toString(),
+                      style: AppTextStyles.poppinsRegular(fontSize: 12.sp),
+                    ),
+                ],
+              ),
+              const Spacer(),
+              MainButton(
+                label: "WITHDRAW_FROM_THE_MATCH".tr(context),
+                color: AppColors.darkYellow,
+                labelStyle: AppTextStyles.poppinsMedium(fontSize: 13.sp),
+                applySize: false,
+                applyShadow: true,
+                borderRadius: 100.r,
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 6.h),
+                onTap: onWithdraw,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _WaitingApprovalCard extends ConsumerWidget {
+  const _WaitingApprovalCard({
+    required this.player,
+    required this.onWithdraw,
+  });
+
+  final ServiceDetail_Players player;
+  final VoidCallback onWithdraw;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "YOU_ARE_WAITING_FOR_APPROVAL".trU(context),
+          style: AppTextStyles.poppinsMedium(fontSize: 17.sp),
+        ),
+        SizedBox(height: 10.h),
+        Container(
+          decoration: BoxDecoration(
+            color: AppColors.gray,
+            border: border,
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 15.h),
+          child: Row(
+            children: [
+              NetworkCircleImage(
+                path: player.customer?.profileUrl,
+                width: 37.w,
+                height: 37.h,
+                logoColor: AppColors.white,
+                borderRadius: BorderRadius.circular(4.r),
+                bgColor: AppColors.black2,
+                boxBorder: Border.all(color: AppColors.white25),
+              ),
+              SizedBox(width: 15.w),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    player.getCustomerName.toUpperCase(),
+                    style: AppTextStyles.poppinsMedium(fontSize: 12.sp),
+                  ),
+                  if ((player.customer?.level(getSportsName(ref))?.isNotEmpty) ?? false)
+                    Text(
+                      player.customer!.level(getSportsName(ref))!,
+                      style: AppTextStyles.poppinsRegular(fontSize: 12.sp),
+                    ),
+                ],
+              ),
+              const Spacer(),
+              MainButton(
+                label: "WITHDRAW_FROM_THE_MATCH".tr(context),
+                color: AppColors.darkYellow,
+                labelStyle: AppTextStyles.poppinsMedium(fontSize: 13.sp),
+                applySize: false,
+                applyShadow: true,
+                borderRadius: 100.r,
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 6.h),
+                onTap: onWithdraw,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _OrganizerPendingApprovalCard extends ConsumerWidget {
+  const _OrganizerPendingApprovalCard({
+    required this.requests,
+    required this.onApprove,
+  });
+
+  final List<RequestWaitingList> requests;
+  final Function(int) onApprove;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final sportsName = getSportsName(ref);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "PLAYERS_WAITING_FOR_YOUR_APPROVAL".trU(context),
+          style: AppTextStyles.poppinsMedium(fontSize: 17.sp),
+        ),
+        SizedBox(height: 10.h),
+        Container(
+          decoration: BoxDecoration(
+            color: AppColors.gray,
+            border: border,
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 15.h),
+          child: Column(
+            children: [
+              for (int i = 0; i < requests.length; i++) ...[
+                Row(
+                  children: [
+                    NetworkCircleImage(
+                      borderRadius: BorderRadius.circular(4.r),
+                      path: requests[i].customer?.profileUrl,
+                      width: 37.h,
+                      height: 37.h,
+                      boxBorder: Border.all(color: AppColors.white25),
+                      bgColor: AppColors.black2,
+                    ),
+                    SizedBox(width: 15.w),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          (requests[i].customer?.firstName ?? "").toUpperCase(),
+                          style: AppTextStyles.poppinsMedium(fontSize: 12.sp),
+                        ),
+                        if ((requests[i].customer?.level(sportsName)?.isNotEmpty) ?? false)
+                          Text(
+                            requests[i].customer!.level(sportsName)!,
+                            style: AppTextStyles.poppinsRegular(fontSize: 12.sp),
+                          ),
+                      ],
+                    ),
+                    const Spacer(),
+                    MainButton(
+                      label: "APPROVE".tr(context),
+                      color: AppColors.darkYellow,
+                      padding: EdgeInsets.only(
+                          left: 15.w, right: 15.w, top: 6.h, bottom: 6.h),
+                      labelStyle: AppTextStyles.poppinsMedium(fontSize: 13.sp),
+                      borderRadius: 100.r,
+                      applySize: false,
+                      applyShadow: true,
+                      onTap: () => onApprove(requests[i].id!),
+                    ),
+                  ],
+                ),
+                if (i < requests.length - 1) ...[
+                  SizedBox(height: 5.h),
+                  CDivider(),
+                  SizedBox(height: 5.h),
+                ],
+              ],
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class _RankedOrFriendly extends StatelessWidget {
   const _RankedOrFriendly({
     this.isRanked = true,
@@ -278,21 +502,27 @@ class __WaitingListState extends ConsumerState<_WaitingList> {
           data.removeWhere((element) => element.customer?.id != currentID);
         }
         if (data.isEmpty) {
-          return SizedBox();
+          return const SizedBox.shrink();
         }
         if (!widget.isCurrentOrganizer) {
-          return WaitingListApprovalStatus(
-            serviceBookingId: widget.id,
-            data: data.first,
-            onJoin: widget.onJoinAfterApproval,
-            onWithdraw: widget.onWithdraw,
-            refreshApis: widget.refreshApis,
-            isForEvent: false,
+          return Padding(
+            padding: EdgeInsets.only(top: 20.h, bottom: 5.h),
+            child: WaitingListApprovalStatus(
+              serviceBookingId: widget.id,
+              data: data.first,
+              onJoin: widget.onJoinAfterApproval,
+              onWithdraw: widget.onWithdraw,
+              refreshApis: widget.refreshApis,
+              isForEvent: false,
+            ),
           );
         }
-        return OpenMatchWaitingForApprovalPlayers(
-          data: data,
-          onApprove: widget.onApprove,
+        return Padding(
+          padding: EdgeInsets.only(top: 20.h, bottom: 5.h),
+          child: OpenMatchWaitingForApprovalPlayers(
+            data: data,
+            onApprove: widget.onApprove,
+          ),
         );
       },
       error: (error, stackTrace) {
