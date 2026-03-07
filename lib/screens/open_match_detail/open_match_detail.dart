@@ -786,29 +786,30 @@ class _DataBodyState extends ConsumerState<_DataBody> {
       required bool isReserve,
       required bool isApprovalNeeded,
       bool isJoinApproval = false}) async {
-    // Check level restrictions first
-    final sportsName = service.getSportsName(ref) ?? "padel";
-    final userLevel = ref.read(userProvider)?.user?.level(sportsName) ?? 0.0;
-    final minLevel = service.options?.minLevel ?? 0.0;
-    final maxLevel = service.options?.maxLevel ?? 7.0;
-
     bool effectiveApprovalNeeded = isApprovalNeeded;
 
-    // Check if user level is within allowed range
-    if (userLevel < minLevel || userLevel > maxLevel) {
-      if (!mounted) return;
-      String message;
-      if (userLevel < minLevel) {
-        message = "Your level ($userLevel) is below the minimum required level ($minLevel) for this match.";
-      } else {
-        message = "Your level ($userLevel) is above the maximum allowed level ($maxLevel) for this match.";
+    // Check level restrictions (skip if player was already approved)
+    if (!isJoinApproval) {
+      final sportsName = service.getSportsName(ref) ?? "padel";
+      final userLevel = ref.read(userProvider)?.user?.level(sportsName) ?? 0.0;
+      final minLevel = service.options?.minLevel ?? 0.0;
+      final maxLevel = service.options?.maxLevel ?? 7.0;
+
+      if (userLevel < minLevel || userLevel > maxLevel) {
+        if (!mounted) return;
+        String message;
+        if (userLevel < minLevel) {
+          message = "Your level ($userLevel) is below the minimum required level ($minLevel) for this match.";
+        } else {
+          message = "Your level ($userLevel) is above the maximum allowed level ($maxLevel) for this match.";
+        }
+        final bool? wantsToRequest = await showDialog<bool>(
+          context: context,
+          builder: (context) => _OutsideRankingRequestDialog(message: message),
+        );
+        if (wantsToRequest != true || !mounted) return;
+        effectiveApprovalNeeded = true;
       }
-      final bool? wantsToRequest = await showDialog<bool>(
-        context: context,
-        builder: (context) => _OutsideRankingRequestDialog(message: message),
-      );
-      if (wantsToRequest != true || !mounted) return;
-      effectiveApprovalNeeded = true;
     }
 
     final provider = joinServiceProvider(service.id!,
