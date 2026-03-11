@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "808637490319",
-    "project_id": "frontendbooakdngo3",
-    "storage_bucket": "frontendbooakdngo3.firebasestorage.app"
+    "project_number": "264818472122",
+    "project_id": "padel-art-2",
+    "storage_bucket": "padel-art-2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:808637490319:android:c3570258dcaa45037cbcfa",
+        "mobilesdk_app_id": "1:264818472122:android:19cdc539b4c1f572f93e83",
         "android_client_info": {
-          "package_name": "com.bookandgo.acepadel"
+          "package_name": "com.anphu.bookandgo"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDZSHzjzdh1A8J_Ini5CEA0GIwJh0MOmjQ"
+          "current_key": "AIzaSyD9ScEHoPjdIY5yTlsu8jlKKXoDyf0Pn1E"
         }
       ],
       "services": {
@@ -26,15 +26,15 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:808637490319:android:aadd03e2593a73247cbcfa",
+        "mobilesdk_app_id": "1:264818472122:android:36634046caafbcbcf93e83",
         "android_client_info": {
-          "package_name": "com.bookandgo.padel702"
+          "package_name": "com.bookandgo.coaches"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDZSHzjzdh1A8J_Ini5CEA0GIwJh0MOmjQ"
+          "current_key": "AIzaSyD9ScEHoPjdIY5yTlsu8jlKKXoDyf0Pn1E"
         }
       ],
       "services": {
@@ -45,7 +45,64 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:808637490319:android:4f9a7e1ba5716aad7cbcfa",
+        "mobilesdk_app_id": "1:264818472122:android:f0311866dd23e27df93e83",
+        "android_client_info": {
+          "package_name": "com.bookandgo.padelbade"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9ScEHoPjdIY5yTlsu8jlKKXoDyf0Pn1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264818472122:android:c28d85765da709b1f93e83",
+        "android_client_info": {
+          "package_name": "com.bookandgo.rejo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9ScEHoPjdIY5yTlsu8jlKKXoDyf0Pn1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264818472122:android:f08017203707721ff93e83",
+        "android_client_info": {
+          "package_name": "com.krosspadel.bookandgo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9ScEHoPjdIY5yTlsu8jlKKXoDyf0Pn1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264818472122:android:c094929e0ab76ceef93e83",
         "android_client_info": {
           "package_name": "com.padelrush.bookandgo"
         }
@@ -53,7 +110,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDZSHzjzdh1A8J_Ini5CEA0GIwJh0MOmjQ"
+          "current_key": "AIzaSyD9ScEHoPjdIY5yTlsu8jlKKXoDyf0Pn1E"
         }
       ],
       "services": {
@@ -64,15 +121,15 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:808637490319:android:cc12bbdcd91ed45a7cbcfa",
+        "mobilesdk_app_id": "1:264818472122:android:ff6872d52e0672ddf93e83",
         "android_client_info": {
-          "package_name": "com.padelfit.bookandgo"
+          "package_name": "com.smashyard.bookandgo"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDZSHzjzdh1A8J_Ini5CEA0GIwJh0MOmjQ"
+          "current_key": "AIzaSyD9ScEHoPjdIY5yTlsu8jlKKXoDyf0Pn1E"
         }
       ],
       "services": {
@@ -83,15 +140,34 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:808637490319:android:71a7daa29516439b7cbcfa",
+        "mobilesdk_app_id": "1:264818472122:android:03d572c338b4b2c0f93e83",
         "android_client_info": {
-          "package_name": "com.rivierapadel.bookandgo"
+          "package_name": "com.thelob.bookandgo"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDZSHzjzdh1A8J_Ini5CEA0GIwJh0MOmjQ"
+          "current_key": "AIzaSyD9ScEHoPjdIY5yTlsu8jlKKXoDyf0Pn1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264818472122:android:e3b893c523b07c63f93e83",
+        "android_client_info": {
+          "package_name": "com.townpadel.bookandgo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9ScEHoPjdIY5yTlsu8jlKKXoDyf0Pn1E"
         }
       ],
       "services": {

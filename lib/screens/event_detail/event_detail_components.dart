@@ -167,10 +167,18 @@ class _ConfirmationDialog extends StatelessWidget {
             ),
           ],
           if (type == _ConfirmationDialogType.leave)
-            RefundDescriptionComponent(
-                policy: policy,
-                text: policy == null ? "LEAVE_POLICY_EVENT".tr(context) : null,
-                style: AppTextStyles.popupBodyTextStyle),
+            Text(
+              policy == null
+                  ? "LEAVE_POLICY_EVENT".tr(context)
+                  : (policy!.cancellationHours == 0
+                      ? "YOU_WILL_NOT_GET_REFUND_ON_THIS_BOOKING".tr(context)
+                      : "CANCELLATION_POLICY_3".tr(context, params: {
+                          "HOUR": policy!.cancellationHours.toString(),
+                          "REFUND": (policy!.refund ?? 0).toStringAsFixed(1)
+                        })),
+              textAlign: TextAlign.center,
+              style: AppTextStyles.popupBodyTextStyle,
+            ),
           SizedBox(height: 20.h),
           MainButton(
             label: _buttonText(context),

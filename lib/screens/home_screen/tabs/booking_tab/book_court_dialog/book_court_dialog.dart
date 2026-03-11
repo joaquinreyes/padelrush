@@ -1328,15 +1328,6 @@ class _BookCourtDialogLessonState extends ConsumerState<BookCourtDialogLesson> {
                   }).toList(),
                 ),
                 SizedBox(height: 20.h),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "BOOKING_PAYMENT".tr(context),
-                    style: AppTextStyles.poppinsLight(
-                        color: AppColors.black, fontSize: 16.sp),
-                  ),
-                ),
-                SizedBox(height: 10.h),
                 MainButton(
                   label: "PAY_LESSON".trU(context),
                   isForPopup: true,

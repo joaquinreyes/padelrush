@@ -27,9 +27,13 @@ Future<void> main() async {
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
+      try {
+        await Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+        );
+      } catch (e) {
+        print("Firebase initialization error: $e");
+      }
       SharedPreferences prefs = await SharedPreferences.getInstance();
       tz.initializeTimeZones();
       if (!kIsWeb) {

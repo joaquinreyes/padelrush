@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:razorpay_web/razorpay_web.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:padelrush/globals/api_endpoints.dart';
 import 'package:padelrush/managers/api_manager.dart';
 import 'package:padelrush/managers/user_manager.dart';
