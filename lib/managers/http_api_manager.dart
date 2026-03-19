@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:padelrush/globals/api_endpoints.dart';
 import 'package:padelrush/managers/api_manager.dart';
@@ -48,7 +49,8 @@ class HttpApiManager {
       myPrint(headers);
       myPrint("-----------------------------------");
       final response = await http.post(Uri.parse(url),
-          headers: headers, body: jsonEncode(data));
+          headers: headers, body: jsonEncode(data))
+          .timeout(const Duration(seconds: 10));
 
       myPrint("-------------------- Response Api ---------------");
       myPrint(response.statusCode.toString());
@@ -87,7 +89,8 @@ class HttpApiManager {
       myPrint(headers);
       myPrint("-----------------------------------");
       final response = await http.patch(Uri.parse(url),
-          headers: headers, body: jsonEncode(data));
+          headers: headers, body: jsonEncode(data))
+          .timeout(const Duration(seconds: 10));
       myPrint("-------------------- Response Api ---------------");
       myPrint(response.statusCode.toString());
       myPrint(response.body);
@@ -141,7 +144,8 @@ class HttpApiManager {
       myPrint(headers);
       myPrint("-----------------------------------");
       final response = await http.put(Uri.parse(url),
-          headers: headers, body: jsonEncode(data));
+          headers: headers, body: jsonEncode(data))
+          .timeout(const Duration(seconds: 10));
 
       myPrint("-------------------- Response Api ---------------");
       myPrint(response.statusCode.toString());
@@ -197,7 +201,8 @@ class HttpApiManager {
       myPrint(url);
       myPrint(headers);
       myPrint("-----------------------------------");
-      final response = await http.get(Uri.parse(url), headers: headers);
+      final response = await http.get(Uri.parse(url), headers: headers)
+          .timeout(const Duration(seconds: 10));
 
       myPrint("-------------------- Get Response Api ---------------");
       myPrint(response.statusCode.toString());
@@ -243,7 +248,8 @@ class HttpApiManager {
       myPrint(request.fields);
       myPrint(request.files.length);
       myPrint("-----------------------------------");
-      final streamedResponse = await request.send();
+      final streamedResponse = await request.send()
+          .timeout(const Duration(seconds: 10));
       final response = await http.Response.fromStream(streamedResponse);
       myPrint(
           "-------------------- Patch Multi part Response Api ---------------");
@@ -279,7 +285,8 @@ class HttpApiManager {
       myPrint(url);
       myPrint(headers);
       myPrint("-----------------------------------");
-      final response = await http.delete(Uri.parse(url), headers: headers);
+      final response = await http.delete(Uri.parse(url), headers: headers)
+          .timeout(const Duration(seconds: 10));
       myPrint("-------------------- Delete Response Api ---------------");
       myPrint(response.statusCode.toString());
       myPrint(response.body);
@@ -318,6 +325,9 @@ class HttpApiManager {
     }
     if (error is http.Response && error.statusCode == 502) {
       throw "Technical Issue";
+    }
+    if (error is TimeoutException) {
+      throw "Request timed out. Please check your connection and try again.";
     }
     if (error is http.ClientException) {
       if (error.message.contains("Connection reset by peer")) {

@@ -71,7 +71,17 @@ class _OpenMatchesState extends ConsumerState<OpenMatchesList> {
       child: openMatches.when(
         data: (data) {
           if (data.isEmpty) {
-            return SecondaryText(text: "NO_OPEN_MATCHES_FOUND".tr(context));
+            return Padding(
+              padding: const EdgeInsets.only(top: 120),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.group_off, size: 64, color: Colors.grey[600]),
+                  const SizedBox(height: 16),
+                  SecondaryText(text: "NO_OPEN_MATCHES_FOUND".tr(context)),
+                ],
+              ),
+            );
           }
           // final dateList = _getDateList(data);
           final dateList = data.dateList;

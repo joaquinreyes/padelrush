@@ -69,7 +69,17 @@ class _LessonState extends ConsumerState<LessonsList> {
       child: lessons.when(
         data: (data) {
           if (data.isEmpty) {
-            return SecondaryText(text: "NO_LESSONS_FOUND".tr(context));
+            return Padding(
+              padding: const EdgeInsets.only(top: 120),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.school_outlined, size: 64, color: Colors.grey[600]),
+                  const SizedBox(height: 16),
+                  SecondaryText(text: "NO_LESSONS_FOUND".tr(context)),
+                ],
+              ),
+            );
           }
           return ListView.builder(
             itemCount: data.length,

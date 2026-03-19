@@ -82,6 +82,10 @@ class PlayRepo {
       return list;
     } catch (e) {
       if (e is Map<String, dynamic>) {
+        final message = (e['message'] as String? ?? '').toLowerCase();
+        if (message.contains('not found') || message.contains('no open match') || message.contains('no booking')) {
+          return [];
+        }
         throw e['message'];
       }
       rethrow;
@@ -129,6 +133,10 @@ class PlayRepo {
       return list;
     } catch (e) {
       if (e is Map<String, dynamic>) {
+        final message = (e['message'] as String? ?? '').toLowerCase();
+        if (message.contains('no events') || message.contains('not found')) {
+          return [];
+        }
         throw e['message'];
       }
       rethrow;
@@ -175,6 +183,10 @@ class PlayRepo {
       return list;
     } catch (e) {
       if (e is Map<String, dynamic>) {
+        final message = (e['message'] as String? ?? '').toLowerCase();
+        if (message.contains('not found') || message.contains('no lesson')) {
+          return [];
+        }
         throw e['message'];
       }
       rethrow;

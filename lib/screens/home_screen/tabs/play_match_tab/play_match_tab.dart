@@ -78,7 +78,9 @@ class _PlayMatchTabState extends ConsumerState<PlayMatchTab> {
     final locationIDs = ref.watch(selectedLocationProvider);
     final sportsIds = ref.watch(_selectedSportsProvider);
     final locationID = ref.watch(selectedLocationProvider);
-    final storeLocations = ref.watch(_storeAllLocationsProvider);
+    final storeLocations = ref.watch(clubLocationsProvider).asData?.value
+        ?? ref.watch(_storeAllLocationsProvider)
+        ?? [];
     List<int> locationIdList = [...locationIDs];
     List<int> sportsIdList =
         Utils.getSportsIds(sportsIds, storeLocations, locationID);

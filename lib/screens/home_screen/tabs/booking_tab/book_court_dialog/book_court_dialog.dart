@@ -449,7 +449,7 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                                                       !ref.watch(
                                                           _isPrivateMatchProvider)
                                                   ? "Loading..."
-                                                  : "PAY_MY_SHARE".tr(context),
+                                                  : "OPEN_MATCH_LABEL".tr(context),
                                               style: !ref.watch(
                                                       _isPrivateMatchProvider)
                                                   ? AppTextStyles.poppinsBold(

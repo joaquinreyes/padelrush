@@ -16,7 +16,9 @@
       "Bash(identify:*)",
       "Bash(sips:*)",
       "Bash(git add:*)",
-      "Bash(flutter pub:*)"
+      "Bash(flutter pub:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
