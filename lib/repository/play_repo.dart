@@ -388,7 +388,7 @@ class PlayRepo {
       final apiManager = ref.read(apiManagerProvider);
       final token = ref.read(userManagerProvider).user?.accessToken ?? "";
       Map<String, dynamic> queryParams = {
-        "date": startTime,
+        "date": startTime.format(kFormatForAPI),
         "sport_name": sportName
       };
       if (coachId.isNotEmpty) {
@@ -398,7 +398,7 @@ class PlayRepo {
         queryParams["duration"] = duration;
       }
       if (endTime != null) {
-        queryParams["end_date"] = endTime;
+        queryParams["end_date"] = endTime.format(kFormatForAPI);
       }
       final response = await apiManager.get(
         ref,

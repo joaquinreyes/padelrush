@@ -88,7 +88,9 @@ class BookingRepo {
 
       // Add customer players if provided
       if (customerPlayers != null && customerPlayers.isNotEmpty) {
-        data['customer_players'] = customerPlayers.map((player) {
+        data['customer_players'] = customerPlayers
+            .where((player) => player.customer?.id != null)
+            .map((player) {
           return {
             "customer_id": player.customer?.id,
             "position": player.position,

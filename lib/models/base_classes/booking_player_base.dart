@@ -89,7 +89,7 @@ class BookingPlayerBase {
 
   BookingPlayerBase.fromJson(Map<String, dynamic> json) {
     reservedPlayersCount = json['reserved_players_count'];
-    isWaiting = json['is_wating'];
+    isWaiting = json['is_wating'] == true || json['is_wating'] == 1;
     status = json['status'];
     paidPrice = double.tryParse(json['paid_price'].toString());
     customer = json['customer'] != null
@@ -103,11 +103,11 @@ class BookingPlayerBase {
     }
     otherPlayer = json['other_player'];
     id = json['id'];
-    isOrganizer = json['is_organizer'];
-    isCanceled = json['is_canceled'];
+    isOrganizer = json['is_organizer'] == true || json['is_organizer'] == 1;
+    isCanceled = json['is_canceled'] == true || json['is_canceled'] == 1;
     pendingPrice = double.tryParse(json['pending_price'].toString());
     position = json['position'];
-    reserved = json['reserved'] ?? false;
+    reserved = json['reserved'] == true || json['reserved'] == 1;
     guest = json['guest'] != null ? Guest.fromJson(json['guest']) : null;
   }
 }

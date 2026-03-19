@@ -680,11 +680,14 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                               value.discountedPrice ?? 0;
                           final double openMatchDiscountedPrice =
                               value.openMatchDiscountedPrice ?? 0;
+                          final double reservePriceVal =
+                              value.reservePrice ?? openMatchDiscountedPrice;
                           pricePaid = price = ref.read(_isOpenMatchProvider)
-                              ? (openMatchDiscountedPrice *
-                                  (widget.isOnlyOpenMatch
-                                      ? 1
-                                      : (reserveSpotsForMatch + 1)))
+                              ? (openMatchDiscountedPrice +
+                                  (reservePriceVal *
+                                      (widget.isOnlyOpenMatch
+                                          ? 0
+                                          : reserveSpotsForMatch)))
                               : discountedPrice;
 
                           cancellationHour = isOpenMatch

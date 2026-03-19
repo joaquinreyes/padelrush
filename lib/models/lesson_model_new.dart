@@ -475,11 +475,11 @@ class LessonVariants {
         this.lessonId});
 
   LessonVariants.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    duration = json['duration'];
-    maximumCapacity = json['maximum_capacity'];
-    price = json['price'];
-    lessonId = json['lesson_id'];
+    id = (json['id'] as num?)?.toInt();
+    duration = (json['duration'] as num?)?.toInt();
+    maximumCapacity = (json['maximum_capacity'] as num?)?.toInt();
+    price = (json['price'] as num?)?.toInt();
+    lessonId = (json['lesson_id'] as num?)?.toInt();
   }
 
   Map<String, dynamic> toJson() {
