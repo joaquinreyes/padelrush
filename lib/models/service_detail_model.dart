@@ -75,7 +75,7 @@ class ServiceDetail extends BookingBase {
     }).toList();
   }
 
-  bool get isPrivate => false;
+  bool get isPrivate => isPrivateMatch ?? false;
 
 
   String get courtName {

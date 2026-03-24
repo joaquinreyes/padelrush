@@ -63,16 +63,16 @@ class LevelRepo {
 }
 
 @riverpod
-LevelRepo levelRepo(Ref ref) => LevelRepo();
+LevelRepo levelRepo(LevelRepoRef ref) => LevelRepo();
 
 @riverpod
-Future<List<LevelQuestion>> levelQuestions(Ref ref,
+Future<List<LevelQuestion>> levelQuestions(LevelQuestionsRef ref,
     {String? sport}) async {
   return await ref.read(levelRepoProvider).getQuestions(ref, sport);
 }
 
 @riverpod
-Future<CalculatedLevelData> calculateLevel(Ref ref,
+Future<CalculatedLevelData> calculateLevel(CalculateLevelRef ref,
     {required List<double?> answers,
     required bool allowClub,
     required String sportsName}) async {

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:padelrush/box_shadow/flutter_inset_box_shadow.dart' as inset;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +37,6 @@ import '../../../../globals/current_platform.dart';
 import '../../../../repository/payment_repo.dart';
 import '../../../payment_information/payment_information.dart';
 import '../../../ranking_profile/ranking_profile.dart';
-import 'package:flutter_riverpod/legacy.dart';
 
 part 'profile_tab_components.dart';
 
@@ -101,16 +99,14 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
           const _HeaderInfo(),
           Container(
             width: double.infinity,
+            height: 48.h,
             margin: EdgeInsets.symmetric(vertical: 15.h, horizontal: 15.w),
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            decoration: inset.BoxDecoration(
-              color: AppColors.gray,
-              boxShadow: kInsetShadow,
-              borderRadius: BorderRadius.circular(100.r),
+            decoration: BoxDecoration(
+              color: AppColors.lightGray,
+              borderRadius: BorderRadius.circular(14.r),
             ),
+            padding: EdgeInsets.all(4.h),
             child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _pageSelectorItem(text: 'BOOKINGS'.tr(context), index: 0),
                 _pageSelectorItem(text: 'RANKING_PROFILE'.tr(context), index: 1),
@@ -139,47 +135,43 @@ class _ProfileTabState extends ConsumerState<ProfileTab> {
     final selectedTab = ref.watch(_selectedTabIndex);
     bool isSelected = selectedTab == index;
     return Expanded(
-      // flex: index == 3 ? 20 : 15,
-      child: InkWell(
-          onTap: () {
-            if (selectedTab != index) {
-              ref.read(_selectedTabIndex.notifier).state = index;
-            }
-          },
-          child: Container(
-            height: 40.h,
-            constraints: kComponentWidthConstraint,
-            padding: EdgeInsets.symmetric(
-              horizontal: 10.w,
-            ),
-            margin: EdgeInsets.symmetric(
-              vertical: 4.h,
-              horizontal: 0.w
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.r),
-              color: isSelected ? AppColors.black2 : AppColors.transparentColor),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  text,
-                  textAlign: TextAlign.center,
-                  style: isSelected
-                      ? GoogleFonts.dmSans(
-                          color: AppColors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12.sp,
-                        )
-                      : GoogleFonts.dmSans(
-                          color: AppColors.black70,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12.sp,
-                        ),
-                ),
-              ],
-            ),
-          )),
+      child: GestureDetector(
+        onTap: () {
+          if (selectedTab != index) {
+            ref.read(_selectedTabIndex.notifier).state = index;
+          }
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: isSelected ? AppColors.black2 : Colors.transparent,
+            borderRadius: BorderRadius.circular(11.r),
+            boxShadow: isSelected
+                ? [
+                    BoxShadow(
+                      color: AppColors.black2.withOpacity(0.15),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ]
+                : [],
+          ),
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: isSelected
+                ? AppTextStyles.poppinsSemiBold(
+                    fontSize: 12.sp,
+                    color: AppColors.white,
+                  )
+                : AppTextStyles.poppinsMedium(
+                    fontSize: 12.sp,
+                    color: AppColors.black70,
+                  ),
+          ),
+        ),
+      ),
     );
   }
 }

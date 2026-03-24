@@ -9,9 +9,7 @@ import 'package:padelrush/app_styles/app_colors.dart';
 import 'package:padelrush/app_styles/app_text_styles.dart';
 import 'package:padelrush/components/approved_applicant_dialogs/events/events_applicant_dialog.dart';
 import 'package:padelrush/components/avaialble_slot_widget.dart';
-import 'package:padelrush/components/c_divider.dart';
-
-import 'package:padelrush/components/service_detail_components.dart/service_coaches.dart';
+import 'package:padelrush/components/network_circle_image.dart';
 import 'package:padelrush/components/main_button.dart';
 import 'package:padelrush/components/participant_slot.dart';
 import 'package:padelrush/components/secondary_button.dart';
@@ -39,7 +37,6 @@ import 'dart:math' as math;
 
 import '../../models/cancellation_policy_model.dart';
 import '../../models/court_price_model.dart';
-import 'package:flutter_riverpod/legacy.dart';
 
 part 'event_detail_provider.dart';
 
@@ -125,6 +122,14 @@ class _DataBodyState extends ConsumerState<_DataBody> {
     final isJoined = ref.watch(_isJoined);
     final playerWaitingListId = ref.watch(_playerWaitingListId);
 
+    final String playersLabel = service.service?.isDoubleEvent ?? false
+        ? (scoreSubmitted
+            ? "RANKING_POSITIONS".tr(context)
+            : "TEAMS".tr(context))
+        : (scoreSubmitted
+            ? "RANKING_POSITIONS".tr(context)
+            : "PLAYERS".tr(context));
+
     return Container(
       constraints: kComponentWidthConstraint,
       padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -143,61 +148,56 @@ class _DataBodyState extends ConsumerState<_DataBody> {
           },
           child: ListView(
             children: [
-              SizedBox(height: 20.h),
-              Padding(
-                padding: EdgeInsets.only(left: 3.w),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: GestureDetector(
-                    onTap: () => ref.read(goRouterProvider).pop(),
-                    child: Image.asset(
-                      AppImages.back_arrow_new.path,
-                      height: 24.h,
-                      width: 24.h,
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  "${"EVENT".trU(context)}\n ${"INFORMATION".trU(context)}",
-                  style: AppTextStyles.pragmaticaObliqueExtendedBold(
-                      fontSize: 24.sp,
-                  height: 1,
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-              // Text(
-              //   "${"EVENT".trU(context)}\n ${"INFORMATION".trU(context)}",
-              //   style: AppTextStyles.gothamNarrowBold()
-              //       .copyWith(height: 1.3.h, fontSize: 22.sp, letterSpacing: 1),
-              //   textAlign: TextAlign.center,
-              // ),
-              SizedBox(height: 40.h),
-              _InfoCard(
-                event: service,
-              ),
-              // SizedBox(height: 10.h),
-              ServiceInformationText(
-                service: service,
-                // titleStyle: AppTextStyles.qanelasBold().copyWith(
-                //     fontSize: 19.sp,
-                //     color: AppColors.black,
-                //     letterSpacing: 19.sp * 0.10),
-                // desStyle: AppTextStyles.qanelasRegular()
-                //     .copyWith(color: AppColors.black, fontSize: 13.sp),
-              ),
-              ServiceCoaches(coaches: service.getCoaches),
-              SizedBox(height: 20.h),
+              SizedBox(height: 16.h),
+
+              // ── Back + Title ──
               Row(
                 children: [
+                  GestureDetector(
+                    onTap: () => ref.read(goRouterProvider).pop(),
+                    child: Container(
+                      padding: EdgeInsets.all(10.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.black2,
+                        borderRadius: BorderRadius.circular(14.r),
+                      ),
+                      child: Icon(Icons.arrow_back_ios_new_rounded,
+                          size: 16.sp, color: AppColors.white),
+                    ),
+                  ),
+                  SizedBox(width: 14.w),
+                  Text(
+                    "EVENT".trU(context),
+                    style: AppTextStyles.poppinsBold(fontSize: 22.sp),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20.h),
+
+              // ── Hero Info Card (with coach strip) ──
+              _InfoCard(event: service),
+
+              // ── Information text ──
+              ServiceInformationText(service: service),
+
+              SizedBox(height: 24.h),
+
+              // ── Players header ──
+              Row(
+                children: [
+                  Container(
+                    width: 3.w,
+                    height: 20.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.darkYellow,
+                      borderRadius: BorderRadius.circular(2.r),
+                    ),
+                  ),
+                  SizedBox(width: 10.w),
                   Expanded(
                     child: Text(
-                      "${service.service?.isDoubleEvent ?? false ? (scoreSubmitted ? "RANKING_POSITIONS".tr(context) : "TEAMS".tr(context)) : (scoreSubmitted ? "RANKING_POSITIONS".tr(context) : "PLAYERS".tr(context))} ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
-                      style: AppTextStyles.poppinsBold(
-                          fontSize: 16.sp,),
+                      "$playersLabel ${service.players?.length ?? 0} / ${service.getMaximumCapacity}",
+                      style: AppTextStyles.poppinsBold(fontSize: 16.sp),
                     ),
                   ),
                   RankedOrFriendly(
@@ -205,16 +205,27 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                   ),
                 ],
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 12.h),
+
+              // ── Players slots card ──
               Container(
                 clipBehavior: Clip.antiAlias,
-                padding: EdgeInsets.fromLTRB(20.w, 15.h, 20.w, (service.service?.isDoubleEvent ?? false) ? 15.h : 0),
+                padding: EdgeInsets.fromLTRB(
+                    20.w,
+                    15.h,
+                    20.w,
+                    (service.service?.isDoubleEvent ?? false) ? 15.h : 0),
                 width: double.infinity,
                 constraints: kComponentWidthConstraint,
                 decoration: BoxDecoration(
-                  border: border,
-                  color: scoreSubmitted ? AppColors.blue : AppColors.gray,
-                  borderRadius: BorderRadius.circular(12.r),
+                  color: scoreSubmitted ? AppColors.blue : AppColors.white,
+                  borderRadius: BorderRadius.circular(16.r),
+                  boxShadow: [
+                    BoxShadow(
+                        color: AppColors.black2.withOpacity(0.06),
+                        blurRadius: 12,
+                        offset: const Offset(0, 3)),
+                  ],
                 ),
                 child: _EventPlayersSlots(
                   players: service.players ?? [],
@@ -234,13 +245,17 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                 ),
               ),
               SizedBox(height: 20.h),
+
+              // ── Action buttons ──
               _secondaryBtns(isJoined, playerWaitingListId, context, service),
 
-              if (!(service.rankedEvent ?? false) && !scoreSubmitted) _ApprovalStatus(
-                service: service,
-                onJoin: _joinAfterApprovel,
-                onWithdraw: _withdraw,
-              ),
+              // ── Waiting list / Approval ──
+              if (!(service.rankedEvent ?? false) && !scoreSubmitted)
+                _ApprovalStatus(
+                  service: service,
+                  onJoin: _joinAfterApprovel,
+                  onWithdraw: _withdraw,
+                ),
             ],
           ),
         ),

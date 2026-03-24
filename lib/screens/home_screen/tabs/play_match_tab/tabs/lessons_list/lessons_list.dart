@@ -6,10 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:padelrush/app_styles/app_colors.dart';
 import 'package:padelrush/app_styles/app_text_styles.dart';
 import 'package:padelrush/components/c_divider.dart';
-import 'package:padelrush/components/multi_style_text.dart';
 import 'package:padelrush/components/network_circle_image.dart';
 import 'package:padelrush/components/service_detail_components.dart/event_lesson_card_coach.dart';
-import 'package:padelrush/components/service_detail_components.dart/level_restriction_container.dart';
 import 'package:padelrush/components/main_button.dart';
 import 'package:padelrush/components/secondary_text.dart';
 import 'package:padelrush/globals/constants.dart';
@@ -70,12 +68,19 @@ class _LessonState extends ConsumerState<LessonsList> {
         data: (data) {
           if (data.isEmpty) {
             return Padding(
-              padding: const EdgeInsets.only(top: 120),
+              padding: const EdgeInsets.only(top: 80),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.school_outlined, size: 64, color: Colors.grey[600]),
-                  const SizedBox(height: 16),
+                  Container(
+                    padding: EdgeInsets.all(20.h),
+                    decoration: BoxDecoration(
+                      color: AppColors.lightGray,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(Icons.school_outlined, size: 40.sp, color: AppColors.black25),
+                  ),
+                  SizedBox(height: 20.h),
                   SecondaryText(text: "NO_LESSONS_FOUND".tr(context)),
                 ],
               ),
@@ -127,109 +132,138 @@ class _LessonsState extends ConsumerState<_Lessons> {
 
   @override
   Widget build(BuildContext context) {
+    final String? levelRestriction = widget.lesson.levelRestriction;
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 15.h),
+      margin: EdgeInsets.only(bottom: 12.h),
       decoration: BoxDecoration(
-        color: AppColors.gray,
-        border: border,
-        borderRadius: BorderRadius.circular(12.r),
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black2.withOpacity(0.06),
+            blurRadius: 12,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
-      margin: EdgeInsets.only(bottom: 15.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
+          // Dark header with lesson name + location
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+            decoration: BoxDecoration(
+              color: AppColors.black2,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16.r),
+                topRight: Radius.circular(16.r),
+              ),
+            ),
             child: Row(
               children: [
                 Expanded(
-                  flex: 10,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        (widget.lesson.lessonName ?? "").capitalizeFirst,
-                        style: AppTextStyles.poppinsBold(
-                            fontSize: 15.sp,),
-                      ),
-                      SizedBox(height: 2.h),
-                      LevelRestrictionContainer(
-                        levelRestriction: widget.lesson.levelRestriction,
-                      ),
-                    ],
+                  child: Text(
+                    (widget.lesson.lessonName ?? "").capitalizeFirst,
+                    style: AppTextStyles.poppinsSemiBold(
+                      fontSize: 15.sp,
+                      color: AppColors.white,
+                    ),
                   ),
                 ),
-                Expanded(
-                  flex: 8,
-                  child: EventLessonCardCoach(
-                    coaches: widget.lesson.coaches,
+                Text(
+                  widget.lesson.location?.locationName ?? '',
+                  style: AppTextStyles.poppinsMedium(
+                    fontSize: 12.sp,
+                    color: AppColors.darkYellow,
                   ),
                 ),
               ],
             ),
           ),
-          CDivider(),
+          // Body: coaches, description, price
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
+            padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 10.h),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   flex: 3,
-                  child: Text(
-                    widget.lesson.description,
-                    style: AppTextStyles.poppinsRegular(
-                      fontSize: 13.sp,
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      EventLessonCardCoach(
+                        coaches: widget.lesson.coaches,
+                      ),
+                      if (widget.lesson.description.isNotEmpty) ...[
+                        SizedBox(height: 6.h),
+                        Text(
+                          widget.lesson.description,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTextStyles.poppinsRegular(
+                            fontSize: 12.sp,
+                            color: AppColors.black70,
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                 ),
-                const Spacer(),
+                SizedBox(width: 12.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      widget.lesson.location?.locationName ?? '',
-                      style: AppTextStyles.poppinsRegular(
-                        fontSize: 13.sp,
-                      ),
-                    ),
-                    2.verticalSpace,
-                    Text(
                       Utils.formatPrice(widget.lesson.price),
-                      overflow: TextOverflow.ellipsis,
-                      style: AppTextStyles.poppinsRegular(
-                        fontSize: 13.sp,
-                      ),
+                      style: AppTextStyles.poppinsBold(fontSize: 15.sp),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
-          SizedBox(height: 8.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: _HideShowDatesButton(
-              isDatesVisible: isDatesVisible,
-              onTap: () {
-                setState(() {
-                  isDatesVisible = !isDatesVisible;
-                });
-              },
+          // Footer: level pill + see dates button
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+            decoration: BoxDecoration(
+              color: AppColors.lightGray,
+              borderRadius: isDatesVisible
+                  ? BorderRadius.zero
+                  : BorderRadius.only(
+                      bottomLeft: Radius.circular(16.r),
+                      bottomRight: Radius.circular(16.r),
+                    ),
+            ),
+            child: Row(
+              children: [
+                if (levelRestriction != null)
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
+                    decoration: BoxDecoration(
+                      color: AppColors.darkYellow30,
+                      borderRadius: BorderRadius.circular(100.r),
+                    ),
+                    child: Text(
+                      "${"LEVEL".tr(context)} $levelRestriction",
+                      style: AppTextStyles.poppinsSemiBold(fontSize: 11.sp),
+                    ),
+                  ),
+                const Spacer(),
+                _HideShowDatesButton(
+                  isDatesVisible: isDatesVisible,
+                  onTap: () {
+                    setState(() {
+                      isDatesVisible = !isDatesVisible;
+                    });
+                  },
+                ),
+              ],
             ),
           ),
+          // Expandable dates section
           if (isDatesVisible) ...[
-            // _LessonCoachesListView(
-            //   lesson: widget.lesson,
-            //   maximumCapacity: widget.lesson.maximumCapacity ?? 0,
-            //   minimumCapacity: widget.lesson.minimumCapacity ?? 0,
-            //   onChangeSelectedCoach: (int? id) {
-            //     widget.lesson.selectedCoach = id;
-            //     setState(() {});
-            //   },
-            // ),
-            SizedBox(height: 10.h),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w),
+              padding: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 14.h),
               child: _LessonDatesListView(
                 services: widget.lesson.services,
                 onTap: (index) {

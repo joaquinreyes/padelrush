@@ -447,25 +447,7 @@ class _AddPlayerToWaitingListDialogState
   }
 
   Future<void> _handleAddPlayer(User user) async {
-    // Check level restrictions first
-    final serviceDetail = await ref.read(fetchServiceDetailProvider(widget.serviceId).future);
-    final sportsName = serviceDetail.getSportsName(ref) ?? "padel";
-    final userLevel = user.level(sportsName) ?? 0.0;
-    final minLevel = serviceDetail.options?.minLevel ?? 0.0;
-    final maxLevel = serviceDetail.options?.maxLevel ?? 7.0;
-
-    // Check if user level is within allowed range
-    bool isOutsideRange = userLevel < minLevel || userLevel > maxLevel;
-    String? outsideRangeWarning;
-    if (isOutsideRange) {
-      if (userLevel < minLevel) {
-        outsideRangeWarning = "${user.fullName}'s level ($userLevel) is below the minimum required level ($minLevel).";
-      } else {
-        outsideRangeWarning = "${user.fullName}'s level ($userLevel) is above the maximum allowed level ($maxLevel).";
-      }
-    }
-
-    // Show confirmation dialog (with optional outside-range warning for organizer override)
+    // Show confirmation dialog
     final bool? confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => CustomDialog(
@@ -482,17 +464,6 @@ class _AddPlayerToWaitingListDialogState
               ),
             ),
             SizedBox(height: 15.h),
-            if (outsideRangeWarning != null) ...[
-              Text(
-                outsideRangeWarning,
-                textAlign: TextAlign.center,
-                style: AppTextStyles.poppinsRegular(
-                  fontSize: 14.sp,
-                  color: Colors.orange.shade700,
-                ),
-              ),
-              SizedBox(height: 8.h),
-            ],
             Text(
               "DO_YOU_WANT_TO_ADD_PLAYER_TO_WAITING_LIST".tr(context, params: {
                 "PLAYER_NAME": user.fullName
@@ -520,59 +491,12 @@ class _AddPlayerToWaitingListDialogState
       return;
     }
 
-    // Show position selection dialog
-    final result = await showDialog<(int, int?)>(
-      context: context,
-      builder: (context) {
-        return CustomDialog(
-          color: AppColors.white,
-          closeIconColor: AppColors.black2,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 3.w),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "CHOOSE_YOUR_SPOT".trU(context),
-                  style: AppTextStyles.poppinsMedium(
-                    fontSize: 19.sp,
-                    color: AppColors.black2,
-                  ),
-                ),
-                SizedBox(height: 20.h),
-                OpenMatchParticipantRowWithBG(
-                  textForAvailableSlot: "SELECT".trU(context),
-                  players: widget.players,
-                  allowTap: false,
-                  backgroundColor: AppColors.black25,
-                  textColor: AppColors.black2,
-                  slotBackgroundColor: AppColors.black2,
-                  imageBgColor: AppColors.white,
-                  imageLogoColor: AppColors.black2,
-                  slotIconColor: AppColors.white,
-                  onTap: (index, playerID) {
-                    Navigator.pop(context, (index, playerID));
-                  },
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-
-    if (result == null || !mounted) {
-      return;
-    }
-
-    final (int selectedIndex, int? otherPlayerID) = result;
-    final position = selectedIndex + 1;
+    if (!mounted) return;
 
     // Call API to add player to waiting list
     final customerPlayers = [
       {
         "customer_id": user.id,
-        "position": position,
       }
     ];
 

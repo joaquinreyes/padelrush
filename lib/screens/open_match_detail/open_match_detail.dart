@@ -22,6 +22,7 @@ import 'package:padelrush/managers/user_manager.dart';
 import 'package:padelrush/models/base_classes/booking_player_base.dart';
 import 'package:padelrush/models/service_detail_model.dart';
 import 'package:padelrush/repository/booking_repo.dart';
+import 'package:padelrush/repository/club_repo.dart';
 import 'package:padelrush/repository/payment_repo.dart';
 import 'package:padelrush/repository/play_repo.dart';
 import 'package:padelrush/routes/app_pages.dart';
@@ -46,7 +47,6 @@ import '../../models/app_user.dart';
 import '../../models/user_bookings.dart';
 import 'dupr_ranked_component.dart';
 import 'match_result_dialog/enter_match_result.dart';
-import 'package:flutter_riverpod/legacy.dart';
 
 part 'open_match_components.dart';
 
@@ -204,30 +204,38 @@ class _DataBodyState extends ConsumerState<_DataBody> {
             padding: const EdgeInsets.all(0),
             child: Column(
               children: [
-                SizedBox(height: 20.h),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: GestureDetector(
-                    onTap: () => ref.read(goRouterProvider).pop(),
-                    child: Image.asset(AppImages.back_arrow_new.path,
-                        height: 24.h, width: 24.h),
-                  ),
+                SizedBox(height: 16.h),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => ref.read(goRouterProvider).pop(),
+                      child: Container(
+                        padding: EdgeInsets.all(8.h),
+                        decoration: BoxDecoration(
+                          color: AppColors.lightGray,
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        child: Icon(Icons.arrow_back_ios_new_rounded, size: 18.sp, color: AppColors.black2),
+                      ),
+                    ),
+                    SizedBox(width: 14.w),
+                    Text(
+                      "MATCH".trU(context),
+                      style: AppTextStyles.poppinsBold(
+                        fontSize: 22.sp,
+                      ),
+                    ),
+                  ],
                 ),
-                // MultiStyleTextFirstBold(text: "${"MATCH".trU(context)} \n${"INFORMATION".trU(context)}",
-                //     fontSize: 26.sp,
-                //     color: AppColors.black),
-                Text(
-                  "${"MATCH".trU(context)}\n  ${"INFORMATION".trU(context)}",
-                  style: AppTextStyles.pragmaticaObliqueExtendedBold(
-                    fontSize: 24.sp,
-                  ).copyWith(height: 1),
-                  textAlign: TextAlign.start,
-                ),
-                SizedBox(height: 40.h),
+                SizedBox(height: 24.h),
                 if (isCancelled) ...[
                   ChangesCancelledDetailsCard(
                     heading: "BOOKING_CANCELLED".tr(context),
                     description: "CHANGES_DESC".tr(context),
+                    contactPhone: ref.read(clubLocationsProvider).value
+                        ?.where((l) => l.id == service.service?.location?.id)
+                        .firstOrNull
+                        ?.locationNumber,
                   ),
                   SizedBox(height: 10.h),
                 ],
@@ -253,11 +261,13 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                     }
                     // Match Info Tab (default)
                     final currentUserId = ref.read(userProvider)?.user?.id;
+                    // Self-applied players waiting for organizer approval (isWaiting)
+                    // Invited players (isOpenMatchWaitingApproval) are handled by _WaitingList
                     final waitingApprovalPlayer = !isCurrentUserOrganizer
                         ? service.players?.where((p) =>
                             p.customer?.id == currentUserId &&
-                            (p.isOpenMatchWaitingApproval ||
-                                (p.isWaiting ?? false))).firstOrNull
+                            (p.isWaiting ?? false) &&
+                            !p.isOpenMatchWaitingApproval).firstOrNull
                         : null;
                     // Check requestWaitingList – this is where the backend puts
                     // outside-level-range join requests
@@ -286,7 +296,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                           children: [
                             Text(
                               "PLAYERS".trU(context),
-                              style: AppTextStyles.poppinsMedium(
+                              style: AppTextStyles.poppinsBold(
                                 fontSize: 17.sp,
                               ),
                             ),
@@ -299,10 +309,11 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                         OpenMatchParticipantRowWithBG(
                           textForAvailableSlot: isCurrentUserOrganizer ? "ADD".trU(context) : "RESERVE".trU(context),
                           players: displayPlayers,
-                          slotIconColor: AppColors.black,
-                          backgroundColor: AppColors.gray,
-                          slotBackgroundColor: AppColors.darkYellow80,
-                          imageBgColor: AppColors.black,
+                          slotIconColor: AppColors.black70,
+                          backgroundColor: AppColors.white,
+                          slotBackgroundColor: AppColors.lightGray,
+                          imageBgColor: AppColors.black2,
+                          borderRadius: BorderRadius.circular(16.r),
                           onTap: (_, __) async {
                             final currentUserID =
                                 ref.read(userManagerProvider).user?.user?.id;
@@ -380,6 +391,11 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                           id: service.id!,
                           onApprove: _onApprove,
                           isCurrentOrganizer: isCurrentUserOrganizer,
+                          excludeCustomerIds: (service.requestWaitingList ?? [])
+                              .where((e) => (e.status ?? "").toLowerCase() != "open_match_waiting_approval")
+                              .map((e) => e.id)
+                              .whereType<int>()
+                              .toSet(),
                           onJoinAfterApproval: (customerID) {
                             _joinAfterApproval(customerID);
                           },
@@ -786,32 +802,6 @@ class _DataBodyState extends ConsumerState<_DataBody> {
       required bool isReserve,
       required bool isApprovalNeeded,
       bool isJoinApproval = false}) async {
-    bool effectiveApprovalNeeded = isApprovalNeeded;
-
-    // Check level restrictions (skip if player was already approved)
-    if (!isJoinApproval) {
-      final sportsName = service.getSportsName(ref) ?? "padel";
-      final userLevel = ref.read(userProvider)?.user?.level(sportsName) ?? 0.0;
-      final minLevel = service.options?.minLevel ?? 0.0;
-      final maxLevel = service.options?.maxLevel ?? 7.0;
-
-      if (userLevel < minLevel || userLevel > maxLevel) {
-        if (!mounted) return;
-        String message;
-        if (userLevel < minLevel) {
-          message = "Your level ($userLevel) is below the minimum required level ($minLevel) for this match.";
-        } else {
-          message = "Your level ($userLevel) is above the maximum allowed level ($maxLevel) for this match.";
-        }
-        final bool? wantsToRequest = await showDialog<bool>(
-          context: context,
-          builder: (context) => _OutsideRankingRequestDialog(message: message),
-        );
-        if (wantsToRequest != true || !mounted) return;
-        effectiveApprovalNeeded = true;
-      }
-    }
-
     final provider = joinServiceProvider(service.id!,
         position: index + 1,
         isEvent: false,
@@ -819,14 +809,14 @@ class _DataBodyState extends ConsumerState<_DataBody> {
         isDouble: false,
         isReserve: isReserve,
         isLesson: false,
-        pendingPayment: effectiveApprovalNeeded,
-        isApprovalNeeded: effectiveApprovalNeeded);
+        pendingPayment: isApprovalNeeded,
+        isApprovalNeeded: isApprovalNeeded);
     final double? price = await Utils.showLoadingDialog(context, provider, ref);
 
     if (!mounted || price == null) {
       return;
     }
-    if (effectiveApprovalNeeded && price < 0) {
+    if (isApprovalNeeded && price < 0) {
       await showDialog(
         context: context,
         builder: (_) => _WaitingForApprovalDialog(serviceID: service.id!),
@@ -886,6 +876,9 @@ class _DataBodyState extends ConsumerState<_DataBody> {
         isReserve
             ? "YOU_HAVE_RESERVED_A_SPOT_SUCCESSFULLY".tr(context)
             : "YOU_HAVE_JOINED_THE_MATCH".tr(context),
+        subtitle: isReserve
+            ? "The organizer has been notified about your reservation."
+            : "The organizer has been notified. See you on the court!",
       );
     }
   }
@@ -949,6 +942,22 @@ class _DataBodyState extends ConsumerState<_DataBody> {
   }
 
   void _withdrawWaitingRequest() async {
+    final userId = ref.read(userProvider)?.user?.id ?? -1;
+    // Find the current user's waiting list entry to get the entry ID
+    final waitingEntry = widget.service.requestWaitingList
+        ?.where((e) => e.customerId == userId)
+        .firstOrNull;
+    final waitingEntryId = waitingEntry?.id;
+
+    if (waitingEntryId == null) {
+      // Fallback: clear local state only (no backend entry to remove)
+      ref.read(_waitingForApprovalProvider.notifier).state = false;
+      ref.read(sharedPrefManagerProvider)
+          .clearWaitingApproval(widget.service.id!, userId);
+      ref.invalidate(fetchServiceDetailProvider(widget.service.id!));
+      return;
+    }
+
     final bool? confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => const ConfirmationDialog(
@@ -958,12 +967,14 @@ class _DataBodyState extends ConsumerState<_DataBody> {
     );
     if (confirmed != true || !mounted) return;
 
-    final provider = cancelServiceProvider(widget.service.id!);
+    final provider = approvePlayerProvider(
+        isApprove: false,
+        serviceID: widget.service.id!,
+        playerID: waitingEntryId);
     final bool? success = await Utils.showLoadingDialog(context, provider, ref);
-    if (!mounted || success == null || !success) return;
+    if (!mounted || success != true) return;
 
     ref.read(_waitingForApprovalProvider.notifier).state = false;
-    final userId = ref.read(userProvider)?.user?.id ?? -1;
     ref.read(sharedPrefManagerProvider)
         .clearWaitingApproval(widget.service.id!, userId);
     ref.invalidate(fetchServiceDetailProvider(widget.service.id!));

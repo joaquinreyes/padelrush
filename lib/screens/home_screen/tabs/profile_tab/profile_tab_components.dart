@@ -10,19 +10,20 @@ class _HeaderInfo extends ConsumerWidget {
     // final userLevel = user?.level(getSportsName(ref));
     // final userLevelTag = user?.getLevelTag(userLevel) ?? "";
     final paymentDetails = ref.watch(walletInfoProvider);
-    final membership = ref.watch(fetchActiveAndAllMembershipsProvider);
 
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      PlatformC().isCurrentDesignPlatformDesktop
-          ? SizedBox(height: 10.h)
-          : SignOutButtonComponent(),
-      10.verticalSpace,
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        PlatformC().isCurrentDesignPlatformDesktop
+            ? SizedBox(height: 10.h)
+            : SignOutButtonComponent(),
+        SizedBox(height: 6.h),
+        // Horizontal centered row: Avatar | Name/Level/Wallet
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Row(
             children: [
+              // Avatar
               InkWell(
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
@@ -58,27 +59,25 @@ class _HeaderInfo extends ConsumerWidget {
                   children: [
                     NetworkCircleImage(
                       path: user?.profileUrl,
-                      width: 90.h,
-                      height: 90.h,
+                      width: 95.h,
+                      height: 95.h,
                       borderRadius: BorderRadius.circular(100.r),
                       bgColor: AppColors.black2,
                       logoColor: AppColors.white,
                       showBG: true,
                     ),
                     Positioned(
-                      bottom: 6.h,
+                      bottom: 4.h,
                       child: Container(
                         padding: EdgeInsets.all(4.h),
-                        decoration:
-                        BoxDecoration(
+                        decoration: BoxDecoration(
                           color: AppColors.black,
                           borderRadius: BorderRadius.circular(100.r),
-
                         ),
                         child: Image.asset(
                           AppImages.iconCameraNew.path,
-                          width: 13.w,
-                          height: 13.w,
+                          width: 12.w,
+                          height: 12.w,
                           color: AppColors.darkYellow,
                         ),
                       ),
@@ -86,180 +85,80 @@ class _HeaderInfo extends ConsumerWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 5.h),
-              Text(
-                user?.firstName?.toUpperCase() ?? "",
-                style: AppTextStyles.pragmaticaObliqueExtendedBold(
-                  fontSize: 24.sp,
+              SizedBox(width: 18.w),
+              // Name + level + wallet — fills remaining space, centered vertically
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      user?.firstName?.toUpperCase() ?? "",
+                      style: AppTextStyles.poppinsBold(fontSize: 22.sp),
+                    ),
+                    SizedBox(height: 2.h),
+                    Text(
+                      "${(userLevel ?? 0).toStringAsFixed(2)} ${getRankLabel(userLevel ?? 0)}• ${user?.playingSide ?? ""}",
+                      style: AppTextStyles.poppinsRegular(
+                        fontSize: 13.sp,
+                        color: AppColors.black70,
+                      ),
+                    ),
+                    SizedBox(height: 6.h),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 5.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.darkYellow30,
+                        borderRadius: BorderRadius.circular(100.r),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.account_balance_wallet_outlined, size: 14.sp, color: AppColors.black2),
+                          SizedBox(width: 5.w),
+                          Text(
+                            "WALLET".tr(context),
+                            style: AppTextStyles.poppinsSemiBold(fontSize: 12.sp),
+                          ),
+                          SizedBox(width: 4.w),
+                          paymentDetails.when(
+                            data: (data) {
+                              if (data.isNotEmpty) {
+                                return Text(
+                                  "${NumberFormat('#,##0', 'id_ID').format(data.first.balance)} $currency",
+                                  style: AppTextStyles.poppinsRegular(fontSize: 12.sp),
+                                );
+                              }
+                              return Text(
+                                Utils.formatPrice2(0, currency),
+                                style: AppTextStyles.poppinsRegular(fontSize: 12.sp),
+                              );
+                            },
+                            error: (error, stackTrace) => Text(
+                              Utils.formatPrice2(0, currency),
+                              style: AppTextStyles.poppinsRegular(fontSize: 12.sp),
+                            ),
+                            loading: () => SizedBox(
+                              width: 14.w,
+                              height: 14.w,
+                              child: const CupertinoActivityIndicator(radius: 6),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 1.h),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // if (userLevelTag.isNotEmpty)
-                  //   Container(
-                  //       padding:
-                  //           EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-                  //       decoration: BoxDecoration(
-                  //           color: AppColors.brightGold,
-                  //           borderRadius: BorderRadius.circular(10)),
-                  //       child: Text(
-                  //         userLevelTag.tr(context),
-                  //         style: AppTextStyles.gothamNarrowLight()
-                  //             .copyWith(fontSize: 15.sp, color: Colors.black),
-                  //       )),
-                  // SizedBox(width: 5.w),
-                  Text(
-                    "${(userLevel ?? 0).toStringAsFixed(2)} ${getRankLabel(userLevel ?? 0)}• ${user?.playingSide ?? ""}",
-                    style: AppTextStyles.poppinsRegular(
-                      fontSize: 15.sp,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    "WALLET".tr(context),
-                    style: AppTextStyles.poppinsBold(
-                      fontSize: 15.sp,
-                    ),
-                  ),
-                  SizedBox(width: 4.w),
-                  paymentDetails.when(
-                      data: (data) {
-                        if (data.isNotEmpty) {
-                          return Text(
-                            "${NumberFormat('#,##0', 'id_ID').format(data.first.balance)} $currency",
-                            style: AppTextStyles.poppinsRegular(
-                              fontSize: 15.sp,
-                            ),
-                          );
-                        }
-
-                        return Text(
-                          Utils.formatPrice2(0, currency),
-                          style: AppTextStyles.poppinsRegular(
-                            fontSize: 15.sp,
-                          ),
-                        );
-                      },
-                      error: (error, stackTrace) => Text(
-                        Utils.formatPrice2(0, currency),
-                        style: AppTextStyles.poppinsRegular(
-                          fontSize: 15.sp,
-                        ),
-                      ),
-                      loading: () => const Center(
-                        child: CupertinoActivityIndicator(
-                          radius: 10,
-                        ),
-                      ))
-                ],
-              ),
-              // SizedBox(height: 10.h),
-              // const FollowingFollowerComponent()
             ],
           ),
-          // Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   mainAxisAlignment: MainAxisAlignment.start,
-          //   children: [
-          //     SizedBox(height: 5.h),
-          //     Text(
-          //       user?.firstName?.toUpperCase() ?? "",
-          //       style: AppTextStyles.poppinsMedium(
-          //         fontSize: 22.sp,
-          //       ),
-          //     ),
-          //     SizedBox(height: 1.h),
-          //     Row(
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         // if (userLevelTag.isNotEmpty)
-          //         //   Container(
-          //         //       padding:
-          //         //           EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-          //         //       decoration: BoxDecoration(
-          //         //           color: AppColors.brightGold,
-          //         //           borderRadius: BorderRadius.circular(10)),
-          //         //       child: Text(
-          //         //         userLevelTag.tr(context),
-          //         //         style: AppTextStyles.gothamNarrowLight()
-          //         //             .copyWith(fontSize: 15.sp, color: Colors.black),
-          //         //       )),
-          //         // SizedBox(width: 5.w),
-          //         Text(
-          //           "${(userLevel ?? 0).toStringAsFixed(2)} ${getRankLabel(userLevel ?? 0)}• ${user?.playingSide ?? ""}",
-          //           style: AppTextStyles.poppinsRegular(
-          //             fontSize: 15.sp,
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //     SizedBox(height: 13.h),
-          //     Row(
-          //       children: [
-          //         Text(
-          //           "WALLET".tr(context),
-          //           style: AppTextStyles.poppinsBold(
-          //             fontSize: 15.sp,
-          //           ),
-          //         ),
-          //         SizedBox(width: 4.w),
-          //         paymentDetails.when(
-          //             data: (data) {
-          //               if (data.isNotEmpty) {
-          //                 return Text(
-          //                   "${NumberFormat('#,##0', 'id_ID').format(data.first.balance)} $currency",
-          //                   style: AppTextStyles.poppinsRegular(
-          //                     fontSize: 15.sp,
-          //                   ),
-          //                 );
-          //               }
-          //
-          //               return Text(
-          //                 Utils.formatPrice2(0, currency),
-          //                 style: AppTextStyles.poppinsRegular(
-          //                   fontSize: 15.sp,
-          //                 ),
-          //               );
-          //             },
-          //             error: (error, stackTrace) => Text(
-          //                   Utils.formatPrice2(0, currency),
-          //                   style: AppTextStyles.poppinsRegular(
-          //                     fontSize: 15.sp,
-          //                   ),
-          //                 ),
-          //             loading: () => const Center(
-          //                   child: CupertinoActivityIndicator(
-          //                     radius: 10,
-          //                   ),
-          //                 ))
-          //       ],
-          //     )
-          //   ],
-          // ),
-          // SizedBox(width: 15.w),
-          // membership.when(
-          //     data: (data) {
-          //       return Padding(
-          //           padding: EdgeInsets.only(top: 25),
-          //           child: _membershipButton(ref, context, data));
-          //     },
-          //     error: (e, _) => SizedBox(),
-          //     loading: () => const Center(child: CupertinoActivityIndicator()))
-        ],
-      )
-    ]);
+        ),
+      ],
+    );
   }
 
   Widget _membershipButton(
       WidgetRef ref, BuildContext context, UserActiveMembership data) {
-    bool haveMembership = data.haveActiveHOPMembership != null;
+    bool haveMembership = data.haveActiveClubMembership != null;
 
     return InkWell(
       onTap: () async {
@@ -313,7 +212,7 @@ class _HeaderInfo extends ConsumerWidget {
 
   Future<void> onPurchaseMembership(
       WidgetRef ref, BuildContext context, UserActiveMembership value) async {
-    final selectedMembership = value.haveHOPMembership;
+    final selectedMembership = value.haveClubMembership;
     if (selectedMembership == null) {
       return;
     }
@@ -457,9 +356,9 @@ class _MembershipDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final price = data.haveHOPMembership?.price ?? 0;
+    final price = data.haveClubMembership?.price ?? 0;
 
-    final haveMembership = data.haveActiveHOPMembership;
+    final haveMembership = data.haveActiveClubMembership;
 
     final isActive = haveMembership != null;
 
@@ -556,7 +455,7 @@ class _MembershipDialog extends ConsumerWidget {
 
   Widget _membershipCard(
       WidgetRef ref, BuildContext context, UserActiveMembership data) {
-    final haveMembership = data.haveActiveHOPMembership;
+    final haveMembership = data.haveActiveClubMembership;
     final user = ref.read(userManagerProvider).user?.user;
     final profilePicture = user?.profileUrl ?? "";
     final fullName = (user?.fullName ?? "").toUpperCase();

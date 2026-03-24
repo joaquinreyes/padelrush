@@ -16,20 +16,20 @@ class UserActiveMembership {
     return value.id != null ? value : null;
   }
 
-  ActiveMemberships? get haveActiveHOPMembership {
+  ActiveMemberships? get haveActiveClubMembership {
     final value = activeMembership.lastWhere(
         (element) => (element.membershipName ?? "")
             .toLowerCase()
-            .contains("hop membership"),
+            .contains("padel rush"),
         orElse: () => ActiveMemberships());
     return value.id != null ? value : null;
   }
 
-  MembershipModel? get haveHOPMembership {
+  MembershipModel? get haveClubMembership {
     final value = membershipModel.lastWhere(
         (element) => (element.membershipName ?? "")
             .toLowerCase()
-            .contains("hop membership"),
+            .contains("padel rush"),
         orElse: () => MembershipModel());
     return value.id != null ? value : null;
   }
@@ -61,12 +61,12 @@ class UserActiveMembership {
   }
 
   List<MembershipModel> getMemberships(int selectedIndex) {
+    if (showMembershipCategories.isEmpty) return [];
+    final categoryIds = showMembershipCategories.length > selectedIndex
+        ? showMembershipCategories[selectedIndex].id
+        : <int>[];
     final value = membershipModel
-        .where((element) =>
-            element.membershipCategoryId ==
-            (selectedIndex == 0
-                ? kPilatesMembershipCategoryId
-                : kYogaMembershipCategoryId))
+        .where((element) => categoryIds.contains(element.membershipCategoryId))
         .toList();
     return value.isNotEmpty ? value : [];
   }

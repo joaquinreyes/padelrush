@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/misc.dart';
 import 'package:geolocator/geolocator.dart' as position;
 import 'package:intl/intl.dart';
 import 'package:padelrush/components/async_dialog.dart';
@@ -134,13 +133,14 @@ class Utils {
   }
 
   static Future<void> showMessageDialog(BuildContext context, String message,
-      {Color? backgroundColor}) async {
+      {Color? backgroundColor, String? subtitle}) async {
     await showDialog(
       context: context,
       builder: (context) {
         return MessageDialog(
           message: message,
           backgroundColor: backgroundColor,
+          subtitle: subtitle,
         );
       },
     );
@@ -430,13 +430,14 @@ class Utils {
 
   static Future<void> openWhatsappSupport(
       {String message = "Hello $kAppName",
+      String? phone,
       required BuildContext context}) async {
     try {
-      final Uri url =
-          Uri.parse('whatsapp://send?phone=$kWhatsAppContact&text=$message');
-      // Uri.parse('$kWhatsAppLink?phone=$kWhatsAppContact&text=$message');
+      final contact = phone ?? kWhatsAppContact;
+      final encodedMessage = Uri.encodeComponent(message);
+      final Uri url = Uri.parse('https://wa.me/$contact?text=$encodedMessage');
       if (await canLaunchUrl(url)) {
-        await launchUrl(url);
+        await launchUrl(url, mode: LaunchMode.externalApplication);
       } else {
         if (!context.mounted) {
           return;

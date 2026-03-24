@@ -11,38 +11,30 @@ class _HideShowDatesButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: InkWell(
-        // customBorder: RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.circular(10.r),
-        // ),
-        onTap: onTap,
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 7.5.w),
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(100.r),
+    return InkWell(
+      borderRadius: BorderRadius.circular(100.r),
+      onTap: onTap,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            isDatesVisible
+                ? "HIDE_DATES".tr(context)
+                : "SEE_DATES".tr(context),
+            style: AppTextStyles.poppinsMedium(
+              fontSize: 12.sp,
+              color: AppColors.black2,
+            ),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                isDatesVisible
-                    ? "HIDE_DATES".tr(context)
-                    : "SEE_DATES".tr(context),
-                style: AppTextStyles.poppinsRegular(
-                    fontSize: 11.sp,),
-              ),
-              SizedBox(width: 4.w),
-              Icon(
-                isDatesVisible ? Icons.arrow_upward : Icons.arrow_downward,
-                size: 16.sp,
-                color: AppColors.black2,
-              ),
-            ],
+          SizedBox(width: 2.w),
+          Icon(
+            isDatesVisible
+                ? Icons.keyboard_arrow_up_rounded
+                : Icons.keyboard_arrow_down_rounded,
+            size: 18.sp,
+            color: AppColors.black2,
           ),
-        ),
+        ],
       ),
     );
   }

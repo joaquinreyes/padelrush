@@ -1,6 +1,6 @@
 part of 'event_detail.dart';
 
-class _InfoCard extends StatelessWidget {
+class _InfoCard extends ConsumerWidget {
   const _InfoCard({
     required this.event,
   });
@@ -8,117 +8,200 @@ class _InfoCard extends StatelessWidget {
   final ServiceDetail event;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     String? levelRestriction = event.service?.event?.levelRestriction;
+    final coaches = event.getCoaches;
+    final hasCoaches = coaches.isNotEmpty;
+
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 15.w,
-        vertical: 15.h,
-      ),
       decoration: BoxDecoration(
-          border: border,
-          color: AppColors.darkYellow35,
-          borderRadius: BorderRadius.circular(12.r)),
+        borderRadius: BorderRadius.circular(20.r),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black2.withOpacity(0.10),
+            blurRadius: 20,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Text(
-                  (event.service?.event?.eventName ?? "").capitalizeFirst,
-                  style: AppTextStyles.poppinsBold(
-                    fontSize: 15.sp,
-                  ),
-                ),
+          // ── Dark header ──
+          Container(
+            padding: EdgeInsets.fromLTRB(20.w, 18.h, 20.w, 16.h),
+            decoration: BoxDecoration(
+              color: AppColors.black2,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.r),
+                topRight: Radius.circular(20.r),
+                bottomLeft: hasCoaches ? Radius.zero : Radius.circular(20.r),
+                bottomRight: hasCoaches ? Radius.zero : Radius.circular(20.r),
               ),
-              Expanded(
-                flex: 4,
-                child: Text(
-                  // (event.courtName).toUpperCase(),
-                  (event.service?.location?.locationName ?? ""),
-                  textAlign: TextAlign.end,
-                  style: AppTextStyles.poppinsBold(
-                    fontSize: 13.sp,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          CDivider(color: AppColors.gray),
-          // SizedBox(
-          //   height: 5.h,
-          // ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                child: _colInfo(
-                  event.bookingDate.format("EEE dd MMM"),
-                  "${event.bookingStartTime.format("HH:mm")} - ${event.bookingEndTime.format("HH:mm a")}"
-                      .toLowerCase(),
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Event name + location
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'SLOTS'.trU(context),
-                      style: AppTextStyles.poppinsBold(
-                        fontSize: 14.sp,
+                    Expanded(
+                      child: Text(
+                        (event.service?.event?.eventName ?? "").capitalizeFirst,
+                        style: AppTextStyles.poppinsBold(
+                          fontSize: 20.sp,
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
-                    Text(
-                      "${'MAX'.tr(context)} ${event.getMaximumCapacity.toString()} ${(event.isWellnessSport ? 'PARTICIPANTS' : 'PLAYERS').tr(context)}",
-                      style: AppTextStyles.poppinsRegular(
-                          fontSize: 12.sp),
+                    SizedBox(width: 10.w),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 5.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.darkYellow,
+                        borderRadius: BorderRadius.circular(100.r),
+                      ),
+                      child: Text(
+                        event.service?.location?.locationName ?? "",
+                        style: AppTextStyles.poppinsSemiBold(
+                          fontSize: 11.sp,
+                          color: AppColors.black2,
+                        ),
+                      ),
                     ),
-                    Text(
-                        "${'MIN'.tr(context)} ${event.getMinimumCapacity.toString()} ${(event.isWellnessSport ? 'PARTICIPANTS' : 'PLAYERS').tr(context)}",
-                        style: AppTextStyles.poppinsRegular(
-                            fontSize: 12.sp)),
                   ],
                 ),
-              ),
-              Expanded(
-                child: _colInfo(
-                  levelRestriction != null
-                      ? "${"LEVEL".tr(context)} $levelRestriction"
-                      : "",
-                  "${"PRICE".tr(context)} ${Utils.formatPrice(event.service?.price)}",
-                  isEnd: true,
+                SizedBox(height: 14.h),
+
+                // Date & Time row
+                Row(
+                  children: [
+                    Icon(Icons.calendar_today_rounded,
+                        size: 14.sp, color: AppColors.darkYellow),
+                    SizedBox(width: 6.w),
+                    Text(
+                      event.bookingDate.format("EEE dd MMM yyyy"),
+                      style: AppTextStyles.poppinsMedium(
+                        fontSize: 13.sp,
+                        color: AppColors.white,
+                      ),
+                    ),
+                    SizedBox(width: 16.w),
+                    Icon(Icons.access_time_rounded,
+                        size: 14.sp, color: AppColors.darkYellow),
+                    SizedBox(width: 4.w),
+                    Text(
+                      "${event.bookingStartTime.format("HH:mm")} – ${event.bookingEndTime.format("HH:mm")}",
+                      style: AppTextStyles.poppinsMedium(
+                        fontSize: 13.sp,
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ],
                 ),
-              )
-            ],
-          )
+                SizedBox(height: 16.h),
+
+                // Stats chips row
+                Row(
+                  children: [
+                    // Price chip
+                    _statChip(
+                      icon: Icons.payments_outlined,
+                      label: Utils.formatPrice(event.service?.price),
+                    ),
+                    SizedBox(width: 8.w),
+                    // Slots chip
+                    _statChip(
+                      icon: Icons.group_outlined,
+                      label:
+                          "${event.players?.length ?? 0}/${event.getMaximumCapacity}",
+                    ),
+                    if (levelRestriction != null) ...[
+                      SizedBox(width: 8.w),
+                      _statChip(
+                        icon: Icons.trending_up_rounded,
+                        label:
+                            "${"LEVEL".tr(context)} $levelRestriction",
+                      ),
+                    ],
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          // ── Coach strip ──
+          if (hasCoaches)
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+              decoration: BoxDecoration(
+                color: AppColors.darkYellow,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20.r),
+                  bottomRight: Radius.circular(20.r),
+                ),
+              ),
+              child: Row(
+                children: [
+                  ...coaches.take(3).map((coach) => Padding(
+                        padding: EdgeInsets.only(right: 6.w),
+                        child: NetworkCircleImage(
+                          path: coach.profileUrl,
+                          width: 28.w,
+                          height: 28.w,
+                          borderRadius: BorderRadius.circular(100.r),
+                          boxBorder:
+                              Border.all(color: AppColors.black2, width: 1.5),
+                          bgColor: AppColors.black2,
+                          logoColor: AppColors.white,
+                        ),
+                      )),
+                  SizedBox(width: 4.w),
+                  Flexible(
+                    child: Text(
+                      coaches.length == 1
+                          ? "${"COACH".tr(context)} ${coaches.first.fullName ?? ""}"
+                          : "${coaches.length} ${"COACHES".tr(context)}",
+                      style: AppTextStyles.poppinsSemiBold(
+                        fontSize: 12.sp,
+                        color: AppColors.black2,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
         ],
       ),
     );
   }
 
-  Column _colInfo(String text1, String text2,
-      {bool isEnd = false, TextStyle? textStyle1, TextStyle? textStyle2}) {
-    return Column(
-      crossAxisAlignment:
-          isEnd ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-      children: [
-        Text(
-          text1,
-          style: textStyle1 ??
-              AppTextStyles.poppinsRegular(
-                  fontSize: 13.sp),
-        ),
-        SizedBox(height: 2.h),
-        Text(
-          text2,
-          style: textStyle2 ??
-              AppTextStyles.poppinsRegular(
-                  fontSize: 13.sp),
-        ),
-      ],
+  Widget _statChip({required IconData icon, required String label}) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
+      decoration: BoxDecoration(
+        color: AppColors.white10,
+        borderRadius: BorderRadius.circular(100.r),
+        border: Border.all(color: AppColors.white25, width: 0.5),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 14.sp, color: AppColors.darkYellow),
+          SizedBox(width: 5.w),
+          Text(
+            label,
+            style: AppTextStyles.poppinsSemiBold(
+              fontSize: 12.sp,
+              color: AppColors.white,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -143,7 +226,6 @@ class _ConfirmationDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDialog(
-      // contentPadding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 20.w),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -183,7 +265,6 @@ class _ConfirmationDialog extends StatelessWidget {
           MainButton(
             label: _buttonText(context),
             isForPopup: true,
-            // color: AppColors.rosewood,
             onTap: () {
               Navigator.pop(context, true);
             },
@@ -297,12 +378,14 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
       children: [
         Row(
           children: [
-            // const Icon(Icons.info_outline, color: AppColors.black, size: 22),
-            Image.asset(
-              AppImages.infoIcon.path,
-              width: 12.h,
-              height: 12.h,
-              color: AppColors.black,
+            Container(
+              padding: EdgeInsets.all(6.h),
+              decoration: BoxDecoration(
+                color: AppColors.darkYellow30,
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+              child: Icon(Icons.hourglass_bottom_rounded,
+                  size: 14.sp, color: AppColors.black2),
             ),
             SizedBox(width: 10.w),
             Text(
@@ -310,18 +393,38 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
               style: AppTextStyles.poppinsBold(
                 fontSize: 16.sp,
               ),
-            )
+            ),
+            const Spacer(),
+            if (showWaitingList)
+              Container(
+                padding:
+                    EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                decoration: BoxDecoration(
+                  color: AppColors.lightGray,
+                  borderRadius: BorderRadius.circular(100.r),
+                ),
+                child: Text(
+                  "${widget.players.length}",
+                  style: AppTextStyles.poppinsSemiBold(fontSize: 12.sp),
+                ),
+              ),
           ],
         ),
-        SizedBox(height: 6.h),
+        SizedBox(height: 10.h),
         showWaitingList
             ? Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    border: border,
-                    color: AppColors.gray),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  borderRadius: BorderRadius.circular(16.r),
+                  color: AppColors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.black2.withOpacity(0.06),
+                      blurRadius: 12,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.all(16.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -351,20 +454,10 @@ class _WaitingPlayersSlotsState extends ConsumerState<_WaitingPlayersSlots> {
                 padding: EdgeInsets.only(top: 0, left: 12.w),
                 child: Text("THERE_IS_NO_WAITING_LIST".tr(context),
                     style: AppTextStyles.poppinsRegular(
-                      color: AppColors.black2,
+                      color: AppColors.black70,
                       fontSize: 13.sp,
                     )),
               ),
-        SizedBox(height: 10.h),
-        if (showWaitingList)
-          Align(
-            alignment: Alignment.centerRight,
-            child:
-                Text("${"WAITING_LIST".tr(context)} ${widget.players.length}",
-                    style: AppTextStyles.poppinsRegular(
-                      color: AppColors.black2,
-                    )),
-          ),
         SizedBox(height: 10.h),
         if (showWaitingList && widget.isInWaitingList)
           Padding(

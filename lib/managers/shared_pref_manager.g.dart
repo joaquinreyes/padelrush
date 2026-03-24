@@ -6,48 +6,20 @@ part of 'shared_pref_manager.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint, type=warning
+String _$sharedPrefManagerHash() => r'32c05dcd1d1109f1338dd948412bedf5e8065d37';
 
+/// See also [sharedPrefManager].
 @ProviderFor(sharedPrefManager)
-final sharedPrefManagerProvider = SharedPrefManagerProvider._();
+final sharedPrefManagerProvider = Provider<SharedPrefManager>.internal(
+  sharedPrefManager,
+  name: r'sharedPrefManagerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$sharedPrefManagerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
-final class SharedPrefManagerProvider extends $FunctionalProvider<
-    SharedPrefManager,
-    SharedPrefManager,
-    SharedPrefManager> with $Provider<SharedPrefManager> {
-  SharedPrefManagerProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'sharedPrefManagerProvider',
-          isAutoDispose: false,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
-
-  @override
-  String debugGetCreateSourceHash() => _$sharedPrefManagerHash();
-
-  @$internal
-  @override
-  $ProviderElement<SharedPrefManager> $createElement(
-          $ProviderPointer pointer) =>
-      $ProviderElement(pointer);
-
-  @override
-  SharedPrefManager create(Ref ref) {
-    return sharedPrefManager(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(SharedPrefManager value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<SharedPrefManager>(value),
-    );
-  }
-}
-
-String _$sharedPrefManagerHash() => r'eaf952d2cf822a813bc9f929f6411f8da27ec95c';
+typedef SharedPrefManagerRef = ProviderRef<SharedPrefManager>;
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

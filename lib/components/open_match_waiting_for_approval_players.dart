@@ -39,7 +39,9 @@ class _OpenMatchWaitingForApprovalPlayersState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "PLAYERS_WAITING_FOR_YOUR_APPROVAL"
+              (widget.isForSocketPopup
+                  ? "PLAYERS_WAITING_FOR_YOUR_APPROVAL"
+                  : "INVITED_PLAYERS")
                   .tr(context)
                   .capitalWord(context, !widget.isForSocketPopup),
               style: AppTextStyles.poppinsMedium(
@@ -107,7 +109,7 @@ class _OpenMatchWaitingForApprovalPlayersState
                               ? SizedBox(
                                   width: 100.w,
                                   child: Text(
-                                    "WAITING_FOR_PLAYER_TO_JOIN".tr(context),
+                                    "WAITING_FOR_PLAYER_TO_PAY".tr(context),
                                     style: AppTextStyles.poppinsLight(
                                         fontSize: 14.sp, color: textColor),
                                     textAlign: TextAlign.center,
@@ -117,7 +119,7 @@ class _OpenMatchWaitingForApprovalPlayersState
                                   ? SizedBox(
                                       width: 100.w,
                                       child: Text(
-                                        "WAITING_FOR_PLAYER_TO_PAY".tr(context),
+                                        "WAITING_TO_ACCEPT".tr(context),
                                         style: AppTextStyles.poppinsLight(
                                             fontSize: 14.sp, color: textColor),
                                         textAlign: TextAlign.center,

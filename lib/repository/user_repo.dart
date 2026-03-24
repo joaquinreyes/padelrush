@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/legacy.dart';
 import 'package:padelrush/globals/api_endpoints.dart';
 import 'package:padelrush/globals/utils.dart';
 import 'package:padelrush/managers/api_manager.dart';
@@ -572,45 +571,45 @@ class AuthRepo {
 }
 
 @Riverpod(keepAlive: true)
-AuthRepo authRepo(Ref ref) {
+AuthRepo authRepo(AuthRepoRef ref) {
   return AuthRepo();
 }
 
 @riverpod
 Future<AppUser?> loginUser(
-    Ref ref, String email, String password) async {
+    LoginUserRef ref, String email, String password) async {
   return ref.watch(authRepoProvider).signIn(email, password, ref);
 }
 
 @riverpod
-Future<AppUser?> registerUser(Ref ref, RegisterModel model) async {
+Future<AppUser?> registerUser(RegisterUserRef ref, RegisterModel model) async {
   return ref.watch(authRepoProvider).signup(model, ref);
 }
 
 @Riverpod(keepAlive: true)
-Future<bool> fetchUser(Ref ref) async {
+Future<bool> fetchUser(FetchUserRef ref) async {
   return ref.watch(authRepoProvider).fetchUser(ref);
 }
 
 @riverpod
-Future<bool> updateUser(Ref ref, User user) async {
+Future<bool> updateUser(UpdateUserRef ref, User user) async {
   return ref.watch(authRepoProvider).updatUser(ref, user);
 }
 
 @riverpod
-Future<bool> updateProfile(Ref ref, File? file) async {
+Future<bool> updateProfile(UpdateProfileRef ref, File? file) async {
   return ref.watch(authRepoProvider).updateProfile(ref, file);
 }
 
 @Riverpod(keepAlive: true)
 Future<List<CustomFields>> fetchAllCustomFields(
-    Ref ref) async {
+    FetchAllCustomFieldsRef ref) async {
   return ref.watch(authRepoProvider).fetchAllCustomFields(ref);
 }
 
 @riverpod
 Future<(bool?, bool?)> updatePictureAndUser(
-    Ref ref, File? file, User user) async {
+    UpdatePictureAndUserRef ref, File? file, User user) async {
   final results = await Future.wait([
     ref.watch(updateProfileProvider(file).future),
     ref.watch(updateUserProvider(user).future),
@@ -620,7 +619,7 @@ Future<(bool?, bool?)> updatePictureAndUser(
 }
 
 @riverpod
-Future<bool> updatePassword(Ref ref,
+Future<bool> updatePassword(UpdatePasswordRef ref,
     {required String oldPassword, required String newPassword}) async {
   return ref
       .watch(authRepoProvider)
@@ -628,22 +627,22 @@ Future<bool> updatePassword(Ref ref,
 }
 
 @riverpod
-Future<bool> deleteAccount(Ref ref, {required String password}) async {
+Future<bool> deleteAccount(DeleteAccountRef ref, {required String password}) async {
   return ref.watch(authRepoProvider).deleteAccount(ref, password: password);
 }
 
 @riverpod
-Future<void> saveFCMToken(Ref ref, String token) async {
+Future<void> saveFCMToken(SaveFCMTokenRef ref, String token) async {
   return ref.watch(authRepoProvider).saveFCMToken(ref, token);
 }
 
 @riverpod
-Future<bool?> recoverPassword(Ref ref, String email) async {
+Future<bool?> recoverPassword(RecoverPasswordRef ref, String email) async {
   return ref.watch(authRepoProvider).resetPassword(ref, email);
 }
 
 @riverpod
-Future<bool?> updateRecoveryPassword(Ref ref,
+Future<bool?> updateRecoveryPassword(UpdateRecoveryPasswordRef ref,
     {required String email, required String password, required String token}) {
   return ref
       .watch(authRepoProvider)
@@ -651,23 +650,23 @@ Future<bool?> updateRecoveryPassword(Ref ref,
 }
 
 @riverpod
-Future<UserAssessment> fetchUserAssessment(Ref ref, {required int id}) async {
+Future<UserAssessment> fetchUserAssessment(FetchUserAssessmentRef ref, {required int id}) async {
   return ref.watch(authRepoProvider).fetchUserAssessment(ref, id);
 }
 
 @riverpod
-Future<List<WalletInfo>> walletInfo(Ref ref) async {
+Future<List<WalletInfo>> walletInfo(WalletInfoRef ref) async {
   return ref.watch(authRepoProvider).walletInfo(ref);
 }
 
 @riverpod
-Future<List<TransactionModel>> transactions(Ref ref) async {
+Future<List<TransactionModel>> transactions(TransactionsRef ref) async {
   return ref.watch(authRepoProvider).transactions(ref);
 }
 
 @riverpod
 Future<PlayersRanking> fetchPlayersRanking(
-  Ref ref, {
+  FetchPlayersRankingRef ref, {
   required int page,
   required int limit,
   required String sportName,
@@ -681,7 +680,7 @@ Future<PlayersRanking> fetchPlayersRanking(
 }
 
 @riverpod
-Future<List<MatchLevel>> getUserMatchLevels(Ref ref,
+Future<List<MatchLevel>> getUserMatchLevels(GetUserMatchLevelsRef ref,
     {required int userId, required int matchNumber, required String sportName}) async {
   return ref.watch(authRepoProvider).getUserMatchLevels(
     ref,
@@ -692,33 +691,33 @@ Future<List<MatchLevel>> getUserMatchLevels(Ref ref,
 }
 
 @riverpod
-Future<bool> followFriend(Ref ref, {required int userId}) async {
+Future<bool> followFriend(FollowFriendRef ref, {required int userId}) async {
   return ref.watch(authRepoProvider).followFriend(ref, userId: userId);
 }
 
 @riverpod
-Future<bool> unfollowFriend(Ref ref, {required int userId}) async {
+Future<bool> unfollowFriend(UnfollowFriendRef ref, {required int userId}) async {
   return ref.watch(authRepoProvider).unfollowFriend(ref, userId: userId);
 }
 
 @riverpod
-Future<bool> checkFollowStatus(Ref ref, {required int userId}) async {
+Future<bool> checkFollowStatus(CheckFollowStatusRef ref, {required int userId}) async {
   return ref.watch(authRepoProvider).checkFollowStatus(ref, userId: userId);
 }
 
 @riverpod
-Future<FollowList> getFollowingList(Ref ref) async {
+Future<FollowList> getFollowingList(GetFollowingListRef ref) async {
   return ref.watch(authRepoProvider).getFollowingList(ref);
 }
 
 @riverpod
-Future<FollowList> getFollowerList(Ref ref) async {
+Future<FollowList> getFollowerList(GetFollowerListRef ref) async {
   return ref.watch(authRepoProvider).getFollowerList(ref);
 }
 
 @riverpod
 Future<UserSearchResponse> searchUsers(
-  Ref ref, {
+  SearchUsersRef ref, {
   required int page,
   required int pageSize,
   required String search,

@@ -16,7 +16,7 @@ const kAppName = 'Padel Rushh';
 const kSportName = "padel"; //sport
 const kPadelName = "padel"; //sport
 const kPickleBallName = "pickleball"; //sport
-const kWhatsAppContact = "+353870356077";
+const kWhatsAppContact = "+353870356077"; // TODO: Replace with Padel Rush's WhatsApp number (currently HOP Ireland's)
 const int kMinimumLimit = 8;
 const int kPageLimit = 30;
 const int kUserSearchPageSize = 30;
@@ -38,7 +38,7 @@ const kMaxLevel = 10;
 
 const kWhatsAppLink = "https://api.whatsapp.com/send";
 
-const sendUsMessageUrl = "https://line.me/R/ti/p/@427tckwu";
+const sendUsMessageUrl = "https://api.whatsapp.com/send?phone=$kWhatsAppContact";
 
 String kFormatForAPI = "yyyy-MM-dd";
 
@@ -48,10 +48,9 @@ String kRazorPayKey = 'rzp_live_S6yUfKtDfMPOED';     // Live key Padel Rush
 
 final kComponentWidthConstraint = BoxConstraints(maxWidth: 450.w);
 const kAnimationDuration = Duration(milliseconds: 250);
-const kStartedPlayingCustomID = "68b06af553f6b47a6a8edd8b";
-const kPositionID = "68b06aeb53f6b47a6a8edd5b";
-const kTermsConditions = "688754a171f940dd68e0e209";
-const kGender = "68de0fa9e086dde9a76f1e48";
+const kStartedPlayingCustomID = "68b06af553f6b47a6a8edd8b"; // TODO: Verify for club 86 (currently from HOP Ireland)
+const kPositionID = "6940380dc3ac30a70023e431";
+const kTermsConditions = "688754a171f940dd68e0e209"; // TODO: Verify for club 86 (currently from HOP Ireland)
 
 List<inset.BoxShadow> get kInsetShadow =>
     kIsWeb
@@ -175,8 +174,6 @@ const chatRoles = {
   5: "STAFF"
 };
 
-const kPilatesMembershipCategoryId = 107; // 107 = Pilates Memberships
-const kYogaMembershipCategoryId = 115; // 115 = Yoga Memberships
 
 final Map<double, String> rankMap = {
   0.0: '(Entry)',

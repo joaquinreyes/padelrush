@@ -385,6 +385,7 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
       onTap: () => _selectPaymentMethod(paymentMethod, mdr: mdr),
       showDelete: false,
       onDelete: null,
+      iconData: paymentMethod.methodType == kPayLaterMethod ? Icons.storefront_outlined : null,
     );
   }
 
@@ -430,6 +431,7 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
       onTap: () => _selectPaymentMethod(paymentMethod),
       showDelete: false,
       onDelete: null,
+      iconData: paymentMethod.methodType == kPayLaterMethod ? Icons.storefront_outlined : null,
     );
   }
 
@@ -555,7 +557,8 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
       required VoidCallback onTap,
       Widget? prefix,
       required VoidCallback? onDelete,
-      required bool showDelete}) {
+      required bool showDelete,
+      IconData? iconData}) {
     return _buildOptionContainer(
       title: title,
       isSelected: isSelected,
@@ -564,6 +567,7 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
       onTap: onTap,
       showDelete: showDelete,
       onDelete: onDelete,
+      iconData: iconData,
     );
   }
 
@@ -591,7 +595,7 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
           ? "${"REDEEM_CREDITS".tr(context)} ${Utils.formatPrice(walletBalance)}"
           : "${"WALLET".tr(context)} ${Utils.formatPrice(walletBalance)}";
     } else if (paymentMethod.methodType == kPayLaterMethod) {
-      return "PAY_LATER".tr(context);
+      return "PAY_AT_THE_CLUB".tr(context);
     } else if (paymentMethod.methodType == kRazorPayMethod) {
       return "EWALLET".tr(context);
     } else {
@@ -608,6 +612,7 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
     VoidCallback? onDelete,
     bool showSwitch = false,
     bool showDelete = false,
+    IconData? iconData,
   }) {
     return GestureDetector(
       onTap: onTap,
@@ -633,12 +638,18 @@ class __WalletState extends ConsumerState<_PaymentMethods> {
                 borderRadius: BorderRadius.circular(10.r),
               ),
               child: Center(
-                child: Image.asset(
-                  imagePath,
-                  width: 18.w,
-                  height: 18.w,
-                  color: isSelected ? AppColors.black : AppColors.black50,
-                ),
+                child: iconData != null
+                    ? Icon(
+                        iconData,
+                        size: 20.w,
+                        color: isSelected ? AppColors.black : AppColors.black50,
+                      )
+                    : Image.asset(
+                        imagePath,
+                        width: 18.w,
+                        height: 18.w,
+                        color: isSelected ? AppColors.black : AppColors.black50,
+                      ),
               ),
             ),
             SizedBox(width: 12.w),

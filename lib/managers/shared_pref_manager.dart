@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'shared_pref_manager.g.dart';
 
 @Riverpod(keepAlive: true)
-SharedPrefManager sharedPrefManager(Ref ref) {
+SharedPrefManager sharedPrefManager(SharedPrefManagerRef ref) {
   throw UnimplementedError();
 }
 

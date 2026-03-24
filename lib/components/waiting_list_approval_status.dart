@@ -138,6 +138,74 @@ class _WaitingListApprovalStatusState
   @override
   Widget build(BuildContext context) {
     final player = widget.data;
+
+    // Invited state — prominent green banner with Accept Now / Reject
+    if (player.isOpenMatchWaitingApproval) {
+      return Container(
+        decoration: BoxDecoration(
+          color: AppColors.darkYellow,
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Icon(Icons.mail_outline_rounded, size: 18.sp, color: AppColors.black2),
+                SizedBox(width: 8.w),
+                Text(
+                  "YOUVE_BEEN_INVITED".tr(context),
+                  style: AppTextStyles.poppinsBold(
+                    fontSize: 14.sp,
+                    color: AppColors.black2,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10.h),
+            Row(
+              children: [
+                Expanded(
+                  child: SecondaryButton(
+                    color: AppColors.white,
+                    borderRadius: 100,
+                    padding: EdgeInsets.symmetric(vertical: 8.h),
+                    onTap: () => _showConfirmationDialog("reject"),
+                    child: Center(
+                      child: Text(
+                        "REJECT".tr(context),
+                        style: AppTextStyles.poppinsSemiBold(
+                          fontSize: 13.sp,
+                          color: AppColors.black2,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10.w),
+                Expanded(
+                  child: MainButton(
+                    label: "ACCEPT_NOW".tr(context),
+                    color: AppColors.black2,
+                    labelStyle: AppTextStyles.poppinsSemiBold(
+                      fontSize: 13.sp,
+                      color: AppColors.white,
+                    ),
+                    applySize: false,
+                    applyShadow: false,
+                    borderRadius: 100.r,
+                    padding: EdgeInsets.symmetric(vertical: 8.h),
+                    onTap: () => _showConfirmationDialog("accept"),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    }
+
+    // Accepted / waiting / withdraw states
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -181,7 +249,6 @@ class _WaitingListApprovalStatusState
                       false)
                     Text(
                       "${player.customer?.level(getSportsName(ref))}",
-                      //, •  Right",
                       style: AppTextStyles.poppinsRegular(
                         fontSize: 12.sp,
                       ),
@@ -189,56 +256,26 @@ class _WaitingListApprovalStatusState
                 ],
               ),
               const Spacer(),
-              if (player.isOpenMatchWaitingApproval) ...[
-                // Show Accept and Reject buttons
-                SecondaryButton(
-                  color: AppColors.darkRosewood,
-                  borderRadius: 100,
-                  padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 6.h),
-                  onTap: () => _showConfirmationDialog("reject"),
-                  child: Text(
-                    "REJECT".tr(context),
-                    style: AppTextStyles.poppinsMedium(
-                      fontSize: 13.sp,
-                      color: AppColors.white,
-                    ),
-                  ),
+              MainButton(
+                label: player.isApproved || player.isAccepted
+                    ? "PAY_MY_SHARE".tr(context)
+                    : "WITHDRAW_FROM_THE_MATCH".tr(context),
+                color: AppColors.darkYellow,
+                labelStyle: AppTextStyles.poppinsMedium(
+                  fontSize: 13.sp,
                 ),
-                SizedBox(width: 10.w),
-                MainButton(
-                  label: "ACCEPT".tr(context),
-                  color: AppColors.darkYellow,
-                  labelStyle: AppTextStyles.poppinsMedium(
-                    fontSize: 13.sp,
-                    color: AppColors.black2
-                  ),
-                  applySize: false,
-                  applyShadow: true,
-                  borderRadius: 100.r,
-                  padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 6.h),
-                  onTap: () => _showConfirmationDialog("accept"),
-                ),
-              ] else
-                MainButton(
-                  label: player.isApproved || player.isAccepted
-                      ? "PAY_MY_SHARE".tr(context)
-                      : "WITHDRAW_FROM_THE_MATCH".tr(context),
-                  color: AppColors.darkYellow,
-                  labelStyle: AppTextStyles.poppinsMedium(
-                    fontSize: 13.sp,
-                  ),
-                  applySize: false,
-                  applyShadow: true,
-                  borderRadius: 100.r,
-                  padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 6.h),
-                  onTap: () {
-                    if (player.isApproved || player.isAccepted) {
-                      widget.onJoin(player.customer!.id!);
-                    } else {
-                      widget.onWithdraw(player.id!);
-                    }
-                  },
-                )
+                applySize: false,
+                applyShadow: true,
+                borderRadius: 100.r,
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 6.h),
+                onTap: () {
+                  if (player.isApproved || player.isAccepted) {
+                    widget.onJoin(player.customer!.id!);
+                  } else {
+                    widget.onWithdraw(player.id!);
+                  }
+                },
+              ),
             ],
           ),
         ),

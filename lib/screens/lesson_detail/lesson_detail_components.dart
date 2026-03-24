@@ -16,110 +16,130 @@ class _InfoCard extends StatelessWidget {
     }
 
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 15.h,
-        vertical: 15.h,
-      ),
       decoration: BoxDecoration(
-        color: AppColors.darkYellow35,
-        borderRadius: BorderRadius.circular(25.r),
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(color: AppColors.black2.withOpacity(0.06), blurRadius: 12, offset: const Offset(0, 3)),
+        ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Text(
-                  (lesson.service?.lesson?.lessonName ?? "").capitalizeFirst,
-                  style: AppTextStyles.poppinsBold(
-                    fontSize: 16.sp,
+          // Header
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+            decoration: BoxDecoration(
+              color: AppColors.black2,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16.r),
+                topRight: Radius.circular(16.r),
+              ),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    (lesson.service?.lesson?.lessonName ?? "").capitalizeFirst,
+                    style: AppTextStyles.poppinsSemiBold(
+                      fontSize: 15.sp,
+                      color: AppColors.white,
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 4,
-                child: Text(
+                Text(
                   (lesson.service?.location?.locationName.trU(context) ?? ""),
-                  textAlign: TextAlign.end,
                   style: AppTextStyles.poppinsMedium(
-                    fontSize: 14.sp,
+                    fontSize: 12.sp,
+                    color: AppColors.darkYellow,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          CDivider(color: AppColors.white25),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                child: _colInfo(
-                  lesson.bookingDate.format("EEE dd MMM"),
-                  "${lesson.bookingStartTime.format("h:mm")} - ${lesson.bookingEndTime.format("h:mm a")}"
-                      .toLowerCase(),
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'SLOTS'.trU(context),
-                      style: AppTextStyles.poppinsBold(
-                        fontSize: 14.sp,
+          // Body
+          Padding(
+            padding: EdgeInsets.fromLTRB(16.w, 14.h, 16.w, 14.h),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Date/Time
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.calendar_today_outlined, size: 13.sp, color: AppColors.black70),
+                          SizedBox(width: 4.w),
+                          Text(
+                            lesson.bookingDate.format("EEE dd MMM"),
+                            style: AppTextStyles.poppinsSemiBold(fontSize: 13.sp),
+                          ),
+                        ],
                       ),
-                    ),
-                    Text(
-                      "${'MAX'.tr(context)} ${lesson.getMaximumCapacity.toString() ?? ""} ${'PLAYERS'.tr(context)}",
-                      style: AppTextStyles.poppinsRegular(
-                        fontSize: 12.sp),
-                    ),
-                    Text(
-                      "${'MIN'.tr(context)} ${lesson.getMinimumCapacity.toString() ?? ""} ${'PLAYERS'.tr(context)}",
-                      style: AppTextStyles.poppinsRegular(
-                    fontSize: 12.sp),
-                    ),
-                  ],
+                      SizedBox(height: 4.h),
+                      Padding(
+                        padding: EdgeInsets.only(left: 17.w),
+                        child: Text(
+                          "${lesson.bookingStartTime.format("h:mm")} - ${lesson.bookingEndTime.format("h:mm a").toLowerCase()}",
+                          style: AppTextStyles.poppinsRegular(fontSize: 12.sp, color: AppColors.black70),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: _colInfo(
-                  levelRestriction != null
-                      ? "${"LEVEL".tr(context)} $levelRestriction"
-                      : "",
-                  "${"PRICE".tr(context)} ${Utils.formatPriceNew(lesson.service?.price)}",
-                  isEnd: true,
+                // Slots badge
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                  decoration: BoxDecoration(
+                    color: AppColors.darkYellow30,
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        'SLOTS'.trU(context),
+                        style: AppTextStyles.poppinsSemiBold(fontSize: 11.sp),
+                      ),
+                      Text(
+                        "${lesson.getMinimumCapacity}-${lesson.getMaximumCapacity}",
+                        style: AppTextStyles.poppinsBold(fontSize: 16.sp),
+                      ),
+                    ],
+                  ),
                 ),
-              )
-            ],
-          )
+                SizedBox(width: 12.w),
+                // Level & Price
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      if (levelRestriction != null)
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
+                          decoration: BoxDecoration(
+                            color: AppColors.darkYellow30,
+                            borderRadius: BorderRadius.circular(100.r),
+                          ),
+                          child: Text(
+                            "${"LEVEL".tr(context)} $levelRestriction",
+                            style: AppTextStyles.poppinsSemiBold(fontSize: 11.sp),
+                          ),
+                        ),
+                      SizedBox(height: 8.h),
+                      Text(
+                        "${"PRICE".tr(context)} ${Utils.formatPriceNew(lesson.service?.price)}",
+                        style: AppTextStyles.poppinsSemiBold(fontSize: 14.sp),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
-    );
-  }
-
-  Column _colInfo(String text1, String text2,
-      {bool isEnd = false, TextStyle? textStyle1, TextStyle? textStyle2}) {
-    return Column(
-      crossAxisAlignment:
-          isEnd ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-      children: [
-        Text(
-          text1,
-          style: textStyle1 ??
-              AppTextStyles.poppinsRegular(
-                 fontSize: 13.sp),
-        ),
-        SizedBox(height: 2.h),
-        Text(
-          text2,
-          style: textStyle2 ??
-              AppTextStyles.poppinsRegular(
-           fontSize: 13.sp),
-        ),
-      ],
     );
   }
 }
@@ -151,12 +171,15 @@ class _LessonVariantInfoCard extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: 15.h,
-        vertical: 15.h,
+        horizontal: 16.h,
+        vertical: 16.h,
       ),
       decoration: BoxDecoration(
         color: AppColors.black2,
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(color: AppColors.black2.withOpacity(0.15), blurRadius: 12, offset: const Offset(0, 4)),
+        ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

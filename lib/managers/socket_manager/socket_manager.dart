@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/legacy.dart';
 import 'package:padelrush/components/approved_applicant_dialogs/events/events_applicant_dialog.dart';
 import 'package:padelrush/components/approved_applicant_dialogs/events/events_approved_request_dialog.dart';
 import 'package:padelrush/components/approved_applicant_dialogs/open_match/open_match_applicants_dialog.dart';

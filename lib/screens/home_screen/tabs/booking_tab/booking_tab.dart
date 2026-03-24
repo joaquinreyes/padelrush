@@ -50,7 +50,6 @@ import '../../../auth/signup/signup_screen.dart';
 import '../../../payment_information/payment_information.dart';
 import '../play_match_tab/play_match_tab.dart';
 import '../profile_tab/tabs/membership_tab/membership_tab.dart';
-import 'package:flutter_riverpod/legacy.dart';
 
 part 'booking_tab_components.dart';
 
@@ -219,18 +218,20 @@ class _BookingTabState extends ConsumerState<BookingTab>
     );
   }
 
-  Container _viewSelectRow() {
+  Widget _viewSelectRow() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.w),
-      // decoration: inset.BoxDecoration(
-      //   color: AppColors.tileBgColor,
-      //   boxShadow: kInsetShadow,
-      // ),
+      height: 48.h,
+      margin: EdgeInsets.symmetric(horizontal: 15.w),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        borderRadius: BorderRadius.circular(14.r),
+      ),
+      padding: EdgeInsets.all(4.h),
       child: Row(
         children: [
           _Selector(title: 'COURTS'.trU(context), index: 0),
           _Selector(title: "COACHES".trU(context), index: 1),
-          // _Selector(title: "SAUNA".trU(context), index: 2), // Recovery tab hidden
+          // _Selector(title: "SAUNA".trU(context), index: 2),
         ],
       ),
     );
@@ -266,12 +267,10 @@ class _BookingTabState extends ConsumerState<BookingTab>
           return Column(
             children: [
               Container(
-                margin: EdgeInsets.only(left: 15.w),
+                margin: EdgeInsets.symmetric(horizontal: 15.w),
                 decoration: BoxDecoration(
-                  color: AppColors.gray,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(100.r),
-                      bottomLeft: Radius.circular(100.r)),
+                  color: AppColors.lightGray,
+                  borderRadius: BorderRadius.circular(16.r),
                 ),
                 child: Row(
                   children: [
@@ -367,10 +366,7 @@ class _BookingTabState extends ConsumerState<BookingTab>
 
   Widget _dateAndCoach({required String text, required bool value}) {
     final isDateLessonSelected = ref.watch(_dateBookableLesson) == value;
-    return InkWell(
-      customBorder: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(100.r),
-      ),
+    return GestureDetector(
       onTap: () {
         if (value) {
           ref.read(_selectedLessonCoachId.notifier).state = [];
@@ -391,21 +387,21 @@ class _BookingTabState extends ConsumerState<BookingTab>
         }
         ref.read(_dateBookableLesson.notifier).state = value;
       },
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 4.w),
-        padding: EdgeInsets.all(5.h),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        margin: EdgeInsets.symmetric(horizontal: 2.w),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
         decoration: BoxDecoration(
-          color:
-              isDateLessonSelected ? AppColors.darkYellow : Colors.transparent,
-          borderRadius: BorderRadius.circular(100.r),
+          color: isDateLessonSelected ? AppColors.darkYellow : Colors.transparent,
+          borderRadius: BorderRadius.circular(9.r),
         ),
         alignment: Alignment.center,
         child: Text(
           text,
           textAlign: TextAlign.center,
           style: isDateLessonSelected
-              ? AppTextStyles.poppinsSemiBold(fontSize: 14.sp)
-              : AppTextStyles.poppinsSemiBold(fontSize: 13.sp),
+              ? AppTextStyles.poppinsSemiBold(fontSize: 13.sp)
+              : AppTextStyles.poppinsMedium(fontSize: 12.sp, color: AppColors.black70),
         ),
       ),
     );
@@ -456,13 +452,13 @@ class _BookingTabState extends ConsumerState<BookingTab>
     if (sports.length > 3) {
       return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 9.w),
+        padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 8.w),
-          decoration: inset.BoxDecoration(
-            color: AppColors.gray,
-            borderRadius: BorderRadius.circular(100.r),
-            // boxShadow: kInsetShadow,
+          height: 40.h,
+          padding: EdgeInsets.all(4.h),
+          decoration: BoxDecoration(
+            color: AppColors.lightGray,
+            borderRadius: BorderRadius.circular(12.r),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.max,
@@ -483,12 +479,12 @@ class _BookingTabState extends ConsumerState<BookingTab>
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: Container(
-          decoration: inset.BoxDecoration(
-            color: AppColors.gray,
-            borderRadius: BorderRadius.circular(100.r),
-            // boxShadow: kInsetShadow,
+          height: 40.h,
+          decoration: BoxDecoration(
+            color: AppColors.lightGray,
+            borderRadius: BorderRadius.circular(12.r),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 8.w),
+          padding: EdgeInsets.all(4.h),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -615,29 +611,60 @@ class _BookingTabState extends ConsumerState<BookingTab>
         if (timeSlots.isEmpty) return const SizedBox();
 
         return Padding(
-          padding: EdgeInsets.only(bottom: 15.h),
-          child: _serviceTimeSlotsBackgroundContainer(
+          padding: EdgeInsets.only(bottom: 15.h, left: 15.w, right: 15.w),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16.r),
+              color: AppColors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.black2.withOpacity(0.06),
+                  blurRadius: 12,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      locationName.toUpperCase(),
-                      style: AppTextStyles.poppinsBold(
-                        fontSize: 14.sp,
+                // Dark header with location name
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                  decoration: BoxDecoration(
+                    color: AppColors.black2,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16.r),
+                      topRight: Radius.circular(16.r),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.location_on_outlined, size: 16.sp, color: AppColors.darkYellow),
+                      SizedBox(width: 6.w),
+                      Expanded(
+                        child: Text(
+                          locationName.toUpperCase(),
+                          style: AppTextStyles.poppinsSemiBold(
+                            fontSize: 14.sp,
+                            color: AppColors.white,
+                          ),
+                        ),
                       ),
-                    ),
-                    const Spacer(),
-                    Text(
-                      "${distance} km",
-                      style: AppTextStyles.poppinsRegular(
-                          color: AppColors.black70, fontSize: 13.sp),
-                    ),
-                  ],
+                      Text(
+                        "${distance} km",
+                        style: AppTextStyles.poppinsRegular(
+                          color: AppColors.darkYellow,
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                SizedBox(height: 10.h),
-                _Timeslots(data: data, locationID: location.id!),
+                // Body with time slots
+                Padding(
+                  padding: EdgeInsets.fromLTRB(10.w, 10.h, 10.w, 10.h),
+                  child: _Timeslots(data: data, locationID: location.id!),
+                ),
                 _AvailableTimeslot(
                   data: data,
                   locationID: location.id!,
@@ -662,15 +689,14 @@ class _BookingTabState extends ConsumerState<BookingTab>
     });
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 15.w),
-      // padding: EdgeInsets.all(0.h),
       child: Container(
-        height: 38.h,
+        height: 40.h,
         constraints: kComponentWidthConstraint,
-        decoration: inset.BoxDecoration(
-          color: AppColors.gray,
-          borderRadius: BorderRadius.circular(100.r),
-          // boxShadow: kInsetShadow,
+        decoration: BoxDecoration(
+          color: AppColors.lightGray,
+          borderRadius: BorderRadius.circular(12.r),
         ),
+        padding: EdgeInsets.all(4.h),
         child: Row(
           children: [
             for (int i = 0; i < data.durationsToShow.length; i++)
@@ -703,16 +729,14 @@ class _BookingTabState extends ConsumerState<BookingTab>
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 15.w),
-      // padding: EdgeInsets.all(0.h),
-      color: AppColors.white,
       child: Container(
-        height: 38.h,
+        height: 40.h,
         constraints: kComponentWidthConstraint,
         decoration: BoxDecoration(
-          // boxShadow: kInsetShadow,
-          borderRadius: BorderRadius.circular(100.r),
-          color: AppColors.gray,
+          borderRadius: BorderRadius.circular(12.r),
+          color: AppColors.lightGray,
         ),
+        padding: EdgeInsets.all(4.h),
         child: Row(
             children: uniqueCourts.entries
                 .map((e) => Expanded(
@@ -747,9 +771,8 @@ class _BookingTabState extends ConsumerState<BookingTab>
       margin: EdgeInsets.symmetric(horizontal: 15.w),
       constraints: kComponentWidthConstraint,
       decoration: BoxDecoration(
-        color: AppColors.gray,
-        border: border,
-        borderRadius: BorderRadius.circular(12.r),
+        color: AppColors.lightGray,
+        borderRadius: BorderRadius.circular(16.r),
       ),
       child: child,
     );

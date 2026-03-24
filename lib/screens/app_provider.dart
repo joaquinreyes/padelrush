@@ -8,12 +8,12 @@ import 'package:padelrush/models/club_locations.dart';
 part 'app_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-FirebaseCrashlytics crashlytics(Ref ref) {
+FirebaseCrashlytics crashlytics(CrashlyticsRef ref) {
   return FirebaseCrashlytics.instance;
 }
 
 @riverpod
-PageController pageController(Ref ref) {
+PageController pageController(PageControllerRef ref) {
   return PageController(
       initialPage: ref.read(pageIndexProvider.notifier).index);
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:padelrush/app_styles/app_colors.dart';
 import 'package:padelrush/app_styles/app_text_styles.dart';
 import 'package:padelrush/components/secondary_text.dart';
 import 'package:padelrush/components/user_booking_card.dart';
@@ -95,14 +96,25 @@ class _UpComingBookingsState extends ConsumerState<UserBookingsList> {
     for (var date in dateList) {
       widgets.add(
         Padding(
-          padding: EdgeInsets.only(
-            bottom: 10.h,
-          ),
-          child: Text(
-            Utils.formatBookingDate(date, context),
-            style: AppTextStyles.poppinsBold(
-              fontSize: 16.sp,
-            ),
+          padding: EdgeInsets.only(bottom: 12.h, top: 4.h),
+          child: Row(
+            children: [
+              Container(
+                width: 3.w,
+                height: 18.h,
+                decoration: BoxDecoration(
+                  color: AppColors.darkYellow,
+                  borderRadius: BorderRadius.circular(2.r),
+                ),
+              ),
+              SizedBox(width: 8.w),
+              Text(
+                Utils.formatBookingDate(date, context),
+                style: AppTextStyles.poppinsBold(
+                  fontSize: 16.sp,
+                ),
+              ),
+            ],
           ),
         ),
       );
@@ -156,12 +168,6 @@ class _UpComingBookingsState extends ConsumerState<UserBookingsList> {
 
   _onTap(bool isOpenMatch, bool isEvent, bool isLessonEvent,
       UserBookings booking) async {
-    // If booking is unpaid, show payment dialog directly
-    if (booking.isPlayerPendingPayment(ref)) {
-      await _showPaymentDialog(booking);
-      return;
-    }
-
     Future nav;
     if (isEvent || isLessonEvent) {
       if (isLessonEvent) {

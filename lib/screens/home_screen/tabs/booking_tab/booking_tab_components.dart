@@ -133,26 +133,25 @@ class _DateSelectorWidgetState extends ConsumerState<_DateSelectorWidget> {
             date.format(DateFormat.ABBR_WEEKDAY),
             style: AppTextStyles.poppinsRegular(
               height: 1,
-              fontSize: 13.sp,
-              color: isSelected ? AppColors.black : AppColors.black,
+              fontSize: 12.sp,
+              color: isSelected ? AppColors.black2 : AppColors.black70,
             ),
           ),
           Text(
             '${date.day}',
             style: AppTextStyles.poppinsBold(
-              color: isSelected ? AppColors.black : AppColors.black,
-              fontSize: 15.sp,
+              color: isSelected ? AppColors.black2 : AppColors.black,
+              fontSize: 16.sp,
             ),
           ),
           Text(
             date.format(DateFormat.ABBR_MONTH),
             style: AppTextStyles.poppinsRegular(
-              fontSize: 13.sp,
-              color: isSelected ? AppColors.black : AppColors.black,
+              fontSize: 12.sp,
+              color: isSelected ? AppColors.black2 : AppColors.black70,
               height: 0.8,
             ),
           ),
-          // SizedBox(height: 10.h),
         ],
       ),
     );
@@ -193,8 +192,7 @@ class _Duration extends ConsumerWidget {
     final selectedDuration = ref.watch(_selectedDuration);
     bool isServiceSelected = (selectedDuration == duration);
     return Expanded(
-      child: InkWell(
-        customBorder: RoundedRectangleBorder(),
+      child: GestureDetector(
         onTap: () {
           ref.read(_selectedDuration.notifier).state = duration;
           ref.read(_pageViewController.notifier).state.animateToPage(
@@ -203,23 +201,32 @@ class _Duration extends ConsumerWidget {
                 curve: Curves.easeInOut,
               );
         },
-        child: Container(
-          margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 8.w),
-          padding: EdgeInsets.all(4.h),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100.r),
-              color: isServiceSelected ? AppColors.black2 : AppColors.transparentColor),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
           alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(9.r),
+            color: isServiceSelected ? AppColors.black2 : Colors.transparent,
+            boxShadow: isServiceSelected
+                ? [
+                    BoxShadow(
+                      color: AppColors.black2.withOpacity(0.15),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ]
+                : [],
+          ),
           child: Text(
             "$duration min",
             textAlign: TextAlign.center,
             style: isServiceSelected
-                ? AppTextStyles.poppinsMedium(
-                color: AppColors.white, fontSize: 11.sp)
-                : AppTextStyles.poppinsRegular(
-              fontSize: 11.sp,
-              color: AppColors.black70,
-            ),
+                ? AppTextStyles.poppinsSemiBold(
+                    color: AppColors.white, fontSize: 12.sp)
+                : AppTextStyles.poppinsMedium(
+                    fontSize: 12.sp,
+                    color: AppColors.black70,
+                  ),
           ),
         ),
       ),
@@ -238,31 +245,36 @@ class _Court extends ConsumerWidget {
     final selectedCourt = ref.watch(_selectedCourt);
     bool isCourtSelected = (selectedCourt == courtId);
 
-    return InkWell(
-      customBorder: RoundedRectangleBorder(),
+    return GestureDetector(
       onTap: () {
-        if (selectedCourt == courtId) {
-          // ref.read(_selectedCourt.notifier).state = null;
-        } else {
+        if (selectedCourt != courtId) {
           ref.read(_selectedCourt.notifier).state = courtId;
         }
       },
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
-        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        alignment: Alignment.center,
         decoration: BoxDecoration(
           color: isCourtSelected ? AppColors.black2 : Colors.transparent,
-          borderRadius: BorderRadius.circular(18.r),
+          borderRadius: BorderRadius.circular(9.r),
+          boxShadow: isCourtSelected
+              ? [
+                  BoxShadow(
+                    color: AppColors.black2.withOpacity(0.15),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ]
+              : [],
         ),
-        alignment: Alignment.center,
         child: Text(
           courtName.capitalizeFirst,
           textAlign: TextAlign.center,
           style: isCourtSelected
-              ? AppTextStyles.poppinsMedium(
-                  color: AppColors.white, fontSize: 11.sp)
-              : AppTextStyles.poppinsRegular(
-                  fontSize: 11.sp, color: AppColors.black70),
+              ? AppTextStyles.poppinsSemiBold(
+                  color: AppColors.white, fontSize: 12.sp)
+              : AppTextStyles.poppinsMedium(
+                  fontSize: 12.sp, color: AppColors.black70),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -281,25 +293,33 @@ class _DurationAndSportContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
-      child: Container(
-        margin: EdgeInsets.all(
-          4.h,
-        ),
-        padding: EdgeInsets.fromLTRB(20.w, 7.h, 20.w, 7.h),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100.r),
-            color: isSelected ? AppColors.black2 : AppColors.transparentColor),
+          borderRadius: BorderRadius.circular(9.r),
+          color: isSelected ? AppColors.black2 : Colors.transparent,
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: AppColors.black2.withOpacity(0.15),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ]
+              : [],
+        ),
         alignment: Alignment.center,
         child: Text(
           text,
           textAlign: TextAlign.center,
           style: isSelected
-              ? AppTextStyles.poppinsMedium(
-                  color: AppColors.white, fontSize: 11.sp)
-              : AppTextStyles.poppinsRegular(
-                  fontSize: 11.sp, color: AppColors.black70),
+              ? AppTextStyles.poppinsSemiBold(
+                  color: AppColors.white, fontSize: 12.sp)
+              : AppTextStyles.poppinsMedium(
+                  fontSize: 12.sp, color: AppColors.black70),
         ),
       ),
     );
@@ -396,33 +416,27 @@ class __TimeslotsState extends ConsumerState<_Timeslots> {
         ref.watch(_selectedTimeSlotAndLocationID);
     bool selected = selectedTime == timeSlotChunked[rowIndex][colIndex] &&
         selectedLocationID == widget.locationID;
-    BorderRadius? borderRadius =
-        _getBorderRadius(rowIndex, colIndex, timeSlotChunked);
 
     return Expanded(
-      child: InkWell(
-        customBorder: RoundedRectangleBorder(
-          borderRadius: borderRadius ?? BorderRadius.zero,
-        ),
+      child: GestureDetector(
         onTap: () => _onTap(timeSlotChunked, rowIndex, colIndex),
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 1.w),
-          // padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 4.w),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          margin: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: selected ? AppColors.darkYellow : AppColors.white,
-            boxShadow: [kBoxShadow],
-            borderRadius: borderRadius,
+            color: selected ? AppColors.darkYellow : AppColors.lightGray,
+            borderRadius: BorderRadius.circular(10.r),
           ),
           child: Text(
             timeSlotChunked[rowIndex][colIndex].format("h:mm a").toLowerCase(),
             style: selected
                 ? AppTextStyles.poppinsBold(
-                    fontSize: 15.sp,
+                    fontSize: 14.sp,
                     color: AppColors.black2,
                   )
                 : AppTextStyles.poppinsRegular(
-                    fontSize: 15.sp,
+                    fontSize: 14.sp,
                     color: AppColors.black,
                   ),
           ),
@@ -489,49 +503,57 @@ class __AvailableTimeslotState extends ConsumerState<_AvailableTimeslot> {
             "${startTime.format("EEE d MMM")} | ${startTime.format("h:mm")} - ${endTime.format("h:mm a").toLowerCase()}";
         return Column(
           children: [
-            Padding(
-              padding: EdgeInsets.only(top: 10.h, left: 10.w),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+              decoration: BoxDecoration(
+                color: AppColors.lightGray,
+                borderRadius: index == courts.length - 1
+                    ? BorderRadius.only(
+                        bottomLeft: Radius.circular(16.r),
+                        bottomRight: Radius.circular(16.r),
+                      )
+                    : null,
+              ),
               child: Row(
                 children: [
                   Expanded(
-                    flex: 10,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           courts.values.toList()[index],
-                          style: AppTextStyles.poppinsMedium(
+                          style: AppTextStyles.poppinsSemiBold(
                             fontSize: 14.sp,
                           ),
                         ),
                         SizedBox(height: 2.h),
                         Row(
                           children: [
-                            SizedBox(
-                              width: 10.w,
-                            ),
+                            Icon(Icons.access_time_rounded, size: 12.sp, color: AppColors.black70),
+                            SizedBox(width: 4.w),
                             Text(
                               formattedTime,
-                              style:
-                                  AppTextStyles.poppinsRegular(fontSize: 13.sp),
+                              style: AppTextStyles.poppinsRegular(
+                                fontSize: 12.sp,
+                                color: AppColors.black70,
+                              ),
                             ),
                           ],
                         )
                       ],
                     ),
                   ),
-                  const Spacer(),
                   MainButton(
-                      color: AppColors.white,
+                      color: AppColors.darkYellow,
                       showArrow: true,
-                      applyShadow: true,
-                      height: 30.h,
+                      applyShadow: false,
+                      height: 34.h,
                       width: 90.w,
                       arrowSize: 15.h,
-                      borderRadius: 100.r,
+                      borderRadius: 10.r,
                       padding: EdgeInsets.symmetric(horizontal: 12.w),
                       label: "BOOK".tr(context),
-                      labelStyle: AppTextStyles.poppinsMedium(fontSize: 15.sp),
+                      labelStyle: AppTextStyles.poppinsSemiBold(fontSize: 14.sp),
                       onTap: () async {
                         if (!Utils.checkUserLogin(ref)) {
                           ref.read(goRouterProvider).push(RouteNames.auth);
@@ -620,14 +642,12 @@ class __AvailableTimeslotState extends ConsumerState<_AvailableTimeslot> {
                 ],
               ),
             ),
-            if (courts.length - 1 != index) ...[
-              const SizedBox(height: 10),
+            if (courts.length - 1 != index)
               Container(
-                height: 0.7.h,
-                margin: EdgeInsets.symmetric(horizontal: 10.w),
-                color: AppColors.black5,
+                height: 0.5.h,
+                margin: EdgeInsets.symmetric(horizontal: 16.w),
+                color: AppColors.black10,
               ),
-            ],
           ],
         );
       },
@@ -646,7 +666,7 @@ class _Selector extends ConsumerWidget {
     final selectedIndex = ref.watch(_selectedTabIndex);
     bool isServiceSelected = (selectedIndex == index);
     return Expanded(
-      child: InkWell(
+      child: GestureDetector(
         onTap: () {
           ref.read(_selectedTabIndex.notifier).state = index;
           ref.read(_pageControllerFor.notifier).state.animateToPage(
@@ -655,21 +675,32 @@ class _Selector extends ConsumerWidget {
                 curve: Curves.easeInOut,
               );
         },
-        child: Container(
-          margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 0.w),
-          clipBehavior: Clip.none,
-          padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 0.w),
-          // decoration: decoration.copyWith(
-          //     color:
-          //         isServiceSelected ? AppColors.black2 : AppColors.white),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
           alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: isServiceSelected ? AppColors.black2 : Colors.transparent,
+            borderRadius: BorderRadius.circular(11.r),
+            boxShadow: isServiceSelected
+                ? [
+                    BoxShadow(
+                      color: AppColors.black2.withOpacity(0.15),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ]
+                : [],
+          ),
           child: Text(
             title,
             textAlign: TextAlign.center,
             style: isServiceSelected
-                ? AppTextStyles.pragmaticaObliqueExtendedBold(fontSize: 26.sp)
-                : AppTextStyles.pragmaticaExtendedBold(
-                    fontSize: 20.sp,
+                ? AppTextStyles.poppinsSemiBold(
+                    fontSize: 14.sp,
+                    color: AppColors.white,
+                  )
+                : AppTextStyles.poppinsMedium(
+                    fontSize: 14.sp,
                     color: AppColors.black70,
                   ),
           ),
@@ -1940,7 +1971,7 @@ class _NonMembershipUser extends ConsumerWidget {
 
 Future<void> _onPurchaseMembership(
     WidgetRef ref, BuildContext context, UserActiveMembership value) async {
-  final selectedMembership = value.haveHOPMembership;
+  final selectedMembership = value.haveClubMembership;
   if (selectedMembership == null) {
     return;
   }
@@ -1981,9 +2012,9 @@ class _MembershipDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final price = data.haveHOPMembership?.price ?? 0;
+    final price = data.haveClubMembership?.price ?? 0;
 
-    final haveMembership = data.haveActiveHOPMembership;
+    final haveMembership = data.haveActiveClubMembership;
 
     final isActive = haveMembership != null;
 
@@ -2080,7 +2111,7 @@ class _MembershipDialog extends ConsumerWidget {
 
   Widget _membershipCard(
       WidgetRef ref, BuildContext context, UserActiveMembership data) {
-    final haveMembership = data.haveActiveHOPMembership;
+    final haveMembership = data.haveActiveClubMembership;
     final user = ref.read(userManagerProvider).user?.user;
     final profilePicture = user?.profileUrl ?? "";
     final fullName = (user?.fullName ?? "").toUpperCase();

@@ -16,6 +16,7 @@ import 'package:padelrush/globals/images.dart';
 import 'package:padelrush/globals/utils.dart';
 import 'package:padelrush/models/service_detail_model.dart';
 import 'package:padelrush/repository/booking_repo.dart';
+import 'package:padelrush/repository/club_repo.dart';
 import 'package:padelrush/repository/play_repo.dart';
 import 'package:padelrush/routes/app_pages.dart';
 import 'package:padelrush/screens/responsive_widgets/home_responsive_widget.dart';
@@ -146,6 +147,10 @@ class _DataBody extends ConsumerWidget {
             ChangesCancelledDetailsCard(
               heading: "BOOKING_CANCELLED".tr(context),
               description: "CANCEL_DESC".tr(context),
+              contactPhone: ref.read(clubLocationsProvider).value
+                  ?.where((l) => l.id == userBooking.service?.location?.id)
+                  .firstOrNull
+                  ?.locationNumber,
             ),
             SizedBox(height: 10.h),
           ],

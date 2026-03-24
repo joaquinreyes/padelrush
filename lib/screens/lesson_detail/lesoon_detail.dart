@@ -33,7 +33,6 @@ import 'dart:math' as math;
 
 import '../../components/refund_description_component.dart';
 import '../../models/cancellation_policy_model.dart';
-import 'package:flutter_riverpod/legacy.dart';
 
 part 'lesson_detail_provider.dart';
 
@@ -136,41 +135,28 @@ class _DataBodyState extends ConsumerState<_DataBody> {
           padding: EdgeInsets.zero,
           child: Column(
             children: [
-              SizedBox(height: 20.h),
-              Padding(
-                padding: EdgeInsets.only(left: 3.w),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: GestureDetector(
+              SizedBox(height: 16.h),
+              Row(
+                children: [
+                  GestureDetector(
                     onTap: () => ref.read(goRouterProvider).pop(),
-                    child: Image.asset(
-                      AppImages.back_arrow_new.path,
-                      height: 24.h,
-                      width: 24.h,
+                    child: Container(
+                      padding: EdgeInsets.all(8.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.lightGray,
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Icon(Icons.arrow_back_ios_new_rounded, size: 18.sp, color: AppColors.black2),
                     ),
                   ),
-                ),
+                  SizedBox(width: 14.w),
+                  Text(
+                    "LESSON".trU(context),
+                    style: AppTextStyles.poppinsBold(fontSize: 22.sp),
+                  ),
+                ],
               ),
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  "${"LESSON".trU(context)}\n ${"INFORMATION".trU(context)}",
-                  style: AppTextStyles.pragmaticaObliqueExtendedBold(
-                      fontSize: 24.sp,
-                      height: 1),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-              // Text(
-              //   "${"LESSON".trU(context)}\n ${"INFORMATION".trU(context)}",
-              //   style: AppTextStyles.gothamNarrowBold().copyWith(
-              //       height: 1.3,
-              //       fontSize: 22.sp,
-              //       color: AppColors.black,
-              //       letterSpacing: 1),
-              //   textAlign: TextAlign.center,
-              // ),
-              SizedBox(height: 40.h),
+              SizedBox(height: 24.h),
               _InfoCard(lesson: service),
               // SizedBox(height: 10.h),
 
@@ -214,8 +200,11 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                   width: double.infinity,
                   constraints: kComponentWidthConstraint,
                   decoration: BoxDecoration(
-                    color: AppColors.gray,
-                    borderRadius: BorderRadius.circular(25.r),
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(16.r),
+                    boxShadow: [
+                      BoxShadow(color: AppColors.black2.withOpacity(0.06), blurRadius: 12, offset: const Offset(0, 3)),
+                    ],
                   ),
                   child: _LessonPlayersSlots(
                     players: service.players ?? [],

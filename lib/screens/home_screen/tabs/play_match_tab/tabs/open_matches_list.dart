@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:padelrush/app_styles/app_colors.dart';
 import 'package:padelrush/app_styles/app_text_styles.dart';
-import 'package:padelrush/components/c_divider.dart';
 import 'package:padelrush/components/open_match_participant_row.dart';
 import 'package:padelrush/components/secondary_text.dart';
 import 'package:padelrush/globals/utils.dart';
@@ -72,12 +71,19 @@ class _OpenMatchesState extends ConsumerState<OpenMatchesList> {
         data: (data) {
           if (data.isEmpty) {
             return Padding(
-              padding: const EdgeInsets.only(top: 120),
+              padding: const EdgeInsets.only(top: 80),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.group_off, size: 64, color: Colors.grey[600]),
-                  const SizedBox(height: 16),
+                  Container(
+                    padding: EdgeInsets.all(20.h),
+                    decoration: BoxDecoration(
+                      color: AppColors.lightGray,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(Icons.sports_tennis, size: 40.sp, color: AppColors.black25),
+                  ),
+                  SizedBox(height: 20.h),
                   SecondaryText(text: "NO_OPEN_MATCHES_FOUND".tr(context)),
                 ],
               ),
@@ -108,11 +114,25 @@ class _OpenMatchesState extends ConsumerState<OpenMatchesList> {
     for (var date in dateList) {
       widgets.add(
         Padding(
-          padding: EdgeInsets.only(bottom: 15.h),
-          child: Text(
-            Utils.formatBookingDate(date, context),
-            style: AppTextStyles.poppinsBold(
-                fontSize: 16.sp,),
+          padding: EdgeInsets.only(bottom: 12.h, top: 4.h),
+          child: Row(
+            children: [
+              Container(
+                width: 3.w,
+                height: 18.h,
+                decoration: BoxDecoration(
+                  color: AppColors.darkYellow,
+                  borderRadius: BorderRadius.circular(2.r),
+                ),
+              ),
+              SizedBox(width: 8.w),
+              Text(
+                Utils.formatBookingDate(date, context),
+                style: AppTextStyles.poppinsBold(
+                  fontSize: 16.sp,
+                ),
+              ),
+            ],
           ),
         ),
       );
@@ -122,8 +142,9 @@ class _OpenMatchesState extends ConsumerState<OpenMatchesList> {
       widgets.addAll(
         dataMatches.map(
           (match) => Padding(
-            padding: EdgeInsets.only(bottom: 15.h),
+            padding: EdgeInsets.only(bottom: 12.h),
             child: InkWell(
+              borderRadius: BorderRadius.circular(16.r),
               onTap: () async {
                 await ref
                     .read(goRouterProvider)
@@ -163,62 +184,104 @@ class _OpenMatchCard extends ConsumerWidget {
       level = "${"LEVEL".tr(context)} $level";
     }
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 15.h),
       decoration: BoxDecoration(
-        color: AppColors.gray,
-        border: border,
-        borderRadius: BorderRadius.circular(12.r),
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black2.withOpacity(0.06),
+            blurRadius: 12,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 10,
-                child: Text(
-                  '${match.bookingDate.format("EEE dd MMM")} | ${match.bookingStartTime.format("h:mm")} - ${match.bookingEndTime.format("h:mm a").toLowerCase()}',
-                  style: AppTextStyles.poppinsBold(
-                    fontSize: 14.sp,
+          // Header with date/time and location
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+            decoration: BoxDecoration(
+              color: AppColors.black2,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16.r),
+                topRight: Radius.circular(16.r),
+              ),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.access_time_rounded, size: 14.sp, color: AppColors.darkYellow),
+                SizedBox(width: 6.w),
+                Expanded(
+                  child: Text(
+                    '${match.bookingDate.format("EEE dd MMM")} | ${match.bookingStartTime.format("h:mm")} - ${match.bookingEndTime.format("h:mm a").toLowerCase()}',
+                    style: AppTextStyles.poppinsSemiBold(
+                      fontSize: 13.sp,
+                      color: AppColors.white,
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Text(
+                Text(
                   (match.service?.location?.locationName ?? ""),
-                  textAlign: TextAlign.end,
-                  style: AppTextStyles.poppinsBold(
-                      fontSize: 13.sp,),
+                  style: AppTextStyles.poppinsMedium(
+                    fontSize: 12.sp,
+                    color: AppColors.darkYellow,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          // SizedBox(height: 2.h),
-          CDivider(color: AppColors.black5,),
-          SizedBox(height: 10.h),
-          OpenMatchParticipantRow(
-            textForAvailableSlot: "AVAILABLE".tr(context),
-            backGroundColor: AppColors.white,
-            slotIconColor: AppColors.black,
-            players: match.players ?? [],
-            imageBgColor: AppColors.black2,
-            borderColor: AppColors.black,
+          // Player slots
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+            child: OpenMatchParticipantRow(
+              textForAvailableSlot: "AVAILABLE".tr(context),
+              backGroundColor: AppColors.lightGray,
+              slotIconColor: AppColors.black70,
+              players: match.players ?? [],
+              imageBgColor: AppColors.black2,
+              borderColor: AppColors.black25,
+            ),
           ),
-          SizedBox(height: 10.h),
-          Row(
-            children: [
-              Text(
-                "${match.court}".capitalizeFirst,
-                style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
+          // Footer with court and level
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+            decoration: BoxDecoration(
+              color: AppColors.lightGray,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(16.r),
+                bottomRight: Radius.circular(16.r),
               ),
-              const Spacer(),
-              Text(
-                level,
-                style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
-              ),
-            ],
-          )
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.sports_tennis, size: 14.sp, color: AppColors.black70),
+                SizedBox(width: 4.w),
+                Text(
+                  "${match.court}".capitalizeFirst,
+                  style: AppTextStyles.poppinsMedium(
+                    fontSize: 12.sp,
+                    color: AppColors.black70,
+                  ),
+                ),
+                const Spacer(),
+                if (level.isNotEmpty)
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
+                    decoration: BoxDecoration(
+                      color: AppColors.darkYellow30,
+                      borderRadius: BorderRadius.circular(100.r),
+                    ),
+                    child: Text(
+                      level,
+                      style: AppTextStyles.poppinsSemiBold(
+                        fontSize: 11.sp,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
         ],
       ),
     );

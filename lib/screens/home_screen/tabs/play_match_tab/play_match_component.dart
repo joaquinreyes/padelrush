@@ -6,131 +6,38 @@ class _ViewSelector extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(_selectedTabIndex);
-    return Container(
-      height: 54.h,
-      // decoration: BoxDecoration(
-      //   color: AppColors.tileBgColor,
-      //   boxShadow: [
-      //     BoxShadow(
-      //         color: AppColors.black5,
-      //         blurRadius: 4,
-      //         offset: Offset(0, 4),
-      //         blurStyle: BlurStyle.outer)
-      //   ],
-      // ),
-      child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CustomTab(
-                title:
-                    '${'OPEN'.trU(context)}${kIsWeb ? " " : "\n "}${'MATCHES'.trU(context)}',
-                index: 0,
-                selectedIndex: selectedIndex,
-                onTap: () => ref.read(_selectedTabIndex.notifier).state = 0,
-              ),
-              // SizedBox(width: 15.w),
-              CustomTab(
-                title: "ACTIVITIES".trU(context),
-                index: 1,
-                selectedIndex: selectedIndex,
-                onTap: () => ref.read(_selectedTabIndex.notifier).state = 1,
-              ),
-              // SizedBox(width: 15.w),
-              CustomTab(
-                title: "COACHING".trU(context),
-                index: 2,
-                selectedIndex: selectedIndex,
-                onTap: () => ref.read(_selectedTabIndex.notifier).state = 2,
-              ),
-            ],
-          )
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     GestureDetector(
-          //       onTap: () {
-          //         if (selectedIndex != 0) {
-          //           ref.read(_selectedTabIndex.notifier).state = 0;
-          //         }
-          //       },
-          //       child: Container(
-          //         decoration: BoxDecoration(
-          //           color: selectedIndex == 0 ? AppColors.black2 : Colors.transparent,
-          //           borderRadius: BorderRadius.circular(15.r),
-          //         ),
-          //         child: Padding(
-          //           padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 5.h),
-          //           child: Text(
-          //             '${'OPEN'.trU(context)}\n${'MATCHES'.trU(context)}',
-          //             textAlign: TextAlign.center,
-          //             style: AppTextStyles.qanelasRegular(
-          //               height: 0.95,
-          //               fontSize: 16.sp,
-          //               letterSpacing: 16.sp * 0.12,
-          //               color: selectedIndex == 0 ? AppColors.white : AppColors.black70,
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //     SizedBox(width: 15.w),
-          //     GestureDetector(
-          //       onTap: () {
-          //         if (selectedIndex != 1) {
-          //           ref.read(_selectedTabIndex.notifier).state = 1;
-          //         }
-          //       },
-          //       child: Container(
-          //         decoration: BoxDecoration(
-          //           color: selectedIndex == 1 ? AppColors.black2 : Colors.transparent,
-          //           borderRadius: BorderRadius.circular(15.r),
-          //         ),
-          //         child: Padding(
-          //           padding: EdgeInsets.only(right: 15.w, left: 15.w, top: 14.h, bottom: 8.h),
-          //           child: Text(
-          //             "ACTIVITIES".trU(context),
-          //             style: AppTextStyles.qanelasRegular(
-          //               height: 0.95,
-          //               fontSize: 16.sp,
-          //               letterSpacing: 16.sp * 0.12,
-          //               color: selectedIndex == 1 ? AppColors.white : AppColors.black70,
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //     SizedBox(width: 15.w),
-          //     GestureDetector(
-          //       onTap: () {
-          //         if (selectedIndex != 2) {
-          //           ref.read(_selectedTabIndex.notifier).state = 2;
-          //         }
-          //       },
-          //       child: Container(
-          //         decoration: BoxDecoration(
-          //           color: selectedIndex == 2 ? AppColors.black2 : Colors.transparent,
-          //           borderRadius: BorderRadius.circular(15.r),
-          //         ),
-          //         child: Padding(
-          //           padding: EdgeInsets.only(right: 15.w, left: 15.w, top: 14.h, bottom: 8.h),
-          //           child: Text(
-          //             "COACHING".trU(context),
-          //             style: AppTextStyles.qanelasRegular(
-          //               height: 0.95,
-          //               fontSize: 16.sp,
-          //               letterSpacing: 16.sp * 0.12,
-          //               color: selectedIndex == 2 ? AppColors.white : AppColors.black70,
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          ),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      child: Container(
+        height: 48.h,
+        decoration: BoxDecoration(
+          color: AppColors.lightGray,
+          borderRadius: BorderRadius.circular(14.r),
+        ),
+        padding: EdgeInsets.all(4.h),
+        child: Row(
+          children: [
+            CustomTab(
+              title: '${'OPEN'.trU(context)} ${'MATCHES'.trU(context)}',
+              index: 0,
+              selectedIndex: selectedIndex,
+              onTap: () => ref.read(_selectedTabIndex.notifier).state = 0,
+            ),
+            CustomTab(
+              title: "EVENTS".trU(context),
+              index: 1,
+              selectedIndex: selectedIndex,
+              onTap: () => ref.read(_selectedTabIndex.notifier).state = 1,
+            ),
+            CustomTab(
+              title: "LESSONS".trU(context),
+              index: 2,
+              selectedIndex: selectedIndex,
+              onTap: () => ref.read(_selectedTabIndex.notifier).state = 2,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -157,23 +64,38 @@ class CustomTab extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
-        child: Container(
-          height: 44.h,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeInOut,
+          height: 40.h,
           alignment: Alignment.center,
-          // decoration: BoxDecoration(
-          //     color: isSelected ? AppColors.black2 : AppColors.white),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0.w),
-            child: Text(
-              title,
-              textAlign: TextAlign.start,
-              style: isSelected ? AppTextStyles.pragmaticaObliqueExtendedBold(
-                fontSize: 20.sp,
-              ).copyWith(height: 1) : AppTextStyles.pragmaticaExtendedBold(
-                fontSize: 14.sp,
-                color: AppColors.black70,
-              ).copyWith(height: 1),
-            ),
+          decoration: BoxDecoration(
+            color: isSelected ? AppColors.black2 : Colors.transparent,
+            borderRadius: BorderRadius.circular(11.r),
+            boxShadow: isSelected
+                ? [
+                    BoxShadow(
+                      color: AppColors.black2.withOpacity(0.15),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ]
+                : [],
+          ),
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: isSelected
+                ? AppTextStyles.poppinsSemiBold(
+                    fontSize: 12.sp,
+                    color: AppColors.white,
+                  )
+                : AppTextStyles.poppinsMedium(
+                    fontSize: 12.sp,
+                    color: AppColors.black70,
+                  ),
           ),
         ),
       ),
@@ -199,7 +121,7 @@ class FilterRow extends ConsumerWidget {
     final selectedLocation = ref.watch(selectedLocationProvider);
     final allLocations = ref.watch(clubLocationsProvider);
     final selectedIndex = ref.watch(_selectedTabIndex);
-    // final selectedSports = ref.watch(_selectedSportsProvider);
+    final selectedSports = ref.watch(_selectedSportsProvider);
 
     return Column(
       children: [
@@ -325,14 +247,14 @@ class FilterRow extends ConsumerWidget {
             ],
           ),
         ),
-        // SizedBox(
-        //   height: 10.h,
-        // ),
-        // _sportsRow(
-        //   ref,
-        //   sports,
-        //   selectedSports,
-        // ),
+        SizedBox(
+          height: 10.h,
+        ),
+        _sportsRow(
+          ref,
+          sports,
+          selectedSports,
+        ),
       ],
     );
   }
@@ -412,13 +334,14 @@ class FilterRow extends ConsumerWidget {
   }) {
     return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(25.r),
       child: Container(
-        decoration: inset.BoxDecoration(
-          boxShadow: kInsetShadow,
-          color: AppColors.gray,
+        decoration: BoxDecoration(
+          color: AppColors.white,
           borderRadius: BorderRadius.circular(25.r),
+          border: Border.all(color: AppColors.black10, width: 1),
         ),
-        padding: EdgeInsets.only(left: 10.w, right: 5.w, top: 11.5.h, bottom: 11.5.h),
+        padding: EdgeInsets.only(left: 12.w, right: 8.w, top: 10.h, bottom: 10.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -430,13 +353,11 @@ class FilterRow extends ConsumerWidget {
                 ),
               ),
             ),
-            // SizedBox(width: 4.w),
-            Image.asset(
-              AppImages.dropdownIcon.path,
-              height: 16.h,
-              width: 16.h,
-              color: AppColors.black,
-            )
+            Icon(
+              Icons.keyboard_arrow_down_rounded,
+              size: 18.h,
+              color: AppColors.black70,
+            ),
           ],
         ),
       ),
@@ -836,7 +757,7 @@ class _PlayerRankingButton extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: InkWell(
-        customBorder: RoundedRectangleBorder(),
+        borderRadius: BorderRadius.circular(100.r),
         onTap: () {
           showDialog(
             context: context,
@@ -846,15 +767,24 @@ class _PlayerRankingButton extends StatelessWidget {
           );
         },
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 8.w),
+          padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 14.w),
           margin: EdgeInsets.only(right: 15.w),
           decoration: BoxDecoration(
-              color: AppColors.darkYellow,
-              borderRadius: BorderRadius.circular(100.r)),
-          child: Text(
-            "PLAYERS_RANKING".tr(context),
-            style: AppTextStyles.poppinsMedium(
-                fontSize: 14.sp,),
+            color: AppColors.darkYellow,
+            borderRadius: BorderRadius.circular(100.r),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.emoji_events_outlined, size: 16.sp, color: AppColors.black2),
+              SizedBox(width: 6.w),
+              Text(
+                "PLAYERS_RANKING".tr(context),
+                style: AppTextStyles.poppinsSemiBold(
+                  fontSize: 13.sp,
+                ),
+              ),
+            ],
           ),
         ),
       ),

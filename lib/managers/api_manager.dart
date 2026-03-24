@@ -18,7 +18,7 @@ const kBaseURL = 'https://api.bookandgo.app/api/v1/apps';
 const kChatBaseURL = 'https://chat.bookandgo.app/websocket/club';
 
 @Riverpod(keepAlive: true)
-HttpApiManager apiManager(Ref ref) => HttpApiManager();
+HttpApiManager apiManager(ApiManagerRef ref) => HttpApiManager();
 
 class APIManager {
   Dio dio = Dio();

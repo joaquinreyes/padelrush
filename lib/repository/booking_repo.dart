@@ -499,10 +499,10 @@ class BookingRepo {
 }
 
 @riverpod
-BookingRepo bookingRepo(Ref ref) => BookingRepo();
+BookingRepo bookingRepo(BookingRepoRef ref) => BookingRepo();
 
 @riverpod
-Future<double?> bookCourt(Ref ref,
+Future<double?> bookCourt(BookCourtRef ref,
     {required Bookings booking,
     required int courtID,
     required DateTime dateTime,
@@ -535,34 +535,40 @@ Future<double?> bookCourt(Ref ref,
 }
 
 @riverpod
-Future<List<UserBookings>> fetchUserBooking(Ref ref) {
+Future<List<UserBookings>> fetchUserBooking(FetchUserBookingRef ref) {
   return ref.read(bookingRepoProvider).fetchUserBooking(ref);
 }
 
 @riverpod
 Future<List<UserBookings>> fetchUserBookingWaitingList(
-    Ref ref) {
+    FetchUserBookingWaitingListRef ref) {
   return ref.read(bookingRepoProvider).fetchUserBookingWaitingList(ref);
 }
 
 @riverpod
 Future<List<UserBookings>> fetchUserAllBookings(
-    Ref ref) async {
+    FetchUserAllBookingsRef ref) async {
   final results = await Future.wait([
     ref.refresh(fetchUserBookingProvider.future),
-    // ref.refresh(fetchUserBookingWaitingListProvider.future),
+    ref.refresh(fetchUserBookingWaitingListProvider.future),
   ]);
 
   final List<UserBookings> bookings = [];
   bookings.addAll(results[0]);
-  // bookings.addAll(results[1]);
+  // Add waiting list bookings, avoiding duplicates
+  final existingIds = bookings.map((e) => e.id).toSet();
+  for (final b in results[1]) {
+    if (!existingIds.contains(b.id)) {
+      bookings.add(b);
+    }
+  }
   //SORT BOOKINGS BY DATE, in descending order
   bookings.sort((a, b) => b.bookingDate.compareTo(a.bookingDate));
   return bookings;
 }
 
 @riverpod
-Future<bool> addToCalendar(Ref ref,
+Future<bool> addToCalendar(AddToCalendarRef ref,
     {required String title,
     required DateTime startDate,
     required DateTime endDate}) {
@@ -571,7 +577,7 @@ Future<bool> addToCalendar(Ref ref,
 
 @riverpod
 Future<dynamic> fetchCourtPrice(
-  Ref ref, {
+  FetchCourtPriceRef ref, {
   required int serviceId,
   required CourtPriceRequestType requestType,
   required DateTime dateTime,
@@ -598,17 +604,17 @@ Future<dynamic> fetchCourtPrice(
 
 @riverpod
 Future<List<MultipleBookings>> fetchBookingCartList(
-    Ref ref) {
+    FetchBookingCartListRef ref) {
   return ref.read(bookingRepoProvider).fetchBookingCartList(ref);
 }
 
 @riverpod
-Future<bool> deleteCart(Ref ref, String bookingId) async {
+Future<bool> deleteCart(DeleteCartRef ref, String bookingId) async {
   return ref.read(bookingRepoProvider).deleteCartBooking(ref, bookingId);
 }
 
 @riverpod
-Future<(int?, double?)> upgradeBookingToOpen(Ref ref,
+Future<(int?, double?)> upgradeBookingToOpen(UpgradeBookingToOpenRef ref,
     {required Bookings booking,
     required int reservedPlayers,
     String? organizerNote,
@@ -629,14 +635,14 @@ Future<(int?, double?)> upgradeBookingToOpen(Ref ref,
 }
 
 @riverpod
-Future<double?> fetchChatCount(Ref ref,
+Future<double?> fetchChatCount(FetchChatCountRef ref,
     {required int matchId}) async {
   return ref.read(bookingRepoProvider).fetchChatCount(ref, matchId: matchId);
 }
 
 @riverpod
 Future<void> bookLessonCourt(
-  Ref ref, {
+  BookLessonCourtRef ref, {
   required int lessonTime,
   required int courtId,
   required int lessonId,
@@ -658,23 +664,23 @@ Future<void> bookLessonCourt(
 }
 
 @riverpod
-Future<List<ActiveMemberships>> activeMembership(Ref ref) {
+Future<List<ActiveMemberships>> activeMembership(ActiveMembershipRef ref) {
   return ref.read(bookingRepoProvider).fetchActiveMemberships(ref);
 }
 
 @riverpod
 Future<UserActiveMembership> fetchActiveAndAllMemberships(
-    Ref ref) {
+    FetchActiveAndAllMembershipsRef ref) {
   return ref.read(bookingRepoProvider).fetchActiveAndAllMemberships(ref);
 }
 
 @riverpod
-Future<List<MembershipModel>> fetchAllMemberships(Ref ref) {
+Future<List<MembershipModel>> fetchAllMemberships(FetchAllMembershipsRef ref) {
   return ref.read(bookingRepoProvider).fetchAllMemberships(ref);
 }
 
 @riverpod
 Future<List<MembershipCategory>> fetchMembershipCategory(
-    Ref ref) {
+    FetchMembershipCategoryRef ref) {
   return ref.read(bookingRepoProvider).fetchMembershipCategory(ref);
 }

@@ -2,13 +2,10 @@ import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:padelrush/box_shadow/flutter_inset_box_shadow.dart' as inset;
 import 'package:padelrush/screens/home_screen/tabs/profile_tab/tabs/booking_profile_tab/user_bookings_list.dart';
 import 'package:padelrush/utils/custom_extensions.dart';
 import '../../../../../../app_styles/app_colors.dart';
 import '../../../../../../app_styles/app_text_styles.dart';
-import '../../../../../../globals/constants.dart';
-import 'package:flutter_riverpod/legacy.dart';
 
 part 'booking_profile_tab_provider.dart';
 
@@ -46,24 +43,23 @@ class _BookingProfileTabState extends ConsumerState<BookingProfileTab> {
           alignment: AlignmentDirectional.centerStart,
           child: Container(
             width: 200.w,
-            alignment: AlignmentDirectional.centerStart,
-            // decoration: inset.BoxDecoration(
-            //   color: AppColors.tileBgColor,
-            //   boxShadow: kInsetShadow,
-            //   borderRadius: BorderRadius.circular(12.r),
-            // ),
+            height: 42.h,
+            decoration: BoxDecoration(
+              color: AppColors.lightGray,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            padding: EdgeInsets.all(3.h),
             child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _pageSelectorItem(
                     ref: ref, text: 'UPCOMING'.tr(context), index: 0),
-                _pageSelectorItem(ref: ref, text: 'PAST'.tr(context), index: 1),
+                _pageSelectorItem(
+                    ref: ref, text: 'PAST'.tr(context), index: 1),
               ],
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 14.h),
         ExpandablePageView(
           physics: const NeverScrollableScrollPhysics(),
           controller: pageController,
@@ -81,34 +77,43 @@ class _BookingProfileTabState extends ConsumerState<BookingProfileTab> {
     final selectedTab = ref.watch(_selectedTabIndex);
     final isSelected = selectedTab == index;
     return Expanded(
-      flex: 15,
-      child: InkWell(
-          onTap: () {
-            if (selectedTab != index) {
-              ref.read(_selectedTabIndex.notifier).state = index;
-            }
-          },
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 8.h),
-            margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 5.w),
-            decoration: decoration.copyWith(
-                color: isSelected ? AppColors.darkYellow : AppColors.white),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(text,
-                    textAlign: TextAlign.center,
-                    style: isSelected
-                        ? AppTextStyles.poppinsSemiBold(
-                            fontSize: 14.sp,
-                          )
-                        : AppTextStyles.poppinsRegular(
-                            color: AppColors.black70,
-                            fontSize: 13.sp,
-                          ))
-              ],
-            ),
-          )),
+      child: GestureDetector(
+        onTap: () {
+          if (selectedTab != index) {
+            ref.read(_selectedTabIndex.notifier).state = index;
+          }
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: isSelected ? AppColors.black2 : Colors.transparent,
+            borderRadius: BorderRadius.circular(10.r),
+            boxShadow: isSelected
+                ? [
+                    BoxShadow(
+                      color: AppColors.black2.withOpacity(0.15),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ]
+                : [],
+          ),
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: isSelected
+                ? AppTextStyles.poppinsSemiBold(
+                    fontSize: 13.sp,
+                    color: AppColors.white,
+                  )
+                : AppTextStyles.poppinsMedium(
+                    color: AppColors.black70,
+                    fontSize: 13.sp,
+                  ),
+          ),
+        ),
+      ),
     );
   }
 }

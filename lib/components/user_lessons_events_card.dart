@@ -3,11 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:padelrush/app_styles/app_colors.dart';
 import 'package:padelrush/app_styles/app_text_styles.dart';
-import 'package:padelrush/components/c_divider.dart';
 import 'package:padelrush/components/changes_cancelled_listing_card.dart';
 import 'package:padelrush/components/ranked_component.dart';
 import 'package:padelrush/components/service_detail_components.dart/event_lesson_card_coach.dart';
-import 'package:padelrush/components/service_detail_components.dart/level_restriction_container.dart';
 import 'package:padelrush/components/waiting_for_approval.dart';
 import 'package:padelrush/globals/constants.dart';
 import 'package:padelrush/globals/utils.dart';
@@ -73,247 +71,299 @@ class UserLessonsEventsCard extends ConsumerWidget {
           ? "LESSON_CANCELLED".tr(context)
           : "EVENT_CANCELLED".tr(context);
     }
-    final color = isCancelled || isPlayerPendingPayment ? AppColors.darkYellow60 : AppColors.gray;
-    final textColor = isCancelled || isPlayerPendingPayment ? AppColors.black : AppColors.black;
-    final pax = booking.minimumCapacity == null
-        ? " - ${booking.maximumCapacity ?? 0} pax"
-        : "";
-
+    final bool hasStatusBanner = isCancelled || isPlayerPendingPayment || ((isWaiting || inWaitingList) && !isCancelled);
     final isRankedEvent = booking.rankedEvent ?? false;
+    final String? levelRestriction = booking.service?.event?.levelRestriction;
+
     return Container(
-      padding: EdgeInsets.all(15.h),
-      constraints: kComponentWidthConstraint,
       decoration: BoxDecoration(
-        color: color,
-        border: border,
-        borderRadius: BorderRadius.all(Radius.circular(12.r)),
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black2.withOpacity(0.06),
+            blurRadius: 12,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if ((isWaiting || inWaitingList) && !isCancelled) ...[
-            if (isApproved)
-              ChangesCancelledListingCard(
-                  text: "APPROVED_TO_JOIN_NOW".tr(context)),
-            if (inWaitingList)
-              ChangesCancelledListingCard(text: "IN_WAITING_LIST".tr(context)),
-            if (isWaiting) const WaitingForApproval(),
-            SizedBox(height: 5.h)
-          ],
-          if (isCancelled) ...[
-            ChangesCancelledListingCard(text: cancelText),
-            SizedBox(height: 10.h),
-          ],
-          if (isPlayerPendingPayment)
-            Padding(
-              padding: EdgeInsets.only(bottom: 15.h),
+          // Status banner
+          if (hasStatusBanner)
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+              decoration: BoxDecoration(
+                color: isCancelled
+                    ? AppColors.black10
+                    : isPlayerPendingPayment
+                        ? AppColors.darkYellow60
+                        : AppColors.darkYellow30,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16.r),
+                  topRight: Radius.circular(16.r),
+                ),
+              ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ChangesCancelledListingCard(
-                    color: AppColors.white,
-                    isUpperCase: false,
-                    iconColor: AppColors.black2,
-                    textColor: AppColors.black2,
-                    padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 15.w),
-                    style: AppTextStyles.poppinsSemiBold(fontSize: 13.sp, color: AppColors.black2),
-                    text: "BOOKING_UNPAID".tr(context),
-                  ),
-                  MainButton(
-                    label: "PAY_NOW".tr(context),
-                    onTap: () async {
-                      String sportName = "";
-                      if ((booking.players ?? []).isNotEmpty &&
-                          booking.players!.first.customer!.sportsLevel
-                              .isNotEmpty) {
-                        sportName = booking.players!.first.customer!.sportsLevel
-                            .first.sportName ??
-                            "";
-                      }
-
-                      List<bookingModel.BookingCourts> listCourts = [];
-
-                      (booking.courts ?? []).map((e) {
-                        listCourts.add(
-                            bookingModel.BookingCourts.fromJson(e.toJson()));
-                      }).toList();
-                      final isEvent = (booking.service?.serviceType ?? "").toLowerCase() == "event";
-                      final singleEvent =
-                          (booking.service?.eventType ?? "").toLowerCase() == "single";
-                      dynamic paid = await showDialog(
-                        context: context,
-                        builder: (context) {
-                          return BookCourtDialog(
-                            allowPayLater: false,
-
-                            getPendingPayment: true,
-                            payRemainingOpenMatch: false,
-                            payRemainingEvent: isEvent,
-                            payRemainingLesson: !isEvent,
-                            eventDoubleJoin: !singleEvent,
-                            showRefund: true,
-                            coachId: null,
-                            courtPriceRequestType: CourtPriceRequestType.join,
-                            bookings: bookingModel.Bookings(
-                                id: booking.id,
-                                price: booking.service!.price,
-                                duration: booking.duration2,
-                                isOpenMatch: true,
-                                sport: bookingModel.Sport(sportName: sportName),
-                                location: bookingModel.Location(
-                                    id: booking.service!.location!.id,
-                                    courts: listCourts,
-                                    locationName: booking
-                                        .service!.location!.locationName)),
-                            bookingTime: booking.bookingStartTime,
-                            court: {
-                              (booking.courts ?? []).first.id ?? 0:
-                              (booking.courts ?? []).first.courtName ?? ""
-                            },
-                          );
-                        },
-                      );
-
-                      if (paid is bool && paid) {
-                        Utils.showMessageDialog(
-                            context, "YOU_HAVE_PAID_SUCCESSFULLY".tr(context));
-                        ref.invalidate(fetchUserAllBookingsProvider);
-                        ref.invalidate(walletInfoProvider);
-                      }
-                    },
-                    width: 85.w,
-                    isForPopup: true,
-                    height: 30.h,
-                    labelStyle: AppTextStyles.poppinsBold(
-                        fontSize: 14.sp),
-                    padding: EdgeInsets.zero,
-                  )
+                  if ((isWaiting || inWaitingList) && !isCancelled && !isPlayerPendingPayment) ...[
+                    if (isApproved)
+                      Expanded(child: ChangesCancelledListingCard(text: "APPROVED_TO_JOIN_NOW".tr(context))),
+                    if (inWaitingList)
+                      Expanded(child: ChangesCancelledListingCard(text: "IN_WAITING_LIST".tr(context))),
+                    if (isWaiting)
+                      Expanded(
+                        child: WaitingForApproval(
+                          title: "WAITING_FOR_APPROVAL".tr(context).capitalizeFirst,
+                          backgroundColor: AppColors.darkYellow80,
+                          titleStyle: AppTextStyles.poppinsSemiBold(
+                            fontSize: 12.sp,
+                            color: AppColors.black2,
+                          ),
+                        ),
+                      ),
+                  ],
+                  if (isCancelled)
+                    Expanded(child: ChangesCancelledListingCard(text: cancelText)),
+                  if (isPlayerPendingPayment && !isCancelled) ...[
+                    ChangesCancelledListingCard(
+                      color: AppColors.white,
+                      isUpperCase: false,
+                      iconColor: AppColors.black2,
+                      textColor: AppColors.black2,
+                      padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 15.w),
+                      style: AppTextStyles.poppinsSemiBold(fontSize: 13.sp, color: AppColors.black2),
+                      text: "BOOKING_UNPAID".tr(context),
+                    ),
+                    const Spacer(),
+                    MainButton(
+                      label: "PAY_NOW".tr(context),
+                      onTap: () => _handlePayNow(context, ref),
+                      width: 85.w,
+                      height: 30.h,
+                      isForPopup: true,
+                      labelStyle: AppTextStyles.poppinsBold(fontSize: 14.sp),
+                      padding: EdgeInsets.zero,
+                    ),
+                  ],
                 ],
               ),
             ),
-          Row(
-            children: [
-              Expanded(
-                flex: 10,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+
+          // Dark header with name + location + time
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+            decoration: BoxDecoration(
+              color: AppColors.black2,
+              borderRadius: hasStatusBanner
+                  ? BorderRadius.zero
+                  : BorderRadius.only(
+                      topLeft: Radius.circular(16.r),
+                      topRight: Radius.circular(16.r),
+                    ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    Text(
-                      booking.service?.eventLessonName ?? "",
-                      style: AppTextStyles.poppinsBold(
-                        color: textColor,
-                        fontSize: 15.sp,
+                    Expanded(
+                      child: Text(
+                        booking.service?.eventLessonName ?? "",
+                        style: AppTextStyles.poppinsSemiBold(
+                          fontSize: 15.sp,
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
-                    SizedBox(height: 2.h),
-                    LevelRestrictionContainer(
-                      levelRestriction:
-                          booking.service?.event?.levelRestriction,
-                    )
-                  ],
-                ),
-              ),
-              const Spacer(),
-              Expanded(
-                flex: 8,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
                     Text(
-                      Utils.eventLessonStatusText(
-                        context: context,
-                        playersCount: booking.players?.length ?? 0,
-                        maxCapacity: booking.getMaximumCapacity,
-                        minCapacity: booking.getMinimumCapacity,
+                      booking.service?.location?.locationName ?? "",
+                      style: AppTextStyles.poppinsMedium(
+                        fontSize: 12.sp,
+                        color: AppColors.darkYellow,
                       ),
-                      style: AppTextStyles.poppinsBold(
-                        color: textColor,
-                        fontSize: 13.sp,
-                      ),
-                    ),
-                    SizedBox(height: 2.h),
-                    EventLessonCardCoach(
-                      coaches: booking.getCoaches,
-                      textColor: textColor,
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: 1.h),
-          CDivider(
-            color: isCancelled ? AppColors.white25 : AppColors.black5,
-          ),
-          if (isRankedEvent)
-            Align(alignment: Alignment.centerRight, child: RankedComponent()),
-          SizedBox(height: 2.h),
-          Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    ("${booking.service?.location?.locationName ?? ""}" )
-                        .capitalizeFirst,
-                    style: AppTextStyles.poppinsRegular(
-                      color: textColor,
-                      fontSize: 13.sp,
+                SizedBox(height: 6.h),
+                Row(
+                  children: [
+                    Icon(Icons.access_time_rounded, size: 13.sp, color: AppColors.darkYellow),
+                    SizedBox(width: 5.w),
+                    Text(
+                      booking.formattedDateStartEndTimeAMH,
+                      style: AppTextStyles.poppinsRegular(
+                        fontSize: 12.sp,
+                        color: AppColors.white,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 2.h),
-                  Text(
-                    "${"PRICE".tr(context)} ${Utils.formatPriceNew(booking.service?.price?.toDouble())}",
-                    style: AppTextStyles.poppinsRegular(
-                      color: textColor,
-                      fontSize: 13.sp,
-                    ),
-                  ),
-                ],
-              ),
-              const Spacer(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    booking.formatBookingDate,
-                    style: AppTextStyles.poppinsRegular(
-                      color: textColor,
-                      fontSize: 13.sp,
-                    ),
-                  ),
-                  SizedBox(height: 2.h),
-                  Text(
-                    "${booking.formatStartEndTimeAM.toLowerCase()}$pax",
-                    style: AppTextStyles.poppinsRegular(
-                      color: textColor,
-                      fontSize: 13.sp,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          if ((booking.service?.isEvent ?? false) &&
-              isPast &&
-              (booking.scoreSubmitted ?? false) &&
-              booking.getMyPositionEvent(currentUserID ?? 0) != null)
-            Container(
-              decoration: BoxDecoration(
-                color: AppColors.darkYellow,
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              margin: EdgeInsets.only(top: 5),
-              padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 13.w),
-              child: Text(
-                "${(booking.getMyPositionEvent(currentUserID ?? 0) ?? 0).getUserPosition} Place",
-                style: AppTextStyles.poppinsSemiBold(
-                  fontSize: 14.sp,
+                  ],
                 ),
+              ],
+            ),
+          ),
+
+          // Body: coaches + price
+          Padding(
+            padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 12.h),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: EventLessonCardCoach(
+                    coaches: booking.getCoaches,
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        Utils.formatPriceNew(booking.service?.price?.toDouble()),
+                        style: AppTextStyles.poppinsBold(fontSize: 15.sp),
+                      ),
+                      SizedBox(height: 4.h),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                        decoration: BoxDecoration(
+                          color: AppColors.darkYellow30,
+                          borderRadius: BorderRadius.circular(100.r),
+                        ),
+                        child: Text(
+                          "${booking.players?.length ?? 0}/${booking.getMaximumCapacity}",
+                          style: AppTextStyles.poppinsBold(
+                            color: AppColors.black2,
+                            fontSize: 13.sp,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Footer: status + ranked + level + position
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+            decoration: BoxDecoration(
+              color: AppColors.lightGray,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(16.r),
+                bottomRight: Radius.circular(16.r),
               ),
-            )
+            ),
+            child: Row(
+              children: [
+                Text(
+                  Utils.eventLessonStatusText(
+                    context: context,
+                    playersCount: booking.players?.length ?? 0,
+                    maxCapacity: booking.getMaximumCapacity,
+                    minCapacity: booking.getMinimumCapacity,
+                  ).tr(context),
+                  style: AppTextStyles.poppinsMedium(
+                    fontSize: 12.sp,
+                    color: AppColors.black70,
+                  ),
+                ),
+                const Spacer(),
+                if ((booking.service?.isEvent ?? false) &&
+                    isPast &&
+                    (booking.scoreSubmitted ?? false) &&
+                    booking.getMyPositionEvent(currentUserID ?? 0) != null) ...[
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
+                    decoration: BoxDecoration(
+                      color: AppColors.darkYellow,
+                      borderRadius: BorderRadius.circular(100.r),
+                    ),
+                    child: Text(
+                      "${(booking.getMyPositionEvent(currentUserID ?? 0) ?? 0).getUserPosition} Place",
+                      style: AppTextStyles.poppinsSemiBold(fontSize: 11.sp),
+                    ),
+                  ),
+                  SizedBox(width: 8.w),
+                ],
+                if (isRankedEvent) ...[
+                  RankedComponent(),
+                  SizedBox(width: 8.w),
+                ],
+                if (levelRestriction != null)
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
+                    decoration: BoxDecoration(
+                      color: AppColors.darkYellow30,
+                      borderRadius: BorderRadius.circular(100.r),
+                    ),
+                    child: Text(
+                      "${"LEVEL".tr(context)} $levelRestriction",
+                      style: AppTextStyles.poppinsSemiBold(fontSize: 11.sp),
+                    ),
+                  ),
+              ],
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  void _handlePayNow(BuildContext context, WidgetRef ref) async {
+    String sportName = "";
+    if ((booking.players ?? []).isNotEmpty &&
+        booking.players!.first.customer!.sportsLevel.isNotEmpty) {
+      sportName =
+          booking.players!.first.customer!.sportsLevel.first.sportName ?? "";
+    }
+
+    List<bookingModel.BookingCourts> listCourts = [];
+    (booking.courts ?? []).map((e) {
+      listCourts.add(bookingModel.BookingCourts.fromJson(e.toJson()));
+    }).toList();
+
+    final isEvent = (booking.service?.serviceType ?? "").toLowerCase() == "event";
+    final singleEvent = (booking.service?.eventType ?? "").toLowerCase() == "single";
+
+    dynamic paid = await showDialog(
+      context: context,
+      builder: (context) {
+        return BookCourtDialog(
+          allowPayLater: false,
+          getPendingPayment: true,
+          payRemainingOpenMatch: false,
+          payRemainingEvent: isEvent,
+          payRemainingLesson: !isEvent,
+          eventDoubleJoin: !singleEvent,
+          showRefund: true,
+          coachId: null,
+          courtPriceRequestType: CourtPriceRequestType.join,
+          bookings: bookingModel.Bookings(
+              id: booking.id,
+              price: booking.service!.price,
+              duration: booking.duration2,
+              isOpenMatch: true,
+              sport: bookingModel.Sport(sportName: sportName),
+              location: bookingModel.Location(
+                  id: booking.service!.location!.id,
+                  courts: listCourts,
+                  locationName: booking.service!.location!.locationName)),
+          bookingTime: booking.bookingStartTime,
+          court: {
+            (booking.courts ?? []).first.id ?? 0:
+                (booking.courts ?? []).first.courtName ?? ""
+          },
+        );
+      },
+    );
+
+    if (paid is bool && paid) {
+      Utils.showMessageDialog(
+          context, "YOU_HAVE_PAID_SUCCESSFULLY".tr(context));
+      ref.invalidate(fetchUserAllBookingsProvider);
+      ref.invalidate(walletInfoProvider);
+    }
   }
 }

@@ -365,13 +365,15 @@ class Courts {
 
 class RequestWaitingList {
   final int? id;
+  final int? customerId;
   final String? status;
   final BookingCustomerBase? customer;
 
-  RequestWaitingList({required this.id, required this.status, this.customer});
+  RequestWaitingList({required this.id, this.customerId, required this.status, this.customer});
 
   RequestWaitingList.fromJson(Map<String, dynamic> json)
-      : id = json['customer_id'],
+      : id = json['id'],
+        customerId = json['customer_id'],
         status = json['status'],
         customer = json['customer'] != null
             ? BookingCustomerBase.fromJson(json['customer'])
@@ -379,7 +381,8 @@ class RequestWaitingList {
 
   Map<String, dynamic> toJson() {
     return {
-      'customer_id': id,
+      'id': id,
+      'customer_id': customerId,
       'status': status,
     };
   }

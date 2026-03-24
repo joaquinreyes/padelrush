@@ -15,39 +15,41 @@ class _RequestWaitingApprovalCard extends ConsumerWidget {
       children: [
         Text(
           "YOU_ARE_WAITING_FOR_APPROVAL".trU(context),
-          style: AppTextStyles.poppinsMedium(fontSize: 17.sp),
+          style: AppTextStyles.poppinsBold(fontSize: 16.sp),
         ),
         SizedBox(height: 10.h),
         Container(
           decoration: BoxDecoration(
-            color: AppColors.gray,
-            border: border,
-            borderRadius: BorderRadius.circular(12.r),
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(16.r),
+            boxShadow: [
+              BoxShadow(color: AppColors.black2.withOpacity(0.06), blurRadius: 12, offset: const Offset(0, 3)),
+            ],
           ),
-          padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 15.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
           child: Row(
             children: [
               NetworkCircleImage(
                 path: user?.profileUrl,
-                width: 37.w,
-                height: 37.h,
+                width: 40.w,
+                height: 40.h,
                 logoColor: AppColors.white,
-                borderRadius: BorderRadius.circular(4.r),
+                borderRadius: BorderRadius.circular(12.r),
                 bgColor: AppColors.black2,
-                boxBorder: Border.all(color: AppColors.white25),
+                boxBorder: Border.all(color: AppColors.black10),
               ),
-              SizedBox(width: 15.w),
+              SizedBox(width: 12.w),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     (user?.firstName ?? "").toUpperCase(),
-                    style: AppTextStyles.poppinsMedium(fontSize: 12.sp),
+                    style: AppTextStyles.poppinsSemiBold(fontSize: 13.sp),
                   ),
                   if (levelValue != null)
                     Text(
                       levelValue.toString(),
-                      style: AppTextStyles.poppinsRegular(fontSize: 12.sp),
+                      style: AppTextStyles.poppinsRegular(fontSize: 12.sp, color: AppColors.black70),
                     ),
                 ],
               ),
@@ -55,11 +57,11 @@ class _RequestWaitingApprovalCard extends ConsumerWidget {
               MainButton(
                 label: "WITHDRAW_FROM_THE_MATCH".tr(context),
                 color: AppColors.darkYellow,
-                labelStyle: AppTextStyles.poppinsMedium(fontSize: 13.sp),
+                labelStyle: AppTextStyles.poppinsMedium(fontSize: 12.sp),
                 applySize: false,
                 applyShadow: true,
                 borderRadius: 100.r,
-                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 6.h),
+                padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
                 onTap: onWithdraw,
               ),
             ],
@@ -157,7 +159,7 @@ class _OrganizerPendingApprovalCard extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "PLAYERS_WAITING_FOR_YOUR_APPROVAL".trU(context),
+          "PLAYERS_REQUESTING_TO_JOIN".trU(context),
           style: AppTextStyles.poppinsMedium(fontSize: 17.sp),
         ),
         SizedBox(height: 10.h),
@@ -235,14 +237,14 @@ class _RankedOrFriendly extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.gray,
+        color: AppColors.lightGray,
         borderRadius: BorderRadius.circular(100.r),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 4.h),
+      padding: EdgeInsets.all(3.h),
       child: Row(
         children: [
           _buildWidget("FRIENDLY".tr(context), !isRanked),
-          2.horizontalSpace,
+          SizedBox(width: 2.w),
           _buildWidget("RANKED".tr(context), isRanked),
         ],
       ),
@@ -250,18 +252,21 @@ class _RankedOrFriendly extends StatelessWidget {
   }
 
   _buildWidget(String text, bool isSelected) {
-    return Container(
-      decoration: BoxDecoration(color: isSelected ? AppColors.black70 : AppColors.transparentColor,
-      borderRadius: BorderRadius.circular(100.r),),
-      padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 10.w),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      decoration: BoxDecoration(
+        color: isSelected ? AppColors.black2 : Colors.transparent,
+        borderRadius: BorderRadius.circular(100.r),
+      ),
+      padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 12.w),
       child: Text(
         text,
         style: isSelected
             ? AppTextStyles.poppinsSemiBold(
-            fontSize: 14.sp, color: AppColors.white)
+                fontSize: 12.sp, color: AppColors.white)
             : AppTextStyles.poppinsRegular(
                 color: AppColors.black70,
-                fontSize: 13.sp,
+                fontSize: 12.sp,
               ),
       ),
     );
@@ -286,22 +291,28 @@ class _OrganizerNote extends StatelessWidget {
         SizedBox(height: 20.h),
         Text(
           "NOTE_FROM_ORGANIZER".trU(context),
-          style: AppTextStyles.poppinsMedium(
-              fontSize: 17.sp,),
+          style: AppTextStyles.poppinsBold(fontSize: 16.sp),
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 8.h),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            border: border,
-            color: AppColors.gray,
-            borderRadius: BorderRadius.circular(12.r)
+            color: AppColors.darkYellow30,
+            borderRadius: BorderRadius.circular(14.r),
           ),
-          padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 12.w),
-          child: Text(
-            note,
-            style: AppTextStyles.poppinsRegular(
-                fontSize: 13.sp,),
+          padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 14.w),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.format_quote_rounded, size: 18.sp, color: AppColors.black70),
+              SizedBox(width: 8.w),
+              Expanded(
+                child: Text(
+                  note,
+                  style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
+                ),
+              ),
+            ],
           ),
         ),
       ],
@@ -318,85 +329,131 @@ class _InfoCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     String level = service.openMatchLevelRange;
     if (level.isNotEmpty) {
-      level = "${"LEVEL".tr(context)} $level |";
+      level = "${"LEVEL".tr(context)} $level";
     }
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 15.h,
-        vertical: 15.h,
-      ),
       decoration: BoxDecoration(
-        color: AppColors.gray,
-        border: border,
-        borderRadius: BorderRadius.circular(12.r),
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black2.withOpacity(0.06),
+            blurRadius: 12,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(
-                'ORGANIZER'.tr(context),
-                style: AppTextStyles.poppinsMedium(fontSize: 16.sp),
+          // Dark header
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+            decoration: BoxDecoration(
+              color: AppColors.black2,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16.r),
+                topRight: Radius.circular(16.r),
               ),
-              const Spacer(),
-              Text(
-                'BOOKING'.tr(context),
-                style: AppTextStyles.poppinsMedium(
-                    fontSize: 16.sp),
-              ),
-              if (service.isPrivate)
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: AppColors.darkYellow50),
-                  padding: EdgeInsets.all(2),
-                  margin: EdgeInsets.only(left: 8),
-                  child: Icon(
-                    Icons.lock,
-                    size: 16,
-                    color: AppColors.black2,
-                  ),
-                )
-            ],
-          ),
-          CDivider(color: AppColors.white25),
-          SizedBox(height: 5.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: _organizer(context, service.organizer, ref),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    // "${DateFormat("EEE dd MMM").format(booking.startingTime ?? (DubaiDateTime.now().dateTime))} • ${DateFormat(DateFormat.HOUR_MINUTE).format(booking.startingTime ?? (DubaiDateTime.now().dateTime))} - ${DateFormat(DateFormat.HOUR_MINUTE).format((booking.endingTime ?? (DubaiDateTime.now().dateTime)))}",
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.access_time_rounded, size: 14.sp, color: AppColors.darkYellow),
+                SizedBox(width: 6.w),
+                Expanded(
+                  child: Text(
                     service.formattedDateStartEndTimeAM12,
-                    style: AppTextStyles.poppinsRegular(
-                      fontSize: 15.sp,
+                    style: AppTextStyles.poppinsSemiBold(
+                      fontSize: 13.sp,
+                      color: AppColors.white,
                     ),
                   ),
-                  SizedBox(height: 2.h),
-                  Text(
-                    "${service.courts?.first.courtName ?? ""} | ${service.service?.location?.locationName ?? ""}"
-                        .capitalizeFirst,
-                    style: AppTextStyles.poppinsRegular(
-                      fontSize: 15.sp,
-                    ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                  decoration: BoxDecoration(
+                    color: service.isPrivate ? AppColors.darkYellow : AppColors.darkYellow50,
+                    borderRadius: BorderRadius.circular(100.r),
                   ),
-                  SizedBox(height: 2.h),
-                  Text(
-                    "$level Price ${Utils.formatPrice(service.pricePaid(ref))}",
-                    style: AppTextStyles.poppinsRegular(
-                      fontSize: 15.sp,
-                    ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        service.isPrivate ? Icons.lock : Icons.public,
+                        size: 12.sp,
+                        color: AppColors.black2,
+                      ),
+                      SizedBox(width: 4.w),
+                      Text(
+                        service.isPrivate
+                            ? "PRIVATE".tr(context)
+                            : "OPEN".tr(context),
+                        style: AppTextStyles.poppinsSemiBold(
+                          fontSize: 11.sp,
+                          color: AppColors.black2,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              SizedBox(width: 15.h),
-            ],
+                ),
+              ],
+            ),
+          ),
+          // Body
+          Padding(
+            padding: EdgeInsets.all(16.h),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Organizer
+                _organizer(context, service.organizer, ref),
+                SizedBox(width: 16.w),
+                // Details
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(Icons.location_on_outlined, size: 14.sp, color: AppColors.black70),
+                          SizedBox(width: 3.w),
+                          Flexible(
+                            child: Text(
+                              "${service.courts?.first.courtName ?? ""} | ${service.service?.location?.locationName ?? ""}"
+                                  .capitalizeFirst,
+                              textAlign: TextAlign.end,
+                              style: AppTextStyles.poppinsMedium(
+                                fontSize: 13.sp,
+                                color: AppColors.black70,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 8.h),
+                      if (level.isNotEmpty)
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
+                          decoration: BoxDecoration(
+                            color: AppColors.darkYellow30,
+                            borderRadius: BorderRadius.circular(100.r),
+                          ),
+                          child: Text(
+                            level,
+                            style: AppTextStyles.poppinsSemiBold(fontSize: 11.sp),
+                          ),
+                        ),
+                      SizedBox(height: 8.h),
+                      Text(
+                        "${"PRICE".tr(context)} ${Utils.formatPrice(service.pricePaid(ref))}",
+                        style: AppTextStyles.poppinsSemiBold(fontSize: 14.sp),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -410,7 +467,7 @@ class _InfoCard extends ConsumerWidget {
         child: Text(
           "NO_ORGANIZER".tr(context),
           textAlign: TextAlign.center,
-          style: AppTextStyles.poppinsRegular(fontSize: 15.sp),
+          style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
         ),
       );
     }
@@ -420,32 +477,29 @@ class _InfoCard extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        GestureDetector(
-          onTap: () {},
-          child: NetworkCircleImage(
-            // path: participant?.imgUrl,
-            path: organizer.customer?.profileUrl,
-            width: 37.h,
-            height: 37.h,
-            bgColor: AppColors.black2,
-            boxBorder: Border.all(color: AppColors.white25),
-            borderRadius: BorderRadius.circular(12.r),
-          ),
+        Text(
+          'ORGANIZER'.tr(context),
+          style: AppTextStyles.poppinsRegular(fontSize: 10.sp, color: AppColors.black70),
         ),
-        SizedBox(height: 5.h),
+        SizedBox(height: 6.h),
+        NetworkCircleImage(
+          path: organizer.customer?.profileUrl,
+          width: 44.h,
+          height: 44.h,
+          bgColor: AppColors.black2,
+          boxBorder: Border.all(color: AppColors.black10),
+          borderRadius: BorderRadius.circular(14.r),
+        ),
+        SizedBox(height: 6.h),
         Text(
           organizer.getCustomerName.capitalizeFirst,
           textAlign: TextAlign.center,
-          style: AppTextStyles.poppinsMedium(
-            fontSize: 11.sp,
-          ),
+          style: AppTextStyles.poppinsSemiBold(fontSize: 12.sp),
         ),
         Text(
-          "$level ${getRankLabel(double.tryParse(level) ?? 0)}", // • SIDE",
+          "$level ${getRankLabel(double.tryParse(level) ?? 0)}",
           textAlign: TextAlign.center,
-          style: AppTextStyles.poppinsRegular(
-            fontSize: 12.sp,
-          ),
+          style: AppTextStyles.poppinsRegular(fontSize: 11.sp, color: AppColors.black70),
         ),
       ],
     );
@@ -458,7 +512,9 @@ class _WaitingList extends ConsumerStatefulWidget {
       required this.onApprove,
       required this.onJoinAfterApproval,
       required this.onWithdraw,
-      required this.isCurrentOrganizer,this.refreshApis});
+      required this.isCurrentOrganizer,
+      this.refreshApis,
+      this.excludeCustomerIds = const {}});
 
   final int id;
   final Function(int) onApprove;
@@ -466,6 +522,7 @@ class _WaitingList extends ConsumerStatefulWidget {
   final Function(int) onJoinAfterApproval;
   final Function(int) onWithdraw;
   final bool isCurrentOrganizer;
+  final Set<int> excludeCustomerIds;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => __WaitingListState();
@@ -479,7 +536,8 @@ class __WaitingListState extends ConsumerState<_WaitingList> {
     return provider.when(
       skipLoadingOnRefresh: false,
       data: (list) {
-        final data = list.map((e) => e).toList();
+        final data = list.where((e) =>
+            !widget.excludeCustomerIds.contains(e.customer?.id)).toList();
         final user = ref.read(userManagerProvider).user;
         if (user == null) {
           return SecondaryText(text: "USER_NOT_FOUND".tr(context));
@@ -541,48 +599,45 @@ class _MatchInfoSettingsTabSelector extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedTab = ref.watch(_selectedTabIndexProvider);
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 4.w),
-        decoration: BoxDecoration(
-          color: AppColors.gray,
-          border: border,
-          borderRadius: BorderRadius.circular(25.r),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _buildTab(context, ref, "MATCH_INFO".tr(context), 0, selectedTab),
-            _buildTab(context, ref, "SETTINGS".tr(context), 1, selectedTab),
-          ],
-        ),
+    return Container(
+      padding: EdgeInsets.all(3.h),
+      decoration: BoxDecoration(
+        color: AppColors.lightGray,
+        borderRadius: BorderRadius.circular(14.r),
+      ),
+      child: Row(
+        children: [
+          _buildTab(context, ref, "MATCH_INFO".tr(context), 0, selectedTab),
+          _buildTab(context, ref, "SETTINGS".tr(context), 1, selectedTab),
+        ],
       ),
     );
   }
 
   Widget _buildTab(BuildContext context, WidgetRef ref, String text, int index, int selectedTab) {
     final isSelected = selectedTab == index;
-    return GestureDetector(
-      onTap: () {
-        ref.read(_selectedTabIndexProvider.notifier).state = index;
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: isSelected ? AppColors.darkYellow80 : Colors.transparent,
-          borderRadius: BorderRadius.circular(25.r),
-        ),
-        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 18.w),
-        child: Text(
-          text,
-          style: isSelected
-              ? AppTextStyles.poppinsMedium(
-                  fontSize: 13.sp,
-                )
-              : AppTextStyles.poppinsRegular(
-                  color: AppColors.black50,
-                  fontSize: 13.sp,
-                ),
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          ref.read(_selectedTabIndexProvider.notifier).state = index;
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          decoration: BoxDecoration(
+            color: isSelected ? AppColors.black2 : Colors.transparent,
+            borderRadius: BorderRadius.circular(11.r),
+            boxShadow: isSelected
+                ? [BoxShadow(color: AppColors.black2.withOpacity(0.15), blurRadius: 8, offset: const Offset(0, 2))]
+                : [],
+          ),
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          alignment: Alignment.center,
+          child: Text(
+            text,
+            style: isSelected
+                ? AppTextStyles.poppinsSemiBold(fontSize: 13.sp, color: AppColors.white)
+                : AppTextStyles.poppinsMedium(color: AppColors.black50, fontSize: 13.sp),
+          ),
         ),
       ),
     );

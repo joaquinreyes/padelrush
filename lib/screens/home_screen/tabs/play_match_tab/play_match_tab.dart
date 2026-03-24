@@ -35,7 +35,6 @@ import '../../../../models/service_detail_model.dart';
 import '../../../../repository/user_repo.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../routes/app_routes.dart';
-import 'package:flutter_riverpod/legacy.dart';
 
 part 'play_match_providers.dart';
 
@@ -88,20 +87,12 @@ class _PlayMatchTabState extends ConsumerState<PlayMatchTab> {
     return Column(
       children: [
         SizedBox(height: 20.h),
-        Row(
-          children: [
-            const Spacer(),
-            // const NotificationButton(),
-            SizedBox(width: 30.w),
-          ],
-        ),
-        // SizedBox(height: 2.5.h),
         const _ViewSelector(),
-        SizedBox(height: 12.h),
+        SizedBox(height: 14.h),
         FilterRow(),
-        SizedBox(height: 10.h),
+        SizedBox(height: 8.h),
         if (selectedTabIndex == 0) _PlayerRankingButton(),
-        SizedBox(height: 10.h),
+        SizedBox(height: 8.h),
         Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),

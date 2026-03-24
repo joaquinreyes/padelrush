@@ -4,9 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:padelrush/app_styles/app_colors.dart';
 import 'package:padelrush/app_styles/app_text_styles.dart';
-import 'package:padelrush/components/c_divider.dart';
 import 'package:padelrush/components/service_detail_components.dart/event_lesson_card_coach.dart';
-import 'package:padelrush/components/service_detail_components.dart/level_restriction_container.dart';
 import 'package:padelrush/components/secondary_text.dart';
 import 'package:padelrush/globals/utils.dart';
 import 'package:padelrush/models/events_model.dart';
@@ -17,7 +15,6 @@ import 'package:padelrush/screens/home_screen/tabs/play_match_tab/tabs/tab_paren
 import 'package:padelrush/utils/custom_extensions.dart';
 
 import '../../../../../components/ranked_component.dart';
-import '../../../../../globals/constants.dart';
 
 class EventsList extends ConsumerStatefulWidget {
   const EventsList({
@@ -62,12 +59,19 @@ class _EventListState extends ConsumerState<EventsList> {
         data: (data) {
           if (data.isEmpty) {
             return Padding(
-              padding: const EdgeInsets.only(top: 120),
+              padding: const EdgeInsets.only(top: 80),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.event_busy, size: 64, color: Colors.grey[600]),
-                  const SizedBox(height: 16),
+                  Container(
+                    padding: EdgeInsets.all(20.h),
+                    decoration: BoxDecoration(
+                      color: AppColors.lightGray,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(Icons.event_outlined, size: 40.sp, color: AppColors.black25),
+                  ),
+                  SizedBox(height: 20.h),
                   SecondaryText(text: "NO_EVENTS_FOUND".tr(context)),
                 ],
               ),
@@ -92,14 +96,25 @@ class _EventListState extends ConsumerState<EventsList> {
     for (var date in dateList) {
       widgets.add(
         Padding(
-          padding: EdgeInsets.only(
-            bottom: 15.h,
-          ),
-          child: Text(
-            Utils.formatBookingDate(date, context),
-            style: AppTextStyles.poppinsBold(
-              fontSize: 16.sp,
-            ),
+          padding: EdgeInsets.only(bottom: 12.h, top: 4.h),
+          child: Row(
+            children: [
+              Container(
+                width: 3.w,
+                height: 18.h,
+                decoration: BoxDecoration(
+                  color: AppColors.darkYellow,
+                  borderRadius: BorderRadius.circular(2.r),
+                ),
+              ),
+              SizedBox(width: 8.w),
+              Text(
+                Utils.formatBookingDate(date, context),
+                style: AppTextStyles.poppinsBold(
+                  fontSize: 16.sp,
+                ),
+              ),
+            ],
           ),
         ),
       );
@@ -109,8 +124,9 @@ class _EventListState extends ConsumerState<EventsList> {
       widgets.addAll(
         dataMatches.map(
           (event) => Padding(
-            padding: EdgeInsets.only(bottom: 15.h),
+            padding: EdgeInsets.only(bottom: 12.h),
             child: InkWell(
+              borderRadius: BorderRadius.circular(16.r),
               onTap: () async {
                 await ref
                     .read(goRouterProvider)
@@ -141,124 +157,161 @@ class EventsCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final String? levelRestriction = event.service?.event?.levelRestriction;
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25.r),
-        border: border,
-        color: AppColors.gray,
+        borderRadius: BorderRadius.circular(16.r),
+        color: AppColors.white,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black2.withOpacity(0.06),
+            blurRadius: 12,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      (event.service?.event?.eventName ?? "").capitalizeFirst,
-                      style: AppTextStyles.poppinsBold(fontSize: 16.sp),
-                    ),
-                    SizedBox(height: 2.h),
-                    LevelRestrictionContainer(
-                      levelRestriction: event.service?.event?.levelRestriction,
-                    )
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: EventLessonCardCoach(
-                  coaches: event.getCoaches,
-                ),
-              ),
-            ],
-          ),
-          CDivider(),
-          if (event.rankedEvent ?? false)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: RankedComponent(),
+          // Dark header with event name, time, location
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+            decoration: BoxDecoration(
+              color: AppColors.black2,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16.r),
+                topRight: Radius.circular(16.r),
               ),
             ),
-          Row(
-            children: [
-              Expanded(
-                child: _colInfo(
-                  // event.courtName,
-                  event.service?.location?.locationName ?? "",
-                  "${"PRICE".tr(context)} ${Utils.formatPrice(event.service?.price)}",
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    Text(
-                      Utils.eventLessonStatusText(
-                        context: context,
-                        playersCount: event.players?.length ?? 0,
-                        maxCapacity: event.getMaximumCapacity,
-                        minCapacity: event.getMinimumCapacity,
-                      ).trU(context),
-                      style: AppTextStyles.poppinsBold(
-                        fontSize: 14.sp,
-                      ),
-                    ),
-                    // SizedBox(height: 4.h),
-                    Container(
-                      padding:
-                          EdgeInsets.only(top: 2.h, left: 10.w, right: 10.w),
-                      decoration: BoxDecoration(
-                        color: AppColors.darkYellow,
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
+                    Expanded(
                       child: Text(
-                        "${event.players?.length.toString() ?? "0"}/${event.getMaximumCapacity.toString()}",
-                        textAlign: TextAlign.center,
-                        style: AppTextStyles.poppinsBold(
-                          color: AppColors.black2,
-                          fontSize: 12.sp,
+                        (event.service?.event?.eventName ?? "").capitalizeFirst,
+                        style: AppTextStyles.poppinsSemiBold(
+                          fontSize: 15.sp,
+                          color: AppColors.white,
                         ),
                       ),
                     ),
+                    Text(
+                      event.service?.location?.locationName ?? "",
+                      style: AppTextStyles.poppinsMedium(
+                        fontSize: 12.sp,
+                        color: AppColors.darkYellow,
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              Expanded(
-                child: _colInfo(
-                  event.bookingDate.format("EEE dd MMM"),
-                  "${event.bookingStartTime.format("HH:mm")} - ${event.bookingEndTime.format("HH:mm a").toLowerCase()}",
-                  isEnd: true,
+                SizedBox(height: 6.h),
+                Row(
+                  children: [
+                    Icon(Icons.access_time_rounded, size: 13.sp, color: AppColors.darkYellow),
+                    SizedBox(width: 5.w),
+                    Text(
+                      '${event.bookingDate.format("EEE dd MMM")} | ${event.bookingStartTime.format("HH:mm")} - ${event.bookingEndTime.format("HH:mm a").toLowerCase()}',
+                      style: AppTextStyles.poppinsRegular(
+                        fontSize: 12.sp,
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ],
                 ),
-              )
-            ],
-          )
+              ],
+            ),
+          ),
+          // Body: coaches, price, capacity
+          Padding(
+            padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 12.h),
+            child: Row(
+              children: [
+                if (event.getCoaches?.isNotEmpty == true)
+                  Expanded(
+                    flex: 2,
+                    child: EventLessonCardCoach(
+                      coaches: event.getCoaches,
+                    ),
+                  ),
+                if (event.getCoaches?.isNotEmpty != true)
+                  const Spacer(),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        Utils.formatPrice(event.service?.price),
+                        style: AppTextStyles.poppinsBold(fontSize: 15.sp),
+                      ),
+                      SizedBox(height: 4.h),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                        decoration: BoxDecoration(
+                          color: AppColors.darkYellow30,
+                          borderRadius: BorderRadius.circular(100.r),
+                        ),
+                        child: Text(
+                          "${event.players?.length.toString() ?? "0"}/${event.getMaximumCapacity.toString()}",
+                          style: AppTextStyles.poppinsBold(
+                            color: AppColors.black2,
+                            fontSize: 13.sp,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Footer with level and ranked badge
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+            decoration: BoxDecoration(
+              color: AppColors.lightGray,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(16.r),
+                bottomRight: Radius.circular(16.r),
+              ),
+            ),
+            child: Row(
+              children: [
+                Text(
+                  Utils.eventLessonStatusText(
+                    context: context,
+                    playersCount: event.players?.length ?? 0,
+                    maxCapacity: event.getMaximumCapacity,
+                    minCapacity: event.getMinimumCapacity,
+                  ).tr(context),
+                  style: AppTextStyles.poppinsMedium(
+                    fontSize: 12.sp,
+                    color: AppColors.black70,
+                  ),
+                ),
+                const Spacer(),
+                if (event.rankedEvent ?? false) ...[
+                  RankedComponent(),
+                  SizedBox(width: 8.w),
+                ],
+                if (levelRestriction != null)
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
+                    decoration: BoxDecoration(
+                      color: AppColors.darkYellow30,
+                      borderRadius: BorderRadius.circular(100.r),
+                    ),
+                    child: Text(
+                      "${"LEVEL".tr(context)} $levelRestriction",
+                      style: AppTextStyles.poppinsSemiBold(fontSize: 11.sp),
+                    ),
+                  ),
+              ],
+            ),
+          ),
         ],
       ),
-    );
-  }
-
-  Column _colInfo(String text1, String text2, {bool isEnd = false}) {
-    return Column(
-      crossAxisAlignment:
-          isEnd ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-      children: [
-        Text(
-          text1,
-          style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
-        ),
-        SizedBox(height: 2.h),
-        Text(
-          text2,
-          style: AppTextStyles.poppinsRegular(fontSize: 13.sp),
-        ),
-      ],
     );
   }
 }

@@ -34,7 +34,6 @@ import '../../../../routes/app_routes.dart';
 import '../../../payment_information/payment_information.dart';
 import '../play_match_tab/play_match_tab.dart';
 import '../play_match_tab/tabs/events_list.dart';
-import 'package:flutter_riverpod/legacy.dart';
 
 part 'wellness_tab_components.dart';
 

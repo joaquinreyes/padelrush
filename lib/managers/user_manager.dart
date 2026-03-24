@@ -4,12 +4,11 @@ import 'package:padelrush/managers/private_chat_socket_manager/private_chat_sock
 import 'package:padelrush/managers/shared_pref_manager.dart';
 import 'package:padelrush/models/app_user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:flutter_riverpod/legacy.dart';
 
 part 'user_manager.g.dart';
 
 @Riverpod(keepAlive: true)
-UserManager userManager(Ref ref) {
+UserManager userManager(UserManagerRef ref) {
   return UserManager();
 }
 
@@ -17,7 +16,7 @@ final userProvider =
     StateProvider<AppUser?>((ref) => ref.read(userManagerProvider).user);
 
 @Riverpod(keepAlive: true)
-Future<bool> isAuthenticated(Ref ref) async {
+Future<bool> isAuthenticated(IsAuthenticatedRef ref) async {
   return ref.read(userManagerProvider).isAuthenticated(ref);
 }
 

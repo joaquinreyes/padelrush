@@ -138,13 +138,13 @@ class NotificationRepo {
 }
 
 @Riverpod(keepAlive: true)
-NotificationRepo notificationRepo(Ref ref) {
+NotificationRepo notificationRepo(NotificationRepoRef ref) {
   return NotificationRepo();
 }
 
 @riverpod
 Future<List<InAppNotification>> fetchNotifications(
-  Ref ref, {
+  FetchNotificationsRef ref, {
   int limit = 20,
   int offset = 0,
 }) async {
@@ -182,7 +182,7 @@ class NotificationUnreadCount extends _$NotificationUnreadCount {
 }
 
 @riverpod
-Future<bool> markNotificationAsRead(Ref ref, String notificationId) async {
+Future<bool> markNotificationAsRead(MarkNotificationAsReadRef ref, String notificationId) async {
   final result = await ref
       .watch(notificationRepoProvider)
       .markAsRead(ref, notificationId);
@@ -193,7 +193,7 @@ Future<bool> markNotificationAsRead(Ref ref, String notificationId) async {
 }
 
 @riverpod
-Future<bool> markAllNotificationsAsRead(Ref ref) async {
+Future<bool> markAllNotificationsAsRead(MarkAllNotificationsAsReadRef ref) async {
   final result =
       await ref.watch(notificationRepoProvider).markAllAsRead(ref);
   if (result) {
@@ -203,14 +203,14 @@ Future<bool> markAllNotificationsAsRead(Ref ref) async {
 }
 
 @riverpod
-Future<bool> deleteNotification(Ref ref, String notificationId) async {
+Future<bool> deleteNotification(DeleteNotificationRef ref, String notificationId) async {
   return ref
       .watch(notificationRepoProvider)
       .deleteNotification(ref, notificationId);
 }
 
 @riverpod
-Future<bool> clearAllNotifications(Ref ref) async {
+Future<bool> clearAllNotifications(ClearAllNotificationsRef ref) async {
   final result =
       await ref.watch(notificationRepoProvider).clearAllNotifications(ref);
   if (result) {
