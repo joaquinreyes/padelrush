@@ -314,7 +314,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                           slotBackgroundColor: AppColors.lightGray,
                           imageBgColor: AppColors.black2,
                           borderRadius: BorderRadius.circular(16.r),
-                          onTap: (_, __) async {
+                          onTap: (slotIndex, __) async {
                             final currentUserID =
                                 ref.read(userManagerProvider).user?.user?.id;
 
@@ -342,7 +342,7 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                             final data =
                                 await Utils.showLoadingDialog(context, provider, ref);
                             if (isCurrentUserOrganizer) {
-                              await _showPlayerSelectionDialog(context);
+                              await _showPlayerSelectionDialog(context, slotIndex + 1);
                               return;
                             }
 
@@ -350,10 +350,6 @@ class _DataBodyState extends ConsumerState<_DataBody> {
                             if (data is List<ServiceWaitingPlayers>) {
                               isUserInWaitingList =
                                   data.any((e) => e.customer?.id == currentUserID);
-                            }
-                            if (isCurrentUserOrganizer) {
-                              await _showPlayerSelectionDialog(context);
-                              return;
                             }
                             if (isUserInWaitingList || isUserInPlayerList || isUserInRequestWaiting || isUserLocallyWaiting) {
                               return;
@@ -457,12 +453,13 @@ class _DataBodyState extends ConsumerState<_DataBody> {
     );
   }
 
-  Future<void> _showPlayerSelectionDialog(BuildContext context) async {
+  Future<void> _showPlayerSelectionDialog(BuildContext context, int position) async {
     await showDialog(
       context: context,
       builder: (context) => _AddPlayerToWaitingListDialog(
         serviceId: widget.service.id!,
         players: widget.service.players ?? [],
+        position: position,
       ),
     );
 

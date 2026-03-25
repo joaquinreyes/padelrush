@@ -12,7 +12,9 @@ class _MembershipDialog extends StatelessWidget {
     final membershipName = membership.membershipName?.toUpperCase() ?? "";
     final categoryName = membership.categoryName ?? "";
 
-    final membershipDescription = membership.description ?? "";
+    final membershipDescription = (membership.description ?? "")
+        .replaceAll(RegExp(r'<[^>]*>'), '')
+        .trim();
     final membershipPrice = membership.price ?? 0;
     final bool isGold = membershipName.toLowerCase().contains("coach");
 

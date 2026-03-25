@@ -471,7 +471,7 @@ class __SwapDialogState extends ConsumerState<_SwapDialog> {
                     player: players[i],
                     showLevel: false,
                     allowTap: false,
-                    textColor: AppColors.white,
+                    textColor: AppColors.black,
                   ),
                 ),
               ),

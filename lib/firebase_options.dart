@@ -22,40 +22,30 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return web;
+        return ios;
       case TargetPlatform.windows:
-        return web;
+        return android;
       case TargetPlatform.linux:
-        return web;
+        return android;
       default:
-        return web;
+        return android;
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyD-PmQOZM8YFV61R8eWzGg3vNGWrIV82Ew',
-    appId: '1:808637490319:web:3d93741f0fdcd17c7cbcfa',
-    messagingSenderId: '808637490319',
-    projectId: 'frontendbooakdngo3',
-    authDomain: 'frontendbooakdngo3.firebaseapp.com',
-    storageBucket: 'frontendbooakdngo3.firebasestorage.app',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDZSHzjzdh1A8J_Ini5CEA0GIwJh0MOmjQ',
-    appId: '1:808637490319:android:4f9a7e1ba5716aad7cbcfa',
-    messagingSenderId: '808637490319',
-    projectId: 'frontendbooakdngo3',
-    storageBucket: 'frontendbooakdngo3.firebasestorage.app',
+    apiKey: 'AIzaSyD9ScEHoPjdIY5yTlsu8jlKKXoDyf0Pn1E',
+    appId: '1:264818472122:android:c094929e0ab76ceef93e83',
+    messagingSenderId: '264818472122',
+    projectId: 'padel-art-2',
+    storageBucket: 'padel-art-2.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBCJDvBaX9K0LOMpcHri0miwk5Q5rZ4tCY',
-    appId: '1:808637490319:ios:51f944749bbe9a3c7cbcfa',
-    messagingSenderId: '808637490319',
-    projectId: 'frontendbooakdngo3',
-    storageBucket: 'frontendbooakdngo3.firebasestorage.app',
+    apiKey: 'AIzaSyAS0n2JoA6IMnACnrZyAseRi9MWWe83Xpo',
+    appId: '1:264818472122:ios:aa15422ee5b8a0c7f93e83',
+    messagingSenderId: '264818472122',
+    projectId: 'padel-art-2',
+    storageBucket: 'padel-art-2.appspot.com',
     iosBundleId: 'com.padelrush.bookandgo',
   );
-
 }

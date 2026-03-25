@@ -389,7 +389,7 @@ class PlayRepo {
       final token = ref.read(userManagerProvider).user?.accessToken ?? "";
       Map<String, dynamic> queryParams = {
         "date": startTime.format(kFormatForAPI),
-        "sport_name": sportName
+        "sport_name": sportName.capitalizeFirst
       };
       if (coachId.isNotEmpty) {
         queryParams["coach_id"] = coachId.join(",");

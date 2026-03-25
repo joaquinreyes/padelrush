@@ -301,9 +301,11 @@ class _AddPlayerToWaitingListDialog extends ConsumerStatefulWidget {
   const _AddPlayerToWaitingListDialog({
     required this.serviceId,
     required this.players,
+    required this.position,
   });
 
   final int serviceId;
+  final int position;
   final List<BookingPlayerBase> players;
 
   @override
@@ -497,6 +499,7 @@ class _AddPlayerToWaitingListDialogState
     final customerPlayers = [
       {
         "customer_id": user.id,
+        "position": widget.position,
       }
     ];
 
@@ -527,7 +530,7 @@ class _AddPlayerToWaitingListDialogState
   @override
   Widget build(BuildContext context) {
     final followingList = ref.watch(getFollowingListProvider);
-    final followingIds = followingList.value?.following
+    final followingIds = followingList.valueOrNull?.following
         ?.map((f) => f.following?.id)
         .whereType<int>()
         .toSet() ?? <int>{};
@@ -590,6 +593,14 @@ class _AddPlayerToWaitingListDialogState
           SizedBox(height: 10.h),
 
           _buildUsersList(followingIds),
+          SizedBox(height: 20.h),
+          MainButton(
+            label: "CONFIRM".trU(context),
+            isForPopup: true,
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
         ],
       ),
     );
