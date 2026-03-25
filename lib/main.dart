@@ -13,6 +13,7 @@ import 'package:padelrush/app_styles/app_colors.dart';
 import 'package:padelrush/firebase_options.dart';
 import 'package:padelrush/globals/constants.dart';
 import 'package:padelrush/globals/current_platform.dart';
+import 'package:padelrush/managers/analytics_manager.dart';
 import 'package:padelrush/managers/fcm_manager.dart';
 import 'package:padelrush/managers/shared_pref_manager.dart';
 import 'package:padelrush/repository/club_repo.dart';
@@ -74,6 +75,7 @@ class _PadelRushState extends ConsumerState<PadelRush> {
   void initState() {
     globalRef = ref;
     FcmManager().initialize();
+    ref.read(analyticsManagerProvider).initialize();
     super.initState();
   }
 

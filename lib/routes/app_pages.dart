@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:padelrush/managers/analytics_manager.dart';
 import 'package:padelrush/globals/current_platform.dart';
 import 'package:padelrush/routes/app_routes.dart';
 import 'package:padelrush/screens/auth/auth_screen.dart';
@@ -20,17 +21,26 @@ import '../screens/private_chat/private_chat_list_screen.dart';
 import '../screens/private_chat/private_chat_screen.dart';
 import '../screens/ranking_profile/ranking_profile.dart';
 
-final goRouterProvider = Provider((ref) => AppPages.router);
+final goRouterProvider = Provider((ref) => AppPages.createRouter(ref));
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class AppPages {
   AppPages._();
   static const String initial = RouteNames.splash;
 
-  static final GoRouter router = GoRouter(
-    navigatorKey: navigatorKey,
-    initialLocation: initial,
-    routes: [
+  static GoRouter? _router;
+
+  static GoRouter createRouter(Ref ref) {
+    _router ??= GoRouter(
+      navigatorKey: navigatorKey,
+      initialLocation: initial,
+      observers: [AnalyticsRouteObserver(ref)],
+      routes: _routes,
+    );
+    return _router!;
+  }
+
+  static final List<RouteBase> _routes = [
       GoRoute(
         name: "splash",
         path: RouteNames.splash,
@@ -167,8 +177,7 @@ class AppPages {
           );
         },
       ),
-    ],
-  );
+  ];
   static Page<dynamic> _buildPage(Widget child) {
     if (PlatformC().isCurrentDesignPlatformDesktop) {
       return CustomTransitionPage(
