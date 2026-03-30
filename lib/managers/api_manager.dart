@@ -18,7 +18,7 @@ const kBaseURL = 'https://api.bookandgo.app/api/v1/apps';
 const kChatBaseURL = 'https://chat.bookandgo.app/websocket/club';
 
 @Riverpod(keepAlive: true)
-HttpApiManager apiManager(ApiManagerRef ref) => HttpApiManager();
+HttpApiManager apiManager(Ref ref) => HttpApiManager();
 
 class APIManager {
   Dio dio = Dio();
@@ -297,18 +297,19 @@ class APIManager {
               "Error while making request to ${endpoint.path(id: pathParams)}: $error"),
           StackTrace.current);
     }
-    if (error.response != null &&
-        (error.response!.statusCode == 401 ||
-            error.response!.statusCode == 403)) {
-      ref.read(userManagerProvider).signOut(ref);
+    if (error.response != null && error.response!.statusCode == 401) {
       final goRouter = ref.read(goRouterProvider);
       final currentRoute =
           goRouter.routerDelegate.currentConfiguration.fullPath;
+      ref.read(userManagerProvider).signOut(ref);
       if (currentRoute != RouteNames.auth) {
         WidgetsBinding.instance
-            .addPostFrameCallback((_) => goRouter.push(RouteNames.auth));
+            .addPostFrameCallback((_) => goRouter.go(RouteNames.auth));
       }
       throw 'Session expired';
+    }
+    if (error.response != null && error.response!.statusCode == 403) {
+      throw 'You do not have permission to perform this action';
     }
     if (error.response is Response) {
       myPrint("-------------------- Error Response Api ---------------");

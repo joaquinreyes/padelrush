@@ -387,6 +387,7 @@ class ServiceDetail_Event {
   int? minimumCapacity;
   String? eventName;
   String? eventInfo;
+  String? imageUrl;
   bool? waitingList;
   double? minLevelRestriction;
   double? maxLevelRestriction;
@@ -406,6 +407,7 @@ class ServiceDetail_Event {
       this.maximumCapacity,
       this.eventName,
       this.eventInfo,
+      this.imageUrl,
       this.waitingList,
       this.minimumCapacity,
       this.minLevelRestriction,
@@ -416,6 +418,7 @@ class ServiceDetail_Event {
     maximumCapacity = json['maximum_capacity'];
     eventName = json['event_name'];
     eventInfo = json['event_info'];
+    imageUrl = json['event_image']?.toString();
     waitingList = json['waiting_list'];
     minimumCapacity = json['minimum_capacity'];
     minLevelRestriction = json['min_level_restrication']?.toDouble();
@@ -483,6 +486,7 @@ class ServiceDetail_Lesson {
   int? maximumCapacity;
   String? lessonName;
   String? eventInfo;
+  String? imageUrl;
   double? minLevelRestriction;
   double? maxLevelRestriction;
 
@@ -502,6 +506,7 @@ class ServiceDetail_Lesson {
       this.maximumCapacity,
       this.lessonName,
       this.eventInfo,
+      this.imageUrl,
       this.minLevelRestriction,
       this.maxLevelRestriction});
 
@@ -511,6 +516,7 @@ class ServiceDetail_Lesson {
     maximumCapacity = json['maximum_capacity'];
     lessonName = json['lesson_name'];
     eventInfo = json['event_info'];
+    imageUrl = json['event_image']?.toString();
     minLevelRestriction = json['min_level_restrication']?.toDouble();
     maxLevelRestriction = json['max_level_restrication']?.toDouble();
   }

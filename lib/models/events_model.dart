@@ -159,6 +159,7 @@ class Event {
   int? minimumCapacity;
   int? maximumCapacity;
   String? eventName;
+  String? imageUrl;
   double? minLevelRestriction;
   double? maxLevelRestriction;
   EventCategory? eventCategory;
@@ -167,6 +168,7 @@ class Event {
       {this.minimumCapacity,
       this.maximumCapacity,
       this.eventName,
+      this.imageUrl,
       this.minLevelRestriction,
       this.maxLevelRestriction,
       this.eventCategory});
@@ -185,6 +187,7 @@ class Event {
     minimumCapacity = json['minimum_capacity'];
     maximumCapacity = json['maximum_capacity'];
     eventName = json['event_name'];
+    imageUrl = json['event_image']?.toString();
     minLevelRestriction = json['min_level_restrication']?.toDouble();
     maxLevelRestriction = json['max_level_restrication']?.toDouble();
     eventCategory = json['eventCategory'] != null

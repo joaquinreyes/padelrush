@@ -74,8 +74,14 @@ class UserLessonsEventsCard extends ConsumerWidget {
     final bool hasStatusBanner = isCancelled || isPlayerPendingPayment || ((isWaiting || inWaitingList) && !isCancelled);
     final isRankedEvent = booking.rankedEvent ?? false;
     final String? levelRestriction = booking.service?.event?.levelRestriction;
+    final String? imageUrl = (booking.service?.isEvent ?? false)
+        ? booking.service?.event?.imageUrl
+        : booking.service?.lesson?.imageUrl;
+    final bool hasImage = imageUrl != null && imageUrl.isNotEmpty;
 
-    return Container(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16.r),
+      child: Container(
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(16.r),
@@ -90,6 +96,17 @@ class UserLessonsEventsCard extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Cover image (if available)
+          if (hasImage)
+            SizedBox(
+              width: double.infinity,
+              height: 120.h,
+              child: Image.network(
+                imageUrl!,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+              ),
+            ),
           // Status banner
           if (hasStatusBanner)
             Container(
@@ -100,10 +117,12 @@ class UserLessonsEventsCard extends ConsumerWidget {
                     : isPlayerPendingPayment
                         ? AppColors.darkYellow60
                         : AppColors.darkYellow30,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16.r),
-                  topRight: Radius.circular(16.r),
-                ),
+                borderRadius: hasImage
+                    ? BorderRadius.zero
+                    : BorderRadius.only(
+                        topLeft: Radius.circular(16.r),
+                        topRight: Radius.circular(16.r),
+                      ),
               ),
               child: Row(
                 children: [
@@ -156,7 +175,7 @@ class UserLessonsEventsCard extends ConsumerWidget {
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             decoration: BoxDecoration(
               color: AppColors.black2,
-              borderRadius: hasStatusBanner
+              borderRadius: (hasStatusBanner || hasImage)
                   ? BorderRadius.zero
                   : BorderRadius.only(
                       topLeft: Radius.circular(16.r),
@@ -208,38 +227,37 @@ class UserLessonsEventsCard extends ConsumerWidget {
           Padding(
             padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 12.h),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  flex: 2,
                   child: EventLessonCardCoach(
                     coaches: booking.getCoaches,
                   ),
                 ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        Utils.formatPriceNew(booking.service?.price?.toDouble()),
-                        style: AppTextStyles.poppinsBold(fontSize: 15.sp),
+                SizedBox(width: 12.w),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      Utils.formatPriceNew(booking.service?.price?.toDouble()),
+                      style: AppTextStyles.poppinsBold(fontSize: 15.sp),
+                    ),
+                    SizedBox(height: 4.h),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.darkYellow30,
+                        borderRadius: BorderRadius.circular(100.r),
                       ),
-                      SizedBox(height: 4.h),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                        decoration: BoxDecoration(
-                          color: AppColors.darkYellow30,
-                          borderRadius: BorderRadius.circular(100.r),
-                        ),
-                        child: Text(
-                          "${booking.players?.length ?? 0}/${booking.getMaximumCapacity}",
-                          style: AppTextStyles.poppinsBold(
-                            color: AppColors.black2,
-                            fontSize: 13.sp,
-                          ),
+                      child: Text(
+                        "${booking.players?.length ?? 0}/${booking.getMaximumCapacity}",
+                        style: AppTextStyles.poppinsBold(
+                          color: AppColors.black2,
+                          fontSize: 13.sp,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -307,6 +325,7 @@ class UserLessonsEventsCard extends ConsumerWidget {
             ),
           ),
         ],
+      ),
       ),
     );
   }

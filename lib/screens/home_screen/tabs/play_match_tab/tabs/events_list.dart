@@ -158,87 +158,103 @@ class EventsCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final String? levelRestriction = event.service?.event?.levelRestriction;
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.r),
-        color: AppColors.white,
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black2.withOpacity(0.06),
-            blurRadius: 12,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Dark header with event name, time, location
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-            decoration: BoxDecoration(
-              color: AppColors.black2,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16.r),
-                topRight: Radius.circular(16.r),
-              ),
+    final String? imageUrl = event.service?.event?.imageUrl;
+    final bool hasImage = imageUrl != null && imageUrl.isNotEmpty;
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16.r),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16.r),
+          color: AppColors.white,
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.black2.withOpacity(0.06),
+              blurRadius: 12,
+              offset: const Offset(0, 3),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        (event.service?.event?.eventName ?? "").capitalizeFirst,
-                        style: AppTextStyles.poppinsSemiBold(
-                          fontSize: 15.sp,
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Cover image (if available)
+            if (hasImage)
+              SizedBox(
+                width: double.infinity,
+                height: 130.h,
+                child: Image.network(
+                  imageUrl!,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+                ),
+              ),
+            // Dark header with event name, time, location
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+              decoration: BoxDecoration(
+                color: AppColors.black2,
+                borderRadius: hasImage
+                    ? BorderRadius.zero
+                    : BorderRadius.only(
+                        topLeft: Radius.circular(16.r),
+                        topRight: Radius.circular(16.r),
+                      ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          (event.service?.event?.eventName ?? "").capitalizeFirst,
+                          style: AppTextStyles.poppinsSemiBold(
+                            fontSize: 15.sp,
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+                      Text(
+                        event.service?.location?.locationName ?? "",
+                        style: AppTextStyles.poppinsMedium(
+                          fontSize: 12.sp,
+                          color: AppColors.darkYellow,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 6.h),
+                  Row(
+                    children: [
+                      Icon(Icons.access_time_rounded, size: 13.sp, color: AppColors.darkYellow),
+                      SizedBox(width: 5.w),
+                      Text(
+                        '${event.bookingDate.format("EEE dd MMM")} | ${event.bookingStartTime.format("HH:mm")} - ${event.bookingEndTime.format("HH:mm")}',
+                        style: AppTextStyles.poppinsRegular(
+                          fontSize: 12.sp,
                           color: AppColors.white,
                         ),
                       ),
-                    ),
-                    Text(
-                      event.service?.location?.locationName ?? "",
-                      style: AppTextStyles.poppinsMedium(
-                        fontSize: 12.sp,
-                        color: AppColors.darkYellow,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 6.h),
-                Row(
-                  children: [
-                    Icon(Icons.access_time_rounded, size: 13.sp, color: AppColors.darkYellow),
-                    SizedBox(width: 5.w),
-                    Text(
-                      '${event.bookingDate.format("EEE dd MMM")} | ${event.bookingStartTime.format("HH:mm")} - ${event.bookingEndTime.format("HH:mm a").toLowerCase()}',
-                      style: AppTextStyles.poppinsRegular(
-                        fontSize: 12.sp,
-                        color: AppColors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-          // Body: coaches, price, capacity
-          Padding(
-            padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 12.h),
-            child: Row(
-              children: [
-                if (event.getCoaches?.isNotEmpty == true)
+            // Body: coaches, price, capacity
+            Padding(
+              padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 12.h),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
                   Expanded(
-                    flex: 2,
                     child: EventLessonCardCoach(
                       coaches: event.getCoaches,
                     ),
                   ),
-                if (event.getCoaches?.isNotEmpty != true)
-                  const Spacer(),
-                Expanded(
-                  child: Column(
+                  SizedBox(width: 12.w),
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
@@ -262,55 +278,55 @@ class EventsCard extends ConsumerWidget {
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ),
-          // Footer with level and ranked badge
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-            decoration: BoxDecoration(
-              color: AppColors.lightGray,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(16.r),
-                bottomRight: Radius.circular(16.r),
+                ],
               ),
             ),
-            child: Row(
-              children: [
-                Text(
-                  Utils.eventLessonStatusText(
-                    context: context,
-                    playersCount: event.players?.length ?? 0,
-                    maxCapacity: event.getMaximumCapacity,
-                    minCapacity: event.getMinimumCapacity,
-                  ).tr(context),
-                  style: AppTextStyles.poppinsMedium(
-                    fontSize: 12.sp,
-                    color: AppColors.black70,
-                  ),
+            // Footer with level and ranked badge
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+              decoration: BoxDecoration(
+                color: AppColors.lightGray,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(16.r),
+                  bottomRight: Radius.circular(16.r),
                 ),
-                const Spacer(),
-                if (event.rankedEvent ?? false) ...[
-                  RankedComponent(),
-                  SizedBox(width: 8.w),
-                ],
-                if (levelRestriction != null)
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
-                    decoration: BoxDecoration(
-                      color: AppColors.darkYellow30,
-                      borderRadius: BorderRadius.circular(100.r),
-                    ),
-                    child: Text(
-                      "${"LEVEL".tr(context)} $levelRestriction",
-                      style: AppTextStyles.poppinsSemiBold(fontSize: 11.sp),
+              ),
+              child: Row(
+                children: [
+                  Text(
+                    Utils.eventLessonStatusText(
+                      context: context,
+                      playersCount: event.players?.length ?? 0,
+                      maxCapacity: event.getMaximumCapacity,
+                      minCapacity: event.getMinimumCapacity,
+                    ).tr(context),
+                    style: AppTextStyles.poppinsMedium(
+                      fontSize: 12.sp,
+                      color: AppColors.black70,
                     ),
                   ),
-              ],
+                  const Spacer(),
+                  if (event.rankedEvent ?? false) ...[
+                    RankedComponent(),
+                    SizedBox(width: 8.w),
+                  ],
+                  if (levelRestriction != null)
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.darkYellow30,
+                        borderRadius: BorderRadius.circular(100.r),
+                      ),
+                      child: Text(
+                        "${"LEVEL".tr(context)} $levelRestriction",
+                        style: AppTextStyles.poppinsSemiBold(fontSize: 11.sp),
+                      ),
+                    ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

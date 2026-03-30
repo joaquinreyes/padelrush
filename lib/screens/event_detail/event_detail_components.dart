@@ -12,8 +12,12 @@ class _InfoCard extends ConsumerWidget {
     String? levelRestriction = event.service?.event?.levelRestriction;
     final coaches = event.getCoaches;
     final hasCoaches = coaches.isNotEmpty;
+    final String? imageUrl = event.service?.event?.imageUrl;
+    final bool hasImage = imageUrl != null && imageUrl.isNotEmpty;
 
-    return Container(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20.r),
+      child: Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
@@ -27,14 +31,25 @@ class _InfoCard extends ConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          // ── Cover image ──
+          if (hasImage)
+            SizedBox(
+              width: double.infinity,
+              height: 160.h,
+              child: Image.network(
+                imageUrl!,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+              ),
+            ),
           // ── Dark header ──
           Container(
             padding: EdgeInsets.fromLTRB(20.w, 18.h, 20.w, 16.h),
             decoration: BoxDecoration(
               color: AppColors.black2,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20.r),
-                topRight: Radius.circular(20.r),
+                topLeft: hasImage ? Radius.zero : Radius.circular(20.r),
+                topRight: hasImage ? Radius.zero : Radius.circular(20.r),
                 bottomLeft: hasCoaches ? Radius.zero : Radius.circular(20.r),
                 bottomRight: hasCoaches ? Radius.zero : Radius.circular(20.r),
               ),
@@ -176,6 +191,7 @@ class _InfoCard extends ConsumerWidget {
               ),
             ),
         ],
+      ),
       ),
     );
   }

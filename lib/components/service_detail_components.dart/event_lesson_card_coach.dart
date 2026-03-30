@@ -28,7 +28,7 @@ class EventLessonCardCoach extends StatelessWidget {
       coachName = "$coachName +${coachCount - 1}";
     }
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         NetworkCircleImage(
           borderRadius: BorderRadius.circular(4.r),

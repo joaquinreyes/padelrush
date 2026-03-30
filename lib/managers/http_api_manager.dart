@@ -5,6 +5,7 @@ import 'package:padelrush/managers/api_manager.dart';
 import 'package:padelrush/managers/user_manager.dart';
 import 'package:padelrush/screens/app_provider.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
@@ -312,16 +313,19 @@ class HttpApiManager {
               "Error while making request to ${endpoint.path(id: pathParams)}: $error"),
           StackTrace.current);
     }
-    if (error is http.Response &&
-        (error.statusCode == 401 || error.statusCode == 403)) {
-      ref.read(userManagerProvider).signOut(ref);
+    if (error is http.Response && error.statusCode == 401) {
       final goRouter = ref.read(goRouterProvider);
       final currentRoute =
           goRouter.routerDelegate.currentConfiguration.fullPath;
+      ref.read(userManagerProvider).signOut(ref);
       if (currentRoute != RouteNames.auth) {
-        goRouter.push(RouteNames.auth);
+        WidgetsBinding.instance
+            .addPostFrameCallback((_) => goRouter.go(RouteNames.auth));
       }
       throw 'Session expired';
+    }
+    if (error is http.Response && error.statusCode == 403) {
+      throw 'You do not have permission to perform this action';
     }
     if (error is http.Response && error.statusCode == 502) {
       throw "Technical Issue";
