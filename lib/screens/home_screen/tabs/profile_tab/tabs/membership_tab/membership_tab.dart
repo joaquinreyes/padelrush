@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:padelrush/components/custom_dialog.dart';
 import 'package:padelrush/globals/utils.dart';
@@ -83,19 +84,19 @@ class MembershipTab extends ConsumerWidget {
 
               if (data.showMembershipCategories.isNotEmpty &&
                   selectedMembershipCategory.isEmpty) {
-                final pickleballCategory = data.showMembershipCategories
+                final defaultCategory = data.showMembershipCategories
                     .firstWhere(
                         (element) =>
                             (element.categoryName ?? "")
                                 .toString()
                                 .trim()
                                 .toLowerCase() ==
-                            "pickleball",
+                            kSportName,
                         orElse: () => data.showMembershipCategories.first);
 
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   ref.read(selectedMembershipCatIndex.notifier).state =
-                      pickleballCategory.id;
+                      defaultCategory.id;
                 });
               }
 

@@ -218,7 +218,10 @@ class FilterRow extends ConsumerWidget {
                           null) {
                         Future(() {
                           ref.read(selectedSportProvider.notifier).sport =
-                              sports.first;
+                              sports.firstWhere(
+                            (s) => s.sportName?.toLowerCase() == kSportName,
+                            orElse: () => sports.first,
+                          );
                         });
                       }
                       return _buildFilterItem(

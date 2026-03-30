@@ -4,6 +4,7 @@ import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:padelrush/app_styles/app_colors.dart';
 import 'package:padelrush/app_styles/app_text_styles.dart';
@@ -199,8 +200,14 @@ class _BookingTabState extends ConsumerState<BookingTab>
                   final lessonNotifier =
                       ref.read(selectedSportLessonProvider.notifier);
 
-                  sportNotifier.sport ??= sports.first;
-                  lessonNotifier.sport ??= sports.first;
+                  sportNotifier.sport ??= sports.firstWhere(
+                    (s) => s.sportName?.toLowerCase() == kSportName,
+                    orElse: () => sports.first,
+                  );
+                  lessonNotifier.sport ??= sports.firstWhere(
+                    (s) => s.sportName?.toLowerCase() == kSportName,
+                    orElse: () => sports.first,
+                  );
                 });
                 return _slotsView(data, pageController);
 

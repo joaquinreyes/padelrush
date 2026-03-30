@@ -75,15 +75,15 @@ class CourtRepo {
 }
 
 @riverpod
-CourtRepo clubRepo(ClubRepoRef ref) => CourtRepo();
+CourtRepo clubRepo(Ref ref) => CourtRepo();
 
 @Riverpod(keepAlive: true)
-Future<List<ClubLocationData>?> clubLocations(ClubLocationsRef ref) async {
+Future<List<ClubLocationData>?> clubLocations(Ref ref) async {
   return ref.read(clubRepoProvider).getClubLocations(ref);
 }
 
 @Riverpod(keepAlive: true)
-Future<CourtBookingData?> getCourtBooking(GetCourtBookingRef ref) {
+Future<CourtBookingData?> getCourtBooking(Ref ref) {
   final sport = ref.watch(selectedSportProvider);
   if (sport == null || (sport.sportName?.isEmpty ?? true)) {
     return Future.value(null);
@@ -132,7 +132,7 @@ class SelectedDateLesson extends _$SelectedDateLesson {
 }
 
 @riverpod
-Future<AppUpdateModel?> checkUpdate(CheckUpdateRef ref) async {
+Future<AppUpdateModel?> checkUpdate(Ref ref) async {
   if (kIsWeb) {
     return null;
   }

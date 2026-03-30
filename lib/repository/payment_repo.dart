@@ -460,11 +460,11 @@ class PaymentRepo {
 }
 
 @riverpod
-PaymentRepo paymentRepo(PaymentRepoRef ref) => PaymentRepo();
+PaymentRepo paymentRepo(Ref ref) => PaymentRepo();
 
 @riverpod
 Future<PaymentDetails> fetchPaymentDetails(
-    FetchPaymentDetailsRef ref,
+    Ref ref,
     int locationID,
     PaymentDetailsRequestType type,
     int id,
@@ -479,7 +479,7 @@ Future<PaymentDetails> fetchPaymentDetails(
 
 @riverpod
 Future<PaymentDetails> fetchAllPaymentMethods(
-    FetchAllPaymentMethodsRef ref,
+    Ref ref,
     int locationID,
     int serviceID,
     PaymentDetailsRequestType type,
@@ -497,7 +497,7 @@ Future<PaymentDetails> fetchAllPaymentMethods(
 
 @riverpod
 Future<(int, double?)> paymentProcess(
-  PaymentProcessRef ref, {
+  Ref ref, {
   required PaymentProcessRequestType requestType,
   bool? payLater,
   double? totalAmount,
@@ -526,7 +526,7 @@ Future<(int, double?)> paymentProcess(
 
 @riverpod
 Future<CouponModel> verifyCoupon(
-  VerifyCouponRef ref, {
+  Ref ref, {
   required String coupon,
   required double price,
 }) {
@@ -535,7 +535,7 @@ Future<CouponModel> verifyCoupon(
 
 @riverpod
 Future<(List<MultipleBookings>?, String?)> multiBookingPaymentProcess(
-  MultiBookingPaymentProcessRef ref, {
+  Ref ref, {
   required PaymentProcessRequestType requestType,
   bool? payLater,
   double? totalAmount,

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 import '../../globals/constants.dart';
 import '../../models/private_chat_conversation_model.dart';

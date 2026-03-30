@@ -1,6 +1,7 @@
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:padelrush/screens/home_screen/tabs/profile_tab/tabs/booking_profile_tab/user_bookings_list.dart';
 import 'package:padelrush/utils/custom_extensions.dart';

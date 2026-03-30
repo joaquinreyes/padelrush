@@ -6,34 +6,79 @@ part of 'location_repo.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(locationRepo)
+final locationRepoProvider = LocationRepoProvider._();
+
+final class LocationRepoProvider
+    extends $FunctionalProvider<LocationRepo, LocationRepo, LocationRepo>
+    with $Provider<LocationRepo> {
+  LocationRepoProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'locationRepoProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$locationRepoHash();
+
+  @$internal
+  @override
+  $ProviderElement<LocationRepo> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  LocationRepo create(Ref ref) {
+    return locationRepo(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(LocationRepo value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<LocationRepo>(value),
+    );
+  }
+}
+
 String _$locationRepoHash() => r'8c8833b6eae0f5f8516c5f835702e4d5ce535f2e';
 
-/// See also [locationRepo].
-@ProviderFor(locationRepo)
-final locationRepoProvider = AutoDisposeProvider<LocationRepo>.internal(
-  locationRepo,
-  name: r'locationRepoProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$locationRepoHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef LocationRepoRef = AutoDisposeProviderRef<LocationRepo>;
-String _$fetchLocationHash() => r'3f1d050bb034379a536142da7b29341114ff7d00';
-
-/// See also [fetchLocation].
 @ProviderFor(fetchLocation)
-final fetchLocationProvider = FutureProvider<Position?>.internal(
-  fetchLocation,
-  name: r'fetchLocationProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fetchLocationHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final fetchLocationProvider = FetchLocationProvider._();
 
-typedef FetchLocationRef = FutureProviderRef<Position?>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package
+final class FetchLocationProvider extends $FunctionalProvider<
+        AsyncValue<Position?>, Position?, FutureOr<Position?>>
+    with $FutureModifier<Position?>, $FutureProvider<Position?> {
+  FetchLocationProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'fetchLocationProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchLocationHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<Position?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Position?> create(Ref ref) {
+    return fetchLocation(ref);
+  }
+}
+
+String _$fetchLocationHash() => r'3f1d050bb034379a536142da7b29341114ff7d00';

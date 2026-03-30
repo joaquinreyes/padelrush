@@ -43,7 +43,7 @@ dependencies:
   firebase_messaging: ^15.1.5
   flutter_i18n: 0.36.0
   flutter_local_notifications: ^18.0.1
-  flutter_riverpod: ^3.0.0-dev.3
+  flutter_riverpod: ^3.1.0
   flutter_screenutil: ^5.9.3
   razorpay_flutter: ^1.4.1
   flutterwebapp_reload_detector: ^0.0.1
@@ -55,7 +55,7 @@ dependencies:
   intl: ^0.19.0
   location: ^7.0.0
   package_info_plus: ^8.3.0
-  riverpod_annotation: ^3.0.0-dev.3
+  riverpod_annotation: ^4.0.0
   shared_preferences: ^2.2.3
   socket_io_client: ^3.0.0-beta.2
   syncfusion_flutter_datepicker: 25.1.40
@@ -69,11 +69,11 @@ dev_dependencies:
   #  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
-  riverpod_generator: ^3.0.0-dev.11
+  riverpod_generator: ^4.0.0
   flutter_native_splash: ^2.4.1
   json_serializable: ^6.7.0
-  freezed: ^2.5.2
-  freezed_annotation: ^2.4.1
+  freezed: ^3.0.0
+  freezed_annotation: ^3.0.0
   flutter_launcher_icons: ^0.14.4
 
 flutter_launcher_icons:

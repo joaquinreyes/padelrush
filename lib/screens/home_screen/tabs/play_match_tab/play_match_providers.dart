@@ -13,12 +13,7 @@ final _storeAllLocationsProvider =
     StateProvider<List<ClubLocationData>>((ref) => []);
 final selectedLocationProvider =
     StateProvider<List<int>>((ref) => [kAllLocation.id ?? -1]);
-final _selectedSportsProvider = StateProvider<String>((ref) {
-  final setting = ref.read(settingSportsValueProvider);
-
-  return setting;
-  // return [kAllSports.sportName.toString()];
-});
+final _selectedSportsProvider = StateProvider<String>((ref) => kSportName);
 final _selectedLevelProvider = StateProvider<List<double>>((ref) {
   return [0,7];
   final userLevel =

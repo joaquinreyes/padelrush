@@ -6,20 +6,47 @@ part of 'analytics_manager.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$analyticsManagerHash() => r'2c1b415c9bd001c17957236370765af249224ba5';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [analyticsManager].
 @ProviderFor(analyticsManager)
-final analyticsManagerProvider = Provider<AnalyticsManager>.internal(
-  analyticsManager,
-  name: r'analyticsManagerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$analyticsManagerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final analyticsManagerProvider = AnalyticsManagerProvider._();
 
-typedef AnalyticsManagerRef = ProviderRef<AnalyticsManager>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package
+final class AnalyticsManagerProvider extends $FunctionalProvider<
+    AnalyticsManager,
+    AnalyticsManager,
+    AnalyticsManager> with $Provider<AnalyticsManager> {
+  AnalyticsManagerProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'analyticsManagerProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$analyticsManagerHash();
+
+  @$internal
+  @override
+  $ProviderElement<AnalyticsManager> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  AnalyticsManager create(Ref ref) {
+    return analyticsManager(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AnalyticsManager value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AnalyticsManager>(value),
+    );
+  }
+}
+
+String _$analyticsManagerHash() => r'2c1b415c9bd001c17957236370765af249224ba5';

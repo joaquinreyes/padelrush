@@ -23,138 +23,211 @@ class __OpenMatchState extends ConsumerState<_OpenMatch> {
 
   @override
   Widget build(BuildContext context) {
-    final isFriedlyMatch = ref.watch(_isFriendlyMatchProvider);
+    final isFriendlyMatch = ref.watch(_isFriendlyMatchProvider);
     final isPrivateMatch = ref.watch(_isPrivateMatchProvider);
-    // final isDUPRMatch = ref.watch(_isDUPRMatchProvider);
-    final appovePlayers = ref.watch(_isApprovePlayersProvider);
+    final approvePlayers = ref.watch(_isApprovePlayersProvider);
     final matchLevel = ref.watch(_matchLevelProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        // HIDDEN: Approve players - always enabled by default
-        // InkWell(
-        //   onTap: () {
-        //     ref.read(_isApprovePlayersProvider.notifier).state = !appovePlayers;
-        //   },
-        //   child: Container(
-        //     decoration: BoxDecoration(
-        //       color: appovePlayers ? AppColors.darkYellow50 : AppColors.black25,
-        //       borderRadius: BorderRadius.circular(12.r),
-        //     ),
-        //     child: Padding(
-        //       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-        //       child: Row(
-        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //         children: [
-        //           Text(
-        //             "APPROVE_PLAYERS_BEFORE_JOIN".tr(context),
-        //             style: AppTextStyles.qanelasSemiBold(
-        //                 color:
-        //                     appovePlayers ? AppColors.black2 : AppColors.black2,
-        //                 fontSize: 13.sp),
-        //           ),
-        //           SelectedTag(
-        //             isSelected: appovePlayers,
-        //             unSelectedBorderColor: AppColors.white,
-        //             unSelectedColor: Colors.transparent,
-        //             shape: BoxShape.circle,
-        //             selectedColor: AppColors.darkYellow,
-        //             selectedBorderColor: AppColors.black25,
-        //           )
-        //         ],
-        //       ),
-        //     ),
-        //   ),
-        // ),
+        // ── MATCH SETTINGS (Open Match only) ────────────────────────────
+        if (!isPrivateMatch) ...[
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
+          decoration: BoxDecoration(
+            color: AppColors.lightGray,
+            borderRadius: BorderRadius.circular(14.r),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header
+              Row(
+                children: [
+                  Icon(Icons.tune_rounded, color: AppColors.black2, size: 18.sp),
+                  SizedBox(width: 8.w),
+                  Text(
+                    "OPEN_MATCH_SETTINGS".trU(context),
+                    style: AppTextStyles.poppinsSemiBold(
+                        color: AppColors.black2, fontSize: 13.sp),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12.h),
+              // Approve players toggle
+              InkWell(
+                borderRadius: BorderRadius.circular(10.r),
+                onTap: () {
+                  ref.read(_isApprovePlayersProvider.notifier).state =
+                      !approvePlayers;
+                },
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+                  decoration: BoxDecoration(
+                    color: approvePlayers
+                        ? AppColors.black2
+                        : AppColors.white,
+                    borderRadius: BorderRadius.circular(10.r),
+                    border: Border.all(
+                      color: approvePlayers
+                          ? AppColors.black2
+                          : AppColors.black25,
+                      width: 1,
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "APPROVE_PLAYERS_BEFORE_JOIN".tr(context),
+                        style: AppTextStyles.poppinsRegular(
+                            color: approvePlayers
+                                ? AppColors.white
+                                : AppColors.black2,
+                            fontSize: 13.sp),
+                      ),
+                      Switch(
+                        value: approvePlayers,
+                        onChanged: (val) {
+                          ref
+                              .read(_isApprovePlayersProvider.notifier)
+                              .state = val;
+                        },
+                        activeColor: AppColors.darkYellow,
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 12.h),
 
-        // HIDDEN: Friendly Match - always ranked (not friendly)
-        // InkWell(
-        //   onTap: () {
-        //     ref.read(_isFriendlyMatchProvider.notifier).state = !isFriedlyMatch;
-        //   },
-        //   child: Container(
-        //     decoration: BoxDecoration(
-        //       color:
-        //           isFriedlyMatch ? AppColors.darkYellow50 : AppColors.black25,
-        //       borderRadius: BorderRadius.circular(12.r),
-        //     ),
-        //     child: Padding(
-        //         padding:
-        //             const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        //         child: Row(
-        //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //           children: [
-        //             Text(
-        //               "FRIENDLY_MATCH".tr(context),
-        //               style: AppTextStyles.qanelasSemiBold(
-        //                   color: isFriedlyMatch
-        //                       ? AppColors.black2
-        //                       : AppColors.black2,
-        //                   fontSize: 13.sp),
-        //             ),
-        //             SelectedTag(
-        //               isSelected: isFriedlyMatch,
-        //               unSelectedBorderColor: AppColors.white,
-        //               unSelectedColor: Colors.transparent,
-        //               shape: BoxShape.circle,
-        //               selectedColor: AppColors.darkYellow,
-        //               selectedBorderColor: AppColors.black25,
-        //             )
-        //           ],
-        //         )),
-        //   ),
-        // ),
-
-        // Match level selector - HIDDEN
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     Text(
-        //       "SELECT_MATCH_LEVEL".tr(context),
-        //       style: AppTextStyles.qanelasMedium(
-        //           color: AppColors.black2, fontSize: 16.sp),
-        //     ),
-        //     Text(
-        //       matchLevel.isNotEmpty
-        //           ? "${matchLevel.first.toStringAsFixed(2)} - ${matchLevel.last.toStringAsFixed(2)}"
-        //           : "0.00 - 7.00",
-        //       style: AppTextStyles.qanelasMedium(
-        //           color: AppColors.black2, fontSize: 16.sp),
-        //     ),
-        //   ],
-        // ),
-        // SizedBox(height: 10.h),
-        // // Range Slider for match level
-        // SliderTheme(
-        //   data: SliderThemeData(
-        //     activeTrackColor: AppColors.darkYellow,
-        //     inactiveTrackColor: AppColors.black25,
-        //     thumbColor: AppColors.darkYellow,
-        //     overlayColor: AppColors.darkYellow.withOpacity(0.2),
-        //     trackHeight: 4.h,
-        //     thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.h),
-        //     overlayShape: RoundSliderOverlayShape(overlayRadius: 20.h),
-        //   ),
-        //   child: RangeSlider(
-        //     values: RangeValues(
-        //       matchLevel.isNotEmpty ? matchLevel.first : 0.0,
-        //       matchLevel.isNotEmpty ? matchLevel.last : 7.0,
-        //     ),
-        //     min: 0.0,
-        //     max: 7.0,
-        //     divisions: 140, // 7.0 * 20 = 140 divisions for 0.05 increments
-        //     onChanged: (RangeValues values) {
-        //       setState(() {
-        //         ref.read(_matchLevelProvider.notifier).state = [
-        //           values.start,
-        //           values.end,
-        //         ];
-        //       });
-        //     },
-        //   ),
-        // ),
-        // SizedBox(height: 15.h),
+        // ── SELECT MATCH LEVEL ──────────────────────────────────────────
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
+          decoration: BoxDecoration(
+            color: AppColors.lightGray,
+            borderRadius: BorderRadius.circular(14.r),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header row with Friendly toggle
+              Row(
+                children: [
+                  Container(
+                    width: 3.w,
+                    height: 18.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.darkYellow,
+                      borderRadius: BorderRadius.circular(2.r),
+                    ),
+                  ),
+                  SizedBox(width: 8.w),
+                  Expanded(
+                    child: Text(
+                      "SELECT_MATCH_LEVEL".trU(context),
+                      style: AppTextStyles.poppinsSemiBold(
+                          color: AppColors.black2, fontSize: 13.sp),
+                    ),
+                  ),
+                  // Friendly / Ranked pill toggle
+                  GestureDetector(
+                    onTap: () {
+                      ref.read(_isFriendlyMatchProvider.notifier).state =
+                          !isFriendlyMatch;
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 5.h),
+                      decoration: BoxDecoration(
+                        color: AppColors.black2,
+                        borderRadius: BorderRadius.circular(20.r),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            isFriendlyMatch
+                                ? Icons.flag_outlined
+                                : Icons.emoji_events_outlined,
+                            color: AppColors.white,
+                            size: 12.sp,
+                          ),
+                          SizedBox(width: 4.w),
+                          Text(
+                            isFriendlyMatch
+                                ? "FRIENDLY".tr(context)
+                                : "RANKED".tr(context),
+                            style: AppTextStyles.poppinsSemiBold(
+                                color: AppColors.white, fontSize: 12.sp),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10.h),
+              // Level values
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    matchLevel.isNotEmpty
+                        ? matchLevel.first.toStringAsFixed(1)
+                        : "0.0",
+                    style: AppTextStyles.poppinsSemiBold(
+                        color: AppColors.black2, fontSize: 14.sp),
+                  ),
+                  Text(
+                    matchLevel.isNotEmpty
+                        ? matchLevel.last.toStringAsFixed(1)
+                        : "7.0",
+                    style: AppTextStyles.poppinsSemiBold(
+                        color: AppColors.black2, fontSize: 14.sp),
+                  ),
+                ],
+              ),
+              SliderTheme(
+                data: SliderThemeData(
+                  activeTrackColor: AppColors.darkYellow,
+                  inactiveTrackColor: AppColors.black25,
+                  thumbColor: AppColors.darkYellow,
+                  overlayColor: AppColors.darkYellow.withOpacity(0.15),
+                  trackHeight: 3.h,
+                  thumbShape:
+                      RoundSliderThumbShape(enabledThumbRadius: 9.h),
+                  overlayShape:
+                      RoundSliderOverlayShape(overlayRadius: 18.h),
+                ),
+                child: RangeSlider(
+                  values: RangeValues(
+                    matchLevel.isNotEmpty ? matchLevel.first : 0.0,
+                    matchLevel.isNotEmpty ? matchLevel.last : 7.0,
+                  ),
+                  min: 0.0,
+                  max: 7.0,
+                  divisions: 14,
+                  onChanged: (RangeValues values) {
+                    ref.read(_matchLevelProvider.notifier).state = [
+                      values.start,
+                      values.end,
+                    ];
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 12.h),
+        ], // end if (!isPrivateMatch)
 
         if (widget.allowAddPlayer) ...[
           Row(

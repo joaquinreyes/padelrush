@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:padelrush/box_shadow/flutter_inset_box_shadow.dart' as inset;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:padelrush/models/user_membership.dart';
 import 'package:image_picker/image_picker.dart';
