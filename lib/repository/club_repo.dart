@@ -7,6 +7,7 @@ import 'package:padelrush/managers/user_manager.dart';
 import 'package:padelrush/models/app_update_model.dart';
 import 'package:padelrush/models/club_locations.dart';
 import 'package:padelrush/models/court_booking.dart';
+import 'package:padelrush/models/voucher_model.dart';
 import 'package:padelrush/screens/app_provider.dart';
 import 'package:padelrush/utils/custom_extensions.dart';
 import 'package:padelrush/utils/dubai_date_time.dart';
@@ -59,6 +60,32 @@ class CourtRepo {
         throw e['message'];
       }
 
+      rethrow;
+    }
+  }
+
+  Future<List<VoucherModel>> getVouchersApi(Ref ref) async {
+    try {
+      final token = ref.read(userManagerProvider).user?.accessToken!;
+      final apiManager = ref.read(apiManagerProvider);
+      debugPrint("🎟️ [Voucher] Calling getVouchers API...");
+      final response =
+          await apiManager.get(ref, ApiEndPoint.getVouchers, token: token);
+      debugPrint("🎟️ [Voucher] Raw response: $response");
+      final List<VoucherModel> vouchers = [];
+      for (final item in response['data']['vouchersDetails']) {
+        vouchers.add(VoucherModel.fromJson(item));
+      }
+      debugPrint("🎟️ [Voucher] Total vouchers fetched: ${vouchers.length}");
+      for (final v in vouchers) {
+        debugPrint("🎟️ [Voucher] → id=${v.id}, name=${v.voucherName}, price=${v.price}, value=${v.value}");
+      }
+      return vouchers;
+    } catch (e) {
+      debugPrint("🎟️ [Voucher] Error: $e");
+      if (e is Map<String, dynamic>) {
+        throw e['message'];
+      }
       rethrow;
     }
   }
@@ -129,6 +156,11 @@ class SelectedDateLesson extends _$SelectedDateLesson {
   }
 
   DubaiDateTime get selectedDate => state;
+}
+
+@Riverpod(keepAlive: true)
+Future<List<VoucherModel>> getVouchersApi(Ref ref) {
+  return ref.read(clubRepoProvider).getVouchersApi(ref);
 }
 
 @riverpod

@@ -48,7 +48,7 @@ final class AuthRepoProvider
   }
 }
 
-String _$authRepoHash() => r'e86e98975634dcb0d01e22e5ee101e7b356996db';
+String _$authRepoHash() => r'97ad17a1d489e0d3aa8886512915644a524a1af8';
 
 @ProviderFor(loginUser)
 final loginUserProvider = LoginUserFamily._();
@@ -110,7 +110,7 @@ final class LoginUserProvider extends $FunctionalProvider<AsyncValue<AppUser?>,
   }
 }
 
-String _$loginUserHash() => r'6dcd9ab5ca307bef7e553297319ad86a440d88db';
+String _$loginUserHash() => r'95c6eefc8a3812de181d508311d8fa3ce6914504';
 
 final class LoginUserFamily extends $Family
     with
@@ -194,7 +194,7 @@ final class RegisterUserProvider extends $FunctionalProvider<
   }
 }
 
-String _$registerUserHash() => r'8cea4ebe62c9c7672d840412af619633db2fafdb';
+String _$registerUserHash() => r'd3536289e6051dceae6e528cf28030aa5a4011c9';
 
 final class RegisterUserFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<AppUser?>, RegisterModel> {
@@ -247,7 +247,7 @@ final class FetchUserProvider
   }
 }
 
-String _$fetchUserHash() => r'099ebf003f1ab6676e312af39803bde0a7e5b1cd';
+String _$fetchUserHash() => r'41a69c9ceac0c5a8ca41c14f86d81e8b9e5dd7c8';
 
 @ProviderFor(updateUser)
 final updateUserProvider = UpdateUserFamily._();
@@ -300,7 +300,7 @@ final class UpdateUserProvider
   }
 }
 
-String _$updateUserHash() => r'08e065709b67f6c8279ce0123c4257451e353cef';
+String _$updateUserHash() => r'6e09f6c67347edcae1e39a038ca65cc663905c9c';
 
 final class UpdateUserFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<bool>, User> {
@@ -373,7 +373,7 @@ final class UpdateProfileProvider
   }
 }
 
-String _$updateProfileHash() => r'7602e431bbe83d1ac096b1cc9ae6c6ffa49fa1c5';
+String _$updateProfileHash() => r'13c111f47f5d8cb7ef253793fe3f802821901f78';
 
 final class UpdateProfileFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<bool>, File?> {
@@ -432,7 +432,7 @@ final class FetchAllCustomFieldsProvider extends $FunctionalProvider<
 }
 
 String _$fetchAllCustomFieldsHash() =>
-    r'98d9db596e582cbfee0285f28102e09a2d6f9ed7';
+    r'd8f547f245c46bef12098ba1d946238ee1f16858';
 
 @ProviderFor(updatePictureAndUser)
 final updatePictureAndUserProvider = UpdatePictureAndUserFamily._();
@@ -527,7 +527,7 @@ final class UpdatePictureAndUserProvider extends $FunctionalProvider<
 }
 
 String _$updatePictureAndUserHash() =>
-    r'8de00c895ae4c370f698f5a2f1f61d29304aa1d9';
+    r'1d5641e3722bd159fbbc8e85cc398f6fdd62a79a';
 
 final class UpdatePictureAndUserFamily extends $Family
     with
@@ -623,7 +623,7 @@ final class UpdatePasswordProvider
   }
 }
 
-String _$updatePasswordHash() => r'f1d01fe19bed76f48a4bd3b9b2916b6055407d20';
+String _$updatePasswordHash() => r'a21d921bf0443cbc9cbbdd4f3357101361896c9f';
 
 final class UpdatePasswordFamily extends $Family
     with
@@ -706,7 +706,7 @@ final class DeleteAccountProvider
   }
 }
 
-String _$deleteAccountHash() => r'30b7d08e1bd06fd1b798fb6355ca053021a1600d';
+String _$deleteAccountHash() => r'bbfa8a9b19d4fe69f1595787ff5a5ed24063352d';
 
 final class DeleteAccountFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<bool>, String> {
@@ -779,7 +779,7 @@ final class SaveFCMTokenProvider
   }
 }
 
-String _$saveFCMTokenHash() => r'c8f3a62078ac93dde6a0be4f03bbe9de0a1fde37';
+String _$saveFCMTokenHash() => r'4b408ae7b37649a52490dc6e66fb567f71d6d7ed';
 
 final class SaveFCMTokenFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<void>, String> {
@@ -853,7 +853,7 @@ final class RecoverPasswordProvider
   }
 }
 
-String _$recoverPasswordHash() => r'000818da027fa41325fb9bcc7f8c384808f0bc06';
+String _$recoverPasswordHash() => r'd22edd6fd6a381a697ff5c8772560a49cba099e1';
 
 final class RecoverPasswordFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<bool?>, String> {
@@ -940,7 +940,7 @@ final class UpdateRecoveryPasswordProvider
 }
 
 String _$updateRecoveryPasswordHash() =>
-    r'aca845866de76a720bea59f5d06e52538652841e';
+    r'b7436465de7e61f6c394f85dde095583ad244d7d';
 
 final class UpdateRecoveryPasswordFamily extends $Family
     with
@@ -1029,7 +1029,7 @@ final class FetchUserAssessmentProvider extends $FunctionalProvider<
 }
 
 String _$fetchUserAssessmentHash() =>
-    r'0589d25d3180b2d7fb2d8ff9a833e9024e650d9e';
+    r'771f158811b7bbbe45afa475e197b06c56cf9d59';
 
 final class FetchUserAssessmentFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<UserAssessment>, int> {
@@ -1085,7 +1085,7 @@ final class WalletInfoProvider extends $FunctionalProvider<
   }
 }
 
-String _$walletInfoHash() => r'b85e22a85700e433b87e7cbb00baacfdf2b91677';
+String _$walletInfoHash() => r'bfe5233d8c626c2c7b8b0a51786f95f536132cb8';
 
 @ProviderFor(transactions)
 final transactionsProvider = TransactionsProvider._();
@@ -1123,7 +1123,7 @@ final class TransactionsProvider extends $FunctionalProvider<
   }
 }
 
-String _$transactionsHash() => r'14397e550e14e09358c2d9caef1aedaae2c241cc';
+String _$transactionsHash() => r'dbf53bcfd7ac1204891efc75c52aa7e1aa60ee39';
 
 @ProviderFor(fetchPlayersRanking)
 final fetchPlayersRankingProvider = FetchPlayersRankingFamily._();
@@ -1190,7 +1190,7 @@ final class FetchPlayersRankingProvider extends $FunctionalProvider<
 }
 
 String _$fetchPlayersRankingHash() =>
-    r'a9faaa488e7be6f072ad6e7c02bb882b1ec48922';
+    r'0f161df982d97b8b2fa87afdcb21100f26f869f1';
 
 final class FetchPlayersRankingFamily extends $Family
     with
@@ -1292,7 +1292,7 @@ final class GetUserMatchLevelsProvider extends $FunctionalProvider<
 }
 
 String _$getUserMatchLevelsHash() =>
-    r'fd50693f9e6c4acc846e26c23f655ec3a5bb2901';
+    r'972287ba8969ef7617c58f32eaaa6ff396abc860';
 
 final class GetUserMatchLevelsFamily extends $Family
     with
@@ -1378,7 +1378,7 @@ final class FollowFriendProvider
   }
 }
 
-String _$followFriendHash() => r'55162549fff7b37644a7d33dd835cb9905be9a0e';
+String _$followFriendHash() => r'62af62e95e66451ef654710fa10e94ef1641fc79';
 
 final class FollowFriendFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<bool>, int> {
@@ -1451,7 +1451,7 @@ final class UnfollowFriendProvider
   }
 }
 
-String _$unfollowFriendHash() => r'ddd097f34a5d2b66ab8deb0028d31919ea068039';
+String _$unfollowFriendHash() => r'2626a72e7c4c3ad1c831b2f2d09008aa8e4b5f7b';
 
 final class UnfollowFriendFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<bool>, int> {
@@ -1525,7 +1525,7 @@ final class CheckFollowStatusProvider
   }
 }
 
-String _$checkFollowStatusHash() => r'db4865808980d7ac6b32ca63112e2255c3582699';
+String _$checkFollowStatusHash() => r'cc24d93d3429f1158f5cf1984f7ed6148af77ee9';
 
 final class CheckFollowStatusFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<bool>, int> {
@@ -1578,7 +1578,7 @@ final class GetFollowingListProvider extends $FunctionalProvider<
   }
 }
 
-String _$getFollowingListHash() => r'ad5b243c0065512e926d36bbe126de02b3bb6b41';
+String _$getFollowingListHash() => r'63295dc0042f8c7105cefc76b20d6fca2934d216';
 
 @ProviderFor(getFollowerList)
 final getFollowerListProvider = GetFollowerListProvider._();
@@ -1611,7 +1611,7 @@ final class GetFollowerListProvider extends $FunctionalProvider<
   }
 }
 
-String _$getFollowerListHash() => r'd9c4635b16a0d6c5148e60d8552bc3971921bc99';
+String _$getFollowerListHash() => r'db2b30e6db83b3bd780cdd5c11c59ac844ba8eb5';
 
 @ProviderFor(searchUsers)
 final searchUsersProvider = SearchUsersFamily._();
@@ -1681,7 +1681,7 @@ final class SearchUsersProvider extends $FunctionalProvider<
   }
 }
 
-String _$searchUsersHash() => r'650cb95d71853f79e4ff061cb7da49c954fdb84d';
+String _$searchUsersHash() => r'3af45b0fa8fa0d7560cd08ff4a6a90b231fe6574';
 
 final class SearchUsersFamily extends $Family
     with

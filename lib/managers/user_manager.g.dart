@@ -48,7 +48,7 @@ final class UserManagerProvider
   }
 }
 
-String _$userManagerHash() => r'b68aeef9dcd5d5c04196c952c366fa5d6ed212ca';
+String _$userManagerHash() => r'8e60d72a3fb90dd5f0419c90b24e2b90b3f8cee7';
 
 @ProviderFor(isAuthenticated)
 final isAuthenticatedProvider = IsAuthenticatedProvider._();
@@ -81,4 +81,4 @@ final class IsAuthenticatedProvider
   }
 }
 
-String _$isAuthenticatedHash() => r'1464431722f0452d193a0aedf274b007900820a7';
+String _$isAuthenticatedHash() => r'e58b9a8b92f56f010e9997498a58f15a9db705c5';

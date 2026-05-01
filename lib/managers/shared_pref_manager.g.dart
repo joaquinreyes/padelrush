@@ -50,4 +50,4 @@ final class SharedPrefManagerProvider extends $FunctionalProvider<
   }
 }
 
-String _$sharedPrefManagerHash() => r'32c05dcd1d1109f1338dd948412bedf5e8065d37';
+String _$sharedPrefManagerHash() => r'eaf952d2cf822a813bc9f929f6411f8da27ec95c';

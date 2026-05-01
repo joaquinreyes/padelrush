@@ -49,7 +49,7 @@ final class NotificationRepoProvider extends $FunctionalProvider<
   }
 }
 
-String _$notificationRepoHash() => r'70ef1a1fbebb6220da9963064026928b9c59fa7f';
+String _$notificationRepoHash() => r'69a0d7756797d298627c9f15c0ef935ce2c4354d';
 
 @ProviderFor(fetchNotifications)
 final fetchNotificationsProvider = FetchNotificationsFamily._();
@@ -117,7 +117,7 @@ final class FetchNotificationsProvider extends $FunctionalProvider<
 }
 
 String _$fetchNotificationsHash() =>
-    r'3c6404a7e9d6711f777f952ebbd55d64071e6d2e';
+    r'b300b403f07f4a7867421eb12f5428651c1169f6';
 
 final class FetchNotificationsFamily extends $Family
     with
@@ -242,7 +242,7 @@ final class MarkNotificationAsReadProvider
 }
 
 String _$markNotificationAsReadHash() =>
-    r'23a8dd48952cc33a3910071345f41ab181cc1650';
+    r'029c2af4b7ae177722a6ab425e8652788bbade06';
 
 final class MarkNotificationAsReadFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<bool>, String> {
@@ -297,7 +297,7 @@ final class MarkAllNotificationsAsReadProvider
 }
 
 String _$markAllNotificationsAsReadHash() =>
-    r'656f2854e59f55f1af70f07f848caaa1de5a85e1';
+    r'fba582f14fc1c701644fea0966ba307d1fb6ed21';
 
 @ProviderFor(deleteNotification)
 final deleteNotificationProvider = DeleteNotificationFamily._();
@@ -352,7 +352,7 @@ final class DeleteNotificationProvider
 }
 
 String _$deleteNotificationHash() =>
-    r'6749a6fb2dfb4d5a840c4570949dc222fefc24fd';
+    r'b6588d1cfb81c0aabf958ed0499e259a5168381f';
 
 final class DeleteNotificationFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<bool>, String> {
@@ -406,4 +406,4 @@ final class ClearAllNotificationsProvider
 }
 
 String _$clearAllNotificationsHash() =>
-    r'e42143b1838242fee62cc5b4382fa2096a4f232b';
+    r'3433d166325725dca1d243f493a41495aafba9aa';

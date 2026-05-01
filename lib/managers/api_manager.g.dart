@@ -48,4 +48,4 @@ final class ApiManagerProvider
   }
 }
 
-String _$apiManagerHash() => r'86ce07e403fd5f9a48ccd2651e277fec08d39477';
+String _$apiManagerHash() => r'835a9dbc9bd052ad17caac484e65e5bce1f343b3';

@@ -48,7 +48,7 @@ final class PlayRepoProvider
   }
 }
 
-String _$playRepoHash() => r'67ca9c754b8caf53fec851533a6cc8608bb7e24d';
+String _$playRepoHash() => r'76b578b12e07c15077c1338a15980b902cefba90';
 
 @ProviderFor(openMatchesList)
 final openMatchesListProvider = OpenMatchesListFamily._();
@@ -127,7 +127,7 @@ final class OpenMatchesListProvider extends $FunctionalProvider<
   }
 }
 
-String _$openMatchesListHash() => r'7414a324fa4ef27c79e63fef9b10c87cc7a0009a';
+String _$openMatchesListHash() => r'5d944d6a078acd11b5c29e996f37fa3bd7453c3a';
 
 final class OpenMatchesListFamily extends $Family
     with
@@ -242,7 +242,7 @@ final class EventsListProvider extends $FunctionalProvider<
   }
 }
 
-String _$eventsListHash() => r'b5a5860e4656ce00ea6ccc3c99d6f41f6d932d3d';
+String _$eventsListHash() => r'b2c1ef627e78ef7bf0953b7a1dbbf5f6e1b0c307';
 
 final class EventsListFamily extends $Family
     with
@@ -351,7 +351,7 @@ final class LessonsListProvider extends $FunctionalProvider<
   }
 }
 
-String _$lessonsListHash() => r'682a0fd567515c7f56bcb2f10073424f4036b680';
+String _$lessonsListHash() => r'2ced34d337190cd5c4e33f233f7fbac607bc6e32';
 
 final class LessonsListFamily extends $Family
     with
@@ -443,7 +443,7 @@ final class FetchServiceDetailProvider extends $FunctionalProvider<
 }
 
 String _$fetchServiceDetailHash() =>
-    r'7bbf7c699be5b4c4814d8648a4d43ce57f986e6d';
+    r'd98c29a6dcac33936632a779b1a38320e2dc44e6';
 
 final class FetchServiceDetailFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<ServiceDetail>, int> {
@@ -549,7 +549,7 @@ final class JoinServiceProvider
   }
 }
 
-String _$joinServiceHash() => r'c28c9698bd077d5664a4debd15d91686f157b88d';
+String _$joinServiceHash() => r'c11d99e7024691f2cc03f4d439374953d402e216';
 
 final class JoinServiceFamily extends $Family
     with
@@ -656,7 +656,7 @@ final class CancelServiceProvider
   }
 }
 
-String _$cancelServiceHash() => r'90ea059f4614d1253c8f3fba67fc9584b27e9cb9';
+String _$cancelServiceHash() => r'14e5982e94f4436ac86b07bc38e8fd94626c2897';
 
 final class CancelServiceFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<bool?>, int> {
@@ -745,7 +745,7 @@ final class FetchServiceWaitingPlayersProvider extends $FunctionalProvider<
 }
 
 String _$fetchServiceWaitingPlayersHash() =>
-    r'bd46107762ffc1b7bc8efe00c6ea5fe59af9915b';
+    r'5dc8f805ba2536f2daa454c21d22fddc1d51a388';
 
 final class FetchServiceWaitingPlayersFamily extends $Family
     with
@@ -840,7 +840,7 @@ final class ApprovePlayerProvider
   }
 }
 
-String _$approvePlayerHash() => r'4fd8ab8406e2dbc47fe3d4f21aa3837111feee5b';
+String _$approvePlayerHash() => r'e99edc7be9b082b9f82197c6d1d2a37d2d90841f';
 
 final class ApprovePlayerFamily extends $Family
     with
@@ -935,7 +935,7 @@ final class DeleteReservedProvider
   }
 }
 
-String _$deleteReservedHash() => r'e1ad84f0134d958488a0301006db7b2953b7c2b6';
+String _$deleteReservedHash() => r'd8afe6e550cf0a55a1d66aad140a0c42831db904';
 
 final class DeleteReservedFamily extends $Family
     with
@@ -1027,7 +1027,7 @@ final class SubmitAssessmentProvider
   }
 }
 
-String _$submitAssessmentHash() => r'1ae169ac972cc963880cddaca1881c209d154265';
+String _$submitAssessmentHash() => r'898dc52ba672081185f872f6a0f60bbb7416cac7';
 
 final class SubmitAssessmentFamily extends $Family
     with
@@ -1115,7 +1115,7 @@ final class FetchAssessmentProvider extends $FunctionalProvider<
   }
 }
 
-String _$fetchAssessmentHash() => r'361a15d57adaab882a7db0e0a92aab6611ee8b49';
+String _$fetchAssessmentHash() => r'ca05e1d2d62609da67af1a523e4eb596f3abe4a4';
 
 final class FetchAssessmentFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<AssessmentResModel>, int> {
@@ -1207,7 +1207,7 @@ final class LessonsSlotProvider extends $FunctionalProvider<
   }
 }
 
-String _$lessonsSlotHash() => r'a83f658b579a1a7ff3a9de7da9409ac645cd8633';
+String _$lessonsSlotHash() => r'9adec31c9d475fdbab49b034564d34f16e5f6b25';
 
 final class LessonsSlotFamily extends $Family
     with
@@ -1308,7 +1308,7 @@ final class JoinWaitingListProvider
   }
 }
 
-String _$joinWaitingListHash() => r'd5f14e98a6568e18526b0fae0e90bbf343d53b2d';
+String _$joinWaitingListHash() => r'8a8ab8ebfbfed6d84f93398c8dabbfbc53966611';
 
 final class JoinWaitingListFamily extends $Family
     with
@@ -1398,7 +1398,7 @@ final class CancellationPolicyProvider extends $FunctionalProvider<
 }
 
 String _$cancellationPolicyHash() =>
-    r'5f15e6523ecc22454f4f2a0e8b0e8c207da06264';
+    r'4a516613818cdfea94baf8f49490bf07bce63206';
 
 final class CancellationPolicyFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<CancellationPolicy>, int> {
@@ -1482,7 +1482,7 @@ final class AddPlayersToWaitingListProvider
 }
 
 String _$addPlayersToWaitingListHash() =>
-    r'13ccd2a677d8a7462907eea50421b3e7765f32e2';
+    r'6f266db30485235fc0bca8e8a1e9da5dffd827c4';
 
 final class AddPlayersToWaitingListFamily extends $Family
     with
@@ -1576,7 +1576,7 @@ final class WaitingListActionProviderProvider
 }
 
 String _$waitingListActionProviderHash() =>
-    r'2b6d63f69904a492a98faa780ce6fc3998b8ac94';
+    r'43ea66176c36a51a02c8fe48bddcc5095fe67f9d';
 
 final class WaitingListActionProviderFamily extends $Family
     with
@@ -1644,7 +1644,7 @@ final class FetchAllCoachesProvider extends $FunctionalProvider<
   }
 }
 
-String _$fetchAllCoachesHash() => r'259e738358908a42fa30143520c85b5de5964a99';
+String _$fetchAllCoachesHash() => r'00b63a66750257be5d65c6287820e078ac2adf54';
 
 @ProviderFor(fetchBlockedCoaches)
 final fetchBlockedCoachesProvider = FetchBlockedCoachesFamily._();
@@ -1711,7 +1711,7 @@ final class FetchBlockedCoachesProvider extends $FunctionalProvider<
 }
 
 String _$fetchBlockedCoachesHash() =>
-    r'2acae18e4b1cf4d9806358f2dd6d048ce46cb225';
+    r'3571e2ce40a948111bd5a0ca0b29895f859de794';
 
 final class FetchBlockedCoachesFamily extends $Family
     with
@@ -1816,7 +1816,7 @@ final class UpdateServiceSettingsProvider
 }
 
 String _$updateServiceSettingsHash() =>
-    r'2f89f01b9db1e8aba1391ae6a0514ca25ac787c4';
+    r'aabeeec67d56d2b80a951ee85094be9816fc295a';
 
 final class UpdateServiceSettingsFamily extends $Family
     with

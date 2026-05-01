@@ -369,6 +369,42 @@ class PaymentRepo {
     throw "Transaction not found";
   }
 
+  Future<(bool, dynamic)> purchaseVoucherAPI(Ref ref,
+      {required AppPaymentMethods paymentMethod,
+      required double totalAmount,
+      required int voucherId,
+      required int locationId}) async {
+    try {
+      final bool isRazorPayment =
+          paymentMethod.methodType == kRazorPayMethod;
+
+      final token = ref.read(userManagerProvider).user?.accessToken ?? "";
+      final Map<String, dynamic> data = {};
+      data['total_amount'] = totalAmount;
+      data["payments"] = paymentMethod.toJsonForProcess();
+      final response = await ref.read(apiManagerProvider).post(
+        ref,
+        ApiEndPoint.purchaseVoucherProcess,
+        data,
+        token: token,
+        pathParams: [voucherId.toString(), locationId.toString()],
+      );
+
+      if (isRazorPayment) {
+        await _handleRazorPayment(ref, response, false, true, [paymentMethod]);
+        return (true, null);
+      } else {
+        return (true, null);
+      }
+    } catch (e) {
+      _handlePaymentError(e);
+      if (e is Map<String, dynamic>) {
+        throw e['message'];
+      }
+      rethrow;
+    }
+  }
+
   Future<CouponModel> verifyCoupon(Ref ref, String coupon, double price) async {
     try {
       final token = ref.read(userManagerProvider).user?.accessToken ?? "";
@@ -522,6 +558,23 @@ Future<(int, double?)> paymentProcess(
       locationID: locationID,
       purchaseMembership: purchaseMembership,
       couponID: couponID);
+}
+
+@riverpod
+Future<(bool, dynamic)> purchaseVoucherAPI(
+  Ref ref, {
+  required AppPaymentMethods paymentMethod,
+  required double totalAmount,
+  required int voucherId,
+  required int locationId,
+}) {
+  return ref.read(paymentRepoProvider).purchaseVoucherAPI(
+        ref,
+        paymentMethod: paymentMethod,
+        totalAmount: totalAmount,
+        voucherId: voucherId,
+        locationId: locationId,
+      );
 }
 
 @riverpod

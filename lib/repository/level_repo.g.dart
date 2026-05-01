@@ -48,7 +48,7 @@ final class LevelRepoProvider
   }
 }
 
-String _$levelRepoHash() => r'bee40f7f9b5ccdf29867f92cf6c76d24e980bf2c';
+String _$levelRepoHash() => r'b3e29487fd16a9dc76b3c6b9d9e8e813108792b2';
 
 @ProviderFor(levelQuestions)
 final levelQuestionsProvider = LevelQuestionsFamily._();
@@ -107,7 +107,7 @@ final class LevelQuestionsProvider extends $FunctionalProvider<
   }
 }
 
-String _$levelQuestionsHash() => r'd707490b294169135d461c7d81d06063fdf1520f';
+String _$levelQuestionsHash() => r'4c74994d40007524bccd6e07e00ae025904709c8';
 
 final class LevelQuestionsFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<List<LevelQuestion>>, String?> {
@@ -197,7 +197,7 @@ final class CalculateLevelProvider extends $FunctionalProvider<
   }
 }
 
-String _$calculateLevelHash() => r'fa0b93f3069d655ede138ca013f7b52ff2bac28d';
+String _$calculateLevelHash() => r'573a9fae9d7311ac0e2720c71c4273bd7a9a1e64';
 
 final class CalculateLevelFamily extends $Family
     with

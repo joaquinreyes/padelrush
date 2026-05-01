@@ -61,6 +61,7 @@ class PaymentInformation extends ConsumerStatefulWidget {
       this.isOpenMatch = false,
       this.isPrivateMatch = false,
       this.allowPayLater = true,
+      this.isVoucherPurchase = false,
       this.title});
 
   final CourtPriceModel? courtPriceModel;
@@ -86,6 +87,7 @@ class PaymentInformation extends ConsumerStatefulWidget {
   final bool isOpenMatch;
   final bool isPrivateMatch;
   final bool getPendingPayment;
+  final bool isVoucherPurchase;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => __PaymentInformationState();
@@ -266,6 +268,7 @@ class __PaymentInformationState extends ConsumerState<PaymentInformation> {
           locationID: widget.locationID,
           purchaseMembership: widget.purchaseMembership,
           isJoiningApproval: widget.isJoiningApproval,
+          isVoucherPurchase: widget.isVoucherPurchase,
         )
       ],
     );

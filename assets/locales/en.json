@@ -541,5 +541,10 @@
   "APPROVE_PLAYERS_BEFORE_THEY_JOIN": "Approve players before they join",
   "FRIENDLY_RANKED_MATCH": "Friendly/Ranked Match",
   "MATCH_LEVEL": "Match Level",
-  "SETTINGS_SAVED_SUCCESSFULLY": "Settings saved successfully"
+  "SETTINGS_SAVED_SUCCESSFULLY": "Settings saved successfully",
+  "BUY_CREDIT_VOUCHERS": "Buy Credit Vouchers",
+  "VOUCHER_INFORMATION": "Voucher Information",
+  "VOUCHER_DESCRIPTION": "Purchase credits to add to your wallet. These credits can be used for future bookings.",
+  "PAY_VOUCHER": "Send As Message",
+  "YOU_HAVE_BUY_VOUCHER_SUCCESSFULLY": "You have purchased the voucher successfully"
 }

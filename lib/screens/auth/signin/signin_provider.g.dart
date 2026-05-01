@@ -40,7 +40,7 @@ final class TestProvider
   }
 }
 
-String _$testHash() => r'323a1a451dee9d2e31ac996407d085a224ff5d10';
+String _$testHash() => r'5a8449b7c3cea23725e341bc26da01b27f7cb610';
 
 @ProviderFor(test2)
 final test2Provider = Test2Provider._();
@@ -73,4 +73,4 @@ final class Test2Provider
   }
 }
 
-String _$test2Hash() => r'8ea8403f145b1611abc8d7e3e2e961bb2d10681b';
+String _$test2Hash() => r'7bc542ff33dd7afe42eae0af9a41c9c8d1f7d447';

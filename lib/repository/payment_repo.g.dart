@@ -48,7 +48,7 @@ final class PaymentRepoProvider
   }
 }
 
-String _$paymentRepoHash() => r'a80a51e9d0a4d9cce189d2d8c8e56d4fec504bf5';
+String _$paymentRepoHash() => r'9fe3844e721b8ce837441831a2b40fe3cd3aa669';
 
 @ProviderFor(fetchPaymentDetails)
 final fetchPaymentDetailsProvider = FetchPaymentDetailsFamily._();
@@ -133,7 +133,7 @@ final class FetchPaymentDetailsProvider extends $FunctionalProvider<
 }
 
 String _$fetchPaymentDetailsHash() =>
-    r'85fd4de5cdfb30300e04ee57dc6a6111a8414f4a';
+    r'ca5f73cd3cad7ce1b90bf6d4ea7272f20dc92b5b';
 
 final class FetchPaymentDetailsFamily extends $Family
     with
@@ -270,7 +270,7 @@ final class FetchAllPaymentMethodsProvider extends $FunctionalProvider<
 }
 
 String _$fetchAllPaymentMethodsHash() =>
-    r'959623918a1832c7a952a0be4e68a43d74fe4925';
+    r'0153d1f003d6d10d5829239c9246308291f53a3a';
 
 final class FetchAllPaymentMethodsFamily extends $Family
     with
@@ -442,7 +442,7 @@ final class PaymentProcessProvider extends $FunctionalProvider<
   }
 }
 
-String _$paymentProcessHash() => r'ec470890d66bb669205957fdefb3a132d3945b28';
+String _$paymentProcessHash() => r'16bc07e1d2b1e475e212642958c6f3e33753f708';
 
 final class PaymentProcessFamily extends $Family
     with
@@ -503,6 +503,147 @@ final class PaymentProcessFamily extends $Family
 
   @override
   String toString() => r'paymentProcessProvider';
+}
+
+@ProviderFor(purchaseVoucherAPI)
+final purchaseVoucherAPIProvider = PurchaseVoucherAPIFamily._();
+
+final class PurchaseVoucherAPIProvider extends $FunctionalProvider<
+        AsyncValue<
+            (
+              bool,
+              dynamic,
+            )>,
+        (
+          bool,
+          dynamic,
+        ),
+        FutureOr<
+            (
+              bool,
+              dynamic,
+            )>>
+    with
+        $FutureModifier<
+            (
+              bool,
+              dynamic,
+            )>,
+        $FutureProvider<
+            (
+              bool,
+              dynamic,
+            )> {
+  PurchaseVoucherAPIProvider._(
+      {required PurchaseVoucherAPIFamily super.from,
+      required ({
+        AppPaymentMethods paymentMethod,
+        double totalAmount,
+        int voucherId,
+        int locationId,
+      })
+          super.argument})
+      : super(
+          retry: null,
+          name: r'purchaseVoucherAPIProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$purchaseVoucherAPIHash();
+
+  @override
+  String toString() {
+    return r'purchaseVoucherAPIProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<
+      (
+        bool,
+        dynamic,
+      )> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<
+      (
+        bool,
+        dynamic,
+      )> create(Ref ref) {
+    final argument = this.argument as ({
+      AppPaymentMethods paymentMethod,
+      double totalAmount,
+      int voucherId,
+      int locationId,
+    });
+    return purchaseVoucherAPI(
+      ref,
+      paymentMethod: argument.paymentMethod,
+      totalAmount: argument.totalAmount,
+      voucherId: argument.voucherId,
+      locationId: argument.locationId,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is PurchaseVoucherAPIProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$purchaseVoucherAPIHash() =>
+    r'c030af43cd0a8cc40d48ac6b3e25b7473c3bd871';
+
+final class PurchaseVoucherAPIFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+            FutureOr<
+                (
+                  bool,
+                  dynamic,
+                )>,
+            ({
+              AppPaymentMethods paymentMethod,
+              double totalAmount,
+              int voucherId,
+              int locationId,
+            })> {
+  PurchaseVoucherAPIFamily._()
+      : super(
+          retry: null,
+          name: r'purchaseVoucherAPIProvider',
+          dependencies: null,
+          $allTransitiveDependencies: null,
+          isAutoDispose: true,
+        );
+
+  PurchaseVoucherAPIProvider call({
+    required AppPaymentMethods paymentMethod,
+    required double totalAmount,
+    required int voucherId,
+    required int locationId,
+  }) =>
+      PurchaseVoucherAPIProvider._(argument: (
+        paymentMethod: paymentMethod,
+        totalAmount: totalAmount,
+        voucherId: voucherId,
+        locationId: locationId,
+      ), from: this);
+
+  @override
+  String toString() => r'purchaseVoucherAPIProvider';
 }
 
 @ProviderFor(verifyCoupon)
@@ -566,7 +707,7 @@ final class VerifyCouponProvider extends $FunctionalProvider<
   }
 }
 
-String _$verifyCouponHash() => r'd7ca19f1d5ad8c1583b8e86842001de163c1fefa';
+String _$verifyCouponHash() => r'4b3a29f8092e1bc316fa1e07e2bc5db6d1f3ec0d';
 
 final class VerifyCouponFamily extends $Family
     with
@@ -707,7 +848,7 @@ final class MultiBookingPaymentProcessProvider extends $FunctionalProvider<
 }
 
 String _$multiBookingPaymentProcessHash() =>
-    r'19e2b67975aec8dad1bcde9d062f98af4d7efd69';
+    r'6cb27217edf58c095892d28611c0cba4895951f5';
 
 final class MultiBookingPaymentProcessFamily extends $Family
     with

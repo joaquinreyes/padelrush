@@ -8,34 +8,118 @@ import 'package:padelrush/components/custom_dialog.dart';
 import 'package:padelrush/globals/utils.dart';
 import 'package:padelrush/models/active_memberships.dart';
 import 'package:padelrush/utils/custom_extensions.dart';
-import 'package:padelrush/box_shadow/flutter_inset_box_shadow.dart' as inset;
 import '../../../../../../app_styles/app_colors.dart';
 import '../../../../../../app_styles/app_text_styles.dart';
 import '../../../../../../components/c_divider.dart';
 import '../../../../../../components/main_button.dart';
 import '../../../../../../components/secondary_text.dart';
 import '../../../../../../globals/constants.dart';
-import '../../../../../../globals/images.dart';
 import '../../../../../../models/membership_list_category_model.dart';
 import '../../../../../../models/membership_model.dart';
 import '../../../../../../models/user_membership.dart';
 import '../../../../../../repository/booking_repo.dart';
+import '../../../../../../repository/club_repo.dart';
 import '../../../../../../repository/payment_repo.dart';
+import '../../../../../../repository/user_repo.dart';
 import '../../../../../payment_information/payment_information.dart';
+import '../booking_profile_tab/voucher_component.dart';
 
 part 'membership_tab_component.dart';
 
 part 'membership_tab_provider.dart';
 
-class MembershipTab extends ConsumerWidget {
+class MembershipTab extends ConsumerStatefulWidget {
   const MembershipTab({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MembershipTab> createState() => _MembershipTabState();
+}
+
+class _MembershipTabState extends ConsumerState<MembershipTab> {
+  @override
+  Widget build(BuildContext context) {
     final membership = ref.watch(fetchActiveAndAllMembershipsProvider);
+    final vouchers = ref.watch(getVouchersApiProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        vouchers.when(
+          data: (data) {
+            if (data.isEmpty) return const SizedBox();
+            final sortedData = [...data]
+              ..sort((a, b) => (a.price ?? 0).compareTo(b.price ?? 0));
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 20.h),
+                Row(
+                  children: [
+                    Container(
+                      width: 3.w,
+                      height: 18.h,
+                      decoration: BoxDecoration(
+                        color: AppColors.darkYellow,
+                        borderRadius: BorderRadius.circular(2.r),
+                      ),
+                    ),
+                    SizedBox(width: 8.w),
+                    Text(
+                      'BUY_CREDIT_VOUCHERS'.trU(context),
+                      style: AppTextStyles.poppinsBold(fontSize: 17.sp),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 14.h),
+                VoucherCarousel(
+                  vouchers: sortedData,
+                  onTapVoucher: (e) async {
+                    final dialogResult = await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return VoucherConfirmDialog(voucher: e);
+                      },
+                    );
+                    if (dialogResult == null) return;
+                    if (dialogResult is bool &&
+                        dialogResult &&
+                        context.mounted &&
+                        mounted) {
+                      final value = await showDialog(
+                        context: context,
+                        builder: (context) => PaymentInformation(
+                          isOpenMatch: false,
+                          isVoucherPurchase: true,
+                          type: PaymentDetailsRequestType.booking,
+                          locationID: e.locationId ?? 0,
+                          price: e.price ?? 0,
+                          requestType: PaymentProcessRequestType.join,
+                          serviceID: e.id,
+                          allowMembership: false,
+                          allowPayLater: false,
+                          allowCoupon: false,
+                          allowWallet: false,
+                          duration: null,
+                          startDate: null,
+                        ),
+                      );
+                      if (value is bool && value && context.mounted && mounted) {
+                        await Utils.showMessageDialog(
+                          context,
+                          "YOU_HAVE_BUY_VOUCHER_SUCCESSFULLY".tr(context),
+                        );
+                      }
+                      ref.invalidate(walletInfoProvider);
+                    }
+                  },
+                ),
+                SizedBox(height: 22.h),
+              ],
+            );
+          },
+          error: (error, stackTrace) => const SizedBox(),
+          loading: () => const SizedBox(),
+        ),
         Row(
           children: [
             Container(

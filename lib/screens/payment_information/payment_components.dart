@@ -72,6 +72,7 @@ class _PaymentButton extends ConsumerStatefulWidget {
     required this.isMultiBooking,
     required this.isJoiningApproval,
     required this.purchaseMembership,
+    this.isVoucherPurchase = false,
     this.title,
     // this.boldPosition,
   });
@@ -88,6 +89,7 @@ class _PaymentButton extends ConsumerStatefulWidget {
   final String? title;
 
   final bool purchaseMembership;
+  final bool isVoucherPurchase;
 
   @override
   ConsumerState<_PaymentButton> createState() => _PaymentButtonState();
@@ -130,12 +132,32 @@ class _PaymentButtonState extends ConsumerState<_PaymentButton> {
       onTap: () {
         if (widget.isMultiBooking) {
           _onPayMultiBookingTap();
+        } else if (widget.isVoucherPurchase) {
+          _onPayVoucherTap();
         } else {
           _onPayTap();
         }
       },
       labelStyle: AppTextStyles.poppinsLight().copyWith(fontSize: 18.sp, color: isButtonEnabled ? AppColors.darkYellow : AppColors.white),
     );
+  }
+
+  void _onPayVoucherTap() async {
+    final selectedPaymentType = ref.read(_selectedPaymentMethod);
+    if (selectedPaymentType == null) return;
+    selectedPaymentType.amountToPay = widget.price;
+    final provider = purchaseVoucherAPIProvider(
+      totalAmount: widget.price,
+      voucherId: widget.serviceID ?? 0,
+      locationId: widget.locationID,
+      paymentMethod: selectedPaymentType,
+    );
+    final data = await Utils.showLoadingDialog(context, provider, ref);
+    if (data == null) return;
+    final (success, _) = data;
+    if (success is bool && success && mounted) {
+      Navigator.pop(context, true);
+    }
   }
 
   void _onPayTap() async {

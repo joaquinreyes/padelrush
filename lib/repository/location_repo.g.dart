@@ -48,7 +48,7 @@ final class LocationRepoProvider
   }
 }
 
-String _$locationRepoHash() => r'8c8833b6eae0f5f8516c5f835702e4d5ce535f2e';
+String _$locationRepoHash() => r'01251ad7629bdc1b47c02c12bbe5eb97a9a95b00';
 
 @ProviderFor(fetchLocation)
 final fetchLocationProvider = FetchLocationProvider._();
@@ -81,4 +81,4 @@ final class FetchLocationProvider extends $FunctionalProvider<
   }
 }
 
-String _$fetchLocationHash() => r'3f1d050bb034379a536142da7b29341114ff7d00';
+String _$fetchLocationHash() => r'54f6b6635d21e9dec19141495a115e0cae5c807a';

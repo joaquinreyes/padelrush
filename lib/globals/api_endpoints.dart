@@ -86,6 +86,8 @@ enum ApiEndPoint {
   notificationDelete("notifications", isAuthRequired: true),
   notificationClearAll("notifications", isAuthRequired: true),
   updateServiceSettings("services", isAuthRequired: true),
+  getVouchers("vouchers", isAuthRequired: true),
+  purchaseVoucherProcess("vouchers/purchase", isAuthRequired: true),
   ;
 
   final String _path;
@@ -184,6 +186,9 @@ enum ApiEndPoint {
     }
     if (this == ApiEndPoint.updateServiceSettings) {
       return "services/${id.first}/update";
+    }
+    if (this == ApiEndPoint.purchaseVoucherProcess) {
+      return "vouchers/${id.first}/location/${id[1]}/purchase";
     }
 
     return _path;

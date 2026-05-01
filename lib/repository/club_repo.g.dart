@@ -48,7 +48,7 @@ final class ClubRepoProvider
   }
 }
 
-String _$clubRepoHash() => r'ab70c530b7048f57a31ab383da079d63c64f5d08';
+String _$clubRepoHash() => r'135ddaadfa3cfc55a766302c5e4c7e8fd3bf4d5f';
 
 @ProviderFor(clubLocations)
 final clubLocationsProvider = ClubLocationsProvider._();
@@ -86,7 +86,7 @@ final class ClubLocationsProvider extends $FunctionalProvider<
   }
 }
 
-String _$clubLocationsHash() => r'd2bd864a351338cee4e3ec3cedcd2f90f560d122';
+String _$clubLocationsHash() => r'c969b935efa64bc175bf663731134be83d27f411';
 
 @ProviderFor(getCourtBooking)
 final getCourtBookingProvider = GetCourtBookingProvider._();
@@ -124,7 +124,7 @@ final class GetCourtBookingProvider extends $FunctionalProvider<
   }
 }
 
-String _$getCourtBookingHash() => r'c1926d4f72f268b3a11cd648e1d6d50e8549a72e';
+String _$getCourtBookingHash() => r'd8bceb225ca3fa4f7c529f03f51ff52e3b0bdbdb';
 
 @ProviderFor(SelectedDate)
 final selectedDateProvider = SelectedDateProvider._();
@@ -225,6 +225,44 @@ abstract class _$SelectedDateLesson extends $Notifier<DubaiDateTime> {
   }
 }
 
+@ProviderFor(getVouchersApi)
+final getVouchersApiProvider = GetVouchersApiProvider._();
+
+final class GetVouchersApiProvider extends $FunctionalProvider<
+        AsyncValue<List<VoucherModel>>,
+        List<VoucherModel>,
+        FutureOr<List<VoucherModel>>>
+    with
+        $FutureModifier<List<VoucherModel>>,
+        $FutureProvider<List<VoucherModel>> {
+  GetVouchersApiProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'getVouchersApiProvider',
+          isAutoDispose: false,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$getVouchersApiHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<VoucherModel>> $createElement(
+          $ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<VoucherModel>> create(Ref ref) {
+    return getVouchersApi(ref);
+  }
+}
+
+String _$getVouchersApiHash() => r'14fd734759573a40d7c5eb7501478aeafd99cb86';
+
 @ProviderFor(checkUpdate)
 final checkUpdateProvider = CheckUpdateProvider._();
 
@@ -257,4 +295,4 @@ final class CheckUpdateProvider extends $FunctionalProvider<
   }
 }
 
-String _$checkUpdateHash() => r'f8d77a0faaa7f460f415d4c88902efc30796dcfc';
+String _$checkUpdateHash() => r'77cfa3a2fab1c4a931cb6c5a9b266f2de5439945';

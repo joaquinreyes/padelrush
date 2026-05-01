@@ -50,7 +50,7 @@ final class CrashlyticsProvider extends $FunctionalProvider<
   }
 }
 
-String _$crashlyticsHash() => r'0d2a39fb408c9c2a052b32979546402417f1abab';
+String _$crashlyticsHash() => r'89f582b17599547f29e9c5587eb027fd25d7540f';
 
 @ProviderFor(pageController)
 final pageControllerProvider = PageControllerProvider._();
@@ -91,7 +91,7 @@ final class PageControllerProvider
   }
 }
 
-String _$pageControllerHash() => r'13983697a6def5f45b2740e5748d528d3b29a115';
+String _$pageControllerHash() => r'70956ab89652fc2f04e7208d78af4e30b77cda31';
 
 @ProviderFor(PageIndex)
 final pageIndexProvider = PageIndexProvider._();

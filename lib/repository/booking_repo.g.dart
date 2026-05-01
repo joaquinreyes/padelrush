@@ -48,7 +48,7 @@ final class BookingRepoProvider
   }
 }
 
-String _$bookingRepoHash() => r'9ebe23e820b376226a4fe9a271d55265b5050c03';
+String _$bookingRepoHash() => r'247f998882c3accb492988e04b8a179afe6a0184';
 
 @ProviderFor(bookCourt)
 final bookCourtProvider = BookCourtFamily._();
@@ -146,7 +146,7 @@ final class BookCourtProvider
   }
 }
 
-String _$bookCourtHash() => r'8de11b4373295bcb3c0538ee2afa8c818587e1ff';
+String _$bookCourtHash() => r'87fae5285896a7bb22639d254339b7865812a4cf';
 
 final class BookCourtFamily extends $Family
     with
@@ -250,7 +250,7 @@ final class FetchUserBookingProvider extends $FunctionalProvider<
   }
 }
 
-String _$fetchUserBookingHash() => r'b0a69cce66a73843c33103d839f8f608885b630e';
+String _$fetchUserBookingHash() => r'8f186077c9056a44f91161b0c4c9ae262f648143';
 
 @ProviderFor(fetchUserBookingWaitingList)
 final fetchUserBookingWaitingListProvider =
@@ -290,7 +290,7 @@ final class FetchUserBookingWaitingListProvider extends $FunctionalProvider<
 }
 
 String _$fetchUserBookingWaitingListHash() =>
-    r'43d18a355c2fb71b457cc3c91f56a6b7de188193';
+    r'edca4527c175fde6c9a0b588eab3cc034bb44b8f';
 
 @ProviderFor(fetchUserAllBookings)
 final fetchUserAllBookingsProvider = FetchUserAllBookingsProvider._();
@@ -329,7 +329,7 @@ final class FetchUserAllBookingsProvider extends $FunctionalProvider<
 }
 
 String _$fetchUserAllBookingsHash() =>
-    r'56c357316a3c6a1307a72036397bc08bedc2c9e3';
+    r'4ac1b05ec9d8835df50ca2731346ad190ec2537b';
 
 @ProviderFor(addToCalendar)
 final addToCalendarProvider = AddToCalendarFamily._();
@@ -394,7 +394,7 @@ final class AddToCalendarProvider
   }
 }
 
-String _$addToCalendarHash() => r'64a254810c4801ab505e0babb496fd935dc108dc';
+String _$addToCalendarHash() => r'8a271860fb7335a7e2700b7426734f43560f899c';
 
 final class AddToCalendarFamily extends $Family
     with
@@ -513,7 +513,7 @@ final class FetchCourtPriceProvider
   }
 }
 
-String _$fetchCourtPriceHash() => r'7c3f146db96a762d9654c2df2414afa6d0d3a072';
+String _$fetchCourtPriceHash() => r'bc6e8ff0ea62dbd497d174558c5d64a082e6609a';
 
 final class FetchCourtPriceFamily extends $Family
     with
@@ -606,7 +606,7 @@ final class FetchBookingCartListProvider extends $FunctionalProvider<
 }
 
 String _$fetchBookingCartListHash() =>
-    r'bb1ab4b33c6c609151cabdd566d9023a343018b6';
+    r'54e78149c24ea0208a3cfe182056360a1baa0882';
 
 @ProviderFor(deleteCart)
 final deleteCartProvider = DeleteCartFamily._();
@@ -659,7 +659,7 @@ final class DeleteCartProvider
   }
 }
 
-String _$deleteCartHash() => r'270f5242597dce0c128f744b8e6be5f53d636b46';
+String _$deleteCartHash() => r'b4f5ccca5cad5535d5c7c796f9fb6f3aa184bb99';
 
 final class DeleteCartFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<bool>, String> {
@@ -792,7 +792,7 @@ final class UpgradeBookingToOpenProvider extends $FunctionalProvider<
 }
 
 String _$upgradeBookingToOpenHash() =>
-    r'd917061d564941227097fa62727b35492541449a';
+    r'06885f12468b0146eb3c226ef86b96407a0da447';
 
 final class UpgradeBookingToOpenFamily extends $Family
     with
@@ -897,7 +897,7 @@ final class FetchChatCountProvider
   }
 }
 
-String _$fetchChatCountHash() => r'b322e51f3a27c4575af69af38ba3c62353795d05';
+String _$fetchChatCountHash() => r'43360ffdb947a2d0635253855a5510ec420dcf7f';
 
 final class FetchChatCountFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<double?>, int> {
@@ -994,7 +994,7 @@ final class BookLessonCourtProvider
   }
 }
 
-String _$bookLessonCourtHash() => r'2c5754ed5f3fba4f7166c87d979279df73036d7d';
+String _$bookLessonCourtHash() => r'873925350a2279f58c9b1911671055ecc61a3f0a';
 
 final class BookLessonCourtFamily extends $Family
     with
@@ -1077,7 +1077,7 @@ final class ActiveMembershipProvider extends $FunctionalProvider<
   }
 }
 
-String _$activeMembershipHash() => r'ee8ccc1ba16514605ab88600feb077b13b8fbc9a';
+String _$activeMembershipHash() => r'420f21b9d55d709dd6d05f3889973f0d4352f5ad';
 
 @ProviderFor(fetchActiveAndAllMemberships)
 final fetchActiveAndAllMembershipsProvider =
@@ -1117,7 +1117,7 @@ final class FetchActiveAndAllMembershipsProvider extends $FunctionalProvider<
 }
 
 String _$fetchActiveAndAllMembershipsHash() =>
-    r'6781ec7fefd91d8883fd9e1f996ed75c840468f0';
+    r'f437d775c289477fe98ca5fc9683ce753e2905bd';
 
 @ProviderFor(fetchAllMemberships)
 final fetchAllMembershipsProvider = FetchAllMembershipsProvider._();
@@ -1156,7 +1156,7 @@ final class FetchAllMembershipsProvider extends $FunctionalProvider<
 }
 
 String _$fetchAllMembershipsHash() =>
-    r'007d54c5bde5f6a62f26bf17d547f8dc03edea10';
+    r'78b43f2bd474e1f68fada52dd4f59215f20e72c0';
 
 @ProviderFor(fetchMembershipCategory)
 final fetchMembershipCategoryProvider = FetchMembershipCategoryProvider._();
@@ -1195,4 +1195,4 @@ final class FetchMembershipCategoryProvider extends $FunctionalProvider<
 }
 
 String _$fetchMembershipCategoryHash() =>
-    r'af162354acb772960d85b39f152671a69e1c72c5';
+    r'b0a6964e89a46605cb53f53aac0712c967863748';
