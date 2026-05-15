@@ -453,7 +453,7 @@ class BookingRepo {
     }
   }
 
-  Future<void> bookLessonCourt(
+  Future<double?> bookLessonCourt(
     Ref ref, {
     required int lessonTime,
     required int courtId,
@@ -641,7 +641,7 @@ Future<double?> fetchChatCount(Ref ref,
 }
 
 @riverpod
-Future<void> bookLessonCourt(
+Future<double?> bookLessonCourt(
   Ref ref, {
   required int lessonTime,
   required int courtId,
