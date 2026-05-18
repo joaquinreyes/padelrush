@@ -214,7 +214,7 @@ class __OpenMatchState extends ConsumerState<_OpenMatch> {
                   ),
                   min: 0.0,
                   max: 7.0,
-                  divisions: 14,
+                  divisions: 35,
                   onChanged: (RangeValues values) {
                     ref.read(_matchLevelProvider.notifier).state = [
                       values.start,

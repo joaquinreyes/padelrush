@@ -756,7 +756,7 @@ class _SettingsTab extends ConsumerWidget {
             values: RangeValues(minLevel, maxLevel),
             min: 0,
             max: 7,
-            divisions: 14,
+            divisions: 35,
             onChanged: (values) {
               ref.read(_minLevelProvider.notifier).state = values.start;
               ref.read(_maxLevelProvider.notifier).state = values.end;
