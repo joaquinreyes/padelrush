@@ -564,7 +564,15 @@ class AuthRepo {
       throw "Some error occurred";
     } catch (e) {
       if (e is Map<String, dynamic>) {
-        throw e['message'];
+        // 404 "no results" from the API — return empty list instead of erroring.
+        return UserSearchResponse(
+          data: UserSearchData(
+            customers: [],
+            totalPages: 1,
+            totalRecords: 0,
+            currentPage: page,
+          ),
+        );
       }
       rethrow;
     }
@@ -723,12 +731,20 @@ Future<UserSearchResponse> searchUsers(
   required int pageSize,
   required String search,
 }) async {
-  return ref.watch(authRepoProvider).searchUsers(
-    ref,
-    page: page,
-    pageSize: pageSize,
-    search: search,
-  );
+  // Prevent autoDispose from killing the provider while the HTTP call is in flight.
+  final keepAlive = ref.keepAlive();
+  try {
+    return await ref.watch(authRepoProvider).searchUsers(
+      ref,
+      page: page,
+      pageSize: pageSize,
+      search: search,
+    );
+  } finally {
+    // Defer close to the event queue so Riverpod can emit AsyncData/AsyncError
+    // via its microtask callbacks before the provider becomes disposal-eligible.
+    Future.delayed(Duration.zero, keepAlive.close);
+  }
 }
 
 class PaginationNotifierPlayersRanking
