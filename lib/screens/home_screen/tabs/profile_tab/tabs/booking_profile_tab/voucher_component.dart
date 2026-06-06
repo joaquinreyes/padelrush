@@ -434,35 +434,10 @@ class VoucherConfirmDialog extends StatelessWidget {
             width: double.infinity,
             child: MainButton(
               isForPopup: true,
-              onTap: () async {
-                final credits = voucher.value ?? 0;
-                final price = voucher.price ?? 0;
-                final savings = credits - price;
-                final hasBonus = savings > 0;
-                final name = (voucher.voucherName ?? '').isNotEmpty
-                    ? voucher.voucherName!
-                    : null;
-
-                final msg = StringBuffer();
-                msg.write("Hi, I'd like to purchase a credit voucher.");
-                if (name != null) msg.write("\n*Voucher:* $name");
-                if (hasBonus) {
-                  msg.write(
-                      "\n*Offer:* Buy $currency${price.toStringAsFixed(0)}, Get $currency${credits.toStringAsFixed(0)} Credit");
-                  msg.write(
-                      "\n*Bonus:* $currency${savings.toStringAsFixed(0)} extra");
-                } else {
-                  msg.write(
-                      "\n*Amount:* $currency${credits.toStringAsFixed(0)} Credit");
-                }
-                msg.write("\n*You Pay:* $currency${price.toStringAsFixed(0)}");
-                msg.write("\n\nPlease assist me with the payment. 🙏");
-
-                await Utils.openWhatsappSupport(
-                  context: context,
-                  message: msg.toString(),
-                );
-              },
+              // Confirm → return true so the caller opens the online
+              // PaymentInformation flow (card / online gateway) and credits
+              // the wallet. Replaces the previous WhatsApp "ask to pay" stopgap.
+              onTap: () => Navigator.pop(context, true),
               label: "PAY_VOUCHER".trU(context),
             ),
           ),
