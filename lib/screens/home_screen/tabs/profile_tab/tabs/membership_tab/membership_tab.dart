@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:padelrush/components/custom_dialog.dart';
 import 'package:padelrush/globals/utils.dart';
 import 'package:padelrush/models/active_memberships.dart';
@@ -40,6 +41,7 @@ class _MembershipTabState extends ConsumerState<MembershipTab> {
   Widget build(BuildContext context) {
     final membership = ref.watch(fetchActiveAndAllMembershipsProvider);
     final vouchers = ref.watch(getVouchersApiProvider);
+    final walletAsync = ref.watch(walletInfoProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -120,6 +122,58 @@ class _MembershipTabState extends ConsumerState<MembershipTab> {
           error: (error, stackTrace) => const SizedBox(),
           loading: () => const SizedBox(),
         ),
+        walletAsync.whenData((wallets) {
+          final wallet = wallets.isNotEmpty ? wallets.first : null;
+          if (wallet == null || wallet.expiryDateTime == null) return const SizedBox();
+          return Padding(
+            padding: EdgeInsets.only(bottom: 22.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 3.w,
+                      height: 18.h,
+                      decoration: BoxDecoration(
+                        color: AppColors.darkYellow,
+                        borderRadius: BorderRadius.circular(2.r),
+                      ),
+                    ),
+                    SizedBox(width: 8.w),
+                    Text(
+                      'WALLET_CREDITS'.trU(context),
+                      style: AppTextStyles.poppinsBold(fontSize: 17.sp),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 14.h),
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                  decoration: BoxDecoration(
+                    color: AppColors.lightGray,
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "${NumberFormat('#,##0', 'id_ID').format(wallet.balance)} $currency",
+                        style: AppTextStyles.poppinsBold(fontSize: 15.sp),
+                      ),
+                      Text(
+                        "${'VALID_UNTIL'.tr(context)}: ${DateFormat('dd/MM/yyyy').format(wallet.expiryDateTime!)}",
+                        style: AppTextStyles.poppinsRegular(
+                            fontSize: 13.sp, color: AppColors.black70),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        }).value ?? const SizedBox(),
         Row(
           children: [
             Container(
