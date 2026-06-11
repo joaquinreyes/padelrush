@@ -506,29 +506,6 @@ class _BookCourtDialogState extends ConsumerState<BookCourtDialog> {
                                   ),
                                 ),
                               ],
-                              // Disclaimer for Private Match
-                              if (ref.watch(_isPrivateMatchProvider)) ...[
-                                SizedBox(height: 15.h),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 12.w, vertical: 12.h),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.darkYellow30,
-                                    borderRadius: BorderRadius.circular(12.r),
-                                    border: Border.all(
-                                        color:
-                                            AppColors.black2.withOpacity(.05)),
-                                  ),
-                                  child: Text(
-                                    "You will be charged the full amount. You will be refunded to your club wallet when someone else joins and pays their share.",
-                                    textAlign: TextAlign.center,
-                                    style: AppTextStyles.poppinsRegular(
-                                      fontSize: 13.sp,
-                                      color: AppColors.black2,
-                                    ),
-                                  ),
-                                ),
-                              ],
                             ] else
                               MainButton(
                                 enabled: price != null,
