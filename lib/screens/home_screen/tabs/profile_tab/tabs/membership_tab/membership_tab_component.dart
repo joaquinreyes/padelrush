@@ -1,5 +1,13 @@
 part of 'membership_tab.dart';
 
+/// GZ#1508 — one rendered card per (catalog membership, active row) pair so a
+/// customer with multiple active memberships of the same type sees all of them.
+class _MembershipEntry {
+  final MembershipModel membership;
+  final ActiveMemberships? active;
+  _MembershipEntry({required this.membership, required this.active});
+}
+
 class _MembershipDialog extends StatelessWidget {
   final MembershipModel membership;
   final ActiveMemberships? activeMembership;
@@ -312,18 +320,34 @@ class MembershipListComponent extends ConsumerWidget {
       {required WidgetRef ref,
       required List<MembershipModel> membershipModels}) {
     final isHorizontalScroll = scrollDirection == Axis.horizontal;
+    // GZ#1508 — a customer may hold several active rows of the same membership
+    // type (e.g. a 0-hour pass + a freshly topped-up one). Flatten the catalog
+    // into one entry per active row so EACH renders its own card instead of a
+    // single `lastWhere` match hiding the rest behind it. Catalog entries with
+    // no active row keep a single (available) card.
+    final entries = <_MembershipEntry>[];
+    for (final e in membershipModels) {
+      final ams = data.activeMembershipsFor(e.id ?? 0);
+      if (ams.isNotEmpty) {
+        for (final am in ams) {
+          entries.add(_MembershipEntry(membership: e, active: am));
+        }
+      } else {
+        entries.add(_MembershipEntry(membership: e, active: null));
+      }
+    }
     return ListView.builder(
         shrinkWrap: !isHorizontalScroll,
         scrollDirection: scrollDirection,
-        itemCount: membershipModels.length,
+        itemCount: entries.length,
         padding: isHorizontalScroll ? EdgeInsets.symmetric(horizontal: 15.w) : EdgeInsets.zero,
         physics: isHorizontalScroll
             ? BouncingScrollPhysics()
             : const NeverScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
-          final e = membershipModels[index];
+          final e = entries[index].membership;
           final membershipName = (e.membershipName ?? "");
-          final activeMembership = data.activeMemberships(e.id ?? 0);
+          final activeMembership = entries[index].active;
           return Padding(
             padding: isHorizontalScroll
                 ? EdgeInsets.only(right: 15.w)
