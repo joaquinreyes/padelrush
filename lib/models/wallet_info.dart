@@ -20,7 +20,7 @@ class WalletInfo {
         customerId: json["customer_id"],
         currency: json["currency"],
         balance: json["balance"]?.toDouble() ?? 0.0,
-        expiryDate: json["expiry_date"],
+        expiryDate: json["expiration_date"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -28,6 +28,6 @@ class WalletInfo {
         "customer_id": customerId,
         "currency": currency,
         "balance": balance,
-        "expiry_date": expiryDate,
+        "expiration_date": expiryDate,
       };
 }

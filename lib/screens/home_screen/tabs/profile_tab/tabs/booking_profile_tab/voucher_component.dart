@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import '../../../../../../app_styles/app_colors.dart';
 import '../../../../../../app_styles/app_text_styles.dart';
 import '../../../../../../components/custom_dialog.dart';
@@ -305,6 +306,16 @@ class _VoucherHeroCard extends StatelessWidget {
                           ).copyWith(height: 1.25),
                         ),
                       ),
+                      if (_voucherExpiryLabel(context, voucher) != null) ...[
+                        SizedBox(height: 6.h),
+                        Text(
+                          _voucherExpiryLabel(context, voucher)!,
+                          style: AppTextStyles.poppinsRegular(
+                            fontSize: 10.sp,
+                            color: AppColors.white.withOpacity(0.65),
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -328,8 +339,7 @@ class VoucherConfirmDialog extends StatelessWidget {
     final price = voucher.price ?? 0;
     final savings = credits - price;
     final hasBonus = savings > 0;
-    final bonusPercent =
-        price > 0 ? ((savings / price) * 100).round() : 0;
+    final bonusPercent = price > 0 ? ((savings / price) * 100).round() : 0;
 
     return CustomDialog(
       child: Column(
@@ -389,8 +399,8 @@ class VoucherConfirmDialog extends StatelessWidget {
                 if (hasBonus) ...[
                   SizedBox(height: 8.h),
                   Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 8.w, vertical: 3.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
                     decoration: BoxDecoration(
                       color: AppColors.darkYellow,
                       borderRadius: BorderRadius.circular(6.r),
@@ -426,6 +436,39 @@ class VoucherConfirmDialog extends StatelessWidget {
                     ),
                   ],
                 ),
+                if (voucher.expiryDateTime != null) ...[
+                  SizedBox(height: 10.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "VALID_UNTIL".tr(context),
+                        style: AppTextStyles.poppinsRegular(
+                          fontSize: 13.sp,
+                          color: AppColors.black2.withOpacity(0.65),
+                        ),
+                      ),
+                      Text(
+                        DateFormat('dd/MM/yyyy')
+                            .format(voucher.expiryDateTime!),
+                        style: AppTextStyles.poppinsSemiBold(
+                          fontSize: 13.sp,
+                          color: AppColors.black2,
+                        ),
+                      ),
+                    ],
+                  ),
+                ] else if (voucher.expiryDays != null) ...[
+                  SizedBox(height: 10.h),
+                  Text(
+                    "VALID_FOR_DAYS_AFTER_PURCHASE"
+                        .tr(context, params: {"DAYS": "${voucher.expiryDays}"}),
+                    style: AppTextStyles.poppinsRegular(
+                      fontSize: 13.sp,
+                      color: AppColors.black2.withOpacity(0.65),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -445,4 +488,15 @@ class VoucherConfirmDialog extends StatelessWidget {
       ),
     );
   }
+}
+
+String? _voucherExpiryLabel(BuildContext context, VoucherModel voucher) {
+  if (voucher.expiryDateTime != null) {
+    return "${'VALID_UNTIL'.tr(context)}: ${DateFormat('dd/MM/yyyy').format(voucher.expiryDateTime!)}";
+  }
+  if (voucher.expiryDays != null) {
+    return "VALID_FOR_DAYS_AFTER_PURCHASE"
+        .tr(context, params: {"DAYS": "${voucher.expiryDays}"});
+  }
+  return null;
 }

@@ -146,6 +146,24 @@ class _HeaderInfo extends ConsumerWidget {
                         ],
                       ),
                     ),
+                    paymentDetails.when(
+                      data: (data) {
+                        final expiryDate = data.isNotEmpty ? data.first.expiryDateTime : null;
+                        if (expiryDate == null) return const SizedBox();
+                        return Padding(
+                          padding: EdgeInsets.only(top: 4.h),
+                          child: Text(
+                            "${'VALID_UNTIL'.tr(context)}: ${DateFormat('dd/MM/yyyy').format(expiryDate)}",
+                            style: AppTextStyles.poppinsRegular(
+                              fontSize: 10.sp,
+                              color: AppColors.black70,
+                            ),
+                          ),
+                        );
+                      },
+                      error: (error, stackTrace) => const SizedBox(),
+                      loading: () => const SizedBox(),
+                    ),
                   ],
                 ),
               ),

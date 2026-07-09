@@ -416,6 +416,7 @@
   "REMAINING": "Remaining",
   "UNLIMITED": "Unlimited",
   "VALID_UNTIL": "Valid until",
+  "VALID_FOR_DAYS_AFTER_PURCHASE": "Valid for {DAYS} days after purchase",
   "DESCRIPTION": "Description",
   "SEND_BUY_MEMBERSHIP_MESSAGE": "Send us a message to get more information",
   "MEMBERSHIP": "Membership",
