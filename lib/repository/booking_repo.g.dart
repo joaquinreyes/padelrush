@@ -923,8 +923,8 @@ final class FetchChatCountFamily extends $Family
 final bookLessonCourtProvider = BookLessonCourtFamily._();
 
 final class BookLessonCourtProvider
-    extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
-    with $FutureModifier<void>, $FutureProvider<void> {
+    extends $FunctionalProvider<AsyncValue<double?>, double?, FutureOr<double?>>
+    with $FutureModifier<double?>, $FutureProvider<double?> {
   BookLessonCourtProvider._(
       {required BookLessonCourtFamily super.from,
       required ({
@@ -957,11 +957,11 @@ final class BookLessonCourtProvider
 
   @$internal
   @override
-  $FutureProviderElement<void> $createElement($ProviderPointer pointer) =>
+  $FutureProviderElement<double?> $createElement($ProviderPointer pointer) =>
       $FutureProviderElement(pointer);
 
   @override
-  FutureOr<void> create(Ref ref) {
+  FutureOr<double?> create(Ref ref) {
     final argument = this.argument as ({
       int lessonTime,
       int courtId,

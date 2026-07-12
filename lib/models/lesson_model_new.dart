@@ -103,7 +103,13 @@ class LessonDataNew0 {
       } else if (json['availableSlots'] is List) {
         availableSlots = <AvailableSlots>[];
         json['availableSlots'].forEach((v) {
-          availableSlots!.add(AvailableSlots.fromJson(v));
+          // Per-coach guard: a single malformed entry must not abort the
+          // whole list and hide every remaining coach (GZ#1810).
+          try {
+            availableSlots!.add(AvailableSlots.fromJson(v));
+          } catch (e) {
+            myPrint('Error parsing availableSlots entry: $e');
+          }
         });
       } else {
         // If it's neither, we can log or handle the error as needed
@@ -464,7 +470,10 @@ class LessonVariants {
   int? id;
   int? duration;
   int? maximumCapacity;
-  int? price;
+  // Admins can configure decimal prices (e.g. 142.5), so this must be a
+  // double: typing it int made fromJson throw and silently drop the coach
+  // from availability (GZ#1810).
+  double? price;
   int? lessonId;
 
   LessonVariants(
@@ -478,7 +487,7 @@ class LessonVariants {
     id = (json['id'] as num?)?.toInt();
     duration = (json['duration'] as num?)?.toInt();
     maximumCapacity = (json['maximum_capacity'] as num?)?.toInt();
-    price = (json['price'] as num?)?.toInt();
+    price = (json['price'] as num?)?.toDouble();
     lessonId = (json['lesson_id'] as num?)?.toInt();
   }
 
