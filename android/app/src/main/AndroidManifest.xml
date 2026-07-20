@@ -19,6 +19,11 @@
                  while the Flutter UI initializes. After that, this theme continues
                  to determine the Window background behind the Flutter UI. -->
             <meta-data android:name="io.flutter.embedding.android.NormalTheme" android:resource="@style/NormalTheme" />
+            <!-- Deep links are handled by app_links / DynamicLinkHandler, which strips the
+                 /padelrushh prefix before routing. Leaving Flutter's built-in deep linking on
+                 makes GoRouter try to match the raw path and fail with "no routes for location".
+                 Mirrors FlutterDeepLinkingEnabled=false in ios/Runner/Info.plist. -->
+            <meta-data android:name="flutter_deeplinking_enabled" android:value="false" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
