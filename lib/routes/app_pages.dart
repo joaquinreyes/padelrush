@@ -29,6 +29,7 @@ class AppPages {
   static const String initial = RouteNames.splash;
 
   static GoRouter? _router;
+  static bool _analyticsListenerAttached = false;
 
   static GoRouter createRouter(Ref ref) {
     _router ??= GoRouter(
@@ -37,6 +38,20 @@ class AppPages {
       observers: [AnalyticsRouteObserver(ref)],
       routes: _routes,
     );
+    // GoRouter pages carry no settings.name, so the NavigatorObserver above
+    // never fires screen_view. Track route changes from the delegate instead,
+    // using the route pattern (fullPath) so dynamic segments group as one screen.
+    if (!_analyticsListenerAttached) {
+      _analyticsListenerAttached = true;
+      String? lastPath;
+      _router!.routerDelegate.addListener(() {
+        final config = _router!.routerDelegate.currentConfiguration;
+        final path = config.fullPath.isNotEmpty ? config.fullPath : config.uri.path;
+        if (path.isEmpty || path == lastPath) return;
+        lastPath = path;
+        ref.read(analyticsManagerProvider).trackScreenView(path);
+      });
+    }
     return _router!;
   }
 
