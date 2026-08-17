@@ -458,7 +458,7 @@ class Utils {
     final players = service.players ?? [];
     final court = service.courtName.capitalizeFirst;
     final link = DynamicLinkHandler.instance.getMatchURL(service.id!);
-    final location = service.service?.location?.locationName ?? "";
+    final location =( service.service?.location?.locationName ?? "").replaceAll("Sector 65 Gurgaon", "Padel Rushh-Gurgaon");
 
     // Build confirmed players list with checkmarks
     final confirmedPlayers = players.map((e) {
@@ -478,7 +478,7 @@ class Utils {
     String shareStr = """
 *• MATCH AT PADEL RUSHH*
 *📅 $date*
-*📍 $court*
+*📍 $location * $court
 *📊 Level $level*
 $playersList
 
